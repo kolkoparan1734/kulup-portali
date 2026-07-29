@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}{{ kulup.isim }} · Öğrenci Kulüpleri Portalı{% endblock %}
+
+{% block content %}
+
+<a href="{{ url_for('anasayfa') }}" class="back-link">&larr; Tüm kulüpler</a>
+
+<section class="club-header">
+    <img src="{{ url_for('static', filename='images/' + kulup.logo) }}" alt="{{ kulup.isim }} logosu" class="club-header-logo">
+    <div>
+        <span class="club-card-category">{{ kulup.kategori }}</span>
+        <h1>{{ kulup.isim }}</h1>
+        <p class="club-header-desc">{{ kulup.aciklama }}</p>
+    </div>
+</section>
+
+<div class="tabs">
+    <button class="tab-button active" data-tab="yonetim">Yönetim Kurulu</button>
+    <button class="tab-button" data-tab="etkinlikler">Etkinlikler</button>
+</div>
+
+<section id="yonetim" class="tab-panel active">
+    <div class="board-grid">
+        {% for uye in kulup.yonetim_kurulu %}
+        <div class="board-card">
+            <div class="board-avatar">{{ uye.isim[0] }}</div>
+            <p class="board-name">{{ uye.isim }}</p>
+            <p class="board-role">{{ uye.gorev }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="etkinlikler" class="tab-panel">
+    <div class="events-columns">
+        <div class="events-column">
+            <h3>Yaklaşan Etkinlikler</h3>
+            {% if gelecek_etkinlikler %}
+                {% for etkinlik in gelecek_etkinlikler %}
+                <div class="event-card upcoming">
+                    <span class="event-date">{{ etkinlik.tarih }}</span>
+                    <h4>{{ etkinlik.baslik }}</h4>
+                    <p>{{ etkinlik.aciklama }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="empty-state">Şu an planlanan bir etkinlik yok.</p>
+            {% endif %}
+        </div>
+
+        <div class="events-column">
+            <h3>Geçmiş Etkinlikler</h3>
+            {% if gecmis_etkinlikler %}
+                {% for etkinlik in gecmis_etkinlikler %}
+                <div class="event-card past">
+                    <span class="event-date">{{ etkinlik.tarih }}</span>
+                    <h4>{{ etkinlik.baslik }}</h4>
+                    <p>{{ etkinlik.aciklama }}</p>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="empty-state">Henüz kayıtlı bir etkinlik yok.</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<script src="{{ url_for('static', filename='js/tabs.js') }}"></script>
+
+{% endblock %}

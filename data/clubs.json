@@ -1,0 +1,222 @@
+{
+  "kulupler": [
+    {
+      "id": "dans",
+      "isim": "Dans Kulübü",
+      "logo": "dans_logo.png",
+      "kategori": "Sanat / Kültür",
+      "aciklama": "Modern dans, halk oyunları ve sosyal dans atölyeleriyle öğrencilere sahne deneyimi kazandıran kulüp.",
+      "baskan": "Ahmet Yılmaz",
+      "yonetim_kurulu": [
+        { "isim": "Ahmet Yılmaz", "gorev": "Başkan" },
+        { "isim": "Elif Demir", "gorev": "Başkan Yardımcısı" },
+        { "isim": "Can Öztürk", "gorev": "Sekreter" },
+        { "isim": "Zeynep Kaya", "gorev": "Sayman" }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Bahar Dans Gösterisi",
+          "tarih": "2026-05-14",
+          "durum": "gecmis",
+          "aciklama": "Kulüp üyelerinin sahneye koyduğu modern dans gösterisi."
+        },
+        {
+          "baslik": "Yeni Üye Tanışma ve Deneme Dersi",
+          "tarih": "2026-09-20",
+          "durum": "gelecek",
+          "aciklama": "Yeni dönem için tanışma ve ücretsiz deneme dans dersi."
+        }
+      ]
+    },
+    {
+      "id": "satranc",
+      "isim": "Satranç Kulübü",
+      "logo": "satranc_logo.png",
+      "kategori": "Zeka Oyunları",
+      "aciklama": "Satranç turnuvaları düzenleyen ve düzenli antrenman seansları sunan öğrenci kulübü.",
+      "baskan": "Mert Aydın",
+      "yonetim_kurulu": [
+        { "isim": "Mert Aydın", "gorev": "Başkan" },
+        { "isim": "Selin Arslan", "gorev": "Başkan Yardımcısı" },
+        { "isim": "Barış Kurt", "gorev": "Sekreter" }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Kampüs İçi Satranç Turnuvası",
+          "tarih": "2026-04-02",
+          "durum": "gecmis",
+          "aciklama": "60 öğrencinin katıldığı eleme usulü turnuva."
+        },
+        {
+          "baslik": "Hızlı Satranç (Blitz) Gecesi",
+          "tarih": "2026-10-05",
+          "durum": "gelecek",
+          "aciklama": "5 dakikalık blitz formatında dostluk turnuvası."
+        }
+      ]
+    },
+    {
+      "id": "ieee",
+      "isim": "IEEE Kulübü",
+      "logo": "ieee_logo.png",
+      "kategori": "Akademik / Teknoloji",
+      "aciklama": "Mühendislik ve teknoloji alanında seminer, atölye ve proje çalışmaları düzenleyen kulüp.",
+      "baskan": "Deniz Şahin",
+      "yonetim_kurulu": [
+        { "isim": "Deniz Şahin", "gorev": "Başkan" },
+        { "isim": "Ece Yıldız", "gorev": "Başkan Yardımcısı" },
+        { "isim": "Kerem Aksoy", "gorev": "Etkinlik Koordinatörü" },
+        { "isim": "Nil Çelik", "gorev": "Sayman" }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Gömülü Sistemler Atölyesi",
+          "tarih": "2026-03-11",
+          "durum": "gecmis",
+          "aciklama": "Arduino ile giriş seviyesi uygulamalı atölye."
+        },
+        {
+          "baslik": "Yapay Zeka Söyleşisi",
+          "tarih": "2026-11-18",
+          "durum": "gelecek",
+          "aciklama": "Sektörden bir konuşmacı ile yapay zeka üzerine söyleşi."
+        }
+      ]
+    },
+    {
+      "id": "gastronomi",
+      "isim": "Gastronomi Kulübü",
+      "logo": "gastronomi_logo.png",
+      "kategori": "Sanat / Kültür",
+      "aciklama": "Mutfak kültürü, yemek atölyeleri ve tadım etkinlikleri düzenleyen kulüp.",
+      "baskan": "Aslı Korkmaz",
+      "yonetim_kurulu": [
+        { "isim": "Aslı Korkmaz", "gorev": "Başkan" },
+        { "isim": "Tolga Er", "gorev": "Başkan Yardımcısı" },
+        { "isim": "Buse Yalçın", "gorev": "Sekreter" }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Dünya Mutfakları Günü",
+          "tarih": "2026-05-30",
+          "durum": "gecmis",
+          "aciklama": "Farklı ülke mutfaklarından tadım standları."
+        },
+        {
+          "baslik": "Hamur İşleri Atölyesi",
+          "tarih": "2026-09-27",
+          "durum": "gelecek",
+          "aciklama": "Temel hamur işi tekniklerinin öğretildiği uygulamalı atölye."
+        }
+      ]
+    },
+    {
+      "id": "yapay-zeka",
+      "isim": "Yapay Zeka ve Robotik Kulübü",
+      "logo": "yapayzeka_logo.png",
+      "kategori": "Akademik / Teknoloji",
+      "aciklama": "Yapay zeka, makine öğrenmesi ve robotik alanlarında proje ve atölyeler düzenleyen kulüp.",
+      "baskan": "Kaan Aydemir",
+      "yonetim_kurulu": [
+        { "isim": "Kaan Aydemir", "gorev": "Başkan" },
+        { "isim": "Sude Yalman", "gorev": "Başkan Yardımcısı" },
+        { "isim": "Emre Koç", "gorev": "Proje Sorumlusu" }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Robotik Kol Yapım Atölyesi",
+          "tarih": "2026-04-18",
+          "durum": "gecmis",
+          "aciklama": "Öğrencilerin sıfırdan basit bir robotik kol tasarladığı uygulamalı atölye."
+        },
+        {
+          "baslik": "Yapay Zeka ile Görüntü İşleme Semineri",
+          "tarih": "2026-09-25",
+          "durum": "gelecek",
+          "aciklama": "Temel görüntü işleme ve yapay zeka uygulamalarına giriş semineri."
+        }
+      ]
+    },
+    {
+      "id": "genc-kalite",
+      "isim": "Genç Kalite Kulübü",
+      "logo": "genckalite_logo.png",
+      "kategori": "Akademik",
+      "aciklama": "Kalite yönetimi ve sürekli gelişim kültürünü öğrencilere tanıtan, sektörle buluşturan kulüp.",
+      "baskan": "Defne Aksu",
+      "yonetim_kurulu": [
+        { "isim": "Defne Aksu", "gorev": "Başkan" },
+        { "isim": "Oğuz Bilgin", "gorev": "Başkan Yardımcısı" },
+        { "isim": "Lara Güneş", "gorev": "Etkinlik Sorumlusu" }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Kalite Yönetim Sistemleri Semineri",
+          "tarih": "2026-03-05",
+          "durum": "gecmis",
+          "aciklama": "Sektörden bir uzmanla kalite yönetim sistemleri üzerine söyleşi."
+        },
+        {
+          "baslik": "Genç Kalite Buluşması",
+          "tarih": "2026-10-12",
+          "durum": "gelecek",
+          "aciklama": "Farklı üniversitelerden kalite kulüplerinin bir araya geldiği network etkinliği."
+        }
+      ]
+    },
+    {
+      "id": "psikoloji",
+      "isim": "Psikoloji Kulübü",
+     "logo": "psikoloji_logo.png",
+      "kategori": "Akademik",
+      "aciklama": "Psikoloji alanında söyleşi, seminer ve farkındalık etkinlikleri düzenleyen kulüp.",
+      "baskan": "İrem Solak",
+      "yonetim_kurulu": [
+        { "isim": "İrem Solak", "gorev": "Başkan" },
+        { "isim": "Yusuf Bayrak", "gorev": "Başkan Yardımcısı" },
+        { "isim": "Nehir Aktaş", "gorev": "Etkinlik Koordinatörü" }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Ruh Sağlığı Farkındalık Haftası",
+          "tarih": "2026-05-20",
+          "durum": "gecmis",
+          "aciklama": "Kampüste stant açılarak ruh sağlığı üzerine bilgilendirme yapıldı."
+        },
+        {
+          "baslik": "Uzman Söyleşisi: Sınav Kaygısıyla Başa Çıkma",
+          "tarih": "2026-11-03",
+          "durum": "gelecek",
+          "aciklama": "Alanında uzman bir psikoloğun katılacağı söyleşi."
+        }
+      ]
+    },
+    {
+      "id": "sinema",
+      "isim": "Sinema Kulübü",
+      "logo": "sinema_logo.png",
+      "kategori": "Sanat / Kültür",
+      "aciklama": "Film gösterimleri, tartışma seansları ve kısa film yarışmaları düzenleyen kulüp.",
+      "baskan": "Toprak Ergin",
+      "yonetim_kurulu": [
+        { "isim": "Toprak Ergin", "gorev": "Başkan" },
+        { "isim": "Asya Demirtaş", "gorev": "Başkan Yardımcısı" },
+        { "isim": "Berk Yavuz", "gorev": "Program Sorumlusu" }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Kısa Film Gecesi",
+          "tarih": "2026-04-29",
+          "durum": "gecmis",
+          "aciklama": "Öğrencilerin çektiği kısa filmlerin gösterildiği gece."
+        },
+        {
+          "baslik": "Klasik Sinema Gösterimi",
+          "tarih": "2026-10-08",
+          "durum": "gelecek",
+          "aciklama": "Sinema tarihinden bir klasik, açık hava gösterimi."
+        }
+      ]
+    }
+  ]
+}

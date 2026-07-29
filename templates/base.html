@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Öğrenci Kulüpleri Portalı{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="site-header">
+        <a href="{{ url_for('anasayfa') }}" class="brand">
+            <span class="brand-mark">AU</span>
+            <span class="brand-text">Öğrenci Kulüpleri</span>
+        </a>
+        <nav>
+            <a href="{{ url_for('anasayfa') }}">Tüm Kulüpler</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <p>Bu bir öğrenci projesi prototipidir · Yönetim Bilişim Sistemleri dersi</p>
+    </footer>
+
+</body>
+</html>

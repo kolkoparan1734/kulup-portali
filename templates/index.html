@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Öğrenci Kulüpleri Portalı{% endblock %}
+
+{% block content %}
+
+   <section class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('{{ url_for('static', filename='images/hero/hero1.jpg') }}');"></div>
+            <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/hero/hero2.jpg') }}');"></div>
+            <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/hero/hero3.jpg') }}');"></div>
+            <div class="hero-slide" style="background-image: url('{{ url_for('static', filename='images/hero/hero4.jpg') }}');"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="eyebrow">50+ öğrenci kulübü</span>
+            <h1>Öğrenci kulübü ile<br>aktif bir kampüs hayatı!</h1>
+            <p>Kampüsteki tüm öğrenci kulüplerini, yönetim kadrolarını ve etkinlik takvimlerini tek yerden keşfet.</p>
+        </div>
+        <div class="hero-dots">
+            <span class="hero-dot active" data-slide="0"></span>
+            <span class="hero-dot" data-slide="1"></span>
+            <span class="hero-dot" data-slide="2"></span>
+            <span class="hero-dot" data-slide="3"></span>
+        </div>
+    </section>
+
+    <section class="club-grid">
+        {% for kulup in kulupler %}
+        <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="club-card">
+            <img src="{{ url_for('static', filename='images/' + kulup.logo) }}" alt="{{ kulup.isim }} logosu" class="club-card-logo">
+            <div class="club-card-body">
+                <span class="club-card-category">{{ kulup.kategori }}</span>
+                <h2 class="club-card-name">{{ kulup.isim }}</h2>
+                <p class="club-card-president">Başkan: {{ kulup.baskan }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </section>
+<script src="{{ url_for('static', filename='js/hero-slider.js') }}"></script>
+{% endblock %}
