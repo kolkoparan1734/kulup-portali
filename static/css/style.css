@@ -87,7 +87,7 @@ a { text-decoration: none; color: inherit; }
 .site-header nav a:hover { opacity: 1; }
 
 /* ============================================
-   HERO — fotoğraf slider'ı
+   HERO — fotoğraf slider'ı, gerçek site stiline yakın
    ============================================ */
 .hero {
     position: relative;
@@ -337,6 +337,28 @@ a { text-decoration: none; color: inherit; }
 
 .tab-panel.active { display: block; }
 
+#etkinlikler.tab-panel {
+    max-width: none;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    isolation: isolate;
+}
+
+#etkinlikler.tab-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(250, 249, 247, 0.93);
+    z-index: -1;
+}
+
+#etkinlikler .events-columns {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
 /* Yönetim Kurulu Kartları */
 .board-grid {
     display: grid;
@@ -401,13 +423,37 @@ a { text-decoration: none; color: inherit; }
     background: var(--beyaz);
     border: 1px solid var(--cizgi);
     border-radius: 16px;
-    padding: 18px 20px;
+    padding: 14px;
     margin-bottom: 14px;
     box-shadow: var(--golge);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
 }
 
 .event-card.upcoming { border-left: 3px solid var(--altin); }
 .event-card.past { border-left: 3px solid var(--cizgi); }
+
+.event-image {
+    width: 84px;
+    height: 84px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.event-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--krem);
+    font-size: 1.8rem;
+}
+
+.event-body {
+    flex: 1;
+    min-width: 0;
+}
 
 .event-date {
     font-size: 0.74rem;
@@ -435,18 +481,24 @@ a { text-decoration: none; color: inherit; }
     color: var(--slate-acik);
     font-style: italic;
 }
+
+/* ============================================
+   HATA SAYFASI
+   ============================================ */
 .error-box {
     max-width: 640px;
     margin: 80px auto;
     padding: 0 24px;
     text-align: center;
 }
+
 .error-box h1 {
     font-family: var(--font-baslik);
     color: var(--bordo, #7A1B26);
     font-size: 1.6rem;
     margin-bottom: 12px;
 }
+
 .error-detail {
     background: #FFF3F2;
     border: 1px solid #F3C9C5;
@@ -458,10 +510,12 @@ a { text-decoration: none; color: inherit; }
     color: #7A1B26;
     text-align: left;
 }
+
 .error-hint {
     color: var(--slate-acik);
     font-size: 0.9rem;
 }
+
 /* ============================================
    FOOTER
    ============================================ */

@@ -32,16 +32,23 @@
     </div>
 </section>
 
-<section id="etkinlikler" class="tab-panel">
+<section id="etkinlikler" class="tab-panel"{% if kulup.kapak_gorseli %} style="background-image: url('{{ url_for('static', filename='images/' + kulup.kapak_gorseli) }}');"{% endif %}>
     <div class="events-columns">
         <div class="events-column">
             <h3>Yaklaşan Etkinlikler</h3>
             {% if gelecek_etkinlikler %}
                 {% for etkinlik in gelecek_etkinlikler %}
                 <div class="event-card upcoming">
-                    <span class="event-date">{{ etkinlik.tarih }}</span>
-                    <h4>{{ etkinlik.baslik }}</h4>
-                    <p>{{ etkinlik.aciklama }}</p>
+                    {% if etkinlik.gorsel %}
+                    <img class="event-image" src="{{ url_for('static', filename='images/events/' + etkinlik.gorsel) }}" alt="{{ etkinlik.baslik }}">
+                    {% else %}
+                    <div class="event-image event-image-placeholder">📅</div>
+                    {% endif %}
+                    <div class="event-body">
+                        <span class="event-date">{{ etkinlik.tarih }}</span>
+                        <h4>{{ etkinlik.baslik }}</h4>
+                        <p>{{ etkinlik.aciklama }}</p>
+                    </div>
                 </div>
                 {% endfor %}
             {% else %}
@@ -54,9 +61,16 @@
             {% if gecmis_etkinlikler %}
                 {% for etkinlik in gecmis_etkinlikler %}
                 <div class="event-card past">
-                    <span class="event-date">{{ etkinlik.tarih }}</span>
-                    <h4>{{ etkinlik.baslik }}</h4>
-                    <p>{{ etkinlik.aciklama }}</p>
+                    {% if etkinlik.gorsel %}
+                    <img class="event-image" src="{{ url_for('static', filename='images/events/' + etkinlik.gorsel) }}" alt="{{ etkinlik.baslik }}">
+                    {% else %}
+                    <div class="event-image event-image-placeholder">🖼️</div>
+                    {% endif %}
+                    <div class="event-body">
+                        <span class="event-date">{{ etkinlik.tarih }}</span>
+                        <h4>{{ etkinlik.baslik }}</h4>
+                        <p>{{ etkinlik.aciklama }}</p>
+                    </div>
                 </div>
                 {% endfor %}
             {% else %}
