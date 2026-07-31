@@ -1,0 +1,6 @@
+[
+  {
+    "kullanici_adi": "admin",
+    "sifre_hash": "scrypt:32768:8:1$Uf2XyGC0y2QR4Tp4$20c38a14ee709cdc82b70a00f36c73ccc304f1ee13d7b035310d91dacc3951cc2356eb145dc3db13edd8c00c29e21facb83e3aa51e373559cef6e3fa3f3be945"
+  }
+]

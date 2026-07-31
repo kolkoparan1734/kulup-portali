@@ -18,6 +18,7 @@
 <div class="tabs">
     <button class="tab-button active" data-tab="yonetim">Yönetim Kurulu</button>
     <button class="tab-button" data-tab="etkinlikler">Etkinlikler</button>
+    <button class="tab-button" data-tab="forum">Forum</button>
 </div>
 
 <section id="yonetim" class="tab-panel active">
@@ -77,6 +78,43 @@
                 <p class="empty-state">Henüz kayıtlı bir etkinlik yok.</p>
             {% endif %}
         </div>
+    </div>
+</section>
+
+<section id="forum" class="tab-panel">
+    <div class="forum-box">
+        <h3>{{ kulup.isim }} Forumu</h3>
+        <p class="forum-intro">Bu kulüple ilgili sorularını sor, düşüncelerini paylaş.</p>
+
+        <div class="forum-mesajlar">
+            {% if mesajlar %}
+                {% for mesaj in mesajlar %}
+                <div class="forum-mesaj">
+                    <div class="forum-avatar">{{ mesaj.isim[0] | upper }}</div>
+                    <div class="forum-mesaj-govde">
+                        <div class="forum-mesaj-ust">
+                            <span class="forum-isim">{{ mesaj.isim }}</span>
+                            <span class="forum-tarih">{{ mesaj.tarih }}</span>
+                        </div>
+                        <p class="forum-metin">{{ mesaj.mesaj }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="empty-state">Henüz mesaj yok. İlk mesajı sen yaz!</p>
+            {% endif %}
+        </div>
+
+        {% if session.kullanici_adi %}
+        <form method="POST" action="{{ url_for('forum_mesaj_gonder', kulup_id=kulup.id) }}" class="forum-form">
+            <textarea name="mesaj" placeholder="Mesajını yaz..." required></textarea>
+            <button type="submit" class="auth-button">Gönder</button>
+        </form>
+        {% else %}
+        <p class="forum-giris-uyarisi">
+            Mesaj yazabilmek için <a href="{{ url_for('giris_yap') }}">giriş yapmalısın</a>.
+        </p>
+        {% endif %}
     </div>
 </section>
 

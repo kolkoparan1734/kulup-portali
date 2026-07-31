@@ -128,9 +128,9 @@
       "logo": "sinema_logo.png",
       "kategori": "Sanat / Kültür",
       "aciklama": "Film gösterimleri, tartışma seansları ve kısa film yarışmaları düzenleyen kulüp.",
-      "baskan": "Toprak Ergin",
+      "baskan": "İclal Yaprak",
       "yonetim_kurulu": [
-        { "isim": "Toprak Ergin", "gorev": "Başkan" },
+        { "isim": "İclal Yaprak", "gorev": "Başkan" },
         { "isim": "Asya Demirtaş", "gorev": "Başkan Yardımcısı" },
         { "isim": "Berk Yavuz", "gorev": "Program Sorumlusu" }
       ],

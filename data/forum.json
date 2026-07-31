@@ -1,0 +1,40 @@
+{
+  "dans": [
+    {
+      "isim": "admin",
+      "mesaj": "merhaba",
+      "tarih": "31.07.2026 21:52"
+    },
+    {
+      "isim": "admin",
+      "mesaj": "selam altınbaş",
+      "tarih": "31.07.2026 21:53"
+    },
+    {
+      "isim": "admin",
+      "mesaj": "heyyy",
+      "tarih": "31.07.2026 21:55"
+    }
+  ],
+  "ieee": [
+    {
+      "isim": "admin",
+      "mesaj": "hey ıeee",
+      "tarih": "31.07.2026 21:54"
+    }
+  ],
+  "satranc": [
+    {
+      "isim": "admin",
+      "mesaj": "Magnus",
+      "tarih": "31.07.2026 21:55"
+    }
+  ],
+  "hayvan-haklari": [
+    {
+      "isim": "admin",
+      "mesaj": "tomris",
+      "tarih": "31.07.2026 21:56"
+    }
+  ]
+}

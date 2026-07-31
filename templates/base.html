@@ -18,6 +18,13 @@
         </a>
         <nav>
             <a href="{{ url_for('anasayfa') }}">Tüm Kulüpler</a>
+            {% if session.kullanici_adi %}
+                <span class="nav-user">Merhaba, {{ session.kullanici_adi }}</span>
+                <a href="{{ url_for('cikis_yap') }}">Çıkış Yap</a>
+            {% else %}
+                <a href="{{ url_for('giris_yap') }}">Giriş Yap</a>
+                <a href="{{ url_for('kayit_ol') }}">Kayıt Ol</a>
+            {% endif %}
         </nav>
     </header>
 

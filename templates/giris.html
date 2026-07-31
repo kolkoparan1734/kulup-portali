@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Giriş Yap · Öğrenci Kulüpleri Portalı{% endblock %}
+
+{% block content %}
+
+<section class="auth-box">
+    <h1>Giriş Yap</h1>
+
+    {% if hata %}
+    <p class="auth-error">{{ hata }}</p>
+    {% endif %}
+
+    <form method="POST" class="auth-form">
+        <label for="kullanici_adi">Kullanıcı Adı</label>
+        <input type="text" id="kullanici_adi" name="kullanici_adi" required>
+
+        <label for="sifre">Şifre</label>
+        <input type="password" id="sifre" name="sifre" required>
+
+        <button type="submit" class="auth-button">Giriş Yap</button>
+    </form>
+
+    <p class="auth-alt">Hesabın yok mu? <a href="{{ url_for('kayit_ol') }}">Kayıt ol</a></p>
+</section>
+
+{% endblock %}

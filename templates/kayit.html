@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Kayıt Ol · Öğrenci Kulüpleri Portalı{% endblock %}
+
+{% block content %}
+
+<section class="auth-box">
+    <h1>Kayıt Ol</h1>
+
+    {% if hata %}
+    <p class="auth-error">{{ hata }}</p>
+    {% endif %}
+
+    <form method="POST" class="auth-form">
+        <label for="kullanici_adi">Kullanıcı Adı</label>
+        <input type="text" id="kullanici_adi" name="kullanici_adi" required>
+
+        <label for="sifre">Şifre</label>
+        <input type="password" id="sifre" name="sifre" required>
+
+        <button type="submit" class="auth-button">Kayıt Ol</button>
+    </form>
+
+    <p class="auth-alt">Zaten hesabın var mı? <a href="{{ url_for('giris_yap') }}">Giriş yap</a></p>
+</section>
+
+{% endblock %}
