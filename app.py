@@ -125,6 +125,12 @@ def anasayfa():
     return render_template("index.html", kulupler=kulupler)
 
 
+@app.route("/belgeler")
+def belgeler():
+    """Kulüp kurma/etkinlik başvurusu gibi resmi belgelerin indirilebildiği sayfa."""
+    return render_template("belgeler.html")
+
+
 @app.route("/kulup/<kulup_id>")
 def kulup_detay(kulup_id):
     """Bir kulübün detay sayfası: logo, başkan, yönetim kurulu, etkinlikler, forum."""

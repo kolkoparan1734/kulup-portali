@@ -18,6 +18,7 @@
         </a>
         <nav>
             <a href="{{ url_for('anasayfa') }}">Tüm Kulüpler</a>
+            <a href="{{ url_for('belgeler') }}">Belgeler</a>
             {% if session.kullanici_adi %}
                 <span class="nav-user">Merhaba, {{ session.kullanici_adi }}</span>
                 <a href="{{ url_for('cikis_yap') }}">Çıkış Yap</a>
@@ -33,7 +34,46 @@
     </main>
 
     <footer class="site-footer">
-        <p>Bu bir öğrenci projesi prototipidir · Yönetim Bilişim Sistemleri dersi</p>
+        <div class="footer-inner">
+            <div class="footer-marka">
+                <img src="{{ url_for('static', filename='images/footer-logo.png') }}" alt="AUDOST Logosu" class="footer-logo-img">
+                <div class="footer-sosyal">
+                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="#" aria-label="TikTok">tt</a>
+                    <a href="#" aria-label="Instagram">ig</a>
+                </div>
+            </div>
+
+            <p class="footer-aciklama">
+                Öğrenci Dekanlığı olarak temel hedefimiz; öğrencilerimizin üniversitemize aday olma
+                düşüncesinden iş hayatına kadar olan süreçlerini en konforlu şekilde geçirmelerini sağlamak.
+            </p>
+
+            <div class="footer-hizli-erisim">
+                <h3>Hızlı Erişim</h3>
+                <div class="footer-sutunlar">
+                    <div class="footer-sutun">
+                        <a href="https://audost.altinbas.edu.tr/?page_id=14" target="_blank" rel="noopener">Yerleşke Yaşam</a>
+                        <a href="https://audost.altinbas.edu.tr/?page_id=309" target="_blank" rel="noopener">Öğrenci Başarı</a>
+                        <a href="https://audost.altinbas.edu.tr/?page_id=2692" target="_blank" rel="noopener">Psikolojik Destek</a>
+                    </div>
+                    <div class="footer-sutun">
+                        <a href="https://audost.altinbas.edu.tr/?page_id=18" target="_blank" rel="noopener">Akran Koçları</a>
+                        <a href="https://audost.altinbas.edu.tr/?page_id=334" target="_blank" rel="noopener">Burslar ve İndirimler</a>
+                        <a href="https://audost.altinbas.edu.tr/?page_id=326" target="_blank" rel="noopener">Öğrenci Konseyi</a>
+                        <a href="https://audost.altinbas.edu.tr/?page_id=328" target="_blank" rel="noopener">Öğrenci Kulüpler</a>
+                    </div>
+                    <div class="footer-sutun">
+                        <a href="https://audost.altinbas.edu.tr/?page_id=330" target="_blank" rel="noopener">Üniversite Takımları</a>
+                        <a href="https://audost.altinbas.edu.tr/?page_id=875" target="_blank" rel="noopener">Engelsiz Altınbaş</a>
+                        <a href="https://altinbas.edu.tr/ogrenci/ogrenci-hayati/shuttle-saatleri.web" target="_blank" rel="noopener">Shuttle</a>
+                        <a href="https://uzem.altinbas.edu.tr/" target="_blank" rel="noopener">UZEM</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="footer-alt-yazi">Bu bir öğrenci projesi prototipidir · Yönetim Bilişim Sistemleri dersi</p>
     </footer>
 
 </body>

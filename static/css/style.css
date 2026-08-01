@@ -515,6 +515,7 @@ a { text-decoration: none; color: inherit; }
     color: var(--slate-acik);
     font-size: 0.9rem;
 }
+
 /* ============================================
    ÜYE OL / KATIL / BAŞKAN PANELİ
    ============================================ */
@@ -624,6 +625,80 @@ a { text-decoration: none; color: inherit; }
 
 .onay-buton:hover { background: #156138; }
 .reddet-buton:hover { background: #E4E4E0; }
+
+/* ============================================
+   BELGELER SAYFASI
+   ============================================ */
+.belgeler-box {
+    max-width: 720px;
+    margin: 48px auto;
+    padding: 0 24px;
+}
+
+.belgeler-box h1 {
+    font-family: var(--font-baslik);
+    color: var(--lacivert);
+    font-size: 1.9rem;
+    margin: 0 0 10px;
+}
+
+.belgeler-intro {
+    color: var(--slate-acik);
+    margin: 0 0 28px;
+}
+
+.belge-listesi {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.belge-karti {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--beyaz);
+    border: 1px solid var(--cizgi);
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: var(--golge);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.belge-karti:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--golge-hover);
+    border-color: var(--altin);
+}
+
+.belge-ikon {
+    font-size: 1.6rem;
+}
+
+.belge-metin {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.belge-baslik {
+    font-weight: 600;
+    color: var(--lacivert);
+    font-size: 0.98rem;
+}
+
+.belge-format {
+    font-size: 0.8rem;
+    color: var(--slate-acik);
+}
+
+.belge-indir {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--lacivert);
+    white-space: nowrap;
+}
+
 /* ============================================
    NAV KULLANICI DURUMU
    ============================================ */
@@ -843,15 +918,117 @@ a { text-decoration: none; color: inherit; }
     color: var(--lacivert);
     font-weight: 600;
 }
+
 /* ============================================
-   FOOTER
+   FOOTER — Hızlı Erişim
    ============================================ */
 .site-footer {
+    background: var(--lacivert-koyu);
+    color: rgba(255,255,255,0.85);
+    padding: 48px 24px 20px;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr 2fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.footer-marka {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-logo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+}
+.footer-logo-img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--beyaz);
+}
+
+.footer-sosyal {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-sosyal a {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    transition: background 0.15s ease;
+}
+
+.footer-sosyal a:hover { background: var(--altin); color: var(--lacivert-koyu); }
+
+.footer-aciklama {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.7);
+    margin: 0;
+}
+
+.footer-hizli-erisim h3 {
+    font-family: var(--font-baslik);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    color: var(--beyaz);
+    margin: 0 0 20px;
+}
+
+.footer-sutunlar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.footer-sutun {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-sutun a {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.75);
+    transition: color 0.15s ease;
+}
+
+.footer-sutun a:hover { color: var(--altin); }
+
+.footer-alt-yazi {
     text-align: center;
-    padding: 28px;
-    color: var(--slate-acik);
-    font-size: 0.8rem;
-    border-top: 1px solid var(--cizgi);
+    margin: 40px 0 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 860px) {
+    .footer-inner { grid-template-columns: 1fr; text-align: center; }
+    .footer-sutunlar { grid-template-columns: 1fr; text-align: center; }
+    .footer-marka { align-items: center; }
 }
 
 /* Mobil uyum */
