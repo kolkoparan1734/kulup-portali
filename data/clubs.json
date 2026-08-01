@@ -8,14 +8,36 @@
       "aciklama": "Modern dans, halk oyunları ve sosyal dans atölyeleriyle öğrencilere sahne deneyimi kazandıran kulüp.",
       "baskan": "Ahmet Yılmaz",
       "yonetim_kurulu": [
-        { "isim": "Ahmet Yılmaz", "gorev": "Başkan" },
-        { "isim": "Elif Demir", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Can Öztürk", "gorev": "Sekreter" },
-        { "isim": "Zeynep Kaya", "gorev": "Sayman" }
+        {
+          "isim": "Ahmet Yılmaz",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Elif Demir",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Can Öztürk",
+          "gorev": "Sekreter"
+        },
+        {
+          "isim": "Zeynep Kaya",
+          "gorev": "Sayman"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Bahar Dans Gösterisi", "tarih": "2026-05-14", "durum": "gecmis", "aciklama": "Kulüp üyelerinin sahneye koyduğu modern dans gösterisi." },
-        { "baslik": "Yeni Üye Tanışma ve Deneme Dersi", "tarih": "2026-09-20", "durum": "gelecek", "aciklama": "Yeni dönem için tanışma ve ücretsiz deneme dans dersi." }
+        {
+          "baslik": "Bahar Dans Gösterisi",
+          "tarih": "2026-05-14",
+          "durum": "gecmis",
+          "aciklama": "Kulüp üyelerinin sahneye koyduğu modern dans gösterisi."
+        },
+        {
+          "baslik": "Yeni Üye Tanışma ve Deneme Dersi",
+          "tarih": "2026-09-20",
+          "durum": "gelecek",
+          "aciklama": "Yeni dönem için tanışma ve ücretsiz deneme dans dersi."
+        }
       ]
     },
     {
@@ -26,13 +48,32 @@
       "aciklama": "Satranç turnuvaları düzenleyen ve düzenli antrenman seansları sunan öğrenci kulübü.",
       "baskan": "Mert Aydın",
       "yonetim_kurulu": [
-        { "isim": "Mert Aydın", "gorev": "Başkan" },
-        { "isim": "Selin Arslan", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Barış Kurt", "gorev": "Sekreter" }
+        {
+          "isim": "Mert Aydın",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Selin Arslan",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Barış Kurt",
+          "gorev": "Sekreter"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Kampüs İçi Satranç Turnuvası", "tarih": "2026-04-02", "durum": "gecmis", "aciklama": "60 öğrencinin katıldığı eleme usulü turnuva." },
-        { "baslik": "Hızlı Satranç (Blitz) Gecesi", "tarih": "2026-10-05", "durum": "gelecek", "aciklama": "5 dakikalık blitz formatında dostluk turnuvası." }
+        {
+          "baslik": "Kampüs İçi Satranç Turnuvası",
+          "tarih": "2026-04-02",
+          "durum": "gecmis",
+          "aciklama": "60 öğrencinin katıldığı eleme usulü turnuva."
+        },
+        {
+          "baslik": "Hızlı Satranç (Blitz) Gecesi",
+          "tarih": "2026-10-05",
+          "durum": "gelecek",
+          "aciklama": "5 dakikalık blitz formatında dostluk turnuvası."
+        }
       ]
     },
     {
@@ -43,32 +84,72 @@
       "aciklama": "Mühendislik ve teknoloji alanında seminer, atölye ve proje çalışmaları düzenleyen kulüp.",
       "baskan": "Deniz Şahin",
       "yonetim_kurulu": [
-        { "isim": "Deniz Şahin", "gorev": "Başkan" },
-        { "isim": "Ece Yıldız", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Kerem Aksoy", "gorev": "Etkinlik Koordinatörü" },
-        { "isim": "Nil Çelik", "gorev": "Sayman" }
+        {
+          "isim": "Deniz Şahin",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Ece Yıldız",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Kerem Aksoy",
+          "gorev": "Etkinlik Koordinatörü"
+        },
+        {
+          "isim": "Nil Çelik",
+          "gorev": "Sayman"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Gömülü Sistemler Atölyesi", "tarih": "2026-03-11", "durum": "gecmis", "aciklama": "Arduino ile giriş seviyesi uygulamalı atölye." },
-        { "baslik": "Yapay Zeka Söyleşisi", "tarih": "2026-11-18", "durum": "gelecek", "aciklama": "Sektörden bir konuşmacı ile yapay zeka üzerine söyleşi." }
+        {
+          "baslik": "Gömülü Sistemler Atölyesi",
+          "tarih": "2026-03-11",
+          "durum": "gecmis",
+          "aciklama": "Arduino ile giriş seviyesi uygulamalı atölye."
+        },
+        {
+          "baslik": "Yapay Zeka Söyleşisi",
+          "tarih": "2026-11-18",
+          "durum": "gelecek",
+          "aciklama": "Sektörden bir konuşmacı ile yapay zeka üzerine söyleşi."
+        }
       ]
     },
     {
       "id": "gastronomi",
       "isim": "Gastronomi Kulübü",
       "logo": "gastronomi_logo.png",
-      "kapak_gorseli": "gastronomi_etkinlik.jpg",
       "kategori": "Sanat / Kültür",
       "aciklama": "Mutfak kültürü, yemek atölyeleri ve tadım etkinlikleri düzenleyen kulüp.",
       "baskan": "Aslı Korkmaz",
       "yonetim_kurulu": [
-        { "isim": "Aslı Korkmaz", "gorev": "Başkan" },
-        { "isim": "Tolga Er", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Buse Yalçın", "gorev": "Sekreter" }
+        {
+          "isim": "Aslı Korkmaz",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Tolga Er",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Buse Yalçın",
+          "gorev": "Sekreter"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Dünya Mutfakları Günü", "tarih": "2026-05-30", "durum": "gecmis", "aciklama": "Farklı ülke mutfaklarından tadım standları." },
-        { "baslik": "Hamur İşleri Atölyesi", "tarih": "2026-09-27", "durum": "gelecek", "aciklama": "Temel hamur işi tekniklerinin öğretildiği uygulamalı atölye." }
+        {
+          "baslik": "Dünya Mutfakları Günü",
+          "tarih": "2026-05-30",
+          "durum": "gecmis",
+          "aciklama": "Farklı ülke mutfaklarından tadım standları."
+        },
+        {
+          "baslik": "Hamur İşleri Atölyesi",
+          "tarih": "2026-09-27",
+          "durum": "gelecek",
+          "aciklama": "Temel hamur işi tekniklerinin öğretildiği uygulamalı atölye."
+        }
       ]
     },
     {
@@ -79,13 +160,32 @@
       "aciklama": "Yapay zeka, makine öğrenmesi ve robotik alanlarında proje ve atölyeler düzenleyen kulüp.",
       "baskan": "Kaan Aydemir",
       "yonetim_kurulu": [
-        { "isim": "Kaan Aydemir", "gorev": "Başkan" },
-        { "isim": "Sude Yalman", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Emre Koç", "gorev": "Proje Sorumlusu" }
+        {
+          "isim": "Kaan Aydemir",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Sude Yalman",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Emre Koç",
+          "gorev": "Proje Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Robotik Kol Yapım Atölyesi", "tarih": "2026-04-18", "durum": "gecmis", "aciklama": "Öğrencilerin sıfırdan basit bir robotik kol tasarladığı uygulamalı atölye." },
-        { "baslik": "Yapay Zeka ile Görüntü İşleme Semineri", "tarih": "2026-09-25", "durum": "gelecek", "aciklama": "Temel görüntü işleme ve yapay zeka uygulamalarına giriş semineri." }
+        {
+          "baslik": "Robotik Kol Yapım Atölyesi",
+          "tarih": "2026-04-18",
+          "durum": "gecmis",
+          "aciklama": "Öğrencilerin sıfırdan basit bir robotik kol tasarladığı uygulamalı atölye."
+        },
+        {
+          "baslik": "Yapay Zeka ile Görüntü İşleme Semineri",
+          "tarih": "2026-09-25",
+          "durum": "gelecek",
+          "aciklama": "Temel görüntü işleme ve yapay zeka uygulamalarına giriş semineri."
+        }
       ]
     },
     {
@@ -96,13 +196,32 @@
       "aciklama": "Kalite yönetimi ve sürekli gelişim kültürünü öğrencilere tanıtan, sektörle buluşturan kulüp.",
       "baskan": "Defne Aksu",
       "yonetim_kurulu": [
-        { "isim": "Defne Aksu", "gorev": "Başkan" },
-        { "isim": "Oğuz Bilgin", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Lara Güneş", "gorev": "Etkinlik Sorumlusu" }
+        {
+          "isim": "Defne Aksu",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Oğuz Bilgin",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Lara Güneş",
+          "gorev": "Etkinlik Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Kalite Yönetim Sistemleri Semineri", "tarih": "2026-03-05", "durum": "gecmis", "aciklama": "Sektörden bir uzmanla kalite yönetim sistemleri üzerine söyleşi." },
-        { "baslik": "Genç Kalite Buluşması", "tarih": "2026-10-12", "durum": "gelecek", "aciklama": "Farklı üniversitelerden kalite kulüplerinin bir araya geldiği network etkinliği." }
+        {
+          "baslik": "Kalite Yönetim Sistemleri Semineri",
+          "tarih": "2026-03-05",
+          "durum": "gecmis",
+          "aciklama": "Sektörden bir uzmanla kalite yönetim sistemleri üzerine söyleşi."
+        },
+        {
+          "baslik": "Genç Kalite Buluşması",
+          "tarih": "2026-10-12",
+          "durum": "gelecek",
+          "aciklama": "Farklı üniversitelerden kalite kulüplerinin bir araya geldiği network etkinliği."
+        }
       ]
     },
     {
@@ -113,13 +232,32 @@
       "aciklama": "Psikoloji alanında söyleşi, seminer ve farkındalık etkinlikleri düzenleyen kulüp.",
       "baskan": "İrem Solak",
       "yonetim_kurulu": [
-        { "isim": "İrem Solak", "gorev": "Başkan" },
-        { "isim": "Yusuf Bayrak", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Nehir Aktaş", "gorev": "Etkinlik Koordinatörü" }
+        {
+          "isim": "İrem Solak",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Yusuf Bayrak",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Nehir Aktaş",
+          "gorev": "Etkinlik Koordinatörü"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Ruh Sağlığı Farkındalık Haftası", "tarih": "2026-05-20", "durum": "gecmis", "aciklama": "Kampüste stant açılarak ruh sağlığı üzerine bilgilendirme yapıldı." },
-        { "baslik": "Uzman Söyleşisi: Sınav Kaygısıyla Başa Çıkma", "tarih": "2026-11-03", "durum": "gelecek", "aciklama": "Alanında uzman bir psikoloğun katılacağı söyleşi." }
+        {
+          "baslik": "Ruh Sağlığı Farkındalık Haftası",
+          "tarih": "2026-05-20",
+          "durum": "gecmis",
+          "aciklama": "Kampüste stant açılarak ruh sağlığı üzerine bilgilendirme yapıldı."
+        },
+        {
+          "baslik": "Uzman Söyleşisi: Sınav Kaygısıyla Başa Çıkma",
+          "tarih": "2026-11-03",
+          "durum": "gelecek",
+          "aciklama": "Alanında uzman bir psikoloğun katılacağı söyleşi."
+        }
       ]
     },
     {
@@ -128,15 +266,34 @@
       "logo": "sinema_logo.png",
       "kategori": "Sanat / Kültür",
       "aciklama": "Film gösterimleri, tartışma seansları ve kısa film yarışmaları düzenleyen kulüp.",
-      "baskan": "İclal Yaprak",
+      "baskan": "Toprak Ergin",
       "yonetim_kurulu": [
-        { "isim": "İclal Yaprak", "gorev": "Başkan" },
-        { "isim": "Asya Demirtaş", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Berk Yavuz", "gorev": "Program Sorumlusu" }
+        {
+          "isim": "Toprak Ergin",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Asya Demirtaş",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Berk Yavuz",
+          "gorev": "Program Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Kısa Film Gecesi", "tarih": "2026-04-29", "durum": "gecmis", "aciklama": "Öğrencilerin çektiği kısa filmlerin gösterildiği gece." },
-        { "baslik": "Klasik Sinema Gösterimi", "tarih": "2026-10-08", "durum": "gelecek", "aciklama": "Sinema tarihinden bir klasik, açık hava gösterimi." }
+        {
+          "baslik": "Kısa Film Gecesi",
+          "tarih": "2026-04-29",
+          "durum": "gecmis",
+          "aciklama": "Öğrencilerin çektiği kısa filmlerin gösterildiği gece."
+        },
+        {
+          "baslik": "Klasik Sinema Gösterimi",
+          "tarih": "2026-10-08",
+          "durum": "gelecek",
+          "aciklama": "Sinema tarihinden bir klasik, açık hava gösterimi."
+        }
       ]
     },
     {
@@ -147,13 +304,32 @@
       "aciklama": "Okuma alışkanlığını yaygınlaştırmak için kitap kulübü toplantıları ve yazarla söyleşi etkinlikleri düzenleyen kulüp.",
       "baskan": "Ela Vural",
       "yonetim_kurulu": [
-        { "isim": "Ela Vural", "gorev": "Başkan" },
-        { "isim": "Mustafa Tekin", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Zehra Polat", "gorev": "Etkinlik Sorumlusu" }
+        {
+          "isim": "Ela Vural",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Mustafa Tekin",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Zehra Polat",
+          "gorev": "Etkinlik Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Aylık Kitap Kulübü Buluşması", "tarih": "2026-04-09", "durum": "gecmis", "aciklama": "Seçilen bir romanın tartışıldığı okuyucu buluşması." },
-        { "baslik": "Yazarla Söyleşi Günü", "tarih": "2026-10-15", "durum": "gelecek", "aciklama": "Türk edebiyatından bir yazarla kampüste söyleşi." }
+        {
+          "baslik": "Aylık Kitap Kulübü Buluşması",
+          "tarih": "2026-04-09",
+          "durum": "gecmis",
+          "aciklama": "Seçilen bir romanın tartışıldığı okuyucu buluşması."
+        },
+        {
+          "baslik": "Yazarla Söyleşi Günü",
+          "tarih": "2026-10-15",
+          "durum": "gelecek",
+          "aciklama": "Türk edebiyatından bir yazarla kampüste söyleşi."
+        }
       ]
     },
     {
@@ -164,13 +340,32 @@
       "aciklama": "Veri analizi, makine öğrenmesi ve istatistik üzerine proje ve eğitimler düzenleyen kulüp.",
       "baskan": "Ege Sancak",
       "yonetim_kurulu": [
-        { "isim": "Ege Sancak", "gorev": "Başkan" },
-        { "isim": "Miray Doğan", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Alp Baransel", "gorev": "Proje Sorumlusu" }
+        {
+          "isim": "Ege Sancak",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Miray Doğan",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Alp Baransel",
+          "gorev": "Proje Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Python ile Veri Analizi Atölyesi", "tarih": "2026-04-22", "durum": "gecmis", "aciklama": "Pandas kütüphanesiyle temel veri analizi uygulamalı atölyesi." },
-        { "baslik": "Kaggle Yarışması Hazırlık Kampı", "tarih": "2026-10-20", "durum": "gelecek", "aciklama": "Uluslararası bir veri bilimi yarışmasına hazırlık kampı." }
+        {
+          "baslik": "Python ile Veri Analizi Atölyesi",
+          "tarih": "2026-04-22",
+          "durum": "gecmis",
+          "aciklama": "Pandas kütüphanesiyle temel veri analizi uygulamalı atölyesi."
+        },
+        {
+          "baslik": "Kaggle Yarışması Hazırlık Kampı",
+          "tarih": "2026-10-20",
+          "durum": "gelecek",
+          "aciklama": "Uluslararası bir veri bilimi yarışmasına hazırlık kampı."
+        }
       ]
     },
     {
@@ -181,13 +376,32 @@
       "aciklama": "Toplumsal konular üzerine tartışma panelleri ve saha araştırmaları düzenleyen kulüp.",
       "baskan": "Yağmur Ceylan",
       "yonetim_kurulu": [
-        { "isim": "Yağmur Ceylan", "gorev": "Başkan" },
-        { "isim": "Kerem Us", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Nisa Batur", "gorev": "Araştırma Sorumlusu" }
+        {
+          "isim": "Yağmur Ceylan",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Kerem Us",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Nisa Batur",
+          "gorev": "Araştırma Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Kentleşme ve Toplum Paneli", "tarih": "2026-05-07", "durum": "gecmis", "aciklama": "Akademisyenlerin katıldığı kentleşme temalı panel." },
-        { "baslik": "Saha Araştırması Sunum Günü", "tarih": "2026-11-10", "durum": "gelecek", "aciklama": "Öğrencilerin yürüttüğü saha araştırmalarının sunulduğu gün." }
+        {
+          "baslik": "Kentleşme ve Toplum Paneli",
+          "tarih": "2026-05-07",
+          "durum": "gecmis",
+          "aciklama": "Akademisyenlerin katıldığı kentleşme temalı panel."
+        },
+        {
+          "baslik": "Saha Araştırması Sunum Günü",
+          "tarih": "2026-11-10",
+          "durum": "gelecek",
+          "aciklama": "Öğrencilerin yürüttüğü saha araştırmalarının sunulduğu gün."
+        }
       ]
     },
     {
@@ -198,31 +412,68 @@
       "aciklama": "Uluslararası ticaret ve lojistik sektörüne yönelik sektör ziyaretleri ve kariyer etkinlikleri düzenleyen kulüp.",
       "baskan": "Bora Şimşek",
       "yonetim_kurulu": [
-        { "isim": "Bora Şimşek", "gorev": "Başkan" },
-        { "isim": "Ceren Aktürk", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Umut Karasu", "gorev": "Kurumsal İlişkiler Sorumlusu" }
+        {
+          "isim": "Bora Şimşek",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Ceren Aktürk",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Umut Karasu",
+          "gorev": "Kurumsal İlişkiler Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Liman ve Lojistik Merkezi Sektör Gezisi", "tarih": "2026-04-30", "durum": "gecmis", "aciklama": "Öğrencilerin bir lojistik merkezini yerinde incelediği teknik gezi." },
-        { "baslik": "Dış Ticarette Kariyer Günü", "tarih": "2026-11-05", "durum": "gelecek", "aciklama": "Sektör profesyonelleriyle kariyer odaklı buluşma." }
+        {
+          "baslik": "Liman ve Lojistik Merkezi Sektör Gezisi",
+          "tarih": "2026-04-30",
+          "durum": "gecmis",
+          "aciklama": "Öğrencilerin bir lojistik merkezini yerinde incelediği teknik gezi."
+        },
+        {
+          "baslik": "Dış Ticarette Kariyer Günü",
+          "tarih": "2026-11-05",
+          "durum": "gelecek",
+          "aciklama": "Sektör profesyonelleriyle kariyer odaklı buluşma."
+        }
       ]
-    }
-    ,
+    },
     {
       "id": "hayvan-haklari",
       "isim": "Hayvan Hakları Kulübü",
       "logo": "hayvanhaklari_logo.png",
       "kategori": "Sosyal Sorumluluk",
       "aciklama": "Sokak hayvanlarının korunması ve hayvan hakları konusunda farkındalık oluşturan, düzenli yardım kampanyaları yürüten kulüp.",
-      "baskan": "Yasemin Sarı",
+      "baskan": "Aylin Er",
       "yonetim_kurulu": [
-        { "isim": "Yasemin Sarı", "gorev": "Başkan" },
-        { "isim": "Mehmet Doğan", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Sena Yıldırım", "gorev": "Kampanya Sorumlusu" }
+        {
+          "isim": "Aylin Er",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Cem Turan",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Sena Yıldırım",
+          "gorev": "Kampanya Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Kampüs Sokak Hayvanları Besleme Kampanyası", "tarih": "2026-04-11", "durum": "gecmis", "aciklama": "Kampüsteki sokak hayvanları için mama ve barınak desteği kampanyası." },
-        { "baslik": "Kısırlaştırma Farkındalık Günü", "tarih": "2026-10-22", "durum": "gelecek", "aciklama": "Yerel bir veteriner kliniğiyle iş birliğinde farkındalık standı." }
+        {
+          "baslik": "Kampüs Sokak Hayvanları Besleme Kampanyası",
+          "tarih": "2026-04-11",
+          "durum": "gecmis",
+          "aciklama": "Kampüsteki sokak hayvanları için mama ve barınak desteği kampanyası."
+        },
+        {
+          "baslik": "Kısırlaştırma Farkındalık Günü",
+          "tarih": "2026-10-22",
+          "durum": "gelecek",
+          "aciklama": "Yerel bir veteriner kliniğiyle iş birliğinde farkındalık standı."
+        }
       ]
     },
     {
@@ -233,30 +484,68 @@
       "aciklama": "Toplum yararına gönüllülük projeleri yürüten, bağış ve dayanışma kampanyaları organize eden kulüp.",
       "baskan": "Meltem Kaan",
       "yonetim_kurulu": [
-        { "isim": "Meltem Kaan", "gorev": "Başkan" },
-        { "isim": "Onur Bekar", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Duru Aslan", "gorev": "Gönüllülük Sorumlusu" }
+        {
+          "isim": "Meltem Kaan",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Onur Bekar",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Duru Aslan",
+          "gorev": "Gönüllülük Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Kırtasiye Bağış Kampanyası", "tarih": "2026-04-25", "durum": "gecmis", "aciklama": "İhtiyaç sahibi öğrencilere kırtasiye malzemesi bağışı." },
-        { "baslik": "Huzurevi Ziyareti", "tarih": "2026-10-30", "durum": "gelecek", "aciklama": "Yerel bir huzurevine gönüllü ziyaret ve etkinlik organizasyonu." }
+        {
+          "baslik": "Kırtasiye Bağış Kampanyası",
+          "tarih": "2026-04-25",
+          "durum": "gecmis",
+          "aciklama": "İhtiyaç sahibi öğrencilere kırtasiye malzemesi bağışı."
+        },
+        {
+          "baslik": "Huzurevi Ziyareti",
+          "tarih": "2026-10-30",
+          "durum": "gelecek",
+          "aciklama": "Yerel bir huzurevine gönüllü ziyaret ve etkinlik organizasyonu."
+        }
       ]
     },
     {
       "id": "tiyatro",
       "isim": "Tiyatro Kulübü",
-     "logo": "tiyatro_logo.png",
+      "logo": "tiyatro_logo.png",
       "kategori": "Sanat / Kültür",
       "aciklama": "Sahne oyunculuğu atölyeleri düzenleyen ve dönem sonu oyun gösterimleri sahneleyen kulüp.",
       "baskan": "Rüzgar Onat",
       "yonetim_kurulu": [
-        { "isim": "Rüzgar Onat", "gorev": "Başkan" },
-        { "isim": "Azra Tunç", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Kutay Erdem", "gorev": "Sahne Sorumlusu" }
+        {
+          "isim": "Rüzgar Onat",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Azra Tunç",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Kutay Erdem",
+          "gorev": "Sahne Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Dönem Sonu Oyun Gösterimi", "tarih": "2026-05-25", "durum": "gecmis", "aciklama": "Kulüp üyelerinin bir yıl boyunca hazırladığı oyunun sahnelenmesi." },
-        { "baslik": "Doğaçlama Atölyesi", "tarih": "2026-10-18", "durum": "gelecek", "aciklama": "Yeni üyeler için doğaçlama oyunculuğa giriş atölyesi." }
+        {
+          "baslik": "Dönem Sonu Oyun Gösterimi",
+          "tarih": "2026-05-25",
+          "durum": "gecmis",
+          "aciklama": "Kulüp üyelerinin bir yıl boyunca hazırladığı oyunun sahnelenmesi."
+        },
+        {
+          "baslik": "Doğaçlama Atölyesi",
+          "tarih": "2026-10-18",
+          "durum": "gelecek",
+          "aciklama": "Yeni üyeler için doğaçlama oyunculuğa giriş atölyesi."
+        }
       ]
     },
     {
@@ -267,13 +556,357 @@
       "aciklama": "Öğrencileri sektör profesyonelleri ve mezunlarla buluşturan, kariyer gelişimine odaklanan kulüp.",
       "baskan": "Efe Kutlu",
       "yonetim_kurulu": [
-        { "isim": "Efe Kutlu", "gorev": "Başkan" },
-        { "isim": "Pelin Sancaktar", "gorev": "Başkan Yardımcısı" },
-        { "isim": "Doruk Alkan", "gorev": "Kurumsal İlişkiler Sorumlusu" }
+        {
+          "isim": "Efe Kutlu",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Pelin Sancaktar",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Doruk Alkan",
+          "gorev": "Kurumsal İlişkiler Sorumlusu"
+        }
       ],
       "etkinlikler": [
-        { "baslik": "Mezunlarla Buluşma Gecesi", "tarih": "2026-05-02", "durum": "gecmis", "aciklama": "Farklı sektörlerde çalışan mezunlarla networking etkinliği." },
-        { "baslik": "LinkedIn ve Kişisel Marka Atölyesi", "tarih": "2026-11-08", "durum": "gelecek", "aciklama": "Öğrencilere profesyonel profil oluşturma üzerine atölye." }
+        {
+          "baslik": "Mezunlarla Buluşma Gecesi",
+          "tarih": "2026-05-02",
+          "durum": "gecmis",
+          "aciklama": "Farklı sektörlerde çalışan mezunlarla networking etkinliği."
+        },
+        {
+          "baslik": "LinkedIn ve Kişisel Marka Atölyesi",
+          "tarih": "2026-11-08",
+          "durum": "gelecek",
+          "aciklama": "Öğrencilere profesyonel profil oluşturma üzerine atölye."
+        }
+      ]
+    },
+    {
+      "id": "arama-kurtarma",
+      "isim": "Altınbaş Arama Kurtarma Kulübü",
+      "logo": "aramakurtarma_logo.png",
+      "kategori": "Sosyal Sorumluluk",
+      "aciklama": "Afet bilinci, ilk yardım ve arama kurtarma teknikleri konusunda eğitimler düzenleyen, gönüllü ekip kuran kulüp.",
+      "baskan": "Kerem Yıldız",
+      "yonetim_kurulu": [
+        {
+          "isim": "Kerem Yıldız",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Dila Aksoy",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Berat Sönmez",
+          "gorev": "Eğitim Sorumlusu"
+        }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Temel Arama Kurtarma Eğitimi",
+          "tarih": "2026-04-14",
+          "durum": "gecmis",
+          "aciklama": "AFAD iş birliğiyle düzenlenen temel eğitim programı."
+        },
+        {
+          "baslik": "Deprem Tatbikatı",
+          "tarih": "2026-10-24",
+          "durum": "gelecek",
+          "aciklama": "Kampüs genelinde düzenlenecek deprem tatbikatı ve bilgilendirme standı."
+        }
+      ]
+    },
+    {
+      "id": "sailing-club",
+      "isim": "Altınbaş Sailing Club",
+     "logo": "sailingclub_logo.png",
+      "kategori": "Spor",
+      "aciklama": "Yelken sporunu öğrencilere tanıtan, denizcilik eğitimleri ve yarışlar düzenleyen kulüp.",
+      "baskan": "Timur Ege",
+      "yonetim_kurulu": [
+        {
+          "isim": "Timur Ege",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "İpek Doğan",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Arda Kurtuluş",
+          "gorev": "Antrenman Sorumlusu"
+        }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Boğaz Yelken Etkinliği",
+          "tarih": "2026-05-09",
+          "durum": "gecmis",
+          "aciklama": "Kulüp üyelerinin katıldığı tanışma amaçlı yelken turu."
+        },
+        {
+          "baslik": "Temel Yelkencilik Eğitimi",
+          "tarih": "2026-10-03",
+          "durum": "gelecek",
+          "aciklama": "Yeni üyeler için sıfırdan yelken eğitimi."
+        }
+      ]
+    },
+    {
+      "id": "turk-dunyasi-genclik",
+      "isim": "Türk Dünyası Gençlik Topluluğu",
+      "logo": "turkdunyasi_logo.png",
+      "kategori": "Kültür",
+      "aciklama": "Türk dünyası ile kültürel bağları güçlendiren, öğrenci değişimi ve kültür etkinlikleri düzenleyen topluluk.",
+      "baskan": "Nurlan Aliyev",
+      "yonetim_kurulu": [
+        {
+          "isim": "Nurlan Aliyev",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Aygerim Bek",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Emin Guliyev",
+          "gorev": "Etkinlik Sorumlusu"
+        }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Türk Dünyası Kültür Gecesi",
+          "tarih": "2026-05-16",
+          "durum": "gecmis",
+          "aciklama": "Farklı Türk cumhuriyetlerinden öğrencilerin kültürlerini tanıttığı gece."
+        },
+        {
+          "baslik": "Nevruz Kutlaması",
+          "tarih": "2026-03-21",
+          "durum": "gelecek",
+          "aciklama": "Kampüste düzenlenecek Nevruz kutlama etkinliği."
+        }
+      ]
+    },
+    {
+      "id": "tebgk",
+      "isim": "Altınbaş TEBGK",
+      "logo": "tebgk_logo.png",
+      "kategori": "Akademik / Sağlık",
+      "aciklama": "Türk Eczacılar Birliği Gençlik Kolu bünyesinde, eczacılık öğrencilerine yönelik mesleki gelişim etkinlikleri düzenleyen kulüp.",
+      "baskan": "Selin Karaca",
+      "yonetim_kurulu": [
+        {
+          "isim": "Selin Karaca",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Umut Fidan",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Ece Baran",
+          "gorev": "Etkinlik Sorumlusu"
+        }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Eczacılıkta Kariyer Günü",
+          "tarih": "2026-04-20",
+          "durum": "gecmis",
+          "aciklama": "Sektörden eczacılarla kariyer odaklı söyleşi."
+        },
+        {
+          "baslik": "Akılcı İlaç Kullanımı Semineri",
+          "tarih": "2026-11-12",
+          "durum": "gelecek",
+          "aciklama": "Halk sağlığı odaklı bilgilendirme semineri."
+        }
+      ]
+    },
+    {
+      "id": "turk-tarihi-kulturu",
+      "isim": "Türk Tarihi ve Kültürü Kulübü",
+      "logo": "turktarihi_logo.png",
+      "kategori": "Akademik / Kültür",
+      "aciklama": "Türk tarihi ve kültürü üzerine söyleşi, gezi ve okuma grubu etkinlikleri düzenleyen kulüp.",
+      "baskan": "Kaan Sezer",
+      "baskan_kullanici_adi": "Furkan123",
+      "yonetim_kurulu": [
+        {
+          "isim": "Kaan Sezer",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Elif Naz Tan",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Tarkan Uçar",
+          "gorev": "Etkinlik Sorumlusu"
+        }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Osmanlı Tarihi Söyleşisi",
+          "tarih": "2026-04-08",
+          "durum": "gecmis",
+          "aciklama": "Bir tarihçinin katıldığı Osmanlı tarihi üzerine söyleşi."
+        },
+        {
+          "baslik": "Müze Gezisi",
+          "tarih": "2026-10-11",
+          "durum": "gelecek",
+          "aciklama": "İstanbul’daki bir tarih müzesine düzenlenecek gezi."
+        }
+      ]
+    },
+    {
+      "id": "ilsa",
+      "isim": "ILSA Altınbaş",
+      "logo": "ilsa_logo.png",
+      "kategori": "Akademik / Hukuk",
+      "aciklama": "Uluslararası hukuk öğrenci birliği bünyesinde, moot court ve hukuk seminerleri düzenleyen kulüp.",
+      "baskan": "Hacer Nur Aktaş",
+      "yonetim_kurulu": [
+        {
+          "isim": "Bade Erim",
+          "gorev": "Hacer Nur Aktaş"
+        },
+        {
+          "isim": "Ozan Kutlu",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Yasemin Ak",
+          "gorev": "Etkinlik Sorumlusu"
+        }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Moot Court Yarışması",
+          "tarih": "2026-04-27",
+          "durum": "gecmis",
+          "aciklama": "Öğrencilerin duruşma simülasyonu yaptığı yarışma."
+        },
+        {
+          "baslik": "Uluslararası Hukuk Semineri",
+          "tarih": "2026-11-14",
+          "durum": "gelecek",
+          "aciklama": "Uluslararası hukuk alanında akademik bir seminer."
+        }
+      ]
+    },
+    {
+      "id": "siyaset-diplomasi",
+      "isim": "Siyaset ve Diplomasi Kulübü",
+      "logo": "siyasetdiplomasi_logo.png",
+      "kategori": "Akademik",
+      "aciklama": "Uluslararası ilişkiler ve diplomasi üzerine münazara, model BM ve panel etkinlikleri düzenleyen kulüp.",
+      "baskan": "Poyraz Demirtaş",
+      "yonetim_kurulu": [
+        {
+          "isim": "Poyraz Demirtaş",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Sena Aydınlık",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Ahmet Kaan Bulut",
+          "gorev": "Etkinlik Sorumlusu"
+        }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Model Birleşmiş Milletler Simülasyonu",
+          "tarih": "2026-05-03",
+          "durum": "gecmis",
+          "aciklama": "Öğrencilerin diplomatik müzakere deneyimi kazandığı simülasyon."
+        },
+        {
+          "baslik": "Dış Politika Paneli",
+          "tarih": "2026-11-07",
+          "durum": "gelecek",
+          "aciklama": "Güncel dış politika gelişmeleri üzerine akademik panel."
+        }
+      ]
+    },
+    {
+      "id": "aubat",
+      "isim": "AUBAT",
+      "logo": "aubat_logo.png",
+      "kategori": "Akademik / Sağlık",
+      "aciklama": "Tıbbi bilimler öğrencilerine yönelik akademik seminer ve klinik beceri atölyeleri düzenleyen topluluk.",
+      "baskan": "Derin Aksakal",
+      "yonetim_kurulu": [
+        {
+          "isim": "Derin Aksakal",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Mira Tuncel",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Kutlu Er",
+          "gorev": "Etkinlik Sorumlusu"
+        }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Temel Yaşam Desteği Atölyesi",
+          "tarih": "2026-04-16",
+          "durum": "gecmis",
+          "aciklama": "Uygulamalı ilk yardım ve temel yaşam desteği eğitimi."
+        },
+        {
+          "baslik": "Tıp Bilimlerinde Kariyer Günü",
+          "tarih": "2026-11-20",
+          "durum": "gelecek",
+          "aciklama": "Farklı tıbbi bilim dallarından uzmanlarla kariyer söyleşisi."
+        }
+      ]
+    },
+    {
+      "id": "dis-hekimligi",
+      "isim": "Diş Hekimliği Kulübü",
+      "logo": "dishekimligi_logo.png",
+      "kategori": "Akademik / Sağlık",
+      "aciklama": "Diş hekimliği öğrencilerine yönelik klinik atölyeler ve toplum sağlığı odaklı farkındalık etkinlikleri düzenleyen kulüp.",
+      "baskan": "Ceyda Yalınız",
+      "yonetim_kurulu": [
+        {
+          "isim": "Ceyda Yalınız",
+          "gorev": "Başkan"
+        },
+        {
+          "isim": "Tolga Şener",
+          "gorev": "Başkan Yardımcısı"
+        },
+        {
+          "isim": "Naz Ergün",
+          "gorev": "Etkinlik Sorumlusu"
+        }
+      ],
+      "etkinlikler": [
+        {
+          "baslik": "Ağız ve Diş Sağlığı Farkındalık Günü",
+          "tarih": "2026-05-11",
+          "durum": "gecmis",
+          "aciklama": "Kampüste ücretsiz bilgilendirme standı ve muayene yönlendirmesi."
+        },
+        {
+          "baslik": "Restoratif Diş Hekimliği Atölyesi",
+          "tarih": "2026-11-16",
+          "durum": "gelecek",
+          "aciklama": "Uygulamalı klinik beceri atölyesi."
+        }
       ]
     }
   ]

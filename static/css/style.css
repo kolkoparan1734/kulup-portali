@@ -516,6 +516,115 @@ a { text-decoration: none; color: inherit; }
     font-size: 0.9rem;
 }
 /* ============================================
+   ÜYE OL / KATIL / BAŞKAN PANELİ
+   ============================================ */
+.club-header {
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.uye-sayisi {
+    margin: 10px 0 0;
+    font-size: 0.85rem;
+    color: var(--slate-acik);
+}
+
+.katil-alani {
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.katil-buton {
+    display: inline-block;
+    margin-top: 0;
+    padding: 12px 22px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.durum-rozet {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.durum-uye {
+    background: #E7F5EC;
+    color: #1D7A46;
+}
+
+.durum-bekliyor {
+    background: var(--altin-soluk);
+    color: var(--lacivert-koyu);
+}
+
+.baskan-paneli {
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    padding: 0 24px;
+}
+
+.baskan-paneli h3 {
+    font-family: var(--font-baslik);
+    color: var(--lacivert);
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+}
+
+.istek-listesi {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.istek-satiri {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--beyaz);
+    border: 1px solid var(--cizgi);
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: var(--golge);
+}
+
+.istek-isim {
+    font-weight: 600;
+    color: var(--lacivert);
+}
+
+.istek-butonlari {
+    display: flex;
+    gap: 8px;
+}
+
+.onay-buton, .reddet-buton {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: var(--font-govde);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.onay-buton {
+    background: #1D7A46;
+    color: var(--beyaz);
+}
+
+.reddet-buton {
+    background: #F1F1EF;
+    color: var(--slate);
+}
+
+.onay-buton:hover { background: #156138; }
+.reddet-buton:hover { background: #E4E4E0; }
+/* ============================================
    NAV KULLANICI DURUMU
    ============================================ */
 .nav-user {

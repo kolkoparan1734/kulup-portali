@@ -12,8 +12,49 @@
         <span class="club-card-category">{{ kulup.kategori }}</span>
         <h1>{{ kulup.isim }}</h1>
         <p class="club-header-desc">{{ kulup.aciklama }}</p>
+        <p class="uye-sayisi">👥 {{ uye_sayisi }} üye</p>
+    </div>
+    <div class="katil-alani">
+        {% if uyelik_durumu == "uye" %}
+            <span class="durum-rozet durum-uye">✓ Üyesiniz</span>
+        {% elif uyelik_durumu == "bekliyor" %}
+            <span class="durum-rozet durum-bekliyor">İsteğiniz onay bekliyor</span>
+        {% elif session.kullanici_adi %}
+            <form method="POST" action="{{ url_for('kulube_katil', kulup_id=kulup.id) }}">
+                <button type="submit" class="auth-button katil-buton">Kulübe Katıl</button>
+            </form>
+        {% else %}
+            <a href="{{ url_for('giris_yap') }}" class="auth-button katil-buton">Katılmak için giriş yap</a>
+        {% endif %}
     </div>
 </section>
+
+{% if kulup_baskani_mi %}
+<section class="baskan-paneli">
+    <h3>🔑 Başkan Paneli — Bekleyen Katılım İstekleri</h3>
+    {% if bekleyen_istekler %}
+        <div class="istek-listesi">
+            {% for istek_kullanici in bekleyen_istekler %}
+            <div class="istek-satiri">
+                <span class="istek-isim">{{ istek_kullanici }}</span>
+                <div class="istek-butonlari">
+                    <form method="POST" action="{{ url_for('uyelik_onayla', kulup_id=kulup.id) }}">
+                        <input type="hidden" name="kullanici_adi" value="{{ istek_kullanici }}">
+                        <button type="submit" class="onay-buton">Onayla</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('uyelik_reddet', kulup_id=kulup.id) }}">
+                        <input type="hidden" name="kullanici_adi" value="{{ istek_kullanici }}">
+                        <button type="submit" class="reddet-buton">Reddet</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">Bekleyen istek yok.</p>
+    {% endif %}
+</section>
+{% endif %}
 
 <div class="tabs">
     <button class="tab-button active" data-tab="yonetim">Yönetim Kurulu</button>

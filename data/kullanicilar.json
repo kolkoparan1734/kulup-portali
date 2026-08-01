@@ -2,5 +2,13 @@
   {
     "kullanici_adi": "admin",
     "sifre_hash": "scrypt:32768:8:1$Uf2XyGC0y2QR4Tp4$20c38a14ee709cdc82b70a00f36c73ccc304f1ee13d7b035310d91dacc3951cc2356eb145dc3db13edd8c00c29e21facb83e3aa51e373559cef6e3fa3f3be945"
+  },
+  {
+    "kullanici_adi": "Furkan",
+    "sifre_hash": "scrypt:32768:8:1$nuC1XFhPywzZx7k6$2ed2960e9c987287709b41e2a2c188d83c9d6b51e0cdde6a01050d24d3261183578aa0697e65ea8b4151a2dd956074ef06bd14533b33fe1c7573b6d2436d5744"
+  },
+  {
+    "kullanici_adi": "Furkan123",
+    "sifre_hash": "scrypt:32768:8:1$6LWpHJqrFzziTlyx$152ba08d9086d67e5b8a2b1e495d86f4c0e7b090bc6b807403c2d03b9e06b33413738256f5ffadbfc00bfe696ea8b238833a7741613eea6ddc834dc59c481e1b"
   }
 ]

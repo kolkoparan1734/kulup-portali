@@ -14,6 +14,11 @@
       "isim": "admin",
       "mesaj": "heyyy",
       "tarih": "31.07.2026 21:55"
+    },
+    {
+      "isim": "admin",
+      "mesaj": "selam",
+      "tarih": "31.07.2026 22:34"
     }
   ],
   "ieee": [
@@ -28,6 +33,11 @@
       "isim": "admin",
       "mesaj": "Magnus",
       "tarih": "31.07.2026 21:55"
+    },
+    {
+      "isim": "Furkan",
+      "mesaj": "hikaru",
+      "tarih": "01.08.2026 12:04"
     }
   ],
   "hayvan-haklari": [
@@ -35,6 +45,54 @@
       "isim": "admin",
       "mesaj": "tomris",
       "tarih": "31.07.2026 21:56"
+    },
+    {
+      "isim": "admin",
+      "mesaj": "dkhbfıduf",
+      "tarih": "01.08.2026 12:53"
+    }
+  ],
+  "ticaret-lojistik": [
+    {
+      "isim": "admin",
+      "mesaj": "ayarlı da başkan",
+      "tarih": "31.07.2026 22:36"
+    }
+  ],
+  "turk-dunyasi-genclik": [
+    {
+      "isim": "admin",
+      "mesaj": "türk",
+      "tarih": "01.08.2026 12:01"
+    }
+  ],
+  "sinema": [
+    {
+      "isim": "admin",
+      "mesaj": "filim",
+      "tarih": "01.08.2026 12:05"
+    },
+    {
+      "isim": "admin",
+      "mesaj": "fight club",
+      "tarih": "01.08.2026 12:07"
+    },
+    {
+      "isim": "admin",
+      "mesaj": "fight club",
+      "tarih": "01.08.2026 12:07"
+    }
+  ],
+  "turk-tarihi-kulturu": [
+    {
+      "isim": "admin",
+      "mesaj": "CcC",
+      "tarih": "01.08.2026 12:07"
+    },
+    {
+      "isim": "admin",
+      "mesaj": "CcC",
+      "tarih": "01.08.2026 12:07"
     }
   ]
 }

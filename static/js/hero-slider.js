@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (slaytlar.length === 0) return;
 
     let aktifIndex = 0;
-    const SURE = 4000;
+    const SURE = 7000; // 7 saniye
 
     function slaydiGoster(index) {
         slaytlar.forEach((s) => s.classList.remove("active"));

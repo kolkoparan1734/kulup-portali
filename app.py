@@ -28,6 +28,7 @@ app.secret_key = "prototip-gizli-anahtar-degistirin"
 DATA_PATH = os.path.join(os.path.dirname(__file__), "data", "clubs.json")
 FORUM_PATH = os.path.join(os.path.dirname(__file__), "data", "forum.json")
 KULLANICI_PATH = os.path.join(os.path.dirname(__file__), "data", "kullanicilar.json")
+UYELIK_PATH = os.path.join(os.path.dirname(__file__), "data", "uyelikler.json")
 
 
 def kulupleri_yukle():
@@ -78,10 +79,43 @@ def kullanicilari_kaydet(veri):
         json.dump(veri, dosya, ensure_ascii=False, indent=2)
 
 
+def uyelikleri_yukle():
+    """data/uyelikler.json dosyasını okur. Yapı: {kulup_id: {"onaylanan": [...], "bekleyen": [...]}}"""
+    if not os.path.exists(UYELIK_PATH):
+        return {}
+    with open(UYELIK_PATH, "r", encoding="utf-8") as dosya:
+        try:
+            return json.load(dosya)
+        except json.JSONDecodeError:
+            return {}
+
+
+def uyelikleri_kaydet(veri):
+    """Üyelik verisini data/uyelikler.json dosyasına yazar."""
+    with open(UYELIK_PATH, "w", encoding="utf-8") as dosya:
+        json.dump(veri, dosya, ensure_ascii=False, indent=2)
+
+
+def uyelik_durumu(uyelik_verisi, kulup_id, kullanici_adi):
+    """Bir kullanıcının bir kulüpteki durumunu döndürür: 'uye', 'bekliyor' veya 'yok'."""
+    kulup_uyelik = uyelik_verisi.get(kulup_id, {"onaylanan": [], "bekleyen": []})
+    if kullanici_adi in kulup_uyelik.get("onaylanan", []):
+        return "uye"
+    if kullanici_adi in kulup_uyelik.get("bekleyen", []):
+        return "bekliyor"
+    return "yok"
+
+
 @app.errorhandler(404)
 def sayfa_bulunamadi(hata):
     """Geçersiz adres veya bozuk veri dosyası durumunda gösterilecek sade hata sayfası."""
     return render_template("error.html"), 404
+
+
+@app.errorhandler(403)
+def yetkisiz_erisim(hata):
+    """Yetkisi olmayan bir işlem denendiğinde gösterilecek hata sayfası."""
+    return render_template("error.html"), 403
 
 
 @app.route("/")
@@ -111,13 +145,110 @@ def kulup_detay(kulup_id):
     forum_verisi = forum_yukle()
     mesajlar = forum_verisi.get(kulup_id, [])
 
+    # Kullanıcının bu kulüpteki üyelik durumu (uye / bekliyor / yok).
+    uyelik_verisi = uyelikleri_yukle()
+    durum = "yok"
+    if "kullanici_adi" in session:
+        durum = uyelik_durumu(uyelik_verisi, kulup_id, session["kullanici_adi"])
+
+    # Bu kulübün başkanı, giriş yapmış kullanıcının kendisiyse (kulüp
+    # verisinde "baskan_kullanici_adi" alanı tanımlıysa) bekleyen
+    # istekleri de gösteriyoruz.
+    bekleyen_istekler = []
+    kulup_baskani_mi = False
+    if "kullanici_adi" in session and session["kullanici_adi"] == kulup.get("baskan_kullanici_adi"):
+        kulup_baskani_mi = True
+        bekleyen_istekler = uyelik_verisi.get(kulup_id, {}).get("bekleyen", [])
+
+    uye_sayisi = len(uyelik_verisi.get(kulup_id, {}).get("onaylanan", []))
+
     return render_template(
         "club_detail.html",
         kulup=kulup,
         gecmis_etkinlikler=gecmis_etkinlikler,
         gelecek_etkinlikler=gelecek_etkinlikler,
         mesajlar=mesajlar,
+        uyelik_durumu=durum,
+        uye_sayisi=uye_sayisi,
+        kulup_baskani_mi=kulup_baskani_mi,
+        bekleyen_istekler=bekleyen_istekler,
     )
+
+
+@app.route("/kulup/<kulup_id>/katil", methods=["POST"])
+def kulube_katil(kulup_id):
+    """Giriş yapmış bir kullanıcının bir kulübe katılma isteği göndermesi."""
+    kulupler = kulupleri_yukle()
+    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
+    if kulup is None:
+        abort(404)
+
+    if "kullanici_adi" not in session:
+        return redirect(url_for("giris_yap"))
+
+    kullanici_adi = session["kullanici_adi"]
+    uyelik_verisi = uyelikleri_yukle()
+
+    if kulup_id not in uyelik_verisi:
+        uyelik_verisi[kulup_id] = {"onaylanan": [], "bekleyen": []}
+
+    zaten_uye = kullanici_adi in uyelik_verisi[kulup_id]["onaylanan"]
+    zaten_bekliyor = kullanici_adi in uyelik_verisi[kulup_id]["bekleyen"]
+
+    if not zaten_uye and not zaten_bekliyor:
+        uyelik_verisi[kulup_id]["bekleyen"].append(kullanici_adi)
+        uyelikleri_kaydet(uyelik_verisi)
+
+    return redirect(url_for("kulup_detay", kulup_id=kulup_id))
+
+
+@app.route("/kulup/<kulup_id>/onayla", methods=["POST"])
+def uyelik_onayla(kulup_id):
+    """Kulüp başkanının bekleyen bir üyelik isteğini onaylaması."""
+    kulupler = kulupleri_yukle()
+    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
+    if kulup is None:
+        abort(404)
+
+    # Sadece o kulübün başkanı (giriş yapmış ve kullanıcı adı eşleşen kişi) onaylayabilir.
+    if session.get("kullanici_adi") != kulup.get("baskan_kullanici_adi"):
+        abort(403)
+
+    onaylanacak_kullanici = request.form.get("kullanici_adi", "").strip()
+    uyelik_verisi = uyelikleri_yukle()
+    kulup_uyelik = uyelik_verisi.get(kulup_id, {"onaylanan": [], "bekleyen": []})
+
+    if onaylanacak_kullanici in kulup_uyelik["bekleyen"]:
+        kulup_uyelik["bekleyen"].remove(onaylanacak_kullanici)
+        if onaylanacak_kullanici not in kulup_uyelik["onaylanan"]:
+            kulup_uyelik["onaylanan"].append(onaylanacak_kullanici)
+        uyelik_verisi[kulup_id] = kulup_uyelik
+        uyelikleri_kaydet(uyelik_verisi)
+
+    return redirect(url_for("kulup_detay", kulup_id=kulup_id))
+
+
+@app.route("/kulup/<kulup_id>/reddet", methods=["POST"])
+def uyelik_reddet(kulup_id):
+    """Kulüp başkanının bekleyen bir üyelik isteğini reddetmesi."""
+    kulupler = kulupleri_yukle()
+    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
+    if kulup is None:
+        abort(404)
+
+    if session.get("kullanici_adi") != kulup.get("baskan_kullanici_adi"):
+        abort(403)
+
+    reddedilecek_kullanici = request.form.get("kullanici_adi", "").strip()
+    uyelik_verisi = uyelikleri_yukle()
+    kulup_uyelik = uyelik_verisi.get(kulup_id, {"onaylanan": [], "bekleyen": []})
+
+    if reddedilecek_kullanici in kulup_uyelik["bekleyen"]:
+        kulup_uyelik["bekleyen"].remove(reddedilecek_kullanici)
+        uyelik_verisi[kulup_id] = kulup_uyelik
+        uyelikleri_kaydet(uyelik_verisi)
+
+    return redirect(url_for("kulup_detay", kulup_id=kulup_id))
 
 
 @app.route("/kayit", methods=["GET", "POST"])
