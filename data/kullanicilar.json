@@ -10,5 +10,9 @@
   {
     "kullanici_adi": "Furkan123",
     "sifre_hash": "scrypt:32768:8:1$6LWpHJqrFzziTlyx$152ba08d9086d67e5b8a2b1e495d86f4c0e7b090bc6b807403c2d03b9e06b33413738256f5ffadbfc00bfe696ea8b238833a7741613eea6ddc834dc59c481e1b"
+  },
+  {
+    "kullanici_adi": "berkaykaynar",
+    "sifre_hash": "scrypt:32768:8:1$4GqI1KnGtEou3jYn$6531b8385d0cbfb9ca2fe29d09f4e199bae1c8c1e6e05ee9914a313959de93704989eded2238c397741537e9954d864bfad247a3a32f0896336d4fa6f643f434"
   }
 ]
