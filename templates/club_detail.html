@@ -6,7 +6,7 @@
 
 <a href="{{ url_for('anasayfa') }}" class="back-link">&larr; Tüm kulüpler</a>
 
-<section class="club-header">
+<section class="club-header"{% if kulup.kapak_gorseli %} style="background-image: linear-gradient(180deg, rgba(18,32,95,0.45), rgba(18,32,95,0.92)), url('{{ url_for('static', filename='images/' + kulup.kapak_gorseli) }}');"{% endif %}>
     <img src="{{ url_for('static', filename='images/' + kulup.logo) }}" alt="{{ kulup.isim }} logosu" class="club-header-logo">
     <div>
         <span class="club-card-category">{{ kulup.kategori }}</span>

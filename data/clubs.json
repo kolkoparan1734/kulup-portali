@@ -38,7 +38,8 @@
           "durum": "gelecek",
           "aciklama": "Yeni dönem için tanışma ve ücretsiz deneme dans dersi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/dans_kapak.jpg"
     },
     {
       "id": "satranc",
@@ -74,7 +75,8 @@
           "durum": "gelecek",
           "aciklama": "5 dakikalık blitz formatında dostluk turnuvası."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/satranc_kapak.jpg"
     },
     {
       "id": "ieee",
@@ -114,7 +116,8 @@
           "durum": "gelecek",
           "aciklama": "Sektörden bir konuşmacı ile yapay zeka üzerine söyleşi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/ieee_kapak.jpg"
     },
     {
       "id": "gastronomi",
@@ -150,7 +153,8 @@
           "durum": "gelecek",
           "aciklama": "Temel hamur işi tekniklerinin öğretildiği uygulamalı atölye."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/gastronomi_kapak.jpg"
     },
     {
       "id": "yapay-zeka",
@@ -186,7 +190,8 @@
           "durum": "gelecek",
           "aciklama": "Temel görüntü işleme ve yapay zeka uygulamalarına giriş semineri."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/yapay-zeka_kapak.jpg"
     },
     {
       "id": "genc-kalite",
@@ -222,7 +227,8 @@
           "durum": "gelecek",
           "aciklama": "Farklı üniversitelerden kalite kulüplerinin bir araya geldiği network etkinliği."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/genc-kalite_kapak.jpg"
     },
     {
       "id": "psikoloji",
@@ -258,7 +264,8 @@
           "durum": "gelecek",
           "aciklama": "Alanında uzman bir psikoloğun katılacağı söyleşi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/psikoloji_kapak.jpg"
     },
     {
       "id": "sinema",
@@ -294,7 +301,8 @@
           "durum": "gelecek",
           "aciklama": "Sinema tarihinden bir klasik, açık hava gösterimi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/sinema_kapak.jpg"
     },
     {
       "id": "kutuphane",
@@ -330,7 +338,8 @@
           "durum": "gelecek",
           "aciklama": "Türk edebiyatından bir yazarla kampüste söyleşi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/kutuphane_kapak.jpg"
     },
     {
       "id": "veri-bilimi",
@@ -366,7 +375,8 @@
           "durum": "gelecek",
           "aciklama": "Uluslararası bir veri bilimi yarışmasına hazırlık kampı."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/veri-bilimi_kapak.jpg"
     },
     {
       "id": "sosyoloji",
@@ -402,7 +412,8 @@
           "durum": "gelecek",
           "aciklama": "Öğrencilerin yürüttüğü saha araştırmalarının sunulduğu gün."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/sosyoloji_kapak.jpg"
     },
     {
       "id": "ticaret-lojistik",
@@ -438,7 +449,8 @@
           "durum": "gelecek",
           "aciklama": "Sektör profesyonelleriyle kariyer odaklı buluşma."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/ticaret-lojistik_kapak.jpg"
     },
     {
       "id": "hayvan-haklari",
@@ -474,7 +486,8 @@
           "durum": "gelecek",
           "aciklama": "Yerel bir veteriner kliniğiyle iş birliğinde farkındalık standı."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/hayvan-haklari_kapak.jpg"
     },
     {
       "id": "iyiligin-gelecegi",
@@ -510,7 +523,8 @@
           "durum": "gelecek",
           "aciklama": "Yerel bir huzurevine gönüllü ziyaret ve etkinlik organizasyonu."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/iyiligin-gelecegi_kapak.jpg"
     },
     {
       "id": "tiyatro",
@@ -546,7 +560,8 @@
           "durum": "gelecek",
           "aciklama": "Yeni üyeler için doğaçlama oyunculuğa giriş atölyesi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/tiyatro_kapak.jpg"
     },
     {
       "id": "network",
@@ -582,7 +597,8 @@
           "durum": "gelecek",
           "aciklama": "Öğrencilere profesyonel profil oluşturma üzerine atölye."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/network_kapak.jpg"
     },
     {
       "id": "arama-kurtarma",
@@ -618,12 +634,13 @@
           "durum": "gelecek",
           "aciklama": "Kampüs genelinde düzenlenecek deprem tatbikatı ve bilgilendirme standı."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/arama-kurtarma_kapak.jpg"
     },
     {
       "id": "sailing-club",
       "isim": "Altınbaş Sailing Club",
-     "logo": "sailingclub_logo.png",
+      "logo": "sailingclub_logo.png",
       "kategori": "Spor",
       "aciklama": "Yelken sporunu öğrencilere tanıtan, denizcilik eğitimleri ve yarışlar düzenleyen kulüp.",
       "baskan": "Timur Ege",
@@ -654,7 +671,8 @@
           "durum": "gelecek",
           "aciklama": "Yeni üyeler için sıfırdan yelken eğitimi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/sailing-club_kapak.jpg"
     },
     {
       "id": "turk-dunyasi-genclik",
@@ -690,7 +708,8 @@
           "durum": "gelecek",
           "aciklama": "Kampüste düzenlenecek Nevruz kutlama etkinliği."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/turk-dunyasi-genclik_kapak.jpg"
     },
     {
       "id": "tebgk",
@@ -726,7 +745,8 @@
           "durum": "gelecek",
           "aciklama": "Halk sağlığı odaklı bilgilendirme semineri."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/tebgk_kapak.jpg"
     },
     {
       "id": "turk-tarihi-kulturu",
@@ -763,7 +783,8 @@
           "durum": "gelecek",
           "aciklama": "İstanbul’daki bir tarih müzesine düzenlenecek gezi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/turk-tarihi-kulturu_kapak.jpg"
     },
     {
       "id": "ilsa",
@@ -799,7 +820,8 @@
           "durum": "gelecek",
           "aciklama": "Uluslararası hukuk alanında akademik bir seminer."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/ilsa_kapak.jpg"
     },
     {
       "id": "siyaset-diplomasi",
@@ -835,7 +857,8 @@
           "durum": "gelecek",
           "aciklama": "Güncel dış politika gelişmeleri üzerine akademik panel."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/siyaset-diplomasi_kapak.jpg"
     },
     {
       "id": "aubat",
@@ -871,7 +894,8 @@
           "durum": "gelecek",
           "aciklama": "Farklı tıbbi bilim dallarından uzmanlarla kariyer söyleşisi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/aubat_kapak.jpg"
     },
     {
       "id": "dis-hekimligi",
@@ -907,7 +931,8 @@
           "durum": "gelecek",
           "aciklama": "Uygulamalı klinik beceri atölyesi."
         }
-      ]
+      ],
+      "kapak_gorseli": "covers/dis-hekimligi_kapak.jpg"
     }
   ]
 }

@@ -27,7 +27,7 @@
 
     <section class="club-grid">
         {% for kulup in kulupler %}
-        <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="club-card">
+        <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="club-card"{% if kulup.kapak_gorseli %} style="background-image: linear-gradient(180deg, rgba(18,32,95,0.38), rgba(18,32,95,0.9)), url('{{ url_for('static', filename='images/' + kulup.kapak_gorseli) }}');"{% endif %}>
             <img src="{{ url_for('static', filename='images/' + kulup.logo) }}" alt="{{ kulup.isim }} logosu" class="club-card-logo">
             <div class="club-card-body">
                 <span class="club-card-category">{{ kulup.kategori }}</span>
