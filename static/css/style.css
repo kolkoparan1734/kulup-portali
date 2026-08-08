@@ -800,6 +800,12 @@ a { text-decoration: none; color: inherit; }
     margin-bottom: 12px;
 }
 
+.flash-mesajlar {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    padding: 0 24px;
+}
+
 .auth-alt {
     text-align: center;
     margin-top: 20px;

@@ -14,8 +14,9 @@ Nasıl çalıştırılır (VS Code terminalinde):
 import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, abort, request, redirect, url_for, session
+from flask import Flask, render_template, abort, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
+from kufur_filtresi import uygunsuz_icerik_mi
 
 # Flask uygulamasını başlatıyoruz.
 app = Flask(__name__)
@@ -267,6 +268,8 @@ def kayit_ol():
 
         if not kullanici_adi or not sifre:
             hata = "Kullanıcı adı ve şifre boş bırakılamaz."
+        elif uygunsuz_icerik_mi(kullanici_adi):
+            hata = "Kullanıcı adı uygun olmayan bir kelime içeriyor."
         else:
             kullanicilar = kullanicilari_yukle()
             if any(k["kullanici_adi"].lower() == kullanici_adi.lower() for k in kullanicilar):
@@ -329,15 +332,18 @@ def forum_mesaj_gonder(kulup_id):
     mesaj = request.form.get("mesaj", "").strip()
 
     if mesaj:
-        forum_verisi = forum_yukle()
-        if kulup_id not in forum_verisi:
-            forum_verisi[kulup_id] = []
-        forum_verisi[kulup_id].append({
-            "isim": session["kullanici_adi"],
-            "mesaj": mesaj,
-            "tarih": datetime.now().strftime("%d.%m.%Y %H:%M"),
-        })
-        forum_kaydet(forum_verisi)
+        if uygunsuz_icerik_mi(mesaj):
+            flash("Mesajın küfür/argo içerdiği için gönderilemedi.", "hata")
+        else:
+            forum_verisi = forum_yukle()
+            if kulup_id not in forum_verisi:
+                forum_verisi[kulup_id] = []
+            forum_verisi[kulup_id].append({
+                "isim": session["kullanici_adi"],
+                "mesaj": mesaj,
+                "tarih": datetime.now().strftime("%d.%m.%Y %H:%M"),
+            })
+            forum_kaydet(forum_verisi)
 
     # Mesaj gönderildikten sonra kullanıcıyı yine aynı kulübün forum
     # sekmesine geri yönlendiriyoruz (#forum ile hangi sekmenin açık

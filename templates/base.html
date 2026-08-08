@@ -30,6 +30,15 @@
     </header>
 
     <main>
+        {% with mesajlar = get_flashed_messages(with_categories=true) %}
+            {% if mesajlar %}
+            <div class="flash-mesajlar">
+                {% for kategori, mesaj in mesajlar %}
+                <p class="auth-error">{{ mesaj }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
     </main>
 
