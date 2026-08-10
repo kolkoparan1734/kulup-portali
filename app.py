@@ -13,10 +13,15 @@ Nasıl çalıştırılır (VS Code terminalinde):
 
 import json
 import os
+from database import add_message, get_messages, init_db
 from datetime import datetime
 from flask import Flask, render_template, abort, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from kufur_filtresi import uygunsuz_icerik_mi
+from kufur_filtresi import uygunsuz_icerik_mi 
+
+
+# Sunucu her başladığında veritabanı tablosunu garantiye alır
+init_db()
 
 # Flask uygulamasını başlatıyoruz.
 app = Flask(__name__)
@@ -27,7 +32,6 @@ app.secret_key = "prototip-gizli-anahtar-degistirin"
 
 # JSON veri dosyalarının yolu
 DATA_PATH = os.path.join(os.path.dirname(__file__), "data", "clubs.json")
-FORUM_PATH = os.path.join(os.path.dirname(__file__), "data", "forum.json")
 KULLANICI_PATH = os.path.join(os.path.dirname(__file__), "data", "kullanicilar.json")
 UYELIK_PATH = os.path.join(os.path.dirname(__file__), "data", "uyelikler.json")
 
@@ -46,21 +50,15 @@ def kulupleri_yukle():
             abort(404)
 
 
-def forum_yukle():
-    """data/forum.json dosyasını okur. Dosya yoksa boş bir sözlük döndürür."""
-    if not os.path.exists(FORUM_PATH):
-        return {}
-    with open(FORUM_PATH, "r", encoding="utf-8") as dosya:
-        try:
-            return json.load(dosya)
-        except json.JSONDecodeError:
-            return {}
+def forum_yukle(kulup_id):
+  """Mesajları JSON yerine SQLite veritabanından çeker."""
+  return get_messages(kulup_id, limit=20)
+    
+         
 
-
-def forum_kaydet(veri):
-    """Forum verisini data/forum.json dosyasına yazar."""
-    with open(FORUM_PATH, "w", encoding="utf-8") as dosya:
-        json.dump(veri, dosya, ensure_ascii=False, indent=2)
+def forum_kaydet(kulup_id, kullanici_adi, mesaj_icerigi):
+  """Yeni mesajı JSON yerine SQLite veritabanına kaydeder."""
+  add_message(kulup_id, kullanici_adi, mesaj_icerigi)
 
 
 def kullanicilari_yukle():
@@ -149,8 +147,7 @@ def kulup_detay(kulup_id):
     gelecek_etkinlikler = [e for e in kulup["etkinlikler"] if e["durum"] == "gelecek"]
 
     # Bu kulübe ait forum mesajlarını yüklüyoruz (yoksa boş liste).
-    forum_verisi = forum_yukle()
-    mesajlar = forum_verisi.get(kulup_id, [])
+    mesajlar = forum_yukle(kulup_id)
 
     # Kullanıcının bu kulüpteki üyelik durumu (uye / bekliyor / yok).
     uyelik_verisi = uyelikleri_yukle()
@@ -335,22 +332,14 @@ def forum_mesaj_gonder(kulup_id):
         if uygunsuz_icerik_mi(mesaj):
             flash("Mesajın küfür/argo içerdiği için gönderilemedi.", "hata")
         else:
-            forum_verisi = forum_yukle()
-            if kulup_id not in forum_verisi:
-                forum_verisi[kulup_id] = []
-            forum_verisi[kulup_id].append({
-                "isim": session["kullanici_adi"],
-                "mesaj": mesaj,
-                "tarih": datetime.now().strftime("%d.%m.%Y %H:%M"),
-            })
-            forum_kaydet(forum_verisi)
+            # Doğrudan veritabanına kaydediyoruz (Buffer şişmez)
+            forum_kaydet(kulup_id, session["kullanici_adi"], mesaj)
 
     # Mesaj gönderildikten sonra kullanıcıyı yine aynı kulübün forum
-    # sekmesine geri yönlendiriyoruz (#forum ile hangi sekmenin açık
-    # kalacağını tabs.js belirliyor).
+    # sekmesine geri yönlendiriyoruz.
     return redirect(url_for("kulup_detay", kulup_id=kulup_id) + "#forum")
 
 
 if __name__ == "__main__":
-    # debug=True: kod değiştikçe sunucu otomatik yeniden başlar (geliştirme için).
+    # debug=True: kod değiştikçe sunucu otomatik yeniden başlar.
     app.run(debug=True)
