@@ -2,29 +2,30 @@
 Öğrenci Kulüpleri Portalı - Prototip
 --------------------------------------
 Bu dosya, Flask web çatısını (framework) kullanarak çalışan basit bir
-web sunucusu oluşturur. Sunucu, data/clubs.json dosyasındaki kulüp
-verilerini okur ve HTML sayfaları olarak tarayıcıda gösterir.
+web sunucusu oluşturur. Sunucu, verileri (kulüpler, üyelikler,
+kullanıcılar, forum mesajları) MySQL'deki kulup_portali veritabanından
+okur ve HTML sayfaları olarak tarayıcıda gösterir.
 
 Nasıl çalıştırılır (VS Code terminalinde):
-    1) pip install flask
-    2) python app.py
-    3) Tarayıcıda http://127.0.0.1:5000 adresini açın
+    1) pip install -r requirements.txt
+    2) MySQL sunucusunun (ör. MySQL Workbench ile bağlandığın sunucu)
+       çalıştığından emin ol (bkz. veritabani.py için bağlantı bilgileri)
+    3) python app.py
+    4) Tarayıcıda http://127.0.0.1:5000 adresini açın
 """
 
-import json
 import os
 from uuid import uuid4
-from database import add_message, get_messages, init_db
 from datetime import datetime
 from flask import Flask, render_template, abort, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from kufur_filtresi import uygunsuz_icerik_mi
 from ogrenci_no import gecerli_mi as ogrenci_no_gecerli_mi
+import veritabani as db
 
-
-# Sunucu her başladığında veritabanı tablosunu garantiye alır
-init_db()
+# Sunucu her başladığında veritabanını ve tabloları garantiye alır
+db.init_db()
 
 # Flask uygulamasını başlatıyoruz.
 app = Flask(__name__)
@@ -33,90 +34,10 @@ app = Flask(__name__)
 # Gerçek bir yayında bu değer ortam değişkeninden okunmalı, prototipte sabit yazıyoruz.
 app.secret_key = "prototip-gizli-anahtar-degistirin"
 
-# JSON veri dosyalarının yolu
-DATA_PATH = os.path.join(os.path.dirname(__file__), "data", "clubs.json")
-KULLANICI_PATH = os.path.join(os.path.dirname(__file__), "data", "kullanicilar.json")
-UYELIK_PATH = os.path.join(os.path.dirname(__file__), "data", "uyelikler.json")
-
-
-def kulupleri_yukle():
-    """data/clubs.json dosyasını okuyup Python sözlüğüne (dict) çevirir.
-
-    Dosyada bir sözdizimi hatası varsa (eksik/fazla virgül, kapanmamış
-    tırnak vb.), sitenin tamamen çökmesi yerine sade bir "sayfa
-    bulunamadı" (404) sayfası gösterilir.
-    """
-    with open(DATA_PATH, "r", encoding="utf-8") as dosya:
-        try:
-            return json.load(dosya)["kulupler"]
-        except json.JSONDecodeError:
-            abort(404)
-
-
-def kulupleri_kaydet(kulupler):
-    """Kulüp listesini data/clubs.json dosyasına yazar."""
-    with open(DATA_PATH, "w", encoding="utf-8") as dosya:
-        json.dump({"kulupler": kulupler}, dosya, ensure_ascii=False, indent=2)
-
-
-def forum_yukle(kulup_id):
-  """Mesajları JSON yerine SQLite veritabanından çeker."""
-  return get_messages(kulup_id, limit=20)
-    
-         
-
-def forum_kaydet(kulup_id, kullanici_adi, mesaj_icerigi):
-  """Yeni mesajı JSON yerine SQLite veritabanına kaydeder."""
-  add_message(kulup_id, kullanici_adi, mesaj_icerigi)
-
-
-def kullanicilari_yukle():
-    """data/kullanicilar.json dosyasını okur. Dosya yoksa boş liste döndürür."""
-    if not os.path.exists(KULLANICI_PATH):
-        return []
-    with open(KULLANICI_PATH, "r", encoding="utf-8") as dosya:
-        try:
-            return json.load(dosya)
-        except json.JSONDecodeError:
-            return []
-
-
-def kullanicilari_kaydet(veri):
-    """Kullanıcı listesini data/kullanicilar.json dosyasına yazar."""
-    with open(KULLANICI_PATH, "w", encoding="utf-8") as dosya:
-        json.dump(veri, dosya, ensure_ascii=False, indent=2)
-
-
-def uyelikleri_yukle():
-    """data/uyelikler.json dosyasını okur. Yapı: {kulup_id: {"onaylanan": [...], "bekleyen": [...]}}"""
-    if not os.path.exists(UYELIK_PATH):
-        return {}
-    with open(UYELIK_PATH, "r", encoding="utf-8") as dosya:
-        try:
-            return json.load(dosya)
-        except json.JSONDecodeError:
-            return {}
-
-
-def uyelikleri_kaydet(veri):
-    """Üyelik verisini data/uyelikler.json dosyasına yazar."""
-    with open(UYELIK_PATH, "w", encoding="utf-8") as dosya:
-        json.dump(veri, dosya, ensure_ascii=False, indent=2)
-
-
-def uyelik_durumu(uyelik_verisi, kulup_id, kullanici_adi):
-    """Bir kullanıcının bir kulüpteki durumunu döndürür: 'uye', 'bekliyor' veya 'yok'."""
-    kulup_uyelik = uyelik_verisi.get(kulup_id, {"onaylanan": [], "bekleyen": []})
-    if kullanici_adi in kulup_uyelik.get("onaylanan", []):
-        return "uye"
-    if kullanici_adi in kulup_uyelik.get("bekleyen", []):
-        return "bekliyor"
-    return "yok"
-
 
 @app.errorhandler(404)
 def sayfa_bulunamadi(hata):
-    """Geçersiz adres veya bozuk veri dosyası durumunda gösterilecek sade hata sayfası."""
+    """Geçersiz adres durumunda gösterilecek sade hata sayfası."""
     return render_template("error.html"), 404
 
 
@@ -129,7 +50,7 @@ def yetkisiz_erisim(hata):
 @app.route("/")
 def anasayfa():
     """Ana sayfa: tüm kulüpleri kart (grid) şeklinde listeler."""
-    kulupler = kulupleri_yukle()
+    kulupler = db.kulupleri_getir()
     return render_template("index.html", kulupler=kulupler)
 
 
@@ -142,13 +63,8 @@ def belgeler():
 @app.route("/kulup/<kulup_id>")
 def kulup_detay(kulup_id):
     """Bir kulübün detay sayfası: logo, başkan, yönetim kurulu, etkinlikler, forum."""
-    kulupler = kulupleri_yukle()
-
-    # Gelen id'ye (örn. 'dans') sahip kulübü listede arıyoruz.
-    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
-
+    kulup = db.kulup_getir(kulup_id)
     if kulup is None:
-        # Kulüp bulunamazsa 404 (Sayfa Bulunamadı) hatası döndürülür.
         abort(404)
 
     # Etkinlikleri geçmiş / gelecek olarak iki ayrı listeye ayırıyoruz.
@@ -156,26 +72,25 @@ def kulup_detay(kulup_id):
     gelecek_etkinlikler = [e for e in kulup["etkinlikler"] if e["durum"] == "gelecek"]
 
     # Bu kulübe ait forum mesajlarını yüklüyoruz (yoksa boş liste).
-    mesajlar = forum_yukle(kulup_id)
+    mesajlar = db.forum_yukle(kulup_id)
 
     # Kullanıcının bu kulüpteki üyelik durumu (uye / bekliyor / yok).
-    uyelik_verisi = uyelikleri_yukle()
     durum = "yok"
     if "kullanici_adi" in session:
-        durum = uyelik_durumu(uyelik_verisi, kulup_id, session["kullanici_adi"])
+        durum = db.uyelik_durumu(kulup_id, session["kullanici_adi"])
 
     # Bu kulübün başkanı, giriş yapmış kullanıcının kendisiyse (kulüp
     # verisinde "baskan_kullanici_adi" alanı tanımlıysa) bekleyen
-    # istekleri de gösteriyoruz.
+    # istekleri ve onaylı üye listesini de gösteriyoruz.
     bekleyen_istekler = []
     onayli_uyeler = []
     kulup_baskani_mi = False
     if "kullanici_adi" in session and session["kullanici_adi"] == kulup.get("baskan_kullanici_adi"):
         kulup_baskani_mi = True
-        bekleyen_istekler = uyelik_verisi.get(kulup_id, {}).get("bekleyen", [])
-        onayli_uyeler = uyelik_verisi.get(kulup_id, {}).get("onaylanan", [])
+        bekleyen_istekler = db.bekleyen_istekleri_getir(kulup_id)
+        onayli_uyeler = db.onayli_uyeleri_getir(kulup_id)
 
-    uye_sayisi = len(uyelik_verisi.get(kulup_id, {}).get("onaylanan", []))
+    uye_sayisi = db.uye_sayisi_getir(kulup_id)
 
     return render_template(
         "club_detail.html",
@@ -194,26 +109,14 @@ def kulup_detay(kulup_id):
 @app.route("/kulup/<kulup_id>/katil", methods=["POST"])
 def kulube_katil(kulup_id):
     """Giriş yapmış bir kullanıcının bir kulübe katılma isteği göndermesi."""
-    kulupler = kulupleri_yukle()
-    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
+    kulup = db.kulup_ozet_getir(kulup_id)
     if kulup is None:
         abort(404)
 
     if "kullanici_adi" not in session:
         return redirect(url_for("giris_yap"))
 
-    kullanici_adi = session["kullanici_adi"]
-    uyelik_verisi = uyelikleri_yukle()
-
-    if kulup_id not in uyelik_verisi:
-        uyelik_verisi[kulup_id] = {"onaylanan": [], "bekleyen": []}
-
-    zaten_uye = kullanici_adi in uyelik_verisi[kulup_id]["onaylanan"]
-    zaten_bekliyor = kullanici_adi in uyelik_verisi[kulup_id]["bekleyen"]
-
-    if not zaten_uye and not zaten_bekliyor:
-        uyelik_verisi[kulup_id]["bekleyen"].append(kullanici_adi)
-        uyelikleri_kaydet(uyelik_verisi)
+    db.uyelik_basvurusu_ekle(kulup_id, session["kullanici_adi"])
 
     return redirect(url_for("kulup_detay", kulup_id=kulup_id))
 
@@ -221,8 +124,7 @@ def kulube_katil(kulup_id):
 @app.route("/kulup/<kulup_id>/onayla", methods=["POST"])
 def uyelik_onayla(kulup_id):
     """Kulüp başkanının bekleyen bir üyelik isteğini onaylaması."""
-    kulupler = kulupleri_yukle()
-    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
+    kulup = db.kulup_ozet_getir(kulup_id)
     if kulup is None:
         abort(404)
 
@@ -231,15 +133,7 @@ def uyelik_onayla(kulup_id):
         abort(403)
 
     onaylanacak_kullanici = request.form.get("kullanici_adi", "").strip()
-    uyelik_verisi = uyelikleri_yukle()
-    kulup_uyelik = uyelik_verisi.get(kulup_id, {"onaylanan": [], "bekleyen": []})
-
-    if onaylanacak_kullanici in kulup_uyelik["bekleyen"]:
-        kulup_uyelik["bekleyen"].remove(onaylanacak_kullanici)
-        if onaylanacak_kullanici not in kulup_uyelik["onaylanan"]:
-            kulup_uyelik["onaylanan"].append(onaylanacak_kullanici)
-        uyelik_verisi[kulup_id] = kulup_uyelik
-        uyelikleri_kaydet(uyelik_verisi)
+    db.uyelik_onayla(kulup_id, onaylanacak_kullanici)
 
     return redirect(url_for("kulup_detay", kulup_id=kulup_id))
 
@@ -247,8 +141,7 @@ def uyelik_onayla(kulup_id):
 @app.route("/kulup/<kulup_id>/reddet", methods=["POST"])
 def uyelik_reddet(kulup_id):
     """Kulüp başkanının bekleyen bir üyelik isteğini reddetmesi."""
-    kulupler = kulupleri_yukle()
-    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
+    kulup = db.kulup_ozet_getir(kulup_id)
     if kulup is None:
         abort(404)
 
@@ -256,13 +149,7 @@ def uyelik_reddet(kulup_id):
         abort(403)
 
     reddedilecek_kullanici = request.form.get("kullanici_adi", "").strip()
-    uyelik_verisi = uyelikleri_yukle()
-    kulup_uyelik = uyelik_verisi.get(kulup_id, {"onaylanan": [], "bekleyen": []})
-
-    if reddedilecek_kullanici in kulup_uyelik["bekleyen"]:
-        kulup_uyelik["bekleyen"].remove(reddedilecek_kullanici)
-        uyelik_verisi[kulup_id] = kulup_uyelik
-        uyelikleri_kaydet(uyelik_verisi)
+    db.uyelik_reddet(kulup_id, reddedilecek_kullanici)
 
     return redirect(url_for("kulup_detay", kulup_id=kulup_id))
 
@@ -270,8 +157,7 @@ def uyelik_reddet(kulup_id):
 @app.route("/kulup/<kulup_id>/etkinlik-ekle", methods=["POST"])
 def etkinlik_ekle(kulup_id):
     """Kulüp başkanının kulübüne elle yeni bir etkinlik (foto, başlık, açıklama) eklemesi."""
-    kulupler = kulupleri_yukle()
-    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
+    kulup = db.kulup_ozet_getir(kulup_id)
     if kulup is None:
         abort(404)
 
@@ -292,24 +178,18 @@ def etkinlik_ekle(kulup_id):
         flash("Geçerli bir tarih seçmelisiniz.", "hata")
         return redirect(url_for("kulup_detay", kulup_id=kulup_id) + "#etkinlikler")
 
-    yeni_etkinlik = {
-        "baslik": baslik,
-        "tarih": tarih,
-        "durum": "gelecek" if etkinlik_tarihi >= datetime.now().date() else "gecmis",
-        "aciklama": aciklama,
-    }
+    durum = "gelecek" if etkinlik_tarihi >= datetime.now().date() else "gecmis"
 
+    gorsel_adi = None
     foto = request.files.get("foto")
     if foto and foto.filename:
         dosya_adi = secure_filename(foto.filename)
-        benzersiz_ad = f"{kulup_id}-{uuid4().hex}-{dosya_adi}"
+        gorsel_adi = f"{kulup_id}-{uuid4().hex}-{dosya_adi}"
         etkinlik_klasoru = os.path.join(app.static_folder, "images", "events")
         os.makedirs(etkinlik_klasoru, exist_ok=True)
-        foto.save(os.path.join(etkinlik_klasoru, benzersiz_ad))
-        yeni_etkinlik["gorsel"] = benzersiz_ad
+        foto.save(os.path.join(etkinlik_klasoru, gorsel_adi))
 
-    kulup["etkinlikler"].append(yeni_etkinlik)
-    kulupleri_kaydet(kulupler)
+    db.etkinlik_ekle(kulup_id, baslik, tarih, durum, aciklama, gorsel_adi)
 
     return redirect(url_for("kulup_detay", kulup_id=kulup_id) + "#etkinlikler")
 
@@ -326,19 +206,13 @@ def kayit_ol():
             hata = "Kullanıcı adı ve şifre boş bırakılamaz."
         elif not ogrenci_no_gecerli_mi(kullanici_adi):
             hata = "Kullanıcı adı öğrenci numaranız olmalı (9 haneli, 20-26 ile başlamalı)."
+        elif db.kullanici_bul(kullanici_adi):
+            hata = "Bu kullanıcı adı zaten alınmış."
         else:
-            kullanicilar = kullanicilari_yukle()
-            if any(k["kullanici_adi"].lower() == kullanici_adi.lower() for k in kullanicilar):
-                hata = "Bu kullanıcı adı zaten alınmış."
-            else:
-                kullanicilar.append({
-                    "kullanici_adi": kullanici_adi,
-                    "sifre_hash": generate_password_hash(sifre),
-                })
-                kullanicilari_kaydet(kullanicilar)
-                # Kayıt olduktan hemen sonra otomatik giriş yapılmış sayılır.
-                session["kullanici_adi"] = kullanici_adi
-                return redirect(url_for("anasayfa"))
+            db.kullanici_ekle(kullanici_adi, generate_password_hash(sifre))
+            # Kayıt olduktan hemen sonra otomatik giriş yapılmış sayılır.
+            session["kullanici_adi"] = kullanici_adi
+            return redirect(url_for("anasayfa"))
 
     return render_template("kayit.html", hata=hata)
 
@@ -351,11 +225,7 @@ def giris_yap():
         kullanici_adi = request.form.get("kullanici_adi", "").strip()
         sifre = request.form.get("sifre", "").strip()
 
-        kullanicilar = kullanicilari_yukle()
-        kullanici = next(
-            (k for k in kullanicilar if k["kullanici_adi"].lower() == kullanici_adi.lower()),
-            None,
-        )
+        kullanici = db.kullanici_bul(kullanici_adi)
 
         if kullanici and check_password_hash(kullanici["sifre_hash"], sifre):
             session["kullanici_adi"] = kullanici["kullanici_adi"]
@@ -375,11 +245,7 @@ def sifremi_unuttum():
         yeni_sifre = request.form.get("yeni_sifre", "").strip()
         yeni_sifre_tekrar = request.form.get("yeni_sifre_tekrar", "").strip()
 
-        kullanicilar = kullanicilari_yukle()
-        kullanici = next(
-            (k for k in kullanicilar if k["kullanici_adi"].lower() == kullanici_adi.lower()),
-            None,
-        )
+        kullanici = db.kullanici_bul(kullanici_adi)
 
         if not kullanici:
             hata = "Bu kullanıcı adıyla kayıtlı bir hesap bulunamadı."
@@ -388,8 +254,7 @@ def sifremi_unuttum():
         elif yeni_sifre != yeni_sifre_tekrar:
             hata = "Girdiğiniz şifreler birbiriyle uyuşmuyor."
         else:
-            kullanici["sifre_hash"] = generate_password_hash(yeni_sifre)
-            kullanicilari_kaydet(kullanicilar)
+            db.kullanici_sifre_guncelle(kullanici["kullanici_adi"], generate_password_hash(yeni_sifre))
             flash("Şifreniz güncellendi, yeni şifrenizle giriş yapabilirsiniz.", "basarili")
             return redirect(url_for("giris_yap"))
 
@@ -406,8 +271,7 @@ def cikis_yap():
 @app.route("/kulup/<kulup_id>/forum", methods=["POST"])
 def forum_mesaj_gonder(kulup_id):
     """Forum sekmesinden gönderilen yeni bir mesajı kaydeder. Sadece giriş yapmış kullanıcılar mesaj gönderebilir."""
-    kulupler = kulupleri_yukle()
-    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
+    kulup = db.kulup_ozet_getir(kulup_id)
     if kulup is None:
         abort(404)
 
@@ -421,8 +285,7 @@ def forum_mesaj_gonder(kulup_id):
         if uygunsuz_icerik_mi(mesaj):
             flash("Mesajın küfür/argo içerdiği için gönderilemedi.", "hata")
         else:
-            # Doğrudan veritabanına kaydediyoruz (Buffer şişmez)
-            forum_kaydet(kulup_id, session["kullanici_adi"], mesaj)
+            db.forum_kaydet(kulup_id, session["kullanici_adi"], mesaj)
 
     # Mesaj gönderildikten sonra kullanıcıyı yine aynı kulübün forum
     # sekmesine geri yönlendiriyoruz.

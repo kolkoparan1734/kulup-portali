@@ -38,6 +38,12 @@
           "tarih": "2026-09-20",
           "durum": "gelecek",
           "aciklama": "Yeni dönem için tanışma ve ücretsiz deneme dans dersi."
+        },
+        {
+          "baslik": "dans workshop",
+          "tarih": "2026-08-17",
+          "durum": "gelecek",
+          "aciklama": "taksimde zeybek etkimniliğime herkesi bekleriz"
         }
       ],
       "kapak_gorseli": "covers/dans_kapak.jpg"
