@@ -34,7 +34,7 @@
             {% if mesajlar %}
             <div class="flash-mesajlar">
                 {% for kategori, mesaj in mesajlar %}
-                <p class="auth-error">{{ mesaj }}</p>
+                <p class="{{ 'auth-basarili' if kategori == 'basarili' else 'auth-error' }}">{{ mesaj }}</p>
                 {% endfor %}
             </div>
             {% endif %}

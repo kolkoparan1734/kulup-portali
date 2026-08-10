@@ -9,11 +9,12 @@
 
     {% if hata %}
     <p class="auth-error">{{ hata }}</p>
+    <p class="auth-alt"><a href="{{ url_for('sifremi_unuttum') }}">Şifremi unuttum</a></p>
     {% endif %}
 
     <form method="POST" class="auth-form">
-        <label for="kullanici_adi">Kullanıcı Adı</label>
-        <input type="text" id="kullanici_adi" name="kullanici_adi" required>
+        <label for="kullanici_adi">Öğrenci Numarası</label>
+        <input type="text" id="kullanici_adi" name="kullanici_adi" inputmode="numeric" pattern="[0-9]{9}" maxlength="9" placeholder="ör. 250200782" required>
 
         <label for="sifre">Şifre</label>
         <input type="password" id="sifre" name="sifre" required>

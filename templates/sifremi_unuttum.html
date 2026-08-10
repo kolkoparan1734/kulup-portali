@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Şifremi Unuttum · Öğrenci Kulüpleri Portalı{% endblock %}
+
+{% block content %}
+
+<section class="auth-box">
+    <h1>Şifremi Unuttum</h1>
+    <p class="forum-intro">Öğrenci numaranızı ve yeni şifrenizi girerek şifrenizi güncelleyebilirsiniz.</p>
+
+    {% if hata %}
+    <p class="auth-error">{{ hata }}</p>
+    {% endif %}
+
+    <form method="POST" class="auth-form">
+        <label for="kullanici_adi">Öğrenci Numarası</label>
+        <input type="text" id="kullanici_adi" name="kullanici_adi" inputmode="numeric" pattern="[0-9]{9}" maxlength="9" placeholder="ör. 250200782" required>
+
+        <label for="yeni_sifre">Yeni Şifre</label>
+        <input type="password" id="yeni_sifre" name="yeni_sifre" required>
+
+        <label for="yeni_sifre_tekrar">Yeni Şifre (Tekrar)</label>
+        <input type="password" id="yeni_sifre_tekrar" name="yeni_sifre_tekrar" required>
+
+        <button type="submit" class="auth-button">Şifreyi Güncelle</button>
+    </form>
+
+    <p class="auth-alt"><a href="{{ url_for('giris_yap') }}">&larr; Giriş sayfasına dön</a></p>
+</section>
+
+{% endblock %}

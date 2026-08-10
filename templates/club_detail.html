@@ -53,6 +53,17 @@
     {% else %}
         <p class="empty-state">Bekleyen istek yok.</p>
     {% endif %}
+
+    <h3>👥 Onaylı Üyeler ({{ onayli_uyeler|length }})</h3>
+    {% if onayli_uyeler %}
+        <div class="uye-listesi">
+            {% for uye in onayli_uyeler %}
+            <span class="uye-rozet">{{ uye }}</span>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="empty-state">Henüz onaylı üye yok.</p>
+    {% endif %}
 </section>
 {% endif %}
 
@@ -75,6 +86,26 @@
 </section>
 
 <section id="etkinlikler" class="tab-panel"{% if kulup.kapak_gorseli %} style="background-image: url('{{ url_for('static', filename='images/' + kulup.kapak_gorseli) }}');"{% endif %}>
+    {% if kulup_baskani_mi %}
+    <div class="etkinlik-ekle-box">
+        <h3>➕ Yeni Etkinlik Ekle</h3>
+        <form method="POST" action="{{ url_for('etkinlik_ekle', kulup_id=kulup.id) }}" enctype="multipart/form-data" class="etkinlik-ekle-form">
+            <label for="etkinlik-baslik">Başlık</label>
+            <input type="text" id="etkinlik-baslik" name="baslik" required>
+
+            <label for="etkinlik-tarih">Tarih</label>
+            <input type="date" id="etkinlik-tarih" name="tarih" required>
+
+            <label for="etkinlik-aciklama">Açıklama</label>
+            <textarea id="etkinlik-aciklama" name="aciklama" required></textarea>
+
+            <label for="etkinlik-foto">Fotoğraf (opsiyonel)</label>
+            <input type="file" id="etkinlik-foto" name="foto" accept="image/*">
+
+            <button type="submit" class="auth-button">Etkinliği Ekle</button>
+        </form>
+    </div>
+    {% endif %}
     <div class="events-columns">
         <div class="events-column">
             <h3>Yaklaşan Etkinlikler</h3>

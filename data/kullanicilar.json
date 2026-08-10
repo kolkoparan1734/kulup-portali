@@ -14,5 +14,25 @@
   {
     "kullanici_adi": "berkaykaynar",
     "sifre_hash": "scrypt:32768:8:1$4GqI1KnGtEou3jYn$6531b8385d0cbfb9ca2fe29d09f4e199bae1c8c1e6e05ee9914a313959de93704989eded2238c397741537e9954d864bfad247a3a32f0896336d4fa6f643f434"
+  },
+  {
+    "kullanici_adi": "Furkan12345",
+    "sifre_hash": "scrypt:32768:8:1$SY1QqeXuwRxb01Tj$a762aacfeee54b0c6456f8eddf3bd29c11292fb3d3245f2bb2e2dcf96edd6f6eb6f288443509719fdc21031755805ecaf7494b1d197d715a56034dca8829e3ca"
+  },
+  {
+    "kullanici_adi": "memo",
+    "sifre_hash": "scrypt:32768:8:1$dZYsWBp7qNUGWN68$16ba38ad2acf8cd8371838984bcb1f2d4c4135512feae5c8211e609acd68f515cf0c0c35a2a146e8590fc9a6e0b9f2f681ad1406cdd0316a8908bbdead6757e2"
+  },
+  {
+    "kullanici_adi": "admingüncel",
+    "sifre_hash": "scrypt:32768:8:1$l1n45eAUC0j60tfp$3d87a799eb43106ac96df290636f8fb7a46539933e1734d47d4431bc898c2bd5dca716bbc8c284af5c45cca408a9056e2b59f0dee31ac74d90c688759ee783b7"
+  },
+  {
+    "kullanici_adi": "mehmet",
+    "sifre_hash": "scrypt:32768:8:1$WFqP528tpzzBiCUu$728d27e1a1bb5cd57f02b5c1bc7e3c0f9e6b78d1bddb8e353a941b34f43ced190e09fa86a9893bfd788eedf9ad4e998b25228f02a359554ed92ba74d04354c91"
+  },
+  {
+    "kullanici_adi": "250200454",
+    "sifre_hash": "scrypt:32768:8:1$HCpx7S1aosjJgNhW$ff1c0175cfe74f163ceb59a99dc5cedbe53891fbd2d4a31a0f297d4365c70426f1ac066fb26d3f066083a74b172f05bbc6228187d78012d1d9d54371a8827ac0"
   }
 ]

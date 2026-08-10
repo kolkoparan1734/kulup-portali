@@ -13,11 +13,14 @@ Nasıl çalıştırılır (VS Code terminalinde):
 
 import json
 import os
+from uuid import uuid4
 from database import add_message, get_messages, init_db
 from datetime import datetime
 from flask import Flask, render_template, abort, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from kufur_filtresi import uygunsuz_icerik_mi 
+from werkzeug.utils import secure_filename
+from kufur_filtresi import uygunsuz_icerik_mi
+from ogrenci_no import gecerli_mi as ogrenci_no_gecerli_mi
 
 
 # Sunucu her başladığında veritabanı tablosunu garantiye alır
@@ -48,6 +51,12 @@ def kulupleri_yukle():
             return json.load(dosya)["kulupler"]
         except json.JSONDecodeError:
             abort(404)
+
+
+def kulupleri_kaydet(kulupler):
+    """Kulüp listesini data/clubs.json dosyasına yazar."""
+    with open(DATA_PATH, "w", encoding="utf-8") as dosya:
+        json.dump({"kulupler": kulupler}, dosya, ensure_ascii=False, indent=2)
 
 
 def forum_yukle(kulup_id):
@@ -159,10 +168,12 @@ def kulup_detay(kulup_id):
     # verisinde "baskan_kullanici_adi" alanı tanımlıysa) bekleyen
     # istekleri de gösteriyoruz.
     bekleyen_istekler = []
+    onayli_uyeler = []
     kulup_baskani_mi = False
     if "kullanici_adi" in session and session["kullanici_adi"] == kulup.get("baskan_kullanici_adi"):
         kulup_baskani_mi = True
         bekleyen_istekler = uyelik_verisi.get(kulup_id, {}).get("bekleyen", [])
+        onayli_uyeler = uyelik_verisi.get(kulup_id, {}).get("onaylanan", [])
 
     uye_sayisi = len(uyelik_verisi.get(kulup_id, {}).get("onaylanan", []))
 
@@ -176,6 +187,7 @@ def kulup_detay(kulup_id):
         uye_sayisi=uye_sayisi,
         kulup_baskani_mi=kulup_baskani_mi,
         bekleyen_istekler=bekleyen_istekler,
+        onayli_uyeler=onayli_uyeler,
     )
 
 
@@ -255,6 +267,53 @@ def uyelik_reddet(kulup_id):
     return redirect(url_for("kulup_detay", kulup_id=kulup_id))
 
 
+@app.route("/kulup/<kulup_id>/etkinlik-ekle", methods=["POST"])
+def etkinlik_ekle(kulup_id):
+    """Kulüp başkanının kulübüne elle yeni bir etkinlik (foto, başlık, açıklama) eklemesi."""
+    kulupler = kulupleri_yukle()
+    kulup = next((k for k in kulupler if k["id"] == kulup_id), None)
+    if kulup is None:
+        abort(404)
+
+    if session.get("kullanici_adi") != kulup.get("baskan_kullanici_adi"):
+        abort(403)
+
+    baslik = request.form.get("baslik", "").strip()
+    aciklama = request.form.get("aciklama", "").strip()
+    tarih = request.form.get("tarih", "").strip()
+
+    if not baslik or not aciklama or not tarih:
+        flash("Başlık, açıklama ve tarih boş bırakılamaz.", "hata")
+        return redirect(url_for("kulup_detay", kulup_id=kulup_id) + "#etkinlikler")
+
+    try:
+        etkinlik_tarihi = datetime.strptime(tarih, "%Y-%m-%d").date()
+    except ValueError:
+        flash("Geçerli bir tarih seçmelisiniz.", "hata")
+        return redirect(url_for("kulup_detay", kulup_id=kulup_id) + "#etkinlikler")
+
+    yeni_etkinlik = {
+        "baslik": baslik,
+        "tarih": tarih,
+        "durum": "gelecek" if etkinlik_tarihi >= datetime.now().date() else "gecmis",
+        "aciklama": aciklama,
+    }
+
+    foto = request.files.get("foto")
+    if foto and foto.filename:
+        dosya_adi = secure_filename(foto.filename)
+        benzersiz_ad = f"{kulup_id}-{uuid4().hex}-{dosya_adi}"
+        etkinlik_klasoru = os.path.join(app.static_folder, "images", "events")
+        os.makedirs(etkinlik_klasoru, exist_ok=True)
+        foto.save(os.path.join(etkinlik_klasoru, benzersiz_ad))
+        yeni_etkinlik["gorsel"] = benzersiz_ad
+
+    kulup["etkinlikler"].append(yeni_etkinlik)
+    kulupleri_kaydet(kulupler)
+
+    return redirect(url_for("kulup_detay", kulup_id=kulup_id) + "#etkinlikler")
+
+
 @app.route("/kayit", methods=["GET", "POST"])
 def kayit_ol():
     """Yeni öğrenci hesabı oluşturma sayfası."""
@@ -265,8 +324,8 @@ def kayit_ol():
 
         if not kullanici_adi or not sifre:
             hata = "Kullanıcı adı ve şifre boş bırakılamaz."
-        elif uygunsuz_icerik_mi(kullanici_adi):
-            hata = "Kullanıcı adı uygun olmayan bir kelime içeriyor."
+        elif not ogrenci_no_gecerli_mi(kullanici_adi):
+            hata = "Kullanıcı adı öğrenci numaranız olmalı (9 haneli, 20-26 ile başlamalı)."
         else:
             kullanicilar = kullanicilari_yukle()
             if any(k["kullanici_adi"].lower() == kullanici_adi.lower() for k in kullanicilar):
@@ -305,6 +364,36 @@ def giris_yap():
             hata = "Kullanıcı adı veya şifre hatalı."
 
     return render_template("giris.html", hata=hata)
+
+
+@app.route("/sifremi-unuttum", methods=["GET", "POST"])
+def sifremi_unuttum():
+    """Şifresini unutan öğrencinin öğrenci numarasıyla yeni şifre belirlemesi."""
+    hata = None
+    if request.method == "POST":
+        kullanici_adi = request.form.get("kullanici_adi", "").strip()
+        yeni_sifre = request.form.get("yeni_sifre", "").strip()
+        yeni_sifre_tekrar = request.form.get("yeni_sifre_tekrar", "").strip()
+
+        kullanicilar = kullanicilari_yukle()
+        kullanici = next(
+            (k for k in kullanicilar if k["kullanici_adi"].lower() == kullanici_adi.lower()),
+            None,
+        )
+
+        if not kullanici:
+            hata = "Bu kullanıcı adıyla kayıtlı bir hesap bulunamadı."
+        elif not yeni_sifre or not yeni_sifre_tekrar:
+            hata = "Yeni şifre boş bırakılamaz."
+        elif yeni_sifre != yeni_sifre_tekrar:
+            hata = "Girdiğiniz şifreler birbiriyle uyuşmuyor."
+        else:
+            kullanici["sifre_hash"] = generate_password_hash(yeni_sifre)
+            kullanicilari_kaydet(kullanicilar)
+            flash("Şifreniz güncellendi, yeni şifrenizle giriş yapabilirsiniz.", "basarili")
+            return redirect(url_for("giris_yap"))
+
+    return render_template("sifremi_unuttum.html", hata=hata)
 
 
 @app.route("/cikis")

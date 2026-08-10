@@ -372,6 +372,55 @@ a { text-decoration: none; color: inherit; }
     padding: 0 24px;
 }
 
+.etkinlik-ekle-box {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+    padding: 20px 24px;
+    background: var(--beyaz);
+    border: 1px solid var(--cizgi);
+    border-radius: var(--radius-card);
+    box-shadow: var(--golge);
+}
+
+.etkinlik-ekle-box h3 {
+    font-family: var(--font-baslik);
+    color: var(--lacivert);
+    font-size: 1.05rem;
+    margin-bottom: 14px;
+}
+
+.etkinlik-ekle-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 480px;
+}
+
+.etkinlik-ekle-form input,
+.etkinlik-ekle-form textarea {
+    padding: 10px 14px;
+    border: 1px solid var(--cizgi);
+    border-radius: 10px;
+    font-family: var(--font-govde);
+    font-size: 0.92rem;
+}
+
+.etkinlik-ekle-form textarea {
+    min-height: 70px;
+}
+
+.etkinlik-ekle-form input:focus,
+.etkinlik-ekle-form textarea:focus {
+    outline: none;
+    border-color: var(--lacivert);
+}
+
+.etkinlik-ekle-form .auth-button {
+    align-self: flex-start;
+    padding: 10px 24px;
+    margin-top: 4px;
+}
+
 /* Yönetim Kurulu Kartları */
 .board-grid {
     display: grid;
@@ -524,6 +573,23 @@ a { text-decoration: none; color: inherit; }
     text-align: left;
 }
 
+.dogum-gunu-box {
+    background: var(--altin-soluk);
+    border: 1px solid var(--altin);
+    border-radius: var(--radius-card);
+    padding: 48px 32px;
+}
+
+.dogum-gunu-emoji {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+}
+
+.error-box h1.dogum-gunu-baslik {
+    color: var(--lacivert);
+    font-size: 1.8rem;
+}
+
 .error-hint {
     color: var(--slate-acik);
     font-size: 0.9rem;
@@ -638,6 +704,22 @@ a { text-decoration: none; color: inherit; }
 
 .onay-buton:hover { background: #156138; }
 .reddet-buton:hover { background: #E4E4E0; }
+
+.uye-listesi {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.uye-rozet {
+    background: var(--krem);
+    border: 1px solid var(--cizgi);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--slate);
+}
 
 /* ============================================
    BELGELER SAYFASI
@@ -804,6 +886,16 @@ a { text-decoration: none; color: inherit; }
     max-width: 1100px;
     margin: 20px auto 0;
     padding: 0 24px;
+}
+
+.auth-basarili {
+    background: #EDF9F2;
+    border: 1px solid #BCE6CC;
+    color: #1E7A46;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    margin-bottom: 12px;
 }
 
 .auth-alt {
