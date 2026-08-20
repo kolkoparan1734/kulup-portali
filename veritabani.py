@@ -18,7 +18,7 @@ import pymysql.cursors
 DB_HOST = os.environ.get("MYSQL_HOST", "localhost")
 DB_PORT = int(os.environ.get("MYSQL_PORT", "3306"))
 DB_USER = os.environ.get("MYSQL_USER", "root")
-DB_PASSWORD = os.environ.get("MYSQL_PASSWORD", "441021Fk.")
+DB_PASSWORD = os.environ.get("MYSQL_PASSWORD", "187256Fk.")
 DB_NAME = os.environ.get("MYSQL_DATABASE", "kulup_portali")
 
 
