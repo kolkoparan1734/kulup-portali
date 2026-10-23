@@ -1,0 +1,15 @@
+{% extends "base.html" if session.kullanici_adi else "auth.html" %}
+
+{% block title %}Hata {{ kod }}{% endblock %}
+
+{% block content %}
+<section class="hata-kutu">
+    <span class="hata-kod">{{ kod }}</span>
+    <h1>{{ mesaj }}</h1>
+    {% if session.kullanici_adi %}
+    <a href="{{ url_for('ana_panel') }}" class="dugme dugme-ana">Ana Panele Dön</a>
+    {% else %}
+    <a href="{{ url_for('giris_yap') }}" class="dugme dugme-ana">Giriş Sayfasına Dön</a>
+    {% endif %}
+</section>
+{% endblock %}

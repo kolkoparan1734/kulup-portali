@@ -1,31 +1,38 @@
-{% extends "base.html" %}
+{% extends "auth.html" %}
 
-{% block title %}Şifremi Unuttum · Öğrenci Kulüpleri Portalı{% endblock %}
+{% block title %}Şifremi Unuttum{% endblock %}
 
 {% block content %}
+<h1 class="giris-baslik">Şifre Sıfırlama</h1>
 
-<section class="auth-box">
-    <h1>Şifremi Unuttum</h1>
-    <p class="forum-intro">Öğrenci numaranızı ve yeni şifrenizi girerek şifrenizi güncelleyebilirsiniz.</p>
+{% if not aktif %}
+<p class="giris-aciklama">Şifre sıfırlama şu an kapalı. Lütfen sistem yöneticisiyle iletişime geçin.</p>
+{% else %}
+<p class="giris-aciklama">Kullanıcı adınızı, size verilen kurtarma kodunu ve yeni şifrenizi girin.</p>
 
-    {% if hata %}
-    <p class="auth-error">{{ hata }}</p>
-    {% endif %}
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
 
-    <form method="POST" class="auth-form">
-        <label for="kullanici_adi">Öğrenci Numarası</label>
-        <input type="text" id="kullanici_adi" name="kullanici_adi" inputmode="numeric" pattern="[0-9]{9}" maxlength="9" placeholder="ör. 250200782" required>
+<form method="POST" class="form">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label class="alan">
+        <span>Kullanıcı adı</span>
+        <input type="text" name="kullanici_adi" autocomplete="username" required>
+    </label>
+    <label class="alan">
+        <span>Kurtarma kodu</span>
+        <input type="password" name="kurtarma_kodu" autocomplete="off" required>
+    </label>
+    <label class="alan">
+        <span>Yeni şifre <small>(en az 8 karakter)</small></span>
+        <input type="password" name="yeni_sifre" minlength="8" autocomplete="new-password" required>
+    </label>
+    <label class="alan">
+        <span>Yeni şifre (tekrar)</span>
+        <input type="password" name="yeni_sifre_tekrar" minlength="8" autocomplete="new-password" required>
+    </label>
+    <button type="submit" class="dugme dugme-ana dugme-tam">Şifreyi Güncelle</button>
+</form>
+{% endif %}
 
-        <label for="yeni_sifre">Yeni Şifre</label>
-        <input type="password" id="yeni_sifre" name="yeni_sifre" required>
-
-        <label for="yeni_sifre_tekrar">Yeni Şifre (Tekrar)</label>
-        <input type="password" id="yeni_sifre_tekrar" name="yeni_sifre_tekrar" required>
-
-        <button type="submit" class="auth-button">Şifreyi Güncelle</button>
-    </form>
-
-    <p class="auth-alt"><a href="{{ url_for('giris_yap') }}">&larr; Giriş sayfasına dön</a></p>
-</section>
-
+<p class="giris-alt"><a href="{{ url_for('giris_yap') }}">&larr; Giriş sayfasına dön</a></p>
 {% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo, bos %}
+
+{% block title %}Ana Panel{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Ana Panel</h1>
+        <p>Kulüplerin ve üyeliklerin genel durumu.</p>
+    </div>
+</div>
+
+<section class="ozet-kartlari">
+    <a href="{{ url_for('kulupler') }}" class="ozet-kart">
+        <span class="ozet-etiket">Toplam Kulüp</span>
+        <span class="ozet-deger">{{ ozet.kulup }}</span>
+    </a>
+    <a href="{{ url_for('uyeler') }}" class="ozet-kart">
+        <span class="ozet-etiket">Toplam Üye</span>
+        <span class="ozet-deger">{{ ozet.uye }}</span>
+        <span class="ozet-alt">{{ ozet.uyelik }} kulüp üyeliği</span>
+    </a>
+    <div class="ozet-kart ozet-aktif">
+        <span class="ozet-etiket">Aktif Kulüp</span>
+        <span class="ozet-deger">{{ ozet.aktif }}</span>
+    </div>
+    <div class="ozet-kart ozet-pasif">
+        <span class="ozet-etiket">Pasif Kulüp</span>
+        <span class="ozet-deger">{{ ozet.pasif }}</span>
+    </div>
+</section>
+
+<div class="panel-izgara">
+    <section class="kutu">
+        <div class="kutu-baslik">
+            <h2>Son Eklenen Üyeler</h2>
+            <a href="{{ url_for('uyeler') }}" class="kutu-link">Tümü &rarr;</a>
+        </div>
+        {% if son_uyeler %}
+        <ul class="liste">
+            {% for uye in son_uyeler %}
+            <li>
+                <div>
+                    <strong>{{ uye.ad_soyad or uye.ogrenci_no }}</strong>
+                    <span class="soluk">{{ uye.ogrenci_no }}{% if uye.bolum %} · {{ uye.bolum }}{% endif %}</span>
+                </div>
+                <div class="liste-sag">
+                    <a href="{{ url_for('kulup_detay', kulup_id=uye.kulup_id) }}">{{ uye.kulup_isim }}</a>
+                    <span class="soluk">{{ uye.katilim_tarihi | tarih }}</span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="bos-durum">Henüz katılım tarihi girilmiş üye yok. Panelden eklenen üyeler burada görünür.</p>
+        {% endif %}
+    </section>
+
+    <section class="kutu">
+        <div class="kutu-baslik">
+            <h2>En Çok Üyesi Olan Kulüpler</h2>
+            <a href="{{ url_for('kulupler') }}" class="kutu-link">Tümü &rarr;</a>
+        </div>
+        <ol class="siralama">
+            {% for kulup in en_buyukler %}
+            <li>
+                <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="siralama-satir">
+                    {{ kulup_logo(kulup, "kucuk") }}
+                    <span class="siralama-ad">{{ kulup.isim }}</span>
+                    <span class="siralama-sayi">{{ kulup.uye_sayisi }}</span>
+                </a>
+                <span class="cubuk"><span style="width: {{ (kulup.uye_sayisi / en_fazla * 100) if en_fazla else 0 }}%"></span></span>
+            </li>
+            {% endfor %}
+        </ol>
+    </section>
+</div>
+{% endblock %}

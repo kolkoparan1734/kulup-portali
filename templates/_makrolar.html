@@ -1,0 +1,13 @@
+{% macro kulup_logo(kulup, boyut="") %}
+{% if kulup.logo %}
+<img src="{{ url_for('static', filename='images/' + kulup.logo) }}" alt="" class="kulup-logo {{ boyut }}">
+{% else %}
+<span class="kulup-logo kulup-logo-yok {{ boyut }}" aria-hidden="true">{{ kulup.isim[:1] | upper }}</span>
+{% endif %}
+{% endmacro %}
+
+{% macro durum_rozeti(durum) %}
+<span class="rozet {{ 'rozet-aktif' if durum == 'aktif' else 'rozet-pasif' }}">{{ 'Aktif' if durum == 'aktif' else 'Pasif' }}</span>
+{% endmacro %}
+
+{% macro bos(deger) %}{% if deger %}{{ deger }}{% else %}<span class="soluk">—</span>{% endif %}{% endmacro %}

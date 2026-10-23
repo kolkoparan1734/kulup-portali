@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import bos %}
+
+{% block title %}Üyeler{% endblock %}
+
+{% block content %}
+<div data-filtre-kapsam data-filtre-oge="#tum-uyeler tbody tr">
+    <div class="sayfa-baslik">
+        <div>
+            <h1>Üyeler</h1>
+            <p>Tüm kulüplerdeki üyelikler · <span data-filtre-sayac>{{ uyeler | length }}</span> kayıt gösteriliyor</p>
+        </div>
+    </div>
+
+    <div class="filtre-cubugu">
+        <input type="search" data-filtre="metin" placeholder="Ad, öğrenci no, bölüm, e-posta ara…" aria-label="Üye ara">
+        <select data-filtre="kulup" aria-label="Kulüp">
+            <option value="">Tüm kulüpler</option>
+            {% for kulup in kulupler %}
+            <option value="{{ kulup.id }}" {% if kulup.id == secili_kulup %}selected{% endif %}>{{ kulup.isim }}</option>
+            {% endfor %}
+        </select>
+        <label class="onay-kutusu">
+            <input type="checkbox" data-filtre="coklu"> Birden fazla kulüpte olanlar
+        </label>
+    </div>
+
+    <section class="kutu kutu-tablo">
+        <div class="tablo-sarici">
+            <table class="tablo" id="tum-uyeler">
+                <thead>
+                    <tr>
+                        <th data-sirala>Ad Soyad</th>
+                        <th data-sirala>Öğrenci No</th>
+                        <th data-sirala>Bölüm</th>
+                        <th data-sirala="sayi">Sınıf</th>
+                        <th data-sirala>Kulüp</th>
+                        <th data-sirala="sayi">Kulüp Sayısı</th>
+                        <th data-sirala>Katılım</th>
+                        <th>İletişim</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for uye in uyeler %}
+                    {% set coklu = uye.kulupleri | length > 1 %}
+                    <tr data-metin="{{ uye.ad_soyad }} {{ uye.ogrenci_no }} {{ uye.bolum }} {{ uye.eposta }} {{ uye.telefon }}"
+                        data-kulup="{{ uye.kulup_id }}" data-coklu="{{ '1' if coklu else '0' }}">
+                        <td>{{ bos(uye.ad_soyad) }}</td>
+                        <td class="mono">{{ uye.ogrenci_no }}</td>
+                        <td>{{ bos(uye.bolum) }}</td>
+                        <td data-deger="{{ uye.sinif }}">{{ bos(uye.sinif) }}</td>
+                        <td><a href="{{ url_for('kulup_detay', kulup_id=uye.kulup_id) }}#uyeler">{{ uye.kulup_isim }}</a></td>
+                        <td data-deger="{{ uye.kulupleri | length }}">
+                            {% if coklu %}
+                            <span class="rozet rozet-bilgi" title="{{ uye.kulupleri | join(', ') }}">{{ uye.kulupleri | length }} kulüp</span>
+                            {% else %}<span class="soluk">1</span>{% endif %}
+                        </td>
+                        <td data-deger="{{ uye.katilim_tarihi }}">{{ bos(uye.katilim_tarihi | tarih) }}</td>
+                        <td class="kucuk-metin">
+                            {% if uye.eposta %}<a href="mailto:{{ uye.eposta }}">{{ uye.eposta }}</a><br>{% endif %}
+                            {% if uye.telefon %}{{ uye.telefon }}{% endif %}
+                            {% if not uye.eposta and not uye.telefon %}<span class="soluk">—</span>{% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="bos-durum" data-filtre-bos hidden>Filtrelere uyan üye bulunamadı.</p>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo %}
+
+{% block title %}{{ 'Kulübü Düzenle' if kulup and kulup.id else 'Yeni Kulüp' }}{% endblock %}
+
+{% block content %}
+{% set duzenleme = kulup and kulup.id %}
+<a href="{{ url_for('kulup_detay', kulup_id=kulup.id) if duzenleme else url_for('kulupler') }}" class="geri-link">&larr; Geri</a>
+
+<div class="sayfa-baslik">
+    <h1>{{ kulup.isim ~ ' — Düzenle' if duzenleme else 'Yeni Kulüp' }}</h1>
+</div>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<form method="POST" enctype="multipart/form-data" class="form kutu">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+
+    <h2 class="form-bolum">Kulüp Bilgileri</h2>
+    <div class="form-izgara">
+        <label class="alan">
+            <span>Kulüp adı *</span>
+            <input type="text" name="isim" value="{{ kulup.isim if kulup else '' }}" required maxlength="120">
+        </label>
+        <label class="alan">
+            <span>Kategori *</span>
+            <input type="text" name="kategori" list="kategori-listesi" value="{{ kulup.kategori if kulup else '' }}" required maxlength="80">
+            <datalist id="kategori-listesi">{% for k in kategoriler %}<option value="{{ k }}">{% endfor %}</datalist>
+        </label>
+        <label class="alan">
+            <span>Başkan</span>
+            <input type="text" name="baskan" value="{{ kulup.baskan if kulup else '' }}" maxlength="120">
+        </label>
+        <label class="alan">
+            <span>Durum</span>
+            <select name="durum">
+                <option value="aktif" {% if not kulup or kulup.durum != 'pasif' %}selected{% endif %}>Aktif</option>
+                <option value="pasif" {% if kulup and kulup.durum == 'pasif' %}selected{% endif %}>Pasif</option>
+            </select>
+        </label>
+        <label class="alan alan-genis">
+            <span>Açıklama</span>
+            <textarea name="aciklama" rows="3" maxlength="1000">{{ kulup.aciklama if kulup else '' }}</textarea>
+        </label>
+        <div class="alan alan-genis">
+            <span>Logo <small>(PNG, JPG veya WEBP)</small></span>
+            <div class="logo-alani">
+                {% if kulup and kulup.logo %}{{ kulup_logo(kulup) }}{% endif %}
+                <input type="file" name="logo" accept=".png,.jpg,.jpeg,.webp">
+            </div>
+        </div>
+    </div>
+
+    <h2 class="form-bolum">Danışman Hoca</h2>
+    <div class="form-izgara">
+        <label class="alan">
+            <span>Ad soyad</span>
+            <input type="text" name="danisman_isim" value="{{ kulup.danisman.isim if kulup and kulup.danisman else '' }}" maxlength="120">
+        </label>
+        <label class="alan">
+            <span>E-posta</span>
+            <input type="email" name="danisman_eposta" value="{{ kulup.danisman.eposta if kulup and kulup.danisman else '' }}" maxlength="120">
+        </label>
+        <label class="alan">
+            <span>Telefon</span>
+            <input type="tel" name="danisman_telefon" value="{{ kulup.danisman.telefon if kulup and kulup.danisman else '' }}" maxlength="30">
+        </label>
+    </div>
+
+    <h2 class="form-bolum">Yönetim Kurulu</h2>
+    <datalist id="gorev-listesi">{% for g in yk_gorevleri %}<option value="{{ g }}">{% endfor %}</datalist>
+    <div class="yk-liste" data-yk-liste>
+        {% for uye in yk_satirlari %}
+        <div class="yk-satir">
+            <input type="text" name="yk_gorev" value="{{ uye.gorev }}" list="gorev-listesi" placeholder="Görev" aria-label="Görev">
+            <input type="text" name="yk_isim" value="{{ uye.isim }}" placeholder="Ad soyad" aria-label="Ad soyad">
+            <button type="button" class="dugme dugme-ince" data-yk-sil aria-label="Satırı kaldır">✕</button>
+        </div>
+        {% endfor %}
+    </div>
+    <button type="button" class="dugme dugme-ince" data-yk-ekle>+ Satır ekle</button>
+
+    <div class="form-eylemler">
+        <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) if duzenleme else url_for('kulupler') }}" class="dugme">Vazgeç</a>
+        <button type="submit" class="dugme dugme-ana">Kaydet</button>
+    </div>
+</form>
+{% endblock %}

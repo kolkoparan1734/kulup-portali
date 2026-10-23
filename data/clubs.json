@@ -46,7 +46,13 @@
           "aciklama": "taksimde zeybek etkimniliğime herkesi bekleriz"
         }
       ],
-      "kapak_gorseli": "covers/dans_kapak.jpg"
+      "kapak_gorseli": "covers/dans_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "satranc",
@@ -83,7 +89,13 @@
           "aciklama": "5 dakikalık blitz formatında dostluk turnuvası."
         }
       ],
-      "kapak_gorseli": "covers/satranc_kapak.jpg"
+      "kapak_gorseli": "covers/satranc_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "ieee",
@@ -124,7 +136,13 @@
           "aciklama": "Sektörden bir konuşmacı ile yapay zeka üzerine söyleşi."
         }
       ],
-      "kapak_gorseli": "covers/ieee_kapak.jpg"
+      "kapak_gorseli": "covers/ieee_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "gastronomi",
@@ -161,7 +179,13 @@
           "aciklama": "Temel hamur işi tekniklerinin öğretildiği uygulamalı atölye."
         }
       ],
-      "kapak_gorseli": "covers/gastronomi_kapak.jpg"
+      "kapak_gorseli": "covers/gastronomi_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "yapay-zeka",
@@ -198,7 +222,13 @@
           "aciklama": "Temel görüntü işleme ve yapay zeka uygulamalarına giriş semineri."
         }
       ],
-      "kapak_gorseli": "covers/yapay-zeka_kapak.jpg"
+      "kapak_gorseli": "covers/yapay-zeka_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "genc-kalite",
@@ -235,7 +265,13 @@
           "aciklama": "Farklı üniversitelerden kalite kulüplerinin bir araya geldiği network etkinliği."
         }
       ],
-      "kapak_gorseli": "covers/genc-kalite_kapak.jpg"
+      "kapak_gorseli": "covers/genc-kalite_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "psikoloji",
@@ -272,7 +308,13 @@
           "aciklama": "Alanında uzman bir psikoloğun katılacağı söyleşi."
         }
       ],
-      "kapak_gorseli": "covers/psikoloji_kapak.jpg"
+      "kapak_gorseli": "covers/psikoloji_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "sinema",
@@ -309,7 +351,13 @@
           "aciklama": "Sinema tarihinden bir klasik, açık hava gösterimi."
         }
       ],
-      "kapak_gorseli": "covers/sinema_kapak.jpg"
+      "kapak_gorseli": "covers/sinema_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "kutuphane",
@@ -346,7 +394,13 @@
           "aciklama": "Türk edebiyatından bir yazarla kampüste söyleşi."
         }
       ],
-      "kapak_gorseli": "covers/kutuphane_kapak.jpg"
+      "kapak_gorseli": "covers/kutuphane_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "veri-bilimi",
@@ -383,7 +437,13 @@
           "aciklama": "Uluslararası bir veri bilimi yarışmasına hazırlık kampı."
         }
       ],
-      "kapak_gorseli": "covers/veri-bilimi_kapak.jpg"
+      "kapak_gorseli": "covers/veri-bilimi_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "sosyoloji",
@@ -420,7 +480,13 @@
           "aciklama": "Öğrencilerin yürüttüğü saha araştırmalarının sunulduğu gün."
         }
       ],
-      "kapak_gorseli": "covers/sosyoloji_kapak.jpg"
+      "kapak_gorseli": "covers/sosyoloji_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "ticaret-lojistik",
@@ -457,7 +523,13 @@
           "aciklama": "Sektör profesyonelleriyle kariyer odaklı buluşma."
         }
       ],
-      "kapak_gorseli": "covers/ticaret-lojistik_kapak.jpg"
+      "kapak_gorseli": "covers/ticaret-lojistik_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "hayvan-haklari",
@@ -466,6 +538,7 @@
       "kategori": "Sosyal Sorumluluk",
       "aciklama": "Sokak hayvanlarının korunması ve hayvan hakları konusunda farkındalık oluşturan, düzenli yardım kampanyaları yürüten kulüp.",
       "baskan": "Aylin Er",
+      "baskan_kullanici_adi": "250200458",
       "yonetim_kurulu": [
         {
           "isim": "Aylin Er",
@@ -494,7 +567,13 @@
           "aciklama": "Yerel bir veteriner kliniğiyle iş birliğinde farkındalık standı."
         }
       ],
-      "kapak_gorseli": "covers/hayvan-haklari_kapak.jpg"
+      "kapak_gorseli": "covers/hayvan-haklari_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "iyiligin-gelecegi",
@@ -531,7 +610,13 @@
           "aciklama": "Yerel bir huzurevine gönüllü ziyaret ve etkinlik organizasyonu."
         }
       ],
-      "kapak_gorseli": "covers/iyiligin-gelecegi_kapak.jpg"
+      "kapak_gorseli": "covers/iyiligin-gelecegi_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "tiyatro",
@@ -540,6 +625,7 @@
       "kategori": "Sanat / Kültür",
       "aciklama": "Sahne oyunculuğu atölyeleri düzenleyen ve dönem sonu oyun gösterimleri sahneleyen kulüp.",
       "baskan": "Rüzgar Onat",
+      "baskan_kullanici_adi": "250200459",
       "yonetim_kurulu": [
         {
           "isim": "Rüzgar Onat",
@@ -568,7 +654,13 @@
           "aciklama": "Yeni üyeler için doğaçlama oyunculuğa giriş atölyesi."
         }
       ],
-      "kapak_gorseli": "covers/tiyatro_kapak.jpg"
+      "kapak_gorseli": "covers/tiyatro_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "network",
@@ -577,6 +669,7 @@
       "kategori": "Kariyer / Networking",
       "aciklama": "Öğrencileri sektör profesyonelleri ve mezunlarla buluşturan, kariyer gelişimine odaklanan kulüp.",
       "baskan": "Efe Kutlu",
+      "baskan_kullanici_adi": "250200460",
       "yonetim_kurulu": [
         {
           "isim": "Efe Kutlu",
@@ -605,7 +698,13 @@
           "aciklama": "Öğrencilere profesyonel profil oluşturma üzerine atölye."
         }
       ],
-      "kapak_gorseli": "covers/network_kapak.jpg"
+      "kapak_gorseli": "covers/network_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "arama-kurtarma",
@@ -642,7 +741,13 @@
           "aciklama": "Kampüs genelinde düzenlenecek deprem tatbikatı ve bilgilendirme standı."
         }
       ],
-      "kapak_gorseli": "covers/arama-kurtarma_kapak.jpg"
+      "kapak_gorseli": "covers/arama-kurtarma_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "sailing-club",
@@ -679,7 +784,13 @@
           "aciklama": "Yeni üyeler için sıfırdan yelken eğitimi."
         }
       ],
-      "kapak_gorseli": "covers/sailing-club_kapak.jpg"
+      "kapak_gorseli": "covers/sailing-club_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "turk-dunyasi-genclik",
@@ -716,7 +827,13 @@
           "aciklama": "Kampüste düzenlenecek Nevruz kutlama etkinliği."
         }
       ],
-      "kapak_gorseli": "covers/turk-dunyasi-genclik_kapak.jpg"
+      "kapak_gorseli": "covers/turk-dunyasi-genclik_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "tebgk",
@@ -753,7 +870,13 @@
           "aciklama": "Halk sağlığı odaklı bilgilendirme semineri."
         }
       ],
-      "kapak_gorseli": "covers/tebgk_kapak.jpg"
+      "kapak_gorseli": "covers/tebgk_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "turk-tarihi-kulturu",
@@ -762,7 +885,7 @@
       "kategori": "Akademik / Kültür",
       "aciklama": "Türk tarihi ve kültürü üzerine söyleşi, gezi ve okuma grubu etkinlikleri düzenleyen kulüp.",
       "baskan": "Kaan Sezer",
-      "baskan_kullanici_adi": "admingüncel",
+      "baskan_kullanici_adi": "250200782",
       "yonetim_kurulu": [
         {
           "isim": "Kaan Sezer",
@@ -791,7 +914,13 @@
           "aciklama": "İstanbul’daki bir tarih müzesine düzenlenecek gezi."
         }
       ],
-      "kapak_gorseli": "covers/turk-tarihi-kulturu_kapak.jpg"
+      "kapak_gorseli": "covers/turk-tarihi-kulturu_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "ilsa",
@@ -828,7 +957,13 @@
           "aciklama": "Uluslararası hukuk alanında akademik bir seminer."
         }
       ],
-      "kapak_gorseli": "covers/ilsa_kapak.jpg"
+      "kapak_gorseli": "covers/ilsa_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "siyaset-diplomasi",
@@ -865,7 +1000,13 @@
           "aciklama": "Güncel dış politika gelişmeleri üzerine akademik panel."
         }
       ],
-      "kapak_gorseli": "covers/siyaset-diplomasi_kapak.jpg"
+      "kapak_gorseli": "covers/siyaset-diplomasi_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "aubat",
@@ -902,7 +1043,13 @@
           "aciklama": "Farklı tıbbi bilim dallarından uzmanlarla kariyer söyleşisi."
         }
       ],
-      "kapak_gorseli": "covers/aubat_kapak.jpg"
+      "kapak_gorseli": "covers/aubat_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     },
     {
       "id": "dis-hekimligi",
@@ -939,7 +1086,13 @@
           "aciklama": "Uygulamalı klinik beceri atölyesi."
         }
       ],
-      "kapak_gorseli": "covers/dis-hekimligi_kapak.jpg"
+      "kapak_gorseli": "covers/dis-hekimligi_kapak.jpg",
+      "durum": "aktif",
+      "danisman": {
+        "isim": "",
+        "eposta": "",
+        "telefon": ""
+      }
     }
   ]
 }

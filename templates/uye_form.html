@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Üyeyi Düzenle' if duzenleme else 'Üye Ekle' }} · {{ kulup.isim }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}#uyeler" class="geri-link">&larr; {{ kulup.isim }}</a>
+
+<div class="sayfa-baslik">
+    <div>
+        <h1>{{ 'Üyeyi Düzenle' if duzenleme else 'Üye Ekle' }}</h1>
+        <p>{{ kulup.isim }}</p>
+    </div>
+</div>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<form method="POST" class="form kutu">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <div class="form-izgara">
+        <label class="alan">
+            <span>Ad soyad *</span>
+            <input type="text" name="ad_soyad" value="{{ uye.ad_soyad if uye else '' }}" required maxlength="120" autofocus>
+        </label>
+        <label class="alan">
+            <span>Öğrenci no *</span>
+            <input type="text" name="ogrenci_no" value="{{ uye.ogrenci_no if uye else '' }}" required maxlength="32" inputmode="numeric">
+        </label>
+        <label class="alan">
+            <span>Bölüm</span>
+            <input type="text" name="bolum" value="{{ uye.bolum if uye else '' }}" maxlength="120">
+        </label>
+        <label class="alan">
+            <span>Sınıf</span>
+            <select name="sinif">
+                <option value="">Seçiniz</option>
+                {% for s in ['Hazırlık', '1', '2', '3', '4', '5', '6', 'Yüksek Lisans', 'Doktora'] %}
+                <option value="{{ s }}" {% if uye and uye.sinif == s %}selected{% endif %}>{{ s }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label class="alan">
+            <span>Telefon</span>
+            <input type="tel" name="telefon" value="{{ uye.telefon if uye else '' }}" maxlength="30" placeholder="05xx xxx xx xx">
+        </label>
+        <label class="alan">
+            <span>E-posta</span>
+            <input type="email" name="eposta" value="{{ uye.eposta if uye else '' }}" maxlength="120">
+        </label>
+        <label class="alan">
+            <span>Katılım tarihi</span>
+            <input type="date" name="katilim_tarihi" value="{{ uye.katilim_tarihi if uye and uye.katilim_tarihi else ('' if duzenleme else bugun) }}">
+        </label>
+    </div>
+    <p class="form-not">Öğrenci bilgileri tüm kulüplerde ortaktır; burada yapılan değişiklik öğrencinin diğer kulüplerinde de görünür.</p>
+
+    <div class="form-eylemler">
+        <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}#uyeler" class="dugme">Vazgeç</a>
+        <button type="submit" class="dugme dugme-ana">Kaydet</button>
+    </div>
+</form>
+{% endblock %}

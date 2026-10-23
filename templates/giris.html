@@ -1,28 +1,25 @@
-{% extends "base.html" %}
+{% extends "auth.html" %}
 
-{% block title %}Giriş Yap · Öğrenci Kulüpleri Portalı{% endblock %}
+{% block title %}Giriş{% endblock %}
 
 {% block content %}
+<h1 class="giris-baslik">Yetkili Girişi</h1>
+<p class="giris-aciklama">Bu panel yalnızca Öğrenci Dekanlığı yetkilileri içindir.</p>
 
-<section class="auth-box">
-    <h1>Giriş Yap</h1>
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
 
-    {% if hata %}
-    <p class="auth-error">{{ hata }}</p>
-    <p class="auth-alt"><a href="{{ url_for('sifremi_unuttum') }}">Şifremi unuttum</a></p>
-    {% endif %}
+<form method="POST" class="form">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label class="alan">
+        <span>Kullanıcı adı</span>
+        <input type="text" name="kullanici_adi" autocomplete="username" required autofocus>
+    </label>
+    <label class="alan">
+        <span>Şifre</span>
+        <input type="password" name="sifre" autocomplete="current-password" required>
+    </label>
+    <button type="submit" class="dugme dugme-ana dugme-tam">Giriş Yap</button>
+</form>
 
-    <form method="POST" class="auth-form">
-        <label for="kullanici_adi">Öğrenci Numarası</label>
-        <input type="text" id="kullanici_adi" name="kullanici_adi" inputmode="numeric" pattern="[0-9]{9}" maxlength="9" placeholder="ör. 250200782" required>
-
-        <label for="sifre">Şifre</label>
-        <input type="password" id="sifre" name="sifre" required>
-
-        <button type="submit" class="auth-button">Giriş Yap</button>
-    </form>
-
-    <p class="auth-alt">Hesabın yok mu? <a href="{{ url_for('kayit_ol') }}">Kayıt ol</a></p>
-</section>
-
+<p class="giris-alt"><a href="{{ url_for('sifremi_unuttum') }}">Şifremi unuttum</a></p>
 {% endblock %}

@@ -1,59 +1,129 @@
 {% extends "base.html" %}
+{% from "_makrolar.html" import bos %}
 
-{% block title %}Belgeler ve Formlar · Öğrenci Kulüpleri Portalı{% endblock %}
+{% block title %}Belgeler{% endblock %}
 
 {% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Belgeler</h1>
+        <p>Kulüp evraklarını (tüzük, faaliyet raporu vb.) yükleyin ve görüntüleyin.</p>
+    </div>
+</div>
 
-<section class="belgeler-box">
-    <h1>Belgeler ve Formlar</h1>
-    <p class="belgeler-intro">Kulüp kurma, etkinlik başvurusu ve diğer resmi işlemler için gerekli formlara buradan ulaşabilirsiniz.</p>
+<div class="belge-izgara">
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Belge Yükle</h2>
+        <form method="POST" enctype="multipart/form-data" class="form">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <label class="alan">
+                <span>Kulüp *</span>
+                <select name="kulup_id" required>
+                    <option value="">Seçiniz</option>
+                    {% for kulup in kulupler %}
+                    <option value="{{ kulup.id }}" {% if kulup.id == secili_kulup %}selected{% endif %}>{{ kulup.isim }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label class="alan">
+                <span>Belge türü *</span>
+                <select name="tur" required>
+                    <option value="">Seçiniz</option>
+                    {% for tur in belge_turleri %}<option>{{ tur }}</option>{% endfor %}
+                </select>
+            </label>
+            <label class="alan">
+                <span>Açıklama</span>
+                <input type="text" name="aciklama" maxlength="200" placeholder="ör. 2025-2026 Güz dönemi">
+            </label>
+            <label class="alan">
+                <span>Dosya * <small>({{ uzantilar }} · en fazla 20 MB)</small></span>
+                <input type="file" name="dosya" required>
+            </label>
+            <button type="submit" class="dugme dugme-ana dugme-tam">Yükle</button>
+        </form>
+    </section>
 
-    <div class="belge-listesi">
-        <a href="https://audost.altinbas.edu.tr/wp-content/uploads/KULUP-KURULMA-TALEBI.odt" class="belge-karti" target="_blank" rel="noopener">
-            <span class="belge-ikon">📄</span>
-            <div class="belge-metin">
-                <span class="belge-baslik">Kulüp Kurma Talep Formu</span>
-                <span class="belge-format">.odt dosyası</span>
-            </div>
-            <span class="belge-indir">İndir ↓</span>
+    <section class="kutu" data-filtre-kapsam data-filtre-oge="#belge-tablosu tbody tr">
+        <div class="kutu-baslik">
+            <h2>Kulüp Evrakları <span class="soluk">(<span data-filtre-sayac>{{ belgeler | length }}</span>)</span></h2>
+        </div>
+        <form method="GET" class="filtre-cubugu">
+            <select name="kulup" onchange="this.form.submit()" aria-label="Kulübe göre filtrele">
+                <option value="">Tüm kulüpler</option>
+                {% for kulup in kulupler %}
+                <option value="{{ kulup.id }}" {% if kulup.id == secili_kulup %}selected{% endif %}>{{ kulup.isim }}</option>
+                {% endfor %}
+            </select>
+            <select data-filtre="tur" aria-label="Belge türü">
+                <option value="">Tüm türler</option>
+                {% for tur in belge_turleri %}<option>{{ tur }}</option>{% endfor %}
+            </select>
+            <noscript><button type="submit" class="dugme">Filtrele</button></noscript>
+        </form>
+
+        {% if belgeler %}
+        <div class="tablo-sarici">
+            <table class="tablo" id="belge-tablosu">
+                <thead>
+                    <tr>
+                        <th data-sirala>Kulüp</th>
+                        <th data-sirala>Tür</th>
+                        <th>Dosya</th>
+                        <th data-sirala>Yüklenme</th>
+                        <th class="sag"><span class="gizli-metin">İşlemler</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for belge in belgeler %}
+                    <tr data-tur="{{ belge.tur }}">
+                        <td><a href="{{ url_for('kulup_detay', kulup_id=belge.kulup_id) }}">{{ belge.kulup_isim }}</a></td>
+                        <td>{{ belge.tur }}</td>
+                        <td>
+                            {{ belge.orijinal_ad }}
+                            <span class="soluk kucuk-metin">{{ belge.boyut | boyut }}{% if belge.aciklama %} · {{ belge.aciklama }}{% endif %}</span>
+                        </td>
+                        <td data-deger="{{ belge.yukleme_tarihi }}">
+                            {{ belge.yukleme_tarihi | tarih }}
+                            {% if belge.yukleyen %}<span class="soluk kucuk-metin">{{ belge.yukleyen }}</span>{% endif %}
+                        </td>
+                        <td class="sag satir-eylem">
+                            <a href="{{ url_for('belge_indir', belge_id=belge.id) }}" class="dugme dugme-ince">İndir</a>
+                            <form method="POST" action="{{ url_for('belge_sil', belge_id=belge.id) }}"
+                                  data-onay="{{ belge.orijinal_ad }} silinsin mi?">
+                                <input type="hidden" name="csrf" value="{{ csrf }}">
+                                <input type="hidden" name="geri" value="{{ request.full_path }}">
+                                <button type="submit" class="dugme dugme-ince dugme-tehlike">Sil</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="bos-durum" data-filtre-bos hidden>Bu türde belge yok.</p>
+        {% else %}
+        <p class="bos-durum">{{ 'Bu kulübe ait belge yok.' if secili_kulup else 'Henüz yüklenmiş belge yok.' }}</p>
+        {% endif %}
+    </section>
+</div>
+
+<section class="kutu">
+    <h2 class="kutu-baslik-tek">Boş Form Şablonları</h2>
+    <p class="soluk">Kulüplerin doldurması gereken resmi formlar (audost.altinbas.edu.tr).</p>
+    <div class="sablon-listesi">
+        {% for ad, uzanti, link in [
+            ('Kulüp Kurma Talep Formu', 'odt', 'https://audost.altinbas.edu.tr/wp-content/uploads/KULUP-KURULMA-TALEBI.odt'),
+            ('Kulüp Tüzüğü', 'docx', 'https://audost.altinbas.edu.tr/wp-content/uploads/SKS-2-Kulup-Tuzugu.docx'),
+            ('Faaliyet Bildirim Formu', 'odt', 'https://audost.altinbas.edu.tr/wp-content/uploads/FAALIYET-BILDIRIM-FORMU.odt'),
+            ('Akademik Danışman Formu', 'odt', 'https://audost.altinbas.edu.tr/wp-content/uploads/AKADEMIK-DANISMAN-FORMU.odt'),
+            ('Kulüp Etkinlik Başvuru Formu', 'doc', 'https://audost.altinbas.edu.tr/wp-content/uploads/YYB-F-03.5-Ogrenci-Kulupleri-Etkinlik-Basvuru-Formu.Ek5-Rev.0.doc'),
+        ] %}
+        <a href="{{ link }}" class="sablon" target="_blank" rel="noopener">
+            <span class="sablon-uzanti">{{ uzanti }}</span>
+            <span>{{ ad }}</span>
         </a>
-
-        <a href="https://audost.altinbas.edu.tr/wp-content/uploads/SKS-2-Kulup-Tuzugu.docx" class="belge-karti" target="_blank" rel="noopener">
-            <span class="belge-ikon">📄</span>
-            <div class="belge-metin">
-                <span class="belge-baslik">Kulüp Tüzüğü</span>
-                <span class="belge-format">.docx dosyası</span>
-            </div>
-            <span class="belge-indir">İndir ↓</span>
-        </a>
-
-        <a href="https://audost.altinbas.edu.tr/wp-content/uploads/FAALIYET-BILDIRIM-FORMU.odt" class="belge-karti" target="_blank" rel="noopener">
-            <span class="belge-ikon">📄</span>
-            <div class="belge-metin">
-                <span class="belge-baslik">Faaliyet Bildirim Formu</span>
-                <span class="belge-format">.odt dosyası</span>
-            </div>
-            <span class="belge-indir">İndir ↓</span>
-        </a>
-
-        <a href="https://audost.altinbas.edu.tr/wp-content/uploads/AKADEMIK-DANISMAN-FORMU.odt" class="belge-karti" target="_blank" rel="noopener">
-            <span class="belge-ikon">📄</span>
-            <div class="belge-metin">
-                <span class="belge-baslik">Akademik Danışman Formu</span>
-                <span class="belge-format">.odt dosyası</span>
-            </div>
-            <span class="belge-indir">İndir ↓</span>
-        </a>
-
-        <a href="https://audost.altinbas.edu.tr/wp-content/uploads/YYB-F-03.5-Ogrenci-Kulupleri-Etkinlik-Basvuru-Formu.Ek5-Rev.0.doc" class="belge-karti" target="_blank" rel="noopener">
-            <span class="belge-ikon">📄</span>
-            <div class="belge-metin">
-                <span class="belge-baslik">Kulüp Etkinlik Başvuru Formu</span>
-                <span class="belge-format">.doc dosyası</span>
-            </div>
-            <span class="belge-indir">İndir ↓</span>
-        </a>
+        {% endfor %}
     </div>
 </section>
-
 {% endblock %}

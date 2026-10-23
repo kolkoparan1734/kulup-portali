@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo, durum_rozeti, bos %}
+
+{% block title %}{{ kulup.isim }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('kulupler') }}" class="geri-link">&larr; Kulüpler</a>
+
+<section class="kulup-ust kutu">
+    {{ kulup_logo(kulup, "buyuk") }}
+    <div class="kulup-ust-metin">
+        <div class="kulup-ust-satir">
+            <h1>{{ kulup.isim }}</h1>
+            {{ durum_rozeti(kulup.durum) }}
+        </div>
+        <p class="soluk">{{ kulup.kategori }} · {{ uyeler | length }} üye</p>
+        {% if kulup.aciklama %}<p class="kulup-aciklama">{{ kulup.aciklama }}</p>{% endif %}
+    </div>
+    <div class="kulup-ust-eylem">
+        <a href="{{ url_for('kulup_form', kulup_id=kulup.id) }}" class="dugme">Düzenle</a>
+        <form method="POST" action="{{ url_for('kulup_sil', kulup_id=kulup.id) }}"
+              data-onay="{{ kulup.isim }} silinsin mi? Kulübün üyelik kayıtları ve belgeleri de silinecek. Bu işlem geri alınamaz.">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <button type="submit" class="dugme dugme-tehlike">Sil</button>
+        </form>
+    </div>
+</section>
+
+<div class="detay-izgara">
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Yönetim Kurulu</h2>
+        {% if kulup.yonetim_kurulu %}
+        <dl class="tanim-listesi">
+            {% for uye in kulup.yonetim_kurulu %}
+            <div><dt>{{ uye.gorev }}</dt><dd>{{ uye.isim }}</dd></div>
+            {% endfor %}
+        </dl>
+        {% else %}
+        <p class="bos-durum">Yönetim kurulu bilgisi girilmemiş.</p>
+        {% endif %}
+    </section>
+
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Danışman Hoca</h2>
+        <dl class="tanim-listesi">
+            <div><dt>Ad soyad</dt><dd>{{ bos(kulup.danisman.isim) }}</dd></div>
+            <div><dt>E-posta</dt><dd>{% if kulup.danisman.eposta %}<a href="mailto:{{ kulup.danisman.eposta }}">{{ kulup.danisman.eposta }}</a>{% else %}{{ bos('') }}{% endif %}</dd></div>
+            <div><dt>Telefon</dt><dd>{% if kulup.danisman.telefon %}<a href="tel:{{ kulup.danisman.telefon }}">{{ kulup.danisman.telefon }}</a>{% else %}{{ bos('') }}{% endif %}</dd></div>
+        </dl>
+        {% if not kulup.danisman.isim %}<a href="{{ url_for('kulup_form', kulup_id=kulup.id) }}" class="kutu-link">Danışman bilgisi ekle &rarr;</a>{% endif %}
+    </section>
+
+    <section class="kutu">
+        <div class="kutu-baslik">
+            <h2>Belgeler</h2>
+            <a href="{{ url_for('belgeler', kulup=kulup.id) }}" class="kutu-link">Belge yükle &rarr;</a>
+        </div>
+        {% if belgeler %}
+        <ul class="liste">
+            {% for belge in belgeler[:5] %}
+            <li>
+                <div><strong>{{ belge.tur }}</strong><span class="soluk">{{ belge.orijinal_ad }}</span></div>
+                <a href="{{ url_for('belge_indir', belge_id=belge.id) }}" class="dugme dugme-ince">İndir</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="bos-durum">Bu kulübe ait yüklenmiş belge yok.</p>
+        {% endif %}
+    </section>
+</div>
+
+<section class="kutu" id="uyeler" data-filtre-kapsam data-filtre-oge="#uye-tablosu tbody tr">
+    <div class="kutu-baslik">
+        <h2>Üye Listesi <span class="soluk">(<span data-filtre-sayac>{{ uyeler | length }}</span>)</span></h2>
+        <div class="dugme-grubu">
+            <a href="{{ url_for('uyeler_excel', kulup_id=kulup.id) }}" class="dugme dugme-ince">Excel indir</a>
+            <a href="{{ url_for('uyeler_pdf', kulup_id=kulup.id) }}" class="dugme dugme-ince">PDF indir</a>
+            <a href="{{ url_for('uye_form', kulup_id=kulup.id) }}" class="dugme dugme-ana dugme-ince">+ Üye Ekle</a>
+        </div>
+    </div>
+
+    <div class="filtre-cubugu">
+        <input type="search" data-filtre="metin" placeholder="Ad, öğrenci no, bölüm, e-posta ara…" aria-label="Üye ara">
+    </div>
+
+    <div class="tablo-sarici">
+        <table class="tablo" id="uye-tablosu">
+            <thead>
+                <tr>
+                    <th data-sirala>Ad Soyad</th>
+                    <th data-sirala>Öğrenci No</th>
+                    <th data-sirala>Bölüm</th>
+                    <th data-sirala="sayi">Sınıf</th>
+                    <th>Telefon</th>
+                    <th data-sirala>E-posta</th>
+                    <th data-sirala>Katılım Tarihi</th>
+                    <th class="sag"><span class="gizli-metin">İşlemler</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for uye in uyeler %}
+                <tr data-metin="{{ uye.ad_soyad }} {{ uye.ogrenci_no }} {{ uye.bolum }} {{ uye.eposta }} {{ uye.telefon }}">
+                    <td>{{ bos(uye.ad_soyad) }}</td>
+                    <td class="mono">{{ uye.ogrenci_no }}</td>
+                    <td>{{ bos(uye.bolum) }}</td>
+                    <td data-deger="{{ uye.sinif }}">{{ bos(uye.sinif) }}</td>
+                    <td>{{ bos(uye.telefon) }}</td>
+                    <td>{{ bos(uye.eposta) }}</td>
+                    <td data-deger="{{ uye.katilim_tarihi }}">{{ bos(uye.katilim_tarihi | tarih) }}</td>
+                    <td class="sag satir-eylem">
+                        <a href="{{ url_for('uye_form', kulup_id=kulup.id, ogrenci_no=uye.ogrenci_no) }}" class="dugme dugme-ince">Düzenle</a>
+                        <form method="POST" action="{{ url_for('uye_sil', kulup_id=kulup.id, ogrenci_no=uye.ogrenci_no) }}"
+                              data-onay="{{ uye.ad_soyad or uye.ogrenci_no }} bu kulüpten çıkarılsın mı?">
+                            <input type="hidden" name="csrf" value="{{ csrf }}">
+                            <button type="submit" class="dugme dugme-ince dugme-tehlike">Sil</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p class="bos-durum" data-filtre-bos hidden>{{ 'Aramanıza uyan üye bulunamadı.' if uyeler else 'Bu kulübün henüz üyesi yok.' }}</p>
+</section>
+{% endblock %}

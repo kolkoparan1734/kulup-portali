@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Giriş{% endblock %} · Öğrenci Dekanlığı Kulüp Paneli</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="giris-govde">
+    <main class="giris-kutu">
+        <div class="giris-marka">
+            <span class="ustbar-logo buyuk"><img src="{{ url_for('static', filename='images/footer-logo.png') }}" alt="Altınbaş Üniversitesi Öğrenci Dekanlığı logosu"></span>
+            <div>
+                <span class="giris-ust">Altınbaş Üniversitesi</span>
+                <span class="giris-panel-adi">Öğrenci Dekanlığı Kulüp Paneli</span>
+            </div>
+        </div>
+        {% with mesajlar = get_flashed_messages(with_categories=true) %}
+            {% for kategori, mesaj in mesajlar %}
+            <div class="bildirim bildirim-{{ 'basarili' if kategori == 'basarili' else 'hata' }}" role="status">{{ mesaj }}</div>
+            {% endfor %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Panelden yüklenen kulüp evrakları
+uploads/
+data/*.tmp

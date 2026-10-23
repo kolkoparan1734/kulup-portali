@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo, durum_rozeti, bos %}
+
+{% block title %}Kulüpler{% endblock %}
+
+{% block content %}
+<div data-filtre-kapsam data-filtre-oge=".kulup-kart">
+    <div class="sayfa-baslik">
+        <div>
+            <h1>Kulüpler</h1>
+            <p><span data-filtre-sayac>{{ kulupler | length }}</span> kulüp gösteriliyor</p>
+        </div>
+        <a href="{{ url_for('kulup_form') }}" class="dugme dugme-ana">+ Yeni Kulüp</a>
+    </div>
+
+    <div class="filtre-cubugu">
+        <input type="search" data-filtre="metin" placeholder="Kulüp, başkan veya danışman ara…" aria-label="Kulüp ara">
+        <select data-filtre="kategori" aria-label="Kategori">
+            <option value="">Tüm kategoriler</option>
+            {% for kategori in kategoriler %}<option>{{ kategori }}</option>{% endfor %}
+        </select>
+        <select data-filtre="durum" aria-label="Durum">
+            <option value="">Tüm durumlar</option>
+            <option value="aktif">Aktif</option>
+            <option value="pasif">Pasif</option>
+        </select>
+    </div>
+
+    <div class="kulup-izgara">
+        {% for kulup in kulupler %}
+        <article class="kulup-kart"
+                 data-metin="{{ kulup.isim }} {{ kulup.baskan }} {{ kulup.danisman.isim }} {{ kulup.kategori }}"
+                 data-kategori="{{ kulup.kategori }}" data-durum="{{ kulup.durum }}">
+            <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="kulup-kart-ust">
+                {{ kulup_logo(kulup) }}
+                <div>
+                    <h2>{{ kulup.isim }}</h2>
+                    <span class="soluk">{{ kulup.kategori }}</span>
+                </div>
+            </a>
+            <dl class="kulup-bilgi">
+                <div><dt>Başkan</dt><dd>{{ bos(kulup.baskan) }}</dd></div>
+                <div><dt>Danışman</dt><dd>{{ bos(kulup.danisman.isim) }}</dd></div>
+                <div><dt>Üye</dt><dd><strong>{{ kulup.uye_sayisi }}</strong></dd></div>
+                <div><dt>Durum</dt><dd>{{ durum_rozeti(kulup.durum) }}</dd></div>
+            </dl>
+            <div class="kart-eylemler">
+                <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="dugme dugme-ince">Detay</a>
+                <a href="{{ url_for('kulup_form', kulup_id=kulup.id) }}" class="dugme dugme-ince">Düzenle</a>
+                <form method="POST" action="{{ url_for('kulup_sil', kulup_id=kulup.id) }}"
+                      data-onay="{{ kulup.isim }} silinsin mi? Kulübün üyelik kayıtları ve belgeleri de silinecek. Bu işlem geri alınamaz.">
+                    <input type="hidden" name="csrf" value="{{ csrf }}">
+                    <button type="submit" class="dugme dugme-ince dugme-tehlike">Sil</button>
+                </form>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+    <p class="bos-durum" data-filtre-bos hidden>Aramanıza uyan kulüp bulunamadı.</p>
+</div>
+{% endblock %}
