@@ -179,6 +179,7 @@ h2 { font-size: 15px; font-weight: 600; }
 .rozet-aktif { background: var(--yesil-soluk); color: var(--yesil); }
 .rozet-pasif { background: #EEF0F3; color: var(--slate-acik); }
 .rozet-bilgi { background: var(--altin-soluk); color: #8A5A00; cursor: help; }
+.rozet-uyari { background: var(--kirmizi-soluk); color: var(--kirmizi); }
 
 /* --- Formlar ---------------------------------------------------------------- */
 .form { display: flex; flex-direction: column; gap: 14px; }
@@ -289,6 +290,7 @@ a.ozet-kart:hover { text-decoration: none; border-color: #C7CDE6; border-top-col
 .kulup-ust-satir { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .kulup-ust-metin .soluk { margin: 4px 0 0; }
 .kulup-aciklama { margin: 10px 0 0; max-width: 70ch; }
+.kulup-baskan { margin: 6px 0 0; }
 .kulup-ust-eylem { display: flex; gap: 8px; }
 .detay-izgara { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-bottom: 20px; }
 .detay-izgara .kutu { margin-bottom: 0; }

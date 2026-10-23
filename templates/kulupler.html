@@ -39,7 +39,7 @@
                 </div>
             </a>
             <dl class="kulup-bilgi">
-                <div><dt>Başkan</dt><dd>{{ bos(kulup.baskan) }}</dd></div>
+                <div><dt>Başkan</dt><dd>{% if kulup.baskan %}{{ kulup.baskan }}{% else %}<span class="rozet rozet-uyari">Başkan atanmamış</span>{% endif %}</dd></div>
                 <div><dt>Danışman</dt><dd>{{ bos(kulup.danisman.isim) }}</dd></div>
                 <div><dt>Üye</dt><dd><strong>{{ kulup.uye_sayisi }}</strong></dd></div>
                 <div><dt>Durum</dt><dd>{{ durum_rozeti(kulup.durum) }}</dd></div>

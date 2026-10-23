@@ -14,6 +14,10 @@
             {{ durum_rozeti(kulup.durum) }}
         </div>
         <p class="soluk">{{ kulup.kategori }} · {{ uyeler | length }} üye</p>
+        <p class="kulup-baskan">Başkan:
+            {% if kulup.baskan %}<strong>{{ kulup.baskan }}</strong>
+            {% else %}<span class="rozet rozet-uyari">Başkan atanmamış</span>{% endif %}
+        </p>
         {% if kulup.aciklama %}<p class="kulup-aciklama">{{ kulup.aciklama }}</p>{% endif %}
     </div>
     <div class="kulup-ust-eylem">
