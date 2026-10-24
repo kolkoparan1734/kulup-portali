@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Dönemi Düzenle{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('donemler') }}" class="geri-link">&larr; Dönemler</a>
+
+<div class="sayfa-baslik">
+    <h1>{{ donem.ad }} — Düzenle</h1>
+</div>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<form method="POST" class="form kutu">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <div class="form-izgara">
+        <label class="alan">
+            <span>Dönem adı *</span>
+            <input type="text" name="ad" value="{{ donem.ad }}" required maxlength="60">
+        </label>
+        <label class="alan">
+            <span>Başlangıç *</span>
+            <input type="date" name="baslangic" value="{{ donem.baslangic }}" required>
+        </label>
+        <label class="alan">
+            <span>Bitiş *</span>
+            <input type="date" name="bitis" value="{{ donem.bitis }}" required>
+        </label>
+    </div>
+    <div class="form-eylemler">
+        <a href="{{ url_for('donemler') }}" class="dugme">Vazgeç</a>
+        <button type="submit" class="dugme dugme-ana">Kaydet</button>
+    </div>
+</form>
+{% endblock %}

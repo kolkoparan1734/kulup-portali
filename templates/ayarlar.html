@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Panel Ayarları{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Panel Ayarları</h1>
+        <p>Bu ayarları yalnızca dekan değiştirebilir. Her değişiklik işlem geçmişine kaydedilir.</p>
+    </div>
+</div>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<form method="POST" class="form kutu">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+
+    <h2 class="form-bolum">Kulüp Başkanı Girişi</h2>
+    <label class="onay-kutusu">
+        <input type="checkbox" name="baskan_girisi" value="1" {% if ayarlar.baskan_girisi %}checked{% endif %}>
+        Kulüp başkanları panele giriş yapabilsin
+    </label>
+    <p class="form-not">Açıkken kulüp başkanı hesapları yalnızca kendi kulüplerini görür, belge yükler ve etkinlik başvurusu yapar.
+        Kapalıyken başkan hesapları giriş yapamaz; açık oturumları bir sonraki işlemde kapanır.
+        Şu an {{ baskan_hesaplari }} kulüp başkanı hesabı var — <a href="{{ url_for('kullanicilar') }}">Kullanıcılar</a>.</p>
+
+    <h2 class="form-bolum">Oturum Güvenliği</h2>
+    <label class="alan alan-dar">
+        <span>İşlem yapılmazsa oturum kaç dakika sonra kapansın?</span>
+        <input type="number" name="oturum_suresi_dk" value="{{ ayarlar.oturum_suresi_dk }}" min="5" max="480" required>
+    </label>
+
+    <div class="form-eylemler">
+        <button type="submit" class="dugme dugme-ana">Kaydet</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import basvuru_rozeti, etkinlik_tarihi, bos %}
+
+{% block title %}{{ basvuru.ad }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('etkinlik_basvurulari') }}" class="geri-link">&larr; Etkinlik Başvuruları</a>
+
+<section class="kulup-ust kutu">
+    <div class="kulup-ust-metin">
+        <div class="kulup-ust-satir">
+            <h1>{{ basvuru.ad }}</h1>
+            {{ basvuru_rozeti(basvuru) }}
+        </div>
+        <p class="soluk">
+            <a href="{{ url_for('kulup_detay', kulup_id=basvuru.kulup_id) }}">{{ basvuru.kulup_isim }}</a>
+            · {{ etkinlik_tarihi(basvuru) }}{% if basvuru.yer %} · {{ basvuru.yer }}{% endif %}
+        </p>
+    </div>
+    <div class="kulup-ust-eylem">
+        {% if rol != 'baskan' or basvuru.durum in ('beklemede', 'revizyon') %}
+        <a href="{{ url_for('basvuru_form', basvuru_id=basvuru.id) }}" class="dugme">Düzenle</a>
+        {% endif %}
+        {% if izin('basvuru_sil') %}
+        <form method="POST" action="{{ url_for('basvuru_sil', basvuru_id=basvuru.id) }}"
+              data-onay="{{ basvuru.ad }} başvurusu arşive alınsın mı? Arşiv sayfasından geri getirilebilir.">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <button type="submit" class="dugme dugme-tehlike">Arşivle</button>
+        </form>
+        {% endif %}
+    </div>
+</section>
+
+<div class="detay-izgara-genis">
+    <div>
+        <section class="kutu">
+            <h2 class="kutu-baslik-tek">Başvuru Bilgileri</h2>
+            <dl class="tanim-listesi">
+                <div><dt>Dönem</dt><dd>{{ bos(basvuru.donem_ad) }}</dd></div>
+                <div><dt>Tahmini katılımcı</dt><dd>{{ bos(basvuru.katilimci) }}</dd></div>
+                <div><dt>Konuşmacı / misafir</dt><dd>{{ basvuru.konusmaci if basvuru.konusmaci_var else 'Yok' }}</dd></div>
+                <div><dt>Bütçe ihtiyacı</dt><dd>
+                    {% if basvuru.butce %}{{ basvuru.butce | para }}{% elif basvuru.butce == 0 %}Yok{% else %}{{ bos('') }}{% endif %}
+                    {% if basvuru.butce_aciklama %}<span class="soluk kucuk-metin">{{ basvuru.butce_aciklama }}</span>{% endif %}
+                </dd></div>
+                <div><dt>Kaynak</dt><dd>{{ kaynaklar.get(basvuru.kaynak, '—') }}</dd></div>
+                <div><dt>Giren</dt><dd>{{ basvuru.giren or '—' }}{% if basvuru.olusturma %} · {{ basvuru.olusturma | tarih }}{% endif %}</dd></div>
+            </dl>
+            {% if basvuru.aciklama %}
+            <h3 class="alt-baslik">Açıklama</h3>
+            <p class="metin-blok">{{ basvuru.aciklama }}</p>
+            {% endif %}
+        </section>
+
+        <section class="kutu">
+            <h2 class="kutu-baslik-tek">Ek Dosyalar</h2>
+            {% if basvuru.ek_dosyalar %}
+            <ul class="liste">
+                {% for d in basvuru.ek_dosyalar %}
+                <li>
+                    <div><strong>{{ d.orijinal_ad }}</strong><span class="soluk">{{ d.boyut | boyut }}</span></div>
+                    <a href="{{ url_for('basvuru_dosya', basvuru_id=basvuru.id, dosya_id=d.id) }}" class="dugme dugme-ince">İndir</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="bos-durum">Ek dosya yok.</p>
+            {% endif %}
+        </section>
+    </div>
+
+    <div>
+        {% if izin('basvuru_karar') %}
+        <section class="kutu">
+            <h2 class="kutu-baslik-tek">Karar Ver</h2>
+            <form method="POST" action="{{ url_for('basvuru_karar', basvuru_id=basvuru.id) }}" class="form">
+                <input type="hidden" name="csrf" value="{{ csrf }}">
+                <div class="karar-secenekleri" role="radiogroup" aria-label="Karar">
+                    <label><input type="radio" name="durum" value="onaylandi" required> Onayla</label>
+                    <label><input type="radio" name="durum" value="revizyon"> Revizyon iste</label>
+                    <label><input type="radio" name="durum" value="reddedildi"> Reddet</label>
+                    {% if basvuru.durum != 'beklemede' %}<label><input type="radio" name="durum" value="beklemede"> Beklemeye al</label>{% endif %}
+                </div>
+                <label class="alan">
+                    <span>Açıklama <small>(red ve revizyonda zorunlu)</small></span>
+                    <textarea name="aciklama" rows="3" maxlength="1000" placeholder="Kulübe iletilecek gerekçe veya not"></textarea>
+                </label>
+                <button type="submit" class="dugme dugme-ana dugme-tam">Kararı Kaydet</button>
+            </form>
+        </section>
+        {% elif basvuru.durum == 'revizyon' %}
+        <div class="bildirim bildirim-hata" role="status">Dekanlık bu başvuru için revizyon istedi. Süreç geçmişindeki açıklamaya göre başvuruyu düzenleyip kaydedin; başvuru yeniden değerlendirmeye alınır.</div>
+        {% endif %}
+
+        <section class="kutu">
+            <h2 class="kutu-baslik-tek">Süreç Geçmişi</h2>
+            <ol class="zaman-cizelgesi">
+                {% for g in basvuru.gecmis | reverse %}
+                <li>
+                    <span class="rozet rozet-basvuru-{{ g.durum }}">{{ durumlar.get(g.durum, g.durum) }}</span>
+                    <span class="soluk kucuk-metin">{{ g.tarih | tarih }} · {{ g.kullanici }}</span>
+                    {% if g.aciklama %}<p class="metin-blok">{{ g.aciklama }}</p>{% endif %}
+                </li>
+                {% endfor %}
+            </ol>
+        </section>
+    </div>
+</div>
+{% endblock %}

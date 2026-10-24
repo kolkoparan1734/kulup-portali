@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo, durum_rozeti, bos %}
+
+{% block title %}{{ danisman.tam_ad }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('danismanlar') }}" class="geri-link">&larr; Danışmanlar</a>
+
+<section class="kulup-ust kutu">
+    <span class="kulup-logo kulup-logo-yok buyuk" aria-hidden="true">{{ danisman.ad_soyad[:1] | upper }}</span>
+    <div class="kulup-ust-metin">
+        <h1>{{ danisman.tam_ad }}</h1>
+        <p class="soluk">{{ danisman.fakulte or 'Fakülte girilmemiş' }}{% if danisman.bolum %} · {{ danisman.bolum }}{% endif %}</p>
+    </div>
+    <div class="kulup-ust-eylem">
+        {% if izin('danisman_form') %}
+        <a href="{{ url_for('danisman_form', danisman_id=danisman.id) }}" class="dugme">Düzenle</a>
+        {% endif %}
+        {% if izin('danisman_sil') %}
+        <form method="POST" action="{{ url_for('danisman_sil', danisman_id=danisman.id) }}"
+              data-onay="{{ danisman.tam_ad }} silinsin mi?{% if kulupler %} {{ kulupler | length }} kulübün danışman alanı boşaltılacak.{% endif %}">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <button type="submit" class="dugme dugme-tehlike">Sil</button>
+        </form>
+        {% endif %}
+    </div>
+</section>
+
+<div class="detay-izgara detay-izgara-2">
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">İletişim</h2>
+        <dl class="tanim-listesi">
+            <div><dt>Unvan</dt><dd>{{ bos(danisman.unvan) }}</dd></div>
+            <div><dt>E-posta</dt><dd>{% if danisman.eposta %}<a href="mailto:{{ danisman.eposta }}">{{ danisman.eposta }}</a>{% else %}{{ bos('') }}{% endif %}</dd></div>
+            <div><dt>Telefon</dt><dd>{% if danisman.telefon %}<a href="tel:{{ danisman.telefon }}">{{ danisman.telefon }}</a>{% else %}{{ bos('') }}{% endif %}</dd></div>
+        </dl>
+    </section>
+
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Danışmanlık Yaptığı Kulüpler ({{ kulupler | length }})</h2>
+        {% if kulupler %}
+        <ul class="liste">
+            {% for kulup in kulupler %}
+            <li>
+                <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="siralama-satir">
+                    {{ kulup_logo(kulup, "kucuk") }}
+                    <span class="siralama-ad">{{ kulup.isim }}</span>
+                </a>
+                <div class="liste-sag">
+                    {{ durum_rozeti(kulup.durum) }}
+                    <span class="soluk kucuk-metin">{{ kulup.uye_sayisi }} üye</span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="bos-durum">Bu hoca henüz hiçbir kulübe danışmanlık yapmıyor. Kulüp düzenleme ekranından atanabilir.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

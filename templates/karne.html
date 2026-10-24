@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo, puan_yildiz %}
+
+{% block title %}Kulüp Karnesi{% endblock %}
+
+{% block content %}
+<div data-filtre-kapsam data-filtre-oge="#karne-tablosu tbody tr">
+    <div class="sayfa-baslik">
+        <div>
+            <h1>Kulüp Karnesi</h1>
+            <p>{% if donem %}{{ donem.ad }} · Kulüpler dekanlık değerlendirme puanına göre sıralanır; eşitlikte evrak teslim oranı ve etkinlik sayısına bakılır.{% else %}Önce bir dönem tanımlayın.{% endif %}</p>
+        </div>
+        {% if donem %}
+        <div class="dugme-grubu">
+            <a href="{{ url_for('donem_raporu_pdf', donem=donem.id) }}" class="dugme">Dönem raporu PDF</a>
+            <a href="{{ url_for('donem_raporu_excel', donem=donem.id) }}" class="dugme">Excel</a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if donem %}
+    <section class="ozet-kartlari">
+        <div class="ozet-kart"><span class="ozet-etiket">Değerlendirilen kulüp</span><span class="ozet-deger">{{ degerlendirilen }}/{{ karneler | length }}</span></div>
+        <div class="ozet-kart ozet-pasif"><span class="ozet-etiket">Ortalama puan</span><span class="ozet-deger">{{ ('%.1f' | format(ortalama)).replace('.', ',') if ortalama else '—' }}</span><span class="ozet-alt">5 üzerinden</span></div>
+        <div class="ozet-kart ozet-aktif"><span class="ozet-etiket">Toplam onaylı etkinlik</span><span class="ozet-deger">{{ karneler | sum(attribute='etkinlik') }}</span></div>
+        <div class="ozet-kart"><span class="ozet-etiket">Toplam üye</span><span class="ozet-deger">{{ karneler | sum(attribute='uye') }}</span></div>
+    </section>
+
+    <form method="GET" class="filtre-cubugu">
+        <select name="donem" onchange="this.form.submit()" aria-label="Dönem">
+            {% for d in donemler %}<option value="{{ d.id }}" {% if d.id == donem.id %}selected{% endif %}>{{ d.ad }}{% if d.aktif %} (aktif){% endif %}</option>{% endfor %}
+        </select>
+        <input type="search" data-filtre="metin" placeholder="Kulüp ara…" aria-label="Kulüp ara">
+        <label class="onay-kutusu"><input type="checkbox" data-filtre="puansiz"> Sadece değerlendirilmemişler</label>
+        <label class="onay-kutusu"><input type="checkbox" name="pasif" value="1" {% if pasifler_dahil %}checked{% endif %} onchange="this.form.submit()"> Pasif kulüpleri de göster</label>
+    </form>
+
+    <section class="kutu kutu-tablo">
+        <div class="tablo-sarici">
+            <table class="tablo" id="karne-tablosu">
+                <thead>
+                    <tr>
+                        <th data-sirala="sayi">Sıra</th>
+                        <th data-sirala>Kulüp</th>
+                        <th data-sirala="sayi">Etkinlik</th>
+                        <th data-sirala="sayi">Evrak Teslim</th>
+                        <th data-sirala="sayi">Üye</th>
+                        <th data-sirala="sayi">Puan</th>
+                        <th>Not</th>
+                        <th class="sag"><span class="gizli-metin">İşlemler</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for k in karneler %}
+                    <tr data-metin="{{ k.kulup.isim }}" data-puansiz="{{ '1' if k.puan is none else '0' }}">
+                        <td data-deger="{{ k.sira or 999 }}">{% if k.sira %}<strong>{{ k.sira }}</strong>{% else %}<span class="soluk">—</span>{% endif %}</td>
+                        <td data-deger="{{ k.kulup.isim }}">
+                            <a href="{{ url_for('kulup_detay', kulup_id=k.kulup.id) }}" class="siralama-satir">{{ kulup_logo(k.kulup, "kucuk") }}<span>{{ k.kulup.isim }}</span></a>
+                        </td>
+                        <td>{{ k.etkinlik }}</td>
+                        <td data-deger="{{ k.teslim_orani if k.teslim_orani is not none else -1 }}">
+                            {% if k.teslim_orani is not none %}%{{ k.teslim_orani }} <span class="soluk kucuk-metin">{{ k.evrak_teslim }}/{{ k.evrak_toplam }}</span>{% else %}<span class="soluk">—</span>{% endif %}
+                        </td>
+                        <td>{{ k.uye }}</td>
+                        <td data-deger="{{ k.puan or 0 }}">{% if k.puan %}{{ puan_yildiz(k.puan) }}{% else %}<span class="rozet rozet-pasif">Değerlendirilmedi</span>{% endif %}</td>
+                        <td class="kucuk-metin not-hucre">{{ k.not }}</td>
+                        <td class="sag"><a href="{{ url_for('kulup_karne', kulup_id=k.kulup.id, donem=donem.id) }}" class="dugme dugme-ince">{{ 'Düzenle' if k.puan else 'Değerlendir' }}</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="bos-durum" data-filtre-bos hidden>Filtrelere uyan kulüp yok.</p>
+    </section>
+    <p class="form-not">Etkinlik: tarihi bu döneme düşen onaylı başvurular. Evrak teslim: bu dönemin zorunlu evrakları. Üye: güncel üye sayısı.</p>
+    {% endif %}
+</div>
+{% endblock %}

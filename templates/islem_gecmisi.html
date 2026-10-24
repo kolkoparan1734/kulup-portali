@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}İşlem Geçmişi{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>İşlem Geçmişi</h1>
+        <p>Panelde yapılan tüm ekleme, düzenleme, karar, arşivleme ve silme işlemleri · {{ toplam }} kayıt</p>
+    </div>
+</div>
+
+<form method="GET" class="filtre-cubugu">
+    <select name="kullanici_adi" aria-label="Kullanıcı">
+        <option value="">Tüm kullanıcılar</option>
+        {% for kadi, ad in kullanicilar %}<option value="{{ kadi }}" {% if kadi == filtre.kullanici_adi %}selected{% endif %}>{{ ad or kadi }}</option>{% endfor %}
+    </select>
+    <select name="kulup_id" aria-label="Kulüp">
+        <option value="">Tüm kulüpler</option>
+        {% for k in kulupler %}<option value="{{ k.id }}" {% if k.id == filtre.kulup_id %}selected{% endif %}>{{ k.isim }}{% if k.arsiv %} (arşivde){% endif %}</option>{% endfor %}
+    </select>
+    <select name="kayit_turu" aria-label="Kayıt türü">
+        <option value="">Tüm kayıt türleri</option>
+        {% for kod, ad in turler.items() %}<option value="{{ kod }}" {% if kod == filtre.kayit_turu %}selected{% endif %}>{{ ad }}</option>{% endfor %}
+    </select>
+    <label class="tarih-filtre">Başlangıç <input type="date" name="baslangic" value="{{ filtre.baslangic }}"></label>
+    <label class="tarih-filtre">Bitiş <input type="date" name="bitis" value="{{ filtre.bitis }}"></label>
+    <button type="submit" class="dugme dugme-ana">Filtrele</button>
+    {% if filtre.values() | select | list %}<a href="{{ url_for('islem_gecmisi') }}" class="dugme">Temizle</a>{% endif %}
+</form>
+
+<section class="kutu kutu-tablo">
+    <div class="tablo-sarici">
+        <table class="tablo islem-tablosu">
+            <thead>
+                <tr>
+                    <th>Tarih</th>
+                    <th>Kullanıcı</th>
+                    <th>İşlem</th>
+                    <th>Kayıt</th>
+                    <th>Değişiklik</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in islemler %}
+                <tr>
+                    <td class="mono">{{ i.tarih[:16] | tarih }}</td>
+                    <td>{{ i.kullanici or i.kullanici_adi }}</td>
+                    <td><span class="rozet rozet-islem">{{ i.islem }}</span></td>
+                    <td>
+                        <span class="soluk kucuk-metin islem-tur">{{ i.tur_ad }}</span>
+                        <strong>{{ i.kayit_ad }}</strong>
+                        {% if i.kulup_isim and i.kayit_turu != 'kulup' %}<span class="soluk kucuk-metin">{{ i.kulup_isim }}</span>{% endif %}
+                    </td>
+                    <td class="kucuk-metin">
+                        {% for d in i.degisiklikler %}
+                        <div class="degisiklik"><span class="degisiklik-alan">{{ d.alan }}:</span>
+                            {% if d.eski %}<del>{{ d.eski | truncate(120) }}</del> → {% endif %}<ins>{{ d.yeni | truncate(120) if d.yeni else '(boş)' }}</ins></div>
+                        {% endfor %}
+                        {% if i.aciklama %}<div class="soluk">{{ i.aciklama }}</div>{% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if not islemler %}<p class="bos-durum">Filtrelere uyan işlem yok.</p>{% endif %}
+</section>
+
+{% if toplam_sayfa > 1 %}
+<nav class="sayfalama" aria-label="Sayfalar">
+    {% if sayfa > 1 %}<a href="{{ url_for('islem_gecmisi', sayfa=sayfa - 1, **filtre) }}" class="dugme dugme-ince">&larr; Önceki</a>{% endif %}
+    <span>Sayfa {{ sayfa }} / {{ toplam_sayfa }}</span>
+    {% if sayfa < toplam_sayfa %}<a href="{{ url_for('islem_gecmisi', sayfa=sayfa + 1, **filtre) }}" class="dugme dugme-ince">Sonraki &rarr;</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

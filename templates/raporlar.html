@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Raporlar{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Raporlar</h1>
+        <p>{% if donem %}{{ donem.ad }} ({{ donem.baslangic | tarih }} – {{ donem.bitis | tarih }}){% else %}Önce bir dönem tanımlayın.{% endif %}</p>
+    </div>
+    {% if donem %}
+    <form method="GET">
+        <select name="donem" onchange="this.form.submit()" aria-label="Dönem">
+            {% for d in donemler %}<option value="{{ d.id }}" {% if d.id == donem.id %}selected{% endif %}>{{ d.ad }}{% if d.aktif %} (aktif){% endif %}</option>{% endfor %}
+        </select>
+    </form>
+    {% endif %}
+</div>
+
+{% if donem %}
+<div class="rapor-izgara">
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Dönem Raporu</h2>
+        <p class="soluk">Tüm kulüplerin özeti: durum, başkan, danışman, üye sayısı, etkinlik sayısı, evrak durumu ve karne puanı.</p>
+        <div class="dugme-grubu">
+            <a href="{{ url_for('donem_raporu_pdf', donem=donem.id) }}" class="dugme dugme-ana">PDF indir</a>
+            <a href="{{ url_for('donem_raporu_excel', donem=donem.id) }}" class="dugme">Excel indir</a>
+        </div>
+    </section>
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Tek Kulüp Raporu</h2>
+        <p class="soluk">Kulüp bilgileri, yönetim kurulu, dönem etkinlikleri, evrak durumu, karne ve görev geçmişi.</p>
+        <form method="GET" action="" class="tek-kulup-formu" data-tek-kulup>
+            <select aria-label="Kulüp" required>
+                <option value="">Kulüp seçin</option>
+                {% for k in kulupler %}<option value="{{ url_for('kulup_raporu_pdf', kulup_id=k.id, donem=donem.id) }}">{{ k.isim }}</option>{% endfor %}
+            </select>
+            <button type="submit" class="dugme dugme-ana">PDF indir</button>
+        </form>
+    </section>
+</div>
+
+<div class="grafik-izgara">
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Kategoriye Göre Kulüpler</h2>
+        <div class="grafik-kap" style="height: {{ grafik.kategori | length * 30 + 30 }}px">
+            <canvas id="grafik-kategori" role="img" aria-label="Kategoriye göre kulüp sayısı çubuk grafiği"></canvas>
+        </div>
+        <details class="grafik-tablo">
+            <summary>Tablo olarak göster</summary>
+            <table class="tablo"><thead><tr><th>Kategori</th><th>Kulüp</th></tr></thead><tbody>
+                {% for ad, sayi in grafik.kategori %}<tr><td>{{ ad }}</td><td>{{ sayi }}</td></tr>{% endfor %}
+            </tbody></table>
+        </details>
+    </section>
+
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Aktif / Pasif Oranı</h2>
+        {% set toplam = grafik.aktif + grafik.pasif %}
+        <div class="oran-buyuk"><strong>%{{ (100 * grafik.aktif / toplam) | round | int if toplam else 0 }}</strong> aktif</div>
+        <div class="oran-cubugu" role="img" aria-label="{{ grafik.aktif }} aktif, {{ grafik.pasif }} pasif kulüp">
+            {% if grafik.aktif %}<span class="oran-aktif" style="flex: {{ grafik.aktif }}"></span>{% endif %}
+            {% if grafik.pasif %}<span class="oran-pasif" style="flex: {{ grafik.pasif }}"></span>{% endif %}
+        </div>
+        <div class="oran-etiketler">
+            <span><i class="oran-isaret oran-aktif"></i>Aktif <strong>{{ grafik.aktif }}</strong></span>
+            <span><i class="oran-isaret oran-pasif"></i>Pasif <strong>{{ grafik.pasif }}</strong></span>
+        </div>
+
+        <h2 class="kutu-baslik-tek grafik-ara-baslik">Evrak Teslim Oranı</h2>
+        {% if grafik.evrak %}
+        <div class="oran-buyuk"><strong>%{{ grafik.evrak_genel }}</strong> genel teslim <span class="soluk">(aktif kulüpler)</span></div>
+        <div class="grafik-kap" style="height: {{ grafik.evrak | length * 30 + 40 }}px">
+            <canvas id="grafik-evrak" role="img" aria-label="Zorunlu evrak başına teslim oranı çubuk grafiği"></canvas>
+        </div>
+        <details class="grafik-tablo">
+            <summary>Tablo olarak göster</summary>
+            <table class="tablo"><thead><tr><th>Evrak</th><th>Teslim</th><th>Oran</th></tr></thead><tbody>
+                {% for ad, oran, teslim, toplam_k in grafik.evrak %}<tr><td>{{ ad }}</td><td>{{ teslim }}/{{ toplam_k }}</td><td>%{{ oran }}</td></tr>{% endfor %}
+            </tbody></table>
+        </details>
+        {% else %}
+        <p class="bos-durum">Bu dönem için zorunlu evrak tanımlı değil.</p>
+        {% endif %}
+    </section>
+
+    <section class="kutu grafik-genis">
+        <h2 class="kutu-baslik-tek">Aylara Göre Onaylı Etkinlik Sayısı</h2>
+        <div class="grafik-kap" style="height: 260px">
+            <canvas id="grafik-aylik" role="img" aria-label="Aylara göre onaylı etkinlik sayısı çubuk grafiği"></canvas>
+        </div>
+        <details class="grafik-tablo">
+            <summary>Tablo olarak göster</summary>
+            <table class="tablo"><thead><tr><th>Ay</th><th>Etkinlik</th></tr></thead><tbody>
+                {% for ay, sayi in grafik.aylik %}<tr><td>{{ ay }}</td><td>{{ sayi }}</td></tr>{% endfor %}
+            </tbody></table>
+        </details>
+    </section>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+{% if donem %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function () {
+    // Tek kulüp raporu: seçilen kulübün PDF adresine git.
+    const form = document.querySelector("[data-tek-kulup]");
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const secim = form.querySelector("select").value;
+        if (secim) window.location.href = secim;
+    });
+
+    if (typeof Chart === "undefined") {
+        // CDN'e ulaşılamadıysa grafiklerin yerine tabloları aç.
+        document.querySelectorAll(".grafik-kap").forEach((k) => (k.hidden = true));
+        document.querySelectorAll(".grafik-tablo").forEach((d) => (d.open = true));
+        return;
+    }
+
+    const LACIVERT = "#1B2F8F", CIZGI = "#EEF0F3", METIN = "#667085";
+    const azHareket = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    Chart.defaults.font.family = "Inter, -apple-system, 'Segoe UI', sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = METIN;
+
+    function cubukGrafik(id, etiketler, degerler, secenek) {
+        const tuval = document.getElementById(id);
+        if (!tuval) return;
+        new Chart(tuval, {
+            type: "bar",
+            data: {
+                labels: etiketler,
+                datasets: [{
+                    data: degerler,
+                    backgroundColor: LACIVERT,
+                    hoverBackgroundColor: "#2A44B8",
+                    borderRadius: 4,
+                    borderSkipped: "start",
+                    maxBarThickness: 26,
+                }],
+            },
+            options: {
+                indexAxis: secenek.yatay ? "y" : "x",
+                maintainAspectRatio: false,
+                animation: azHareket ? false : { duration: 300 },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: "#12205F",
+                        padding: 10,
+                        displayColors: false,
+                        callbacks: { label: (c) => secenek.etiket(c.raw, c.dataIndex) },
+                    },
+                },
+                scales: {
+                    [secenek.yatay ? "x" : "y"]: {
+                        beginAtZero: true,
+                        max: secenek.max,
+                        grid: { color: CIZGI },
+                        border: { display: false },
+                        ticks: { precision: 0, callback: secenek.eksen || ((d) => d) },
+                    },
+                    [secenek.yatay ? "y" : "x"]: { grid: { display: false }, border: { color: CIZGI } },
+                },
+            },
+        });
+    }
+
+    const kategori = {{ grafik.kategori | tojson }};
+    cubukGrafik("grafik-kategori", kategori.map((k) => k[0]), kategori.map((k) => k[1]),
+        { yatay: true, etiket: (d) => d + " kulüp" });
+
+    const aylik = {{ grafik.aylik | tojson }};
+    cubukGrafik("grafik-aylik", aylik.map((a) => a[0]), aylik.map((a) => a[1]),
+        { yatay: false, etiket: (d) => d + " onaylı etkinlik" });
+
+    const evrak = {{ grafik.evrak | tojson }};
+    cubukGrafik("grafik-evrak", evrak.map((e) => e[0]), evrak.map((e) => e[1]),
+        { yatay: true, max: 100, eksen: (d) => "%" + d,
+          etiket: (d, i) => "%" + d + " · " + evrak[i][2] + "/" + evrak[i][3] + " kulüp teslim etti" });
+})();
+</script>
+{% endif %}
+{% endblock %}

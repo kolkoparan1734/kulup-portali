@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Zorunlu Evraklar · {{ donem.ad }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('donemler') }}" class="geri-link">&larr; Dönemler</a>
+
+<div class="sayfa-baslik">
+    <div>
+        <h1>Zorunlu Evraklar · {{ donem.ad }}</h1>
+        <p>Kulüplerin bu dönem teslim etmesi gereken evraklar. Kulüp, aynı türde bir belgeyi bu döneme yüklediğinde evrak teslim edilmiş sayılır.</p>
+    </div>
+    <a href="{{ url_for('evrak_takibi', donem=donem.id) }}" class="dugme">Evrak Takibine Git</a>
+</div>
+
+<div class="belge-izgara">
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Zorunlu Evrak Ekle</h2>
+        {% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+        <form method="POST" class="form">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <label class="alan">
+                <span>Belge türü *</span>
+                <select name="tur" required>
+                    <option value="">Seçiniz</option>
+                    {% for tur in belge_turleri %}<option {% if tur == form.tur %}selected{% endif %}>{{ tur }}</option>{% endfor %}
+                </select>
+            </label>
+            <label class="alan">
+                <span>Son teslim tarihi *</span>
+                <input type="date" name="teslim_tarihi" value="{{ form.teslim_tarihi }}" required
+                       min="{{ donem.baslangic }}" max="{{ donem.bitis }}">
+            </label>
+            <label class="alan">
+                <span>Açıklama</span>
+                <input type="text" name="aciklama" value="{{ form.aciklama }}" maxlength="200" placeholder="ör. imzalı ve kaşeli olmalı">
+            </label>
+            <button type="submit" class="dugme dugme-ana dugme-tam">Ekle</button>
+        </form>
+    </section>
+
+    <section class="kutu kutu-tablo">
+        <div class="tablo-sarici">
+            <table class="tablo">
+                <thead>
+                    <tr>
+                        <th>Evrak</th>
+                        <th>Son Teslim</th>
+                        <th>Elden teslim</th>
+                        <th class="sag"><span class="gizli-metin">İşlemler</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in evraklar %}
+                    <tr>
+                        <td>
+                            <strong>{{ e.tur }}</strong>
+                            {% if e.aciklama %}<span class="soluk kucuk-metin">{{ e.aciklama }}</span>{% endif %}
+                        </td>
+                        <td>{{ e.teslim_tarihi | tarih }}</td>
+                        <td>{{ e.elden | length }} kulüp</td>
+                        <td class="sag satir-eylem">
+                            <a href="{{ url_for('zorunlu_evrak_duzenle', evrak_id=e.id) }}" class="dugme dugme-ince">Düzenle</a>
+                            {% if izin('zorunlu_evrak_sil') %}
+                            <form method="POST" action="{{ url_for('zorunlu_evrak_sil', evrak_id=e.id) }}"
+                                  data-onay="{{ e.tur }} zorunlu evraklardan çıkarılsın mı? Yüklenmiş belgeler silinmez; elden teslim işaretleri silinir.">
+                                <input type="hidden" name="csrf" value="{{ csrf }}">
+                                <button type="submit" class="dugme dugme-ince dugme-tehlike">Kaldır</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if not evraklar %}<p class="bos-durum">Bu dönem için zorunlu evrak tanımlanmamış.</p>{% endif %}
+    </section>
+</div>
+{% endblock %}

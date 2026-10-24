@@ -26,10 +26,20 @@
                 </select>
             </label>
             <label class="alan">
+                <span>Dönem *</span>
+                <select name="donem_id" required>
+                    {% for d in donemler %}
+                    <option value="{{ d.id }}" {% if d.id == yukleme_donemi %}selected{% endif %}>{{ d.ad }}{% if d.aktif %} (aktif){% endif %}</option>
+                    {% else %}
+                    <option value="">Önce bir dönem tanımlayın</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label class="alan">
                 <span>Belge türü *</span>
                 <select name="tur" required>
                     <option value="">Seçiniz</option>
-                    {% for tur in belge_turleri %}<option>{{ tur }}</option>{% endfor %}
+                    {% for tur in belge_turleri %}<option {% if tur == secili_tur %}selected{% endif %}>{{ tur }}</option>{% endfor %}
                 </select>
             </label>
             <label class="alan">
@@ -49,6 +59,12 @@
             <h2>Kulüp Evrakları <span class="soluk">(<span data-filtre-sayac>{{ belgeler | length }}</span>)</span></h2>
         </div>
         <form method="GET" class="filtre-cubugu">
+            <select name="donem" onchange="this.form.submit()" aria-label="Döneme göre filtrele">
+                {% for d in donemler %}
+                <option value="{{ d.id }}" {% if d.id == secili_donem %}selected{% endif %}>{{ d.ad }}{% if d.aktif %} (aktif){% endif %}</option>
+                {% endfor %}
+                <option value="tum" {% if secili_donem == 'tum' %}selected{% endif %}>Tüm dönemler</option>
+            </select>
             <select name="kulup" onchange="this.form.submit()" aria-label="Kulübe göre filtrele">
                 <option value="">Tüm kulüpler</option>
                 {% for kulup in kulupler %}
@@ -69,6 +85,7 @@
                     <tr>
                         <th data-sirala>Kulüp</th>
                         <th data-sirala>Tür</th>
+                        <th data-sirala>Dönem</th>
                         <th>Dosya</th>
                         <th data-sirala>Yüklenme</th>
                         <th class="sag"><span class="gizli-metin">İşlemler</span></th>
@@ -79,6 +96,7 @@
                     <tr data-tur="{{ belge.tur }}">
                         <td><a href="{{ url_for('kulup_detay', kulup_id=belge.kulup_id) }}">{{ belge.kulup_isim }}</a></td>
                         <td>{{ belge.tur }}</td>
+                        <td>{{ belge.donem_ad }}</td>
                         <td>
                             {{ belge.orijinal_ad }}
                             <span class="soluk kucuk-metin">{{ belge.boyut | boyut }}{% if belge.aciklama %} · {{ belge.aciklama }}{% endif %}</span>
@@ -89,12 +107,14 @@
                         </td>
                         <td class="sag satir-eylem">
                             <a href="{{ url_for('belge_indir', belge_id=belge.id) }}" class="dugme dugme-ince">İndir</a>
+                            {% if izin('belge_sil') %}
                             <form method="POST" action="{{ url_for('belge_sil', belge_id=belge.id) }}"
-                                  data-onay="{{ belge.orijinal_ad }} silinsin mi?">
+                                  data-onay="{{ belge.orijinal_ad }} arşive alınsın mı? Arşiv sayfasından geri getirilebilir.">
                                 <input type="hidden" name="csrf" value="{{ csrf }}">
                                 <input type="hidden" name="geri" value="{{ request.full_path }}">
-                                <button type="submit" class="dugme dugme-ince dugme-tehlike">Sil</button>
+                                <button type="submit" class="dugme dugme-ince dugme-tehlike">Arşivle</button>
                             </form>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
@@ -103,7 +123,7 @@
         </div>
         <p class="bos-durum" data-filtre-bos hidden>Bu türde belge yok.</p>
         {% else %}
-        <p class="bos-durum">{{ 'Bu kulübe ait belge yok.' if secili_kulup else 'Henüz yüklenmiş belge yok.' }}</p>
+        <p class="bos-durum">Seçili dönem ve kulüpte belge yok.</p>
         {% endif %}
     </section>
 </div>

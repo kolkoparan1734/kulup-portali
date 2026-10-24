@@ -52,22 +52,27 @@
     </div>
 
     <h2 class="form-bolum">Danışman Hoca</h2>
+    {% set secili_danisman = kulup.danisman_id if kulup else '' %}
     <div class="form-izgara">
         <label class="alan">
-            <span>Ad soyad</span>
-            <input type="text" name="danisman_isim" value="{{ kulup.danisman.isim if kulup and kulup.danisman else '' }}" maxlength="120">
+            <span>Danışman</span>
+            <select name="danisman_id">
+                <option value="">— Danışman atanmamış —</option>
+                {% for d in danismanlar %}
+                <option value="{{ d.id }}" {% if d.id == secili_danisman %}selected{% endif %}>
+                    {{ d.tam_ad }}{% if d.fakulte %} · {{ d.fakulte }}{% endif %}
+                </option>
+                {% endfor %}
+            </select>
         </label>
-        <label class="alan">
-            <span>E-posta</span>
-            <input type="email" name="danisman_eposta" value="{{ kulup.danisman.eposta if kulup and kulup.danisman else '' }}" maxlength="120">
-        </label>
-        <label class="alan">
-            <span>Telefon</span>
-            <input type="tel" name="danisman_telefon" value="{{ kulup.danisman.telefon if kulup and kulup.danisman else '' }}" maxlength="30">
-        </label>
+        <div class="alan alan-hizali">
+            <a href="{{ url_for('danisman_form', geri=request.full_path) }}" class="dugme dugme-ince">+ Listede yok, yeni danışman ekle</a>
+        </div>
     </div>
+    <p class="form-not">Yeni danışman eklediğinizde bu sayfaya geri dönersiniz; formda yaptığınız kaydedilmemiş değişiklikler kaybolur.</p>
 
     <h2 class="form-bolum">Yönetim Kurulu</h2>
+    <p class="form-not">Başkan yukarıdaki "Başkan" alanından değiştirilir. Görev değişikliklerinde eski kayıtlar silinmez; kulüp detayındaki "Görev Geçmişi"ne tarih ve dönemiyle eklenir.</p>
     <datalist id="gorev-listesi">{% for g in yk_gorevleri %}<option value="{{ g }}">{% endfor %}</datalist>
     <div class="yk-liste" data-yk-liste>
         {% for uye in yk_satirlari %}

@@ -48,11 +48,7 @@
       ],
       "kapak_gorseli": "covers/dans_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "satranc",
@@ -91,11 +87,7 @@
       ],
       "kapak_gorseli": "covers/satranc_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "ieee",
@@ -138,11 +130,7 @@
       ],
       "kapak_gorseli": "covers/ieee_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "gastronomi",
@@ -181,11 +169,7 @@
       ],
       "kapak_gorseli": "covers/gastronomi_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "yapay-zeka",
@@ -196,16 +180,16 @@
       "baskan": "Batuhan Dede",
       "yonetim_kurulu": [
         {
-          "isim": "Batuhan Dede",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Batuhan Dede"
         },
         {
-          "isim": "Sude Yalman",
-          "gorev": "Başkan Yardımcısı"
+          "gorev": "Başkan Yardımcısı",
+          "isim": "Sude Yalman"
         },
         {
-          "isim": "Emre Koç",
-          "gorev": "Proje Sorumlusu"
+          "gorev": "Proje Sorumlusu",
+          "isim": "Emre Koç"
         }
       ],
       "etkinlikler": [
@@ -224,11 +208,7 @@
       ],
       "kapak_gorseli": "covers/yapay-zeka_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": "390f5a9c6da8"
     },
     {
       "id": "genc-kalite",
@@ -267,11 +247,7 @@
       ],
       "kapak_gorseli": "covers/genc-kalite_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "psikoloji",
@@ -310,11 +286,7 @@
       ],
       "kapak_gorseli": "covers/psikoloji_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "sinema",
@@ -353,11 +325,7 @@
       ],
       "kapak_gorseli": "covers/sinema_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "kutuphane",
@@ -396,11 +364,7 @@
       ],
       "kapak_gorseli": "covers/kutuphane_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "veri-bilimi",
@@ -411,16 +375,8 @@
       "baskan": "Furkan Kolkoparan",
       "yonetim_kurulu": [
         {
-          "isim": "Furkan Kolkoparan",
-          "gorev": "Başkan"
-        },
-        {
-          "isim": "Miray Doğan",
-          "gorev": "Başkan Yardımcısı"
-        },
-        {
-          "isim": "Alp Baransel",
-          "gorev": "Proje Sorumlusu"
+          "gorev": "Başkan",
+          "isim": "Furkan Kolkoparan"
         }
       ],
       "etkinlikler": [
@@ -439,11 +395,7 @@
       ],
       "kapak_gorseli": "covers/veri-bilimi_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": "59134c3f82c7"
     },
     {
       "id": "sosyoloji",
@@ -482,11 +434,7 @@
       ],
       "kapak_gorseli": "covers/sosyoloji_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "ticaret-lojistik",
@@ -525,11 +473,7 @@
       ],
       "kapak_gorseli": "covers/ticaret-lojistik_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "hayvan-haklari",
@@ -569,11 +513,7 @@
       ],
       "kapak_gorseli": "covers/hayvan-haklari_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "iyiligin-gelecegi",
@@ -612,11 +552,7 @@
       ],
       "kapak_gorseli": "covers/iyiligin-gelecegi_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "tiyatro",
@@ -656,11 +592,7 @@
       ],
       "kapak_gorseli": "covers/tiyatro_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "network",
@@ -700,11 +632,7 @@
       ],
       "kapak_gorseli": "covers/network_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "arama-kurtarma",
@@ -743,11 +671,7 @@
       ],
       "kapak_gorseli": "covers/arama-kurtarma_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "sailing-club",
@@ -758,16 +682,16 @@
       "baskan": "Timur Ege",
       "yonetim_kurulu": [
         {
-          "isim": "Timur Ege",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Timur Ege"
         },
         {
-          "isim": "İpek Doğan",
-          "gorev": "Başkan Yardımcısı"
+          "gorev": "Başkan Yardımcısı",
+          "isim": "İpek Doğan"
         },
         {
-          "isim": "Arda Kurtuluş",
-          "gorev": "Antrenman Sorumlusu"
+          "gorev": "Antrenman Sorumlusu",
+          "isim": "Arda Kurtuluş"
         }
       ],
       "etkinlikler": [
@@ -785,12 +709,8 @@
         }
       ],
       "kapak_gorseli": "covers/sailing-club_kapak.jpg",
-      "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "durum": "pasif",
+      "danisman_id": ""
     },
     {
       "id": "turk-dunyasi-genclik",
@@ -829,11 +749,7 @@
       ],
       "kapak_gorseli": "covers/turk-dunyasi-genclik_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "tebgk",
@@ -872,11 +788,7 @@
       ],
       "kapak_gorseli": "covers/tebgk_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "turk-tarihi-kulturu",
@@ -916,11 +828,7 @@
       ],
       "kapak_gorseli": "covers/turk-tarihi-kulturu_kapak.jpg",
       "durum": "pasif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "ilsa",
@@ -959,11 +867,7 @@
       ],
       "kapak_gorseli": "covers/ilsa_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "siyaset-diplomasi",
@@ -1002,11 +906,7 @@
       ],
       "kapak_gorseli": "covers/siyaset-diplomasi_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "aubat",
@@ -1045,11 +945,7 @@
       ],
       "kapak_gorseli": "covers/aubat_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "dis-hekimligi",
@@ -1088,11 +984,7 @@
       ],
       "kapak_gorseli": "covers/dis-hekimligi_kapak.jpg",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      }
+      "danisman_id": ""
     },
     {
       "id": "besiktas",
@@ -1102,12 +994,8 @@
       "aciklama": "",
       "baskan": "Ömer Tekdamar",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "futbol",
@@ -1117,12 +1005,8 @@
       "aciklama": "",
       "baskan": "",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "hemsirelik",
@@ -1132,12 +1016,8 @@
       "aciklama": "",
       "baskan": "Ebrar Keçecioğlu",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "hukuk",
@@ -1147,12 +1027,8 @@
       "aciklama": "",
       "baskan": "",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "hukukta-kariyer",
@@ -1162,12 +1038,8 @@
       "aciklama": "",
       "baskan": "Ali Fettah Arslan",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "ideal-hukuk",
@@ -1177,12 +1049,8 @@
       "aciklama": "",
       "baskan": "Beytullah Haşar",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "makine-muhendisligi",
@@ -1192,12 +1060,8 @@
       "aciklama": "",
       "baskan": "Muhammed Eskiçırak",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "masa-tenisi",
@@ -1207,12 +1071,8 @@
       "aciklama": "",
       "baskan": "Alperen Başali",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "oyun",
@@ -1222,12 +1082,8 @@
       "aciklama": "",
       "baskan": "Zeynep Aksoy",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "tob-tip-ogrencileri-birligi",
@@ -1237,12 +1093,8 @@
       "aciklama": "",
       "baskan": "Nisa Çırpıcı",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "toplum-gonulluleri",
@@ -1252,12 +1104,8 @@
       "aciklama": "",
       "baskan": "Hatice Zehra Kışla",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "yazilim-ve-inovasyon",
@@ -1267,12 +1115,8 @@
       "aciklama": "",
       "baskan": "Burak Kaan",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "uniconnect",
@@ -1282,12 +1126,8 @@
       "aciklama": "",
       "baskan": "Mehmet Doğan",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [],
+      "danisman_id": ""
     },
     {
       "id": "ai-club",
@@ -1297,12 +1137,13 @@
       "aciklama": "",
       "baskan": "Zülal Kılıç",
       "durum": "aktif",
-      "danisman": {
-        "isim": "",
-        "eposta": "",
-        "telefon": ""
-      },
-      "yonetim_kurulu": []
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Zülal Kılıç"
+        }
+      ],
+      "danisman_id": "7d56cf4ca0ae"
     }
   ]
 }

@@ -1,0 +1,83 @@
+[
+  {
+    "kullanici_adi": "admin",
+    "sifre_hash": "scrypt:32768:8:1$ywoNyDVKLw8t1Tvk$2bc3e4c02664a488046146b8f19f8ea3dcc0aa1da8a119a55b4e0ba89abadc7ad8fe080350fd5f52e2c42d7a952d2cb6c1f1c213763439dd7d4a750f6f4adb02",
+    "rol": "dekan",
+    "ad_soyad": "Öğrenci Dekanlığı"
+  },
+  {
+    "kullanici_adi": "Furkan",
+    "sifre_hash": "scrypt:32768:8:1$nuC1XFhPywzZx7k6$2ed2960e9c987287709b41e2a2c188d83c9d6b51e0cdde6a01050d24d3261183578aa0697e65ea8b4151a2dd956074ef06bd14533b33fe1c7573b6d2436d5744",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "Furkan123",
+    "sifre_hash": "scrypt:32768:8:1$6LWpHJqrFzziTlyx$152ba08d9086d67e5b8a2b1e495d86f4c0e7b090bc6b807403c2d03b9e06b33413738256f5ffadbfc00bfe696ea8b238833a7741613eea6ddc834dc59c481e1b",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "berkaykaynar",
+    "sifre_hash": "scrypt:32768:8:1$4GqI1KnGtEou3jYn$6531b8385d0cbfb9ca2fe29d09f4e199bae1c8c1e6e05ee9914a313959de93704989eded2238c397741537e9954d864bfad247a3a32f0896336d4fa6f643f434",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "Furkan12345",
+    "sifre_hash": "scrypt:32768:8:1$SY1QqeXuwRxb01Tj$a762aacfeee54b0c6456f8eddf3bd29c11292fb3d3245f2bb2e2dcf96edd6f6eb6f288443509719fdc21031755805ecaf7494b1d197d715a56034dca8829e3ca",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "memo",
+    "sifre_hash": "scrypt:32768:8:1$dZYsWBp7qNUGWN68$16ba38ad2acf8cd8371838984bcb1f2d4c4135512feae5c8211e609acd68f515cf0c0c35a2a146e8590fc9a6e0b9f2f681ad1406cdd0316a8908bbdead6757e2",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "admingüncel",
+    "sifre_hash": "scrypt:32768:8:1$l1n45eAUC0j60tfp$3d87a799eb43106ac96df290636f8fb7a46539933e1734d47d4431bc898c2bd5dca716bbc8c284af5c45cca408a9056e2b59f0dee31ac74d90c688759ee783b7",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "mehmet",
+    "sifre_hash": "scrypt:32768:8:1$WFqP528tpzzBiCUu$728d27e1a1bb5cd57f02b5c1bc7e3c0f9e6b78d1bddb8e353a941b34f43ced190e09fa86a9893bfd788eedf9ad4e998b25228f02a359554ed92ba74d04354c91",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "250200454",
+    "sifre_hash": "scrypt:32768:8:1$HCpx7S1aosjJgNhW$ff1c0175cfe74f163ceb59a99dc5cedbe53891fbd2d4a31a0f297d4365c70426f1ac066fb26d3f066083a74b172f05bbc6228187d78012d1d9d54371a8827ac0",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "200300400",
+    "sifre_hash": "scrypt:32768:8:1$AzlWjbIP63e7s7DX$fea385e7e55bb5ecca7a9b449f46245bf963ead8daf47556af4b7cf20c021375bb6c2c1394ebe89aa079f4b60cb66fe4530d4653c1d9503bceccb27c2fe1af09",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "250200458",
+    "sifre_hash": "scrypt:32768:8:1$sw1owm2bViFZXxCq$657be0f2d77525f107369456c63e732c79f36785741d81c043fe37c99cd6792f2c8316cbc3ae9d0e3f721d81933c749407c6a15589fcd846a7deaa9f27d13405",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "250200459",
+    "sifre_hash": "scrypt:32768:8:1$4iRu0W8ZnAKRXHix$47216f95649c61226db25a8e40221e6663944946a4107344656e79c6f6e19eb2ee4a9c91d17061f8b03d7e60707435bec2306a206cc1f74e703a6a837b9a5524",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "250200460",
+    "sifre_hash": "scrypt:32768:8:1$ROZSIjyxqFLRcVFk$4a46533dfd60701aebe9d6e104279a1999f6dd89f626eae9ac67956f5020d98a97c05ffd30457138cbf328b590613eb1981ff7d45cdfc0ae5b585d39809b8bda",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "250200461",
+    "sifre_hash": "scrypt:32768:8:1$j4USSb6ZmXLZo6N8$54a9c0c6e27bea6f1aa9d1c799fc486c5f5f0d2244e67bacdb7bab55079f90dff67726e7ca6293a7056137044d07f8c9a670ca93caf64fa3e6bbfe70e467add0",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "250200782",
+    "sifre_hash": "scrypt:32768:8:1$PlyAPcWykGqIcYXc$53ad7c337f1174bf0b7a74c66c073eb27cdcbfb81afb9f9925c0c8482c455fcce787af82570ebeb078e17ac49a72dbd1e995231f02c79f18e1e221f9832d943e",
+    "rol": "ogrenci"
+  },
+  {
+    "kullanici_adi": "250543333",
+    "sifre_hash": "scrypt:32768:8:1$NHKApxRTQc0VYir8$48153ee3aa248810b5abbc4337f5aa71cf24d7832121c15a3cdd5d912ace0372bcb291e6e32fda52d22a8c076fbb48765b8e6f5e4be6ccd79e5605ff06b60d73",
+    "rol": "ogrenci"
+  }
+]

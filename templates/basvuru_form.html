@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Başvuruyu Düzenle' if duzenleme else 'Yeni Etkinlik Başvurusu' }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('basvuru_detay', basvuru_id=basvuru.id) if duzenleme else url_for('etkinlik_basvurulari') }}" class="geri-link">&larr; Geri</a>
+
+<div class="sayfa-baslik">
+    <div>
+        <h1>{{ 'Başvuruyu Düzenle' if duzenleme else 'Yeni Etkinlik Başvurusu' }}</h1>
+        <p>{% if duzenleme and basvuru.durum == 'revizyon' %}Kaydettiğinizde başvuru yeniden "Beklemede" durumuna geçer.{% else %}Kulüplerden e-posta veya elden gelen başvuruları buradan girebilirsiniz.{% endif %}</p>
+    </div>
+</div>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<form method="POST" enctype="multipart/form-data" class="form kutu">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+
+    <h2 class="form-bolum">Etkinlik</h2>
+    <div class="form-izgara">
+        <label class="alan">
+            <span>Kulüp *</span>
+            <select name="kulup_id" required>
+                <option value="">Seçiniz</option>
+                {% for k in kulupler %}<option value="{{ k.id }}" {% if k.id == basvuru.kulup_id %}selected{% endif %}>{{ k.isim }}</option>{% endfor %}
+            </select>
+        </label>
+        <label class="alan">
+            <span>Etkinlik adı *</span>
+            <input type="text" name="ad" value="{{ basvuru.ad }}" required maxlength="150">
+        </label>
+        <label class="alan">
+            <span>Tarih ve saat *</span>
+            <input type="datetime-local" name="tarih_saat" value="{{ basvuru.tarih_saat }}" required>
+        </label>
+        <label class="alan">
+            <span>Yer *</span>
+            <input type="text" name="yer" value="{{ basvuru.yer }}" required maxlength="150" placeholder="ör. Mahmutbey Yerleşkesi, Konferans Salonu">
+        </label>
+        <label class="alan">
+            <span>Tahmini katılımcı sayısı</span>
+            <input type="number" name="katilimci" value="{{ basvuru.katilimci if basvuru.katilimci is not none }}" min="0" step="1">
+        </label>
+        {% if not duzenleme and rol != 'baskan' %}
+        <label class="alan">
+            <span>Başvuru nasıl geldi?</span>
+            <select name="kaynak">
+                {% for kod, ad in kaynaklar.items() %}<option value="{{ kod }}" {% if kod == basvuru.kaynak %}selected{% endif %}>{{ ad }}</option>{% endfor %}
+            </select>
+        </label>
+        {% endif %}
+        <label class="alan alan-genis">
+            <span>Açıklama</span>
+            <textarea name="aciklama" rows="4" maxlength="2000">{{ basvuru.aciklama }}</textarea>
+        </label>
+    </div>
+
+    <h2 class="form-bolum">Konuşmacı / Misafir</h2>
+    <div class="form-izgara">
+        <div class="alan">
+            <span>Konuşmacı veya misafir var mı?</span>
+            <div class="karar-secenekleri">
+                <label><input type="radio" name="konusmaci_var" value="hayir" {% if not basvuru.konusmaci_var %}checked{% endif %}> Hayır</label>
+                <label><input type="radio" name="konusmaci_var" value="evet" {% if basvuru.konusmaci_var %}checked{% endif %}> Evet</label>
+            </div>
+        </div>
+        <label class="alan">
+            <span>Konuşmacı/misafir bilgisi <small>(ad, unvan, kurum)</small></span>
+            <input type="text" name="konusmaci" value="{{ basvuru.konusmaci }}" maxlength="300">
+        </label>
+    </div>
+
+    <h2 class="form-bolum">Bütçe</h2>
+    <div class="form-izgara">
+        <label class="alan">
+            <span>Bütçe ihtiyacı (TL) <small>yoksa 0</small></span>
+            <input type="number" name="butce" value="{{ basvuru.butce if basvuru.butce is not none }}" min="0" step="0.01">
+        </label>
+        <label class="alan">
+            <span>Bütçe açıklaması</span>
+            <input type="text" name="butce_aciklama" value="{{ basvuru.butce_aciklama }}" maxlength="300" placeholder="ör. ikram, ulaşım, baskı">
+        </label>
+    </div>
+
+    <h2 class="form-bolum">Ek Dosya</h2>
+    {% if duzenleme and basvuru.ek_dosyalar %}
+    <p class="form-not">Mevcut ekler: {{ basvuru.ek_dosyalar | map(attribute='orijinal_ad') | join(', ') }}. Yeni seçtikleriniz bunlara eklenir.</p>
+    {% endif %}
+    <label class="alan">
+        <span>Dosya <small>({{ uzantilar }} · birden fazla seçilebilir)</small></span>
+        <input type="file" name="ek_dosya" multiple>
+    </label>
+
+    <div class="form-eylemler">
+        <a href="{{ url_for('basvuru_detay', basvuru_id=basvuru.id) if duzenleme else url_for('etkinlik_basvurulari') }}" class="dugme">Vazgeç</a>
+        <button type="submit" class="dugme dugme-ana">Kaydet</button>
+    </div>
+</form>
+{% endblock %}

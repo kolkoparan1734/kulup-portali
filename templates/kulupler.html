@@ -10,7 +10,9 @@
             <h1>Kulüpler</h1>
             <p><span data-filtre-sayac>{{ kulupler | length }}</span> kulüp gösteriliyor</p>
         </div>
+        {% if izin('kulup_form') %}
         <a href="{{ url_for('kulup_form') }}" class="dugme dugme-ana">+ Yeni Kulüp</a>
+        {% endif %}
     </div>
 
     <div class="filtre-cubugu">
@@ -46,12 +48,16 @@
             </dl>
             <div class="kart-eylemler">
                 <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="dugme dugme-ince">Detay</a>
+                {% if izin('kulup_form') %}
                 <a href="{{ url_for('kulup_form', kulup_id=kulup.id) }}" class="dugme dugme-ince">Düzenle</a>
+                {% endif %}
+                {% if izin('kulup_sil') %}
                 <form method="POST" action="{{ url_for('kulup_sil', kulup_id=kulup.id) }}"
-                      data-onay="{{ kulup.isim }} silinsin mi? Kulübün üyelik kayıtları ve belgeleri de silinecek. Bu işlem geri alınamaz.">
+                      data-onay="{{ kulup.isim }} arşive alınsın mı? Kulüp; üyelikleri, belgeleri ve etkinlik başvurularıyla birlikte listelerden kalkar. Arşiv sayfasından geri getirilebilir.">
                     <input type="hidden" name="csrf" value="{{ csrf }}">
-                    <button type="submit" class="dugme dugme-ince dugme-tehlike">Sil</button>
+                    <button type="submit" class="dugme dugme-ince dugme-tehlike">Arşivle</button>
                 </form>
+                {% endif %}
             </div>
         </article>
         {% endfor %}

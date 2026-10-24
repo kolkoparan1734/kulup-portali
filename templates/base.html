@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body class="panel-govde">
+<body class="panel-govde" data-oturum-suresi="{{ oturum_suresi_dk }}" data-cikis-adresi="{{ url_for('giris_yap') }}">
 
     <header class="ustbar">
         <button type="button" class="menu-dugme" aria-label="Menüyü aç/kapat" aria-controls="yanmenu" aria-expanded="false">
@@ -19,23 +19,51 @@
             <span class="ustbar-logo"><img src="{{ url_for('static', filename='images/footer-logo.png') }}" alt="Altınbaş Üniversitesi Öğrenci Dekanlığı logosu"></span>
             <span class="ustbar-baslik">Öğrenci Dekanlığı <strong>Kulüp Paneli</strong></span>
         </a>
-        <div class="ustbar-kullanici">
+        {% if aktif_donem %}
+        {% if izin('donemler') %}<a href="{{ url_for('donemler') }}"{% else %}<span{% endif %} class="ustbar-donem" title="Aktif dönem">
+            <span class="ustbar-donem-etiket">Aktif dönem</span>{{ aktif_donem.ad }}
+        {% if izin('donemler') %}</a>{% else %}</span>{% endif %}
+        {% elif izin('donemler') %}
+        <a href="{{ url_for('donemler') }}" class="ustbar-donem ustbar-donem-yok">Aktif dönem seçilmedi</a>
+        {% endif %}
+        <a href="{{ url_for('hesabim') }}" class="ustbar-kullanici" title="Hesabım">
             <span class="avatar" aria-hidden="true">{{ (session.ad_soyad or '?')[:1] | upper }}</span>
-            <span class="kullanici-ad">{{ session.ad_soyad }}</span>
-        </div>
+            <span class="kullanici-ad">{{ session.ad_soyad }}<span class="kullanici-rol">{{ rol_ad }}</span></span>
+        </a>
     </header>
 
     <nav class="yanmenu" id="yanmenu" aria-label="Ana menü">
-        {% set menu = [
-            ('ana_panel', 'Ana Panel', '<path d="M3 13h8V3H3zm0 8h8v-6H3zm10 0h8V11h-8zm0-18v6h8V3z"/>', ['ana_panel']),
-            ('kulupler', 'Kulüpler', '<path d="M12 2 2 7l10 5 10-5zm-8 9.5V17l8 4 8-4v-5.5l-8 4z"/>', ['kulupler', 'kulup_detay', 'kulup_form', 'uye_form']),
-            ('uyeler', 'Üyeler', '<path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4m-8 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3m0 2c-2.7 0-8 1.3-8 4v3h6v-3c0-1.2.6-2.3 1.7-3.1A10 10 0 0 0 8 13m8 0c-2.7 0-8 1.3-8 4v3h16v-3c0-2.7-5.3-4-8-4"/>', ['uyeler']),
-            ('belgeler', 'Belgeler', '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/>', ['belgeler']),
+        {% set gruplar = [
+            (none, [
+                ('ana_panel', 'Kulübüm' if rol == 'baskan' else 'Ana Panel', '<path d="M3 13h8V3H3zm0 8h8v-6H3zm10 0h8V11h-8zm0-18v6h8V3z"/>', ['ana_panel'] + (['kulup_detay'] if rol == 'baskan' else [])),
+                ('kulupler', 'Kulüpler', '<path d="M12 2 2 7l10 5 10-5zm-8 9.5V17l8 4 8-4v-5.5l-8 4z"/>', ['kulupler', 'kulup_detay', 'kulup_form', 'uye_form']),
+                ('uyeler', 'Üyeler', '<path d="M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4m-8 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3m0 2c-2.7 0-8 1.3-8 4v3h6v-3c0-1.2.6-2.3 1.7-3.1A10 10 0 0 0 8 13m8 0c-2.7 0-8 1.3-8 4v3h16v-3c0-2.7-5.3-4-8-4"/>', ['uyeler']),
+                ('danismanlar', 'Danışmanlar', '<path d="M12 3 1 9l11 6 9-4.9V17h2V9zM5 13.2v4L12 21l7-3.8v-4L12 17z"/>', ['danismanlar', 'danisman_detay', 'danisman_form']),
+                ('etkinlik_basvurulari', 'Etkinlik Başvuruları', '<path d="M9 11H7v2h2zm4 0h-2v2h2zm4 0h-2v2h2zm2-7h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 16H5V9h14z"/>', ['etkinlik_basvurulari', 'basvuru_form', 'basvuru_detay']),
+                ('belgeler', 'Belgeler', '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 7V3.5L18.5 9zM8 13h8v2H8zm0 4h8v2H8z"/>', ['belgeler']),
+                ('evrak_takibi', 'Evrak Takibi', '<path d="M19 3h-4.2A3 3 0 0 0 12 1a3 3 0 0 0-2.8 2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m-7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2m-2 14-4-4 1.4-1.4 2.6 2.6 6.6-6.6L18 9z"/>', ['evrak_takibi']),
+                ('takvim', 'Takvim', '<path d="M17 12h-5v5h5zM16 1v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1zm3 18H5V8h14z"/>', ['takvim']),
+                ('karne', 'Kulüp Karnesi', '<path d="M12 17.3 18.2 21l-1.6-7 5.4-4.7-7.2-.6L12 2 9.2 8.7 2 9.3l5.4 4.7-1.6 7z"/>', ['karne', 'kulup_karne']),
+                ('raporlar', 'Raporlar', '<path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/>', ['raporlar']),
+            ]),
+            ('Kayıtlar', [
+                ('islem_gecmisi', 'İşlem Geçmişi', '<path d="M13 3a9 9 0 0 0-9 9H1l4 4 4-4H6a7 7 0 1 1 2 4.9l-1.4 1.4A9 9 0 1 0 13 3m-1 5v5l4.3 2.5.7-1.2-3.5-2.1V8z"/>', ['islem_gecmisi']),
+                ('arsiv', 'Arşiv', '<path d="M20.5 5.2 19.1 3.6A1.5 1.5 0 0 0 18 3H6a1.5 1.5 0 0 0-1.2.6L3.5 5.2A2 2 0 0 0 3 6.5V19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.5a2 2 0 0 0-.5-1.3M12 17.5 6.5 12H10v-2h4v2h3.5zM5.1 5l.8-1h12l.9 1z"/>', ['arsiv']),
+            ]),
+            ('Ayarlar', [
+                ('donemler', 'Dönemler', '<path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 16H5V9h14zM7 11h5v5H7z"/>', ['donemler', 'donem_duzenle', 'zorunlu_evraklar', 'zorunlu_evrak_duzenle']),
+                ('kullanicilar', 'Kullanıcılar', '<path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4m0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4"/>', ['kullanicilar', 'kullanici_form']),
+                ('ayarlar', 'Panel Ayarları', '<path d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.7a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.4-2.7a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5a3.5 3.5 0 1 1 3.5-3.5 3.5 3.5 0 0 1-3.5 3.5"/>', ['ayarlar']),
+            ]),
         ] %}
-        {% for endpoint, etiket, ikon, aktifler in menu %}
+        {% for baslik, ogeler in gruplar %}
+        {% for endpoint, etiket, ikon, aktifler in ogeler if izin(endpoint) %}
+        {% if loop.first and baslik %}<span class="menu-bolum">{{ baslik }}</span>{% endif %}
         <a href="{{ url_for(endpoint) }}" class="menu-oge{% if aktif_sayfa in aktifler %} aktif{% endif %}">
             <svg viewBox="0 0 24 24" aria-hidden="true">{{ ikon | safe }}</svg>{{ etiket }}
+            {% if endpoint == 'etkinlik_basvurulari' and bekleyen_basvuru %}<span class="menu-sayac" title="Onay bekleyen başvuru">{{ bekleyen_basvuru }}</span>{% endif %}
         </a>
+        {% endfor %}
         {% endfor %}
         <a href="{{ url_for('cikis_yap') }}" class="menu-oge menu-cikis">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17v-3H3v-4h7V7l5 5zm2-15h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-8v-2h8V4h-8z"/></svg>Çıkış

@@ -21,6 +21,25 @@ document.addEventListener("DOMContentLoaded", function () {
         document.addEventListener("keydown", (e) => { if (e.key === "Escape") menuAyarla(false); });
     }
 
+    // --- Oturum zaman aşımı -------------------------------------------------
+    // Sunucu, belirlenen süre boyunca istek gelmezse oturumu kapatır. Sayfa
+    // açık bırakıldıysa süre dolmadan önce uyarı verilir, dolunca sayfa yenilenir
+    // ve sunucu kullanıcıyı giriş sayfasına yönlendirir.
+    const dakika = Number(document.body.dataset.oturumSuresi || 0);
+    if (dakika > 0) {
+        const sureMs = dakika * 60 * 1000;
+        if (sureMs > 3 * 60 * 1000) {
+            setTimeout(function () {
+                const uyari = document.createElement("div");
+                uyari.className = "bildirim bildirim-hata oturum-uyarisi";
+                uyari.setAttribute("role", "alert");
+                uyari.textContent = "İşlem yapılmadığı için oturumunuz 2 dakika içinde kapanacak. Devam etmek için sayfayı yenileyin veya bir işlem yapın.";
+                document.querySelector(".icerik").prepend(uyari);
+            }, sureMs - 2 * 60 * 1000);
+        }
+        setTimeout(() => window.location.reload(), sureMs + 5000);
+    }
+
     // --- Silme onayı ------------------------------------------------------
     document.querySelectorAll("form[data-onay]").forEach(function (form) {
         form.addEventListener("submit", function (e) {
@@ -57,6 +76,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         alanlar.forEach((alan) => alan.addEventListener(alan.tagName === "INPUT" && alan.type !== "checkbox" ? "input" : "change", uygula));
         uygula();
+    });
+
+    // --- Sekme düğmeleri: kapsamdaki gizli filtre alanının değerini ayarlar --
+    document.querySelectorAll("[data-sekme]").forEach(function (sekme) {
+        sekme.addEventListener("click", function () {
+            const grup = sekme.parentElement;
+            const alan = grup.querySelector("[data-filtre]");
+            alan.value = sekme.dataset.sekme;
+            alan.dispatchEvent(new Event("input"));
+            grup.querySelectorAll("[data-sekme]").forEach((s) => s.setAttribute("aria-pressed", String(s === sekme)));
+        });
     });
 
     // --- Tablo sıralama ---------------------------------------------------

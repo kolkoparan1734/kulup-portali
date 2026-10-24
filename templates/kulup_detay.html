@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% from "_makrolar.html" import kulup_logo, durum_rozeti, bos %}
+{% from "_makrolar.html" import kulup_logo, durum_rozeti, basvuru_rozeti, etkinlik_tarihi, bos %}
 
 {% block title %}{{ kulup.isim }}{% endblock %}
 
 {% block content %}
-<a href="{{ url_for('kulupler') }}" class="geri-link">&larr; Kulüpler</a>
+{% if izin('kulupler') %}<a href="{{ url_for('kulupler') }}" class="geri-link">&larr; Kulüpler</a>{% endif %}
 
 <section class="kulup-ust kutu">
     {{ kulup_logo(kulup, "buyuk") }}
@@ -21,12 +21,24 @@
         {% if kulup.aciklama %}<p class="kulup-aciklama">{{ kulup.aciklama }}</p>{% endif %}
     </div>
     <div class="kulup-ust-eylem">
+        {% if aktif_donem %}
+        {% if izin('kulup_karne') %}
+        <a href="{{ url_for('kulup_karne', kulup_id=kulup.id) }}" class="dugme">Karne</a>
+        {% endif %}
+        {% if izin('kulup_raporu_pdf') %}
+        <a href="{{ url_for('kulup_raporu_pdf', kulup_id=kulup.id) }}" class="dugme" title="{{ aktif_donem.ad }} kulüp raporu">Rapor PDF</a>
+        {% endif %}
+        {% endif %}
+        {% if izin('kulup_form') %}
         <a href="{{ url_for('kulup_form', kulup_id=kulup.id) }}" class="dugme">Düzenle</a>
+        {% endif %}
+        {% if izin('kulup_sil') %}
         <form method="POST" action="{{ url_for('kulup_sil', kulup_id=kulup.id) }}"
-              data-onay="{{ kulup.isim }} silinsin mi? Kulübün üyelik kayıtları ve belgeleri de silinecek. Bu işlem geri alınamaz.">
+              data-onay="{{ kulup.isim }} arşive alınsın mı? Kulüp; üyelikleri, belgeleri ve etkinlik başvurularıyla birlikte listelerden kalkar. Arşiv sayfasından geri getirilebilir.">
             <input type="hidden" name="csrf" value="{{ csrf }}">
-            <button type="submit" class="dugme dugme-tehlike">Sil</button>
+            <button type="submit" class="dugme dugme-tehlike">Arşivle</button>
         </form>
+        {% endif %}
     </div>
 </section>
 
@@ -47,11 +59,11 @@
     <section class="kutu">
         <h2 class="kutu-baslik-tek">Danışman Hoca</h2>
         <dl class="tanim-listesi">
-            <div><dt>Ad soyad</dt><dd>{{ bos(kulup.danisman.isim) }}</dd></div>
+            <div><dt>Ad soyad</dt><dd>{% if kulup.danisman.id and izin('danisman_detay') %}<a href="{{ url_for('danisman_detay', danisman_id=kulup.danisman.id) }}">{{ kulup.danisman.isim }}</a>{% else %}{{ bos(kulup.danisman.isim) }}{% endif %}</dd></div>
             <div><dt>E-posta</dt><dd>{% if kulup.danisman.eposta %}<a href="mailto:{{ kulup.danisman.eposta }}">{{ kulup.danisman.eposta }}</a>{% else %}{{ bos('') }}{% endif %}</dd></div>
             <div><dt>Telefon</dt><dd>{% if kulup.danisman.telefon %}<a href="tel:{{ kulup.danisman.telefon }}">{{ kulup.danisman.telefon }}</a>{% else %}{{ bos('') }}{% endif %}</dd></div>
         </dl>
-        {% if not kulup.danisman.isim %}<a href="{{ url_for('kulup_form', kulup_id=kulup.id) }}" class="kutu-link">Danışman bilgisi ekle &rarr;</a>{% endif %}
+        {% if not kulup.danisman.id and izin('kulup_form') %}<a href="{{ url_for('kulup_form', kulup_id=kulup.id) }}" class="kutu-link">Danışman ata &rarr;</a>{% endif %}
     </section>
 
     <section class="kutu">
@@ -74,13 +86,91 @@
     </section>
 </div>
 
+<section class="kutu" id="etkinlikler">
+    <div class="kutu-baslik">
+        <h2>Etkinlik Geçmişi <span class="soluk">({{ etkinlikler | length }})</span></h2>
+        <a href="{{ url_for('basvuru_form', kulup=kulup.id) }}" class="dugme dugme-ince">+ Başvuru Gir</a>
+    </div>
+    {% if etkinlikler %}
+    <div class="tablo-sarici">
+        <table class="tablo">
+            <thead>
+                <tr>
+                    <th data-sirala>Etkinlik</th>
+                    <th data-sirala>Tarih</th>
+                    <th data-sirala>Dönem</th>
+                    <th data-sirala>Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in etkinlikler %}
+                <tr>
+                    <td><a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}">{{ b.ad }}</a></td>
+                    <td data-deger="{{ b.tarih_saat }}">{{ etkinlik_tarihi(b) }}</td>
+                    <td>{{ bos(b.donem_ad) }}</td>
+                    <td data-deger="{{ b.durum_ad }}">{{ basvuru_rozeti(b) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="bos-durum">Bu kulübün henüz etkinlik başvurusu yok.</p>
+    {% endif %}
+</section>
+
+<section class="kutu" id="gorev-gecmisi">
+    <div class="kutu-baslik">
+        <h2>Görev Geçmişi</h2>
+        <span class="soluk kucuk-metin">Başkan ve yönetim kurulu değişiklikleri kulüp düzenlenirken otomatik kaydedilir.</span>
+    </div>
+    {% if gorev_gecmisi %}
+    <div class="tablo-sarici">
+        <table class="tablo">
+            <thead>
+                <tr>
+                    <th data-sirala>Görev</th>
+                    <th data-sirala>Ad Soyad</th>
+                    <th data-sirala>Başlangıç</th>
+                    <th data-sirala>Bitiş</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for g in gorev_gecmisi %}
+                <tr{% if g.bitis %} class="satir-soluk"{% endif %}>
+                    <td>{{ g.gorev }}</td>
+                    <td>{{ g.isim }}</td>
+                    <td data-deger="{{ g.baslangic }}">
+                        {% if g.baslangic %}{{ g.baslangic | tarih }}{% if g.donem_ad %} <span class="soluk kucuk-metin">{{ g.donem_ad }}</span>{% endif %}
+                        {% else %}<span class="soluk">Kayıt öncesi</span>{% endif %}
+                    </td>
+                    <td data-deger="{{ g.bitis or '9999' }}">
+                        {% if g.bitis %}{{ g.bitis | tarih }}{% if g.bitis_donem_ad %} <span class="soluk kucuk-metin">{{ g.bitis_donem_ad }}</span>{% endif %}
+                        {% else %}<span class="rozet rozet-aktif">Görevde</span>{% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="bos-durum">Görev kaydı yok.</p>
+    {% endif %}
+</section>
+
 <section class="kutu" id="uyeler" data-filtre-kapsam data-filtre-oge="#uye-tablosu tbody tr">
     <div class="kutu-baslik">
         <h2>Üye Listesi <span class="soluk">(<span data-filtre-sayac>{{ uyeler | length }}</span>)</span></h2>
         <div class="dugme-grubu">
+            {% if izin('uyeler_excel') %}
             <a href="{{ url_for('uyeler_excel', kulup_id=kulup.id) }}" class="dugme dugme-ince">Excel indir</a>
+            {% endif %}
+            {% if izin('uyeler_pdf') %}
             <a href="{{ url_for('uyeler_pdf', kulup_id=kulup.id) }}" class="dugme dugme-ince">PDF indir</a>
+            {% endif %}
+            {% if izin('uye_form') %}
             <a href="{{ url_for('uye_form', kulup_id=kulup.id) }}" class="dugme dugme-ana dugme-ince">+ Üye Ekle</a>
+            {% endif %}
         </div>
     </div>
 
@@ -113,12 +203,16 @@
                     <td>{{ bos(uye.eposta) }}</td>
                     <td data-deger="{{ uye.katilim_tarihi }}">{{ bos(uye.katilim_tarihi | tarih) }}</td>
                     <td class="sag satir-eylem">
+                        {% if izin('uye_form') %}
                         <a href="{{ url_for('uye_form', kulup_id=kulup.id, ogrenci_no=uye.ogrenci_no) }}" class="dugme dugme-ince">Düzenle</a>
+                        {% endif %}
+                        {% if izin('uye_sil') %}
                         <form method="POST" action="{{ url_for('uye_sil', kulup_id=kulup.id, ogrenci_no=uye.ogrenci_no) }}"
                               data-onay="{{ uye.ad_soyad or uye.ogrenci_no }} bu kulüpten çıkarılsın mı?">
                             <input type="hidden" name="csrf" value="{{ csrf }}">
                             <button type="submit" class="dugme dugme-ince dugme-tehlike">Sil</button>
                         </form>
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

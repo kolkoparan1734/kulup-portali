@@ -10,4 +10,14 @@
 <span class="rozet {{ 'rozet-aktif' if durum == 'aktif' else 'rozet-pasif' }}">{{ 'Aktif' if durum == 'aktif' else 'Pasif' }}</span>
 {% endmacro %}
 
+{% macro basvuru_rozeti(basvuru) %}
+<span class="rozet rozet-basvuru-{{ basvuru.durum }}">{{ basvuru.durum_ad }}</span>
+{% endmacro %}
+
+{% macro etkinlik_tarihi(basvuru) %}{{ basvuru.tarih_saat[:10] | tarih }}{% if not basvuru.saat_belirsiz %} {{ basvuru.tarih_saat[11:16] }}{% endif %}{% endmacro %}
+
+{% macro puan_yildiz(puan) %}
+<span class="puan" title="{{ puan }}/5"><span class="puan-yildiz" aria-hidden="true">{{ '★' * puan }}<span class="puan-bos">{{ '★' * (5 - puan) }}</span></span> {{ puan }}/5</span>
+{% endmacro %}
+
 {% macro bos(deger) %}{% if deger %}{{ deger }}{% else %}<span class="soluk">—</span>{% endif %}{% endmacro %}
