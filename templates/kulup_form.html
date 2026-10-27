@@ -28,6 +28,10 @@
             <datalist id="kategori-listesi">{% for k in kategoriler %}<option value="{{ k }}">{% endfor %}</datalist>
         </label>
         <label class="alan">
+            <span>Kulüp e-postası <small>(duyurular için)</small></span>
+            <input type="email" name="eposta" value="{{ kulup.eposta if kulup and kulup.eposta else '' }}" maxlength="120" placeholder="ör. kulup@altinbas.edu.tr">
+        </label>
+        <label class="alan">
             <span>Başkan</span>
             <input type="text" name="baskan" value="{{ kulup.baskan if kulup else '' }}" maxlength="120">
         </label>

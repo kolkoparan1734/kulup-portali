@@ -40,6 +40,104 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => window.location.reload(), sureMs + 5000);
     }
 
+    // --- Genel arama (üst çubuk) -------------------------------------------
+    const arama = document.querySelector("[data-genel-arama]");
+    if (arama) {
+        const kutu = arama.querySelector("input");
+        const liste = arama.querySelector(".arama-sonuclari");
+        let zamanlayici = null, secili = -1, istekNo = 0;
+
+        const ogeler = () => Array.from(liste.querySelectorAll(".arama-sonuc"));
+        function kapat() {
+            liste.hidden = true;
+            kutu.setAttribute("aria-expanded", "false");
+            secili = -1;
+        }
+        function sec(i) {
+            const tum = ogeler();
+            if (!tum.length) return;
+            secili = (i + tum.length) % tum.length;
+            tum.forEach((o, j) => o.setAttribute("aria-selected", String(j === secili)));
+            tum[secili].scrollIntoView({ block: "nearest" });
+            kutu.setAttribute("aria-activedescendant", tum[secili].id);
+        }
+        function goster(veri) {
+            liste.replaceChildren();
+            if (!veri.sonuclar.length) {
+                const bos = document.createElement("div");
+                bos.className = "arama-bos";
+                bos.textContent = "Sonuç bulunamadı.";
+                liste.appendChild(bos);
+            }
+            veri.sonuclar.forEach(function (s, i) {
+                const a = document.createElement("a");
+                a.className = "arama-sonuc";
+                a.href = s.link;
+                a.id = "arama-sonuc-" + i;
+                a.setAttribute("role", "option");
+                const tur = document.createElement("span");
+                tur.className = "arama-tur";
+                tur.textContent = s.tur;
+                const baslik = document.createElement("span");
+                baslik.className = "arama-baslik";
+                baslik.textContent = s.baslik;
+                const alt = document.createElement("span");
+                alt.className = "arama-alt";
+                alt.textContent = s.alt;
+                a.append(tur, baslik, alt);
+                liste.appendChild(a);
+            });
+            liste.hidden = false;
+            kutu.setAttribute("aria-expanded", "true");
+            secili = -1;
+        }
+        kutu.addEventListener("input", function () {
+            clearTimeout(zamanlayici);
+            const q = kutu.value.trim();
+            if (q.length < 2) { kapat(); return; }
+            zamanlayici = setTimeout(function () {
+                const bu = ++istekNo;
+                fetch(arama.dataset.adres + "?q=" + encodeURIComponent(q), { headers: { Accept: "application/json" } })
+                    .then((r) => r.json())
+                    .then((veri) => { if (bu === istekNo) goster(veri); })
+                    .catch(kapat);
+            }, 200);
+        });
+        kutu.addEventListener("keydown", function (e) {
+            if (e.key === "ArrowDown") { e.preventDefault(); sec(secili + 1); }
+            else if (e.key === "ArrowUp") { e.preventDefault(); sec(secili - 1); }
+            else if (e.key === "Enter" && secili >= 0) { e.preventDefault(); ogeler()[secili].click(); }
+            else if (e.key === "Escape") { kapat(); arama.classList.remove("acik"); }
+        });
+        document.addEventListener("click", function (e) {
+            if (!arama.contains(e.target)) { kapat(); arama.classList.remove("acik"); }
+        });
+        arama.querySelector("[data-arama-ac]").addEventListener("click", function () {
+            arama.classList.toggle("acik");
+            if (arama.classList.contains("acik")) kutu.focus();
+        });
+    }
+
+    // --- Panoya kopyala ----------------------------------------------------
+    document.querySelectorAll("[data-kopyala]").forEach(function (dugme) {
+        dugme.addEventListener("click", function () {
+            const hedef = document.querySelector(dugme.dataset.kopyala);
+            const metin = hedef.value !== undefined ? hedef.value : hedef.textContent;
+            const tamam = () => {
+                const eski = dugme.textContent;
+                dugme.textContent = "Kopyalandı ✓";
+                setTimeout(() => (dugme.textContent = eski), 1800);
+            };
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(metin).then(tamam, () => { hedef.select && hedef.select(); });
+            } else if (hedef.select) {
+                hedef.select();
+                document.execCommand("copy");
+                tamam();
+            }
+        });
+    });
+
     // --- Silme onayı ------------------------------------------------------
     document.querySelectorAll("form[data-onay]").forEach(function (form) {
         form.addEventListener("submit", function (e) {

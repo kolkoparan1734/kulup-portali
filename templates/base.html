@@ -19,6 +19,16 @@
             <span class="ustbar-logo"><img src="{{ url_for('static', filename='images/footer-logo.png') }}" alt="Altınbaş Üniversitesi Öğrenci Dekanlığı logosu"></span>
             <span class="ustbar-baslik">Öğrenci Dekanlığı <strong>Kulüp Paneli</strong></span>
         </a>
+        {% if izin('ara') %}
+        <div class="genel-arama" data-genel-arama data-adres="{{ url_for('ara') }}">
+            <button type="button" class="arama-ac" aria-label="Aramayı aç" data-arama-ac>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14"/></svg>
+            </button>
+            <input type="search" placeholder="Kulüp, başkan, danışman, öğrenci no ara…" aria-label="Genel arama"
+                   autocomplete="off" role="combobox" aria-expanded="false" aria-controls="arama-sonuclari" aria-autocomplete="list">
+            <div class="arama-sonuclari" id="arama-sonuclari" role="listbox" hidden></div>
+        </div>
+        {% endif %}
         {% if aktif_donem %}
         {% if izin('donemler') %}<a href="{{ url_for('donemler') }}"{% else %}<span{% endif %} class="ustbar-donem" title="Aktif dönem">
             <span class="ustbar-donem-etiket">Aktif dönem</span>{{ aktif_donem.ad }}
@@ -45,6 +55,7 @@
                 ('takvim', 'Takvim', '<path d="M17 12h-5v5h5zM16 1v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1zm3 18H5V8h14z"/>', ['takvim']),
                 ('karne', 'Kulüp Karnesi', '<path d="M12 17.3 18.2 21l-1.6-7 5.4-4.7-7.2-.6L12 2 9.2 8.7 2 9.3l5.4 4.7-1.6 7z"/>', ['karne', 'kulup_karne']),
                 ('raporlar', 'Raporlar', '<path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zm5.6 8H19v6h-2.8z"/>', ['raporlar']),
+                ('duyurular', 'Duyurular', '<path d="M18 11v2h4v-2zm-2 6.6 3.2 2.4 1.2-1.6-3.2-2.4zM20.4 5.6 19.2 4 16 6.4l1.2 1.6zM4 9a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1v4h2v-4h1l5 3V6L8 9zm11.5 3A4.5 4.5 0 0 0 14 8.7v6.6a4.5 4.5 0 0 0 1.5-3.3"/>', ['duyurular', 'duyuru_form', 'duyuru_detay']),
             ]),
             ('Kayıtlar', [
                 ('islem_gecmisi', 'İşlem Geçmişi', '<path d="M13 3a9 9 0 0 0-9 9H1l4 4 4-4H6a7 7 0 1 1 2 4.9l-1.4 1.4A9 9 0 1 0 13 3m-1 5v5l4.3 2.5.7-1.2-3.5-2.1V8z"/>', ['islem_gecmisi']),

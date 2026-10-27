@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Excel'den Üye Yükle · {{ kulup.isim }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}#uyeler" class="geri-link">&larr; {{ kulup.isim }}</a>
+
+<div class="sayfa-baslik">
+    <div>
+        <h1>Excel'den Üye Yükle</h1>
+        <p>{{ kulup.isim }} · Önce şablonu indirip doldurun, sonra yükleyin. Hiçbir şey kaydedilmeden önce önizleme gösterilir.</p>
+    </div>
+</div>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<div class="belge-izgara">
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">1. Şablonu indirin</h2>
+        <p class="soluk">Sütunlar: {{ sutunlar | join(', ') }}. Ad Soyad ve Öğrenci No zorunludur.</p>
+        <a href="{{ url_for('uye_sablonu', kulup_id=kulup.id) }}" class="dugme dugme-ana">Boş şablonu indir (.xlsx)</a>
+
+        <h2 class="kutu-baslik-tek grafik-ara-baslik">2. Doldurduğunuz dosyayı yükleyin</h2>
+        <form method="POST" enctype="multipart/form-data" class="form">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <label class="alan">
+                <span>Excel dosyası (.xlsx)</span>
+                <input type="file" name="dosya" accept=".xlsx" required>
+            </label>
+            <button type="submit" class="dugme">Önizle</button>
+        </form>
+        <p class="form-not">Öğrenci bilgileri tüm kulüplerde ortaktır. Zaten üye olan bir öğrencinin Excel'de dolu olan alanları güncellenir; boş bırakılan alanlar mevcut bilgiyi silmez.</p>
+    </section>
+
+    <section class="kutu{% if satirlar %} kutu-tablo{% endif %}">
+        {% if satirlar %}
+        <div class="onizleme-ust">
+            <h2>3. Önizleme</h2>
+            <div class="evrak-lejant">
+                <span class="evrak-hucre evrak-teslim">{{ sayilar.yeni }} yeni</span>
+                <span class="evrak-hucre evrak-yaklasiyor">{{ sayilar.guncelleme }} güncellenecek</span>
+                <span class="evrak-hucre evrak-bekleniyor">{{ sayilar.ayni }} değişiklik yok</span>
+                <span class="evrak-hucre evrak-eksik">{{ sayilar.hata }} hatalı</span>
+            </div>
+        </div>
+        <div class="tablo-sarici">
+            <table class="tablo">
+                <thead>
+                    <tr><th>Satır</th><th>Ad Soyad</th><th>Öğrenci No</th><th>Bölüm</th><th>Sınıf</th><th>E-posta</th><th>Katılım</th><th>Durum</th></tr>
+                </thead>
+                <tbody>
+                    {% for s in satirlar %}
+                    <tr>
+                        <td class="mono">{{ s.satir }}</td>
+                        <td>{{ s.uye.ad_soyad }}</td>
+                        <td class="mono">{{ s.uye.ogrenci_no }}</td>
+                        <td>{{ s.uye.bolum }}</td>
+                        <td>{{ s.uye.sinif }}</td>
+                        <td>{{ s.uye.eposta }}</td>
+                        <td>{{ s.uye.katilim_tarihi | tarih }}</td>
+                        <td><span class="evrak-hucre evrak-{{ {'yeni': 'teslim', 'guncelleme': 'yaklasiyor', 'ayni': 'bekleniyor', 'hata': 'eksik'}[s.durum] }}">{{ s.aciklama }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="onizleme-alt">
+            {% if sayilar.yeni or sayilar.guncelleme %}
+            <form method="POST" action="{{ url_for('uye_ice_aktar_onayla', kulup_id=kulup.id) }}"
+                  data-onay="{{ sayilar.yeni }} yeni üye eklenecek, {{ sayilar.guncelleme }} üye güncellenecek. Onaylıyor musunuz?">
+                <input type="hidden" name="csrf" value="{{ csrf }}">
+                <input type="hidden" name="anahtar" value="{{ anahtar }}">
+                <button type="submit" class="dugme dugme-ana">Onayla ve Kaydet</button>
+            </form>
+            {% else %}
+            <p class="soluk">Kaydedilecek yeni veya değişen satır yok.</p>
+            {% endif %}
+            {% if sayilar.hata %}<p class="soluk kucuk-metin">Hatalı satırlar kaydedilmez; düzeltip dosyayı yeniden yükleyebilirsiniz.</p>{% endif %}
+        </div>
+        {% else %}
+        <h2 class="kutu-baslik-tek">3. Önizleme</h2>
+        <p class="bos-durum">Dosya yüklediğinizde satırlar burada kontrol edilip gösterilecek. Onaylamadan hiçbir veri kaydedilmez.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

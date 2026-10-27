@@ -10,9 +10,14 @@
             <h1>Kulüpler</h1>
             <p><span data-filtre-sayac>{{ kulupler | length }}</span> kulüp gösteriliyor</p>
         </div>
-        {% if izin('kulup_form') %}
-        <a href="{{ url_for('kulup_form') }}" class="dugme dugme-ana">+ Yeni Kulüp</a>
-        {% endif %}
+        <div class="dugme-grubu">
+            {% if izin('iletisim_listesi') %}
+            <a href="{{ url_for('iletisim_listesi') }}" class="dugme">İletişim listesi (Excel)</a>
+            {% endif %}
+            {% if izin('kulup_form') %}
+            <a href="{{ url_for('kulup_form') }}" class="dugme dugme-ana">+ Yeni Kulüp</a>
+            {% endif %}
+        </div>
     </div>
 
     <div class="filtre-cubugu">

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Duyurular{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Duyurular</h1>
+        <p>Kulüp başkanlarına gönderilen duyuruların arşivi. Duyurular e-posta programınızda (Outlook) açılarak gönderilir.</p>
+    </div>
+    <div class="dugme-grubu">
+        <a href="{{ url_for('iletisim_listesi') }}" class="dugme">İletişim listesi (Excel)</a>
+        <a href="{{ url_for('duyuru_form') }}" class="dugme dugme-ana">+ Yeni Duyuru</a>
+    </div>
+</div>
+
+<section class="kutu kutu-tablo">
+    <div class="tablo-sarici">
+        <table class="tablo">
+            <thead>
+                <tr>
+                    <th>Tarih</th>
+                    <th>Konu</th>
+                    <th>Hedef</th>
+                    <th>Alıcı</th>
+                    <th>Gönderen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in duyurular %}
+                <tr>
+                    <td class="mono">{{ d.tarih | tarih }}</td>
+                    <td><a href="{{ url_for('duyuru_detay', duyuru_id=d.id) }}"><strong>{{ d.konu }}</strong></a></td>
+                    <td>{{ d.hedef_ad }}<span class="soluk kucuk-metin">{{ d.kulupler | length }} kulüp</span></td>
+                    <td>{{ d.alicilar | length }}{% if d.adressiz %} <span class="rozet rozet-uyari" title="E-posta adresi olmayan kulüp">{{ d.adressiz | length }} adressiz</span>{% endif %}</td>
+                    <td>{{ d.gonderen }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if not duyurular %}<p class="bos-durum">Henüz duyuru yok.</p>{% endif %}
+</section>
+{% endblock %}

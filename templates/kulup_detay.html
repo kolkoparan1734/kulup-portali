@@ -17,6 +17,7 @@
         <p class="kulup-baskan">Başkan:
             {% if kulup.baskan %}<strong>{{ kulup.baskan }}</strong>
             {% else %}<span class="rozet rozet-uyari">Başkan atanmamış</span>{% endif %}
+            {% if kulup.eposta %} · <a href="mailto:{{ kulup.eposta }}">{{ kulup.eposta }}</a>{% endif %}
         </p>
         {% if kulup.aciklama %}<p class="kulup-aciklama">{{ kulup.aciklama }}</p>{% endif %}
     </div>
@@ -28,6 +29,9 @@
         {% if izin('kulup_raporu_pdf') %}
         <a href="{{ url_for('kulup_raporu_pdf', kulup_id=kulup.id) }}" class="dugme" title="{{ aktif_donem.ad }} kulüp raporu">Rapor PDF</a>
         {% endif %}
+        {% endif %}
+        {% if izin('duyuru_form') %}
+        <a href="{{ url_for('duyuru_form', hedef_turu='kulup', kulup=kulup.id) }}" class="dugme">Duyuru gönder</a>
         {% endif %}
         {% if izin('kulup_form') %}
         <a href="{{ url_for('kulup_form', kulup_id=kulup.id) }}" class="dugme">Düzenle</a>
@@ -167,6 +171,9 @@
             {% endif %}
             {% if izin('uyeler_pdf') %}
             <a href="{{ url_for('uyeler_pdf', kulup_id=kulup.id) }}" class="dugme dugme-ince">PDF indir</a>
+            {% endif %}
+            {% if izin('uye_ice_aktar') %}
+            <a href="{{ url_for('uye_ice_aktar', kulup_id=kulup.id) }}" class="dugme dugme-ince">Excel'den üye yükle</a>
             {% endif %}
             {% if izin('uye_form') %}
             <a href="{{ url_for('uye_form', kulup_id=kulup.id) }}" class="dugme dugme-ana dugme-ince">+ Üye Ekle</a>

@@ -18,9 +18,11 @@ Ortam değişkenleri (isteğe bağlı):
 
 import hmac
 import io
+import json
 import os
 import re
 import secrets
+from urllib.parse import quote
 from datetime import date, datetime, timedelta
 from functools import wraps
 from uuid import uuid4
@@ -29,9 +31,11 @@ from flask import (
     Flask, render_template, abort, request, redirect, url_for, session, flash,
     send_file, send_from_directory,
 )
+from werkzeug.datastructures import MultiDict
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
+import config
 import veri
 
 app = Flask(__name__)
@@ -40,6 +44,7 @@ app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024  # yükleme sınırı: 20 MB
 
 BELGE_KLASORU = os.path.join(app.root_path, "uploads", "belgeler")
 BASVURU_KLASORU = os.path.join(app.root_path, "uploads", "basvurular")
+ICE_AKTARIM_KLASORU = os.path.join(app.root_path, "uploads", "ice_aktarim")
 LOGO_KLASORU = os.path.join(app.static_folder, "images")
 
 BELGE_UZANTILARI = {"pdf", "doc", "docx", "odt", "xls", "xlsx", "ods", "png", "jpg", "jpeg"}
@@ -48,6 +53,7 @@ BELGE_TURLERI = ["Tüzük", "Faaliyet Raporu", "Faaliyet Bildirim Formu", "Faali
                  "Yönetim Kurulu Listesi", "Danışman Onay Formu", "Danışman Formu", "Etkinlik Başvurusu",
                  "Toplantı Tutanağı", "Diğer"]
 YK_GOREVLERI = ["Başkan", "Başkan Yardımcısı", "Sekreter", "Sayman"]
+EPOSTA_DESENI = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
 
 # Giriş yapmadan açılabilen sayfalar.
 ACIK_SAYFALAR = {"giris_yap", "sifremi_unuttum", "static"}
@@ -184,7 +190,7 @@ def sablon_degiskenleri():
 KAYIT_TURLERI = {
     "kulup": "Kulüp", "uye": "Üye", "danisman": "Danışman", "donem": "Dönem", "belge": "Belge",
     "basvuru": "Etkinlik başvurusu", "zorunlu_evrak": "Zorunlu evrak", "karne": "Karne",
-    "kullanici": "Kullanıcı", "ayar": "Ayar",
+    "kullanici": "Kullanıcı", "ayar": "Ayar", "duyuru": "Duyuru",
 }
 
 ALAN_ADLARI = {
@@ -457,6 +463,7 @@ def kulup_form(kulup_id=None):
         kulup = {
             "isim": f.get("isim", "").strip(),
             "kategori": f.get("kategori", "").strip(),
+            "eposta": f.get("eposta", "").strip(),
             "aciklama": f.get("aciklama", "").strip(),
             "baskan": f.get("baskan", "").strip(),
             "durum": "pasif" if f.get("durum") == "pasif" else "aktif",
@@ -473,6 +480,8 @@ def kulup_form(kulup_id=None):
             hata = "Kulüp adı ve kategori boş bırakılamaz."
         elif kulup["danisman_id"] and veri.danisman_getir(kulup["danisman_id"]) is None:
             hata = "Seçilen danışman bulunamadı."
+        elif kulup["eposta"] and not EPOSTA_DESENI.fullmatch(kulup["eposta"]):
+            hata = "Kulüp e-posta adresi geçersiz."
         elif logo and logo.filename and _uzanti(logo.filename) not in LOGO_UZANTILARI:
             hata = "Logo PNG, JPG veya WEBP olmalı."
         else:
@@ -1884,6 +1893,373 @@ def islem_gecmisi():
     return render_template("islem_gecmisi.html", islemler=gosterilen, toplam=len(islemler), sayfa=sayfa,
                            toplam_sayfa=toplam_sayfa, filtre=filtre, kullanicilar=kullanicilar,
                            kulupler=veri.kulupleri_getir(arsiv=None), turler=KAYIT_TURLERI)
+
+
+# ---------------------------------------------------------------------------
+# Duyurular
+# ---------------------------------------------------------------------------
+
+HEDEF_TURLERI = {"tum": "Tüm kulüp başkanları", "kategori": "Seçili kategorideki kulüpler", "kulup": "Tek kulüp"}
+
+
+def _duyuru_hedefi(kaynak):
+    """Formdan/sorgudan hedef kulüpleri ve adresleri hesaplar.
+
+    Dönüş: (hedef bilgisi, hata). Hedef bilgisi: tur, deger, ad, kulupler, alicilar, adressiz.
+    """
+    tur = kaynak.get("hedef_turu", "tum")
+    # Formda gizli alan (0) + onay kutusu (1) aynı adla gelir; kutu işaretliyse "1" listededir.
+    sadece_aktif = "1" in kaynak.getlist("sadece_aktif")
+    danisman_dahil = kaynak.get("danisman_dahil") == "1"
+    kulupler = veri.kulupleri_getir()
+    if tur == "kategori":
+        deger = kaynak.get("kategori", "")
+        if not deger:
+            return None, "Bir kategori seçin."
+        kulupler = [k for k in kulupler if k["kategori"] == deger]
+        ad = f"{deger} kategorisindeki kulüpler"
+    elif tur == "kulup":
+        deger = kaynak.get("kulup_id", "")
+        kulupler = [k for k in kulupler if k["id"] == deger]
+        if not kulupler:
+            return None, "Bir kulüp seçin."
+        ad = kulupler[0]["isim"]
+        sadece_aktif = False  # tek kulüp seçildiyse durumuna bakılmaz
+    else:
+        tur, deger, ad = "tum", "", "Tüm kulüp başkanları"
+    if sadece_aktif:
+        kulupler = [k for k in kulupler if k["durum"] == "aktif"]
+
+    alicilar, adressiz = [], []
+    for kulup in kulupler:
+        adresler = veri.kulup_eposta_adresleri(kulup, danisman_dahil)
+        if adresler:
+            alicilar.extend(a for a in adresler if a.lower() not in {x.lower() for x in alicilar})
+        else:
+            adressiz.append({"id": kulup["id"], "isim": kulup["isim"]})
+    return {
+        "tur": tur, "deger": deger, "ad": ad, "sadece_aktif": sadece_aktif, "danisman_dahil": danisman_dahil,
+        "kulupler": [{"id": k["id"], "isim": k["isim"]} for k in kulupler],
+        "alicilar": alicilar, "adressiz": adressiz,
+    }, None
+
+
+def _mailto(duyuru):
+    """Duyuruyu e-posta programında açan mailto bağlantısı (alıcılar gizli/BCC)."""
+    alan = "bcc" if config.ALICILAR_GIZLI else "to"
+    parcalar = [f"{alan}={quote(','.join(duyuru['alicilar']), safe='@,')}",
+                f"subject={quote(duyuru['konu'])}", f"body={quote(duyuru['metin'])}"]
+    return f"mailto:{quote(config.GONDEREN_ADRES, safe='@')}?" + "&".join(parcalar)
+
+
+@app.route("/duyurular")
+def duyurular():
+    return render_template("duyurular.html", duyurular=veri.duyurulari_getir(), hedef_turleri=HEDEF_TURLERI)
+
+
+@app.route("/duyurular/alicilar")
+def duyuru_alicilari():
+    """Duyuru formundaki canlı alıcı önizlemesi için JSON."""
+    hedef, hata = _duyuru_hedefi(request.args)
+    if hata:
+        return {"hata": hata}
+    return {"kulup_sayisi": len(hedef["kulupler"]), "alici_sayisi": len(hedef["alicilar"]),
+            "adressiz": [k["isim"] for k in hedef["adressiz"]]}
+
+
+@app.route("/duyurular/yeni", methods=["GET", "POST"])
+def duyuru_form():
+    hata = None
+    form = request.form if request.method == "POST" else MultiDict({
+        "hedef_turu": request.args.get("hedef_turu", "tum"), "kulup_id": request.args.get("kulup", ""),
+        "sadece_aktif": "1"})
+    if request.method == "POST":
+        hedef, hata = _duyuru_hedefi(request.form)
+        konu, metin = request.form.get("konu", "").strip(), request.form.get("metin", "").strip()
+        if not hata and (not konu or not metin):
+            hata = "Konu ve metin boş bırakılamaz."
+        if not hata:
+            duyuru = {
+                "id": veri.yeni_id(), "tarih": datetime.now().strftime("%Y-%m-%d %H:%M"),
+                "gonderen": session.get("ad_soyad", ""), "gonderen_kullanici": session.get("kullanici_adi", ""),
+                "konu": konu, "metin": metin, "hedef_turu": hedef["tur"], "hedef_deger": hedef["deger"],
+                "hedef_ad": hedef["ad"], "kulupler": hedef["kulupler"], "alicilar": hedef["alicilar"],
+                "adressiz": hedef["adressiz"], "danisman_dahil": hedef["danisman_dahil"],
+                "yontem": config.EPOSTA_YONTEMI,
+            }
+            veri.duyuru_ekle(duyuru)
+            _islem("Ekleme", "duyuru", konu, duyuru["id"],
+                   hedef["deger"] if hedef["tur"] == "kulup" else "",
+                   aciklama=f"{hedef['ad']} · {len(hedef['kulupler'])} kulüp, {len(hedef['alicilar'])} alıcı")
+            flash("Duyuru arşive kaydedildi. Şimdi e-posta programınızda açıp gönderebilirsiniz.", "basarili")
+            return redirect(url_for("duyuru_detay", duyuru_id=duyuru["id"]))
+    return render_template("duyuru_form.html", form=form, hata=hata, hedef_turleri=HEDEF_TURLERI,
+                           kategoriler=veri.kategorileri_getir(), kulupler=veri.kulupleri_getir())
+
+
+@app.route("/duyurular/<duyuru_id>")
+def duyuru_detay(duyuru_id):
+    duyuru = veri.duyuru_getir(duyuru_id)
+    if duyuru is None:
+        abort(404)
+    mailto = _mailto(duyuru) if duyuru["alicilar"] else ""
+    return render_template("duyuru_detay.html", duyuru=duyuru, mailto=mailto,
+                           mailto_uzun=len(mailto) > config.MAILTO_UZUNLUK_SINIRI,
+                           gizli=config.ALICILAR_GIZLI, hedef_turleri=HEDEF_TURLERI)
+
+
+# ---------------------------------------------------------------------------
+# İletişim listesi (Excel)
+# ---------------------------------------------------------------------------
+
+def _excel_basligi(sayfa, basliklar, genislikler):
+    from openpyxl.styles import Font, PatternFill
+
+    sayfa.append(basliklar)
+    for hucre in sayfa[sayfa.max_row]:
+        hucre.font = Font(bold=True, color="FFFFFF")
+        hucre.fill = PatternFill("solid", fgColor="1B2F8F")
+    for i, genislik in enumerate(genislikler):
+        sayfa.column_dimensions[chr(65 + i)].width = genislik
+    # Hücreye erişmek o satırı oluşturur; konum metin olarak verilir.
+    sayfa.freeze_panes = f"A{sayfa.max_row + 1}"
+
+
+@app.route("/iletisim-listesi.xlsx")
+def iletisim_listesi():
+    from openpyxl import Workbook
+
+    kitap = Workbook()
+    sayfa = kitap.active
+    sayfa.title = "Kulüpler"
+    _excel_basligi(sayfa, ["Kulüp", "Kategori", "Durum", "Başkan", "Başkan / Kulüp E-posta", "Danışman",
+                           "Danışman E-posta", "Danışman Telefon"], (36, 22, 8, 24, 34, 34, 30, 16))
+    for k in veri.kulupleri_getir():
+        sayfa.append([k["isim"], k["kategori"], "Aktif" if k["durum"] == "aktif" else "Pasif",
+                      k["baskan"] or "Atanmamış", ", ".join(veri.kulup_eposta_adresleri(k)),
+                      k["danisman"]["isim"], k["danisman"]["eposta"], k["danisman"]["telefon"]])
+
+    sayfa = kitap.create_sheet("Danışmanlar")
+    _excel_basligi(sayfa, ["Unvan", "Ad Soyad", "Fakülte", "Bölüm", "E-posta", "Telefon", "Kulüpler"],
+                   (16, 26, 28, 30, 30, 16, 50))
+    for d in veri.danismanlari_getir():
+        sayfa.append([d["unvan"], d["ad_soyad"], d["fakulte"], d["bolum"], d["eposta"], d["telefon"],
+                      ", ".join(k["isim"] for k in d["kulupler"])])
+
+    cikti = io.BytesIO()
+    kitap.save(cikti)
+    cikti.seek(0)
+    return send_file(cikti, as_attachment=True, download_name=f"kulup-iletisim-listesi-{date.today().isoformat()}.xlsx",
+                     mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+
+
+# ---------------------------------------------------------------------------
+# Genel arama (üst çubuk)
+# ---------------------------------------------------------------------------
+
+def _arama_metni(metin):
+    """Türkçe büyük/küçük harf duyarsız karşılaştırma için (İ/I dönüşümü dahil)."""
+    return (metin or "").replace("İ", "i").replace("I", "ı").lower()
+
+
+@app.route("/ara")
+def ara():
+    """Kulüp, başkan, danışman ve öğrenci (numara veya ad) araması; JSON döner."""
+    q = _arama_metni(request.args.get("q", "").strip())
+    if len(q) < 2:
+        return {"sonuclar": []}
+    sonuclar = []
+    kulupler = veri.kulupleri_getir()
+    for k in kulupler:
+        if q in _arama_metni(k["isim"]):
+            sonuclar.append({"tur": "Kulüp", "baslik": k["isim"], "alt": k["kategori"],
+                             "link": url_for("kulup_detay", kulup_id=k["id"])})
+    for k in kulupler:
+        if k["baskan"] and q in _arama_metni(k["baskan"]):
+            sonuclar.append({"tur": "Başkan", "baslik": k["baskan"], "alt": k["isim"],
+                             "link": url_for("kulup_detay", kulup_id=k["id"])})
+    for d in veri.danismanlari_getir():
+        if q in _arama_metni(d["ad_soyad"]):
+            sonuclar.append({"tur": "Danışman", "baslik": d["tam_ad"],
+                             "alt": ", ".join(k["isim"] for k in d["kulupler"]) or "Kulübü yok",
+                             "link": url_for("danisman_detay", danisman_id=d["id"])})
+    # Öğrenciler: numara veya ad soyad; bir öğrenci birden fazla kulüpteyse tek satırda gösterilir.
+    ogrenciler = {}
+    for u in veri.tum_uyeleri_getir():
+        if q in _arama_metni(u["ogrenci_no"]) or (u["ad_soyad"] and q in _arama_metni(u["ad_soyad"])):
+            kayit = ogrenciler.setdefault(u["ogrenci_no"], {"uye": u, "kulupler": []})
+            kayit["kulupler"].append((u["kulup_id"], u["kulup_isim"]))
+    for no, kayit in list(ogrenciler.items())[:15]:
+        sonuclar.append({"tur": "Öğrenci", "baslik": f"{kayit['uye']['ad_soyad'] or 'Ad girilmemiş'} · {no}",
+                         "alt": ", ".join(isim for _, isim in kayit["kulupler"]),
+                         "link": url_for("kulup_detay", kulup_id=kayit["kulupler"][0][0]) + "#uyeler"})
+    return {"sonuclar": sonuclar[:40], "fazla": len(sonuclar) > 40}
+
+
+# ---------------------------------------------------------------------------
+# Excel'den üye içe aktarma (önizleme + onay)
+# ---------------------------------------------------------------------------
+
+SABLON_SUTUNLARI = ["Ad Soyad", "Öğrenci No", "Bölüm", "Sınıf", "Telefon", "E-posta", "Katılım Tarihi (GG.AA.YYYY)"]
+SABLON_ALANLARI = ["ad_soyad", "ogrenci_no", "bolum", "sinif", "telefon", "eposta", "katilim_tarihi"]
+
+
+@app.route("/kulupler/<kulup_id>/uyeler/sablon.xlsx")
+def uye_sablonu(kulup_id):
+    from openpyxl import Workbook
+    from openpyxl.comments import Comment
+
+    kulup = _kulup_veya_404(kulup_id)
+    kitap = Workbook()
+    sayfa = kitap.active
+    sayfa.title = "Üyeler"
+    _excel_basligi(sayfa, SABLON_SUTUNLARI, (26, 14, 28, 10, 16, 30, 26))
+    sayfa["A1"].comment = Comment(f"{kulup['isim']} üye listesi. Ad Soyad ve Öğrenci No zorunludur. "
+                                  "Başlık satırını değiştirmeyin.", "Öğrenci Dekanlığı")
+    # Metin olarak saklansın diye öğrenci no ve telefon sütunları metin biçiminde.
+    for satir in range(2, 502):
+        for sutun in ("B", "E"):
+            sayfa[f"{sutun}{satir}"].number_format = "@"
+    cikti = io.BytesIO()
+    kitap.save(cikti)
+    cikti.seek(0)
+    return send_file(cikti, as_attachment=True, download_name=f"{kulup_id}-uye-sablonu.xlsx",
+                     mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+
+
+def _hucre_metni(deger):
+    if deger is None:
+        return ""
+    if isinstance(deger, float) and deger.is_integer():
+        deger = int(deger)
+    return str(deger).strip()
+
+
+def _tarih_coz(deger):
+    """Excel tarih hücresi veya 'GG.AA.YYYY' / 'YYYY-AA-GG' metnini 'YYYY-AA-GG' yapar."""
+    if deger in (None, ""):
+        return "", None
+    if isinstance(deger, datetime):
+        return deger.date().isoformat(), None
+    if isinstance(deger, date):
+        return deger.isoformat(), None
+    metin = str(deger).strip()
+    for bicim in ("%d.%m.%Y", "%Y-%m-%d", "%d/%m/%Y"):
+        try:
+            return datetime.strptime(metin, bicim).date().isoformat(), None
+        except ValueError:
+            pass
+    return "", f"Katılım tarihi anlaşılamadı: {metin}"
+
+
+def _excel_uyelerini_oku(dosya, kulup_id):
+    """Excel'deki satırları okuyup doğrular; her satıra durum ekler."""
+    from openpyxl import load_workbook
+
+    sayfa = load_workbook(dosya, read_only=True, data_only=True).active
+    satirlar = list(sayfa.iter_rows(values_only=True))
+    if not satirlar:
+        raise ValueError("Dosya boş.")
+    baslik = [_arama_metni(_hucre_metni(h)) for h in satirlar[0]]
+    beklenen = [_arama_metni(b) for b in SABLON_SUTUNLARI]
+    if baslik[:2] != beklenen[:2]:
+        raise ValueError("Başlık satırı şablonla uyuşmuyor. Lütfen panelden indirilen şablonu kullanın.")
+
+    mevcut = {u["ogrenci_no"]: u for u in veri.uyeleri_getir(kulup_id)}
+    tum_ogrenciler = {u["ogrenci_no"]: u for u in veri.tum_uyeleri_getir()}
+    gorulen, sonuc = set(), []
+    for no, ham in enumerate(satirlar[1:], start=2):
+        if not any(_hucre_metni(h) for h in ham):
+            continue
+        ham = list(ham) + [None] * len(SABLON_ALANLARI)
+        uye = {alan: _hucre_metni(ham[i]) for i, alan in enumerate(SABLON_ALANLARI) if alan != "katilim_tarihi"}
+        uye["katilim_tarihi"], tarih_hatasi = _tarih_coz(ham[6])
+        hatalar = []
+        if not uye["ad_soyad"] or not uye["ogrenci_no"]:
+            hatalar.append("Ad soyad ve öğrenci no zorunlu.")
+        elif not re.fullmatch(r"[0-9A-Za-zçğıöşüÇĞİÖŞÜ]{1,32}", uye["ogrenci_no"]):
+            hatalar.append("Öğrenci numarası geçersiz.")
+        if uye["eposta"] and not EPOSTA_DESENI.fullmatch(uye["eposta"]):
+            hatalar.append("E-posta geçersiz.")
+        if tarih_hatasi:
+            hatalar.append(tarih_hatasi)
+        if uye["ogrenci_no"] in gorulen:
+            hatalar.append("Bu öğrenci numarası dosyada birden fazla kez geçiyor.")
+        gorulen.add(uye["ogrenci_no"])
+
+        if hatalar:
+            durum, aciklama = "hata", " ".join(hatalar)
+        elif uye["ogrenci_no"] in mevcut:
+            eski = mevcut[uye["ogrenci_no"]]
+            farkli = [a for a in SABLON_ALANLARI if a != "ogrenci_no" and uye[a] and uye[a] != eski.get(a, "")]
+            durum = "guncelleme" if farkli else "ayni"
+            aciklama = ("Zaten üye; güncellenecek: " + ", ".join(ALAN_ADLARI[a] for a in farkli)) if farkli \
+                else "Zaten üye; değişiklik yok."
+        else:
+            durum = "yeni"
+            diger = tum_ogrenciler.get(uye["ogrenci_no"])
+            aciklama = f"Yeni üye (başka kulüpte de kayıtlı: {diger['kulup_isim']})" if diger else "Yeni üye"
+        sonuc.append({"satir": no, "uye": uye, "durum": durum, "aciklama": aciklama})
+    return sonuc
+
+
+@app.route("/kulupler/<kulup_id>/uyeler/ice-aktar", methods=["GET", "POST"])
+def uye_ice_aktar(kulup_id):
+    kulup = _kulup_veya_404(kulup_id)
+    satirlar, anahtar, hata = None, None, None
+    if request.method == "POST":
+        dosya = request.files.get("dosya")
+        if not dosya or not dosya.filename:
+            hata = "Lütfen bir Excel dosyası seçin."
+        elif _uzanti(dosya.filename) != "xlsx":
+            hata = "Sadece .xlsx dosyası yüklenebilir. Panelden indirilen şablonu kullanın."
+        else:
+            try:
+                satirlar = _excel_uyelerini_oku(dosya, kulup_id)
+            except Exception as e:  # bozuk/uyumsuz dosya
+                hata = str(e) if isinstance(e, ValueError) else "Dosya okunamadı. Geçerli bir Excel (.xlsx) dosyası yükleyin."
+            if satirlar is not None and not satirlar:
+                hata, satirlar = "Dosyada üye satırı bulunamadı.", None
+        if satirlar:
+            # Önizleme sunucuda geçici olarak saklanır; onaylanınca okunup silinir.
+            os.makedirs(ICE_AKTARIM_KLASORU, exist_ok=True)
+            anahtar = secrets.token_hex(16)
+            with open(os.path.join(ICE_AKTARIM_KLASORU, f"{anahtar}.json"), "w", encoding="utf-8") as f:
+                json.dump({"kulup_id": kulup_id, "kullanici": session.get("kullanici_adi"), "satirlar": satirlar},
+                          f, ensure_ascii=False)
+    sayilar = {d: sum(1 for s in satirlar or [] if s["durum"] == d) for d in ("yeni", "guncelleme", "ayni", "hata")}
+    return render_template("uye_ice_aktar.html", kulup=kulup, satirlar=satirlar, anahtar=anahtar, hata=hata,
+                           sayilar=sayilar, sutunlar=SABLON_SUTUNLARI)
+
+
+@app.route("/kulupler/<kulup_id>/uyeler/ice-aktar/onayla", methods=["POST"])
+def uye_ice_aktar_onayla(kulup_id):
+    kulup = _kulup_veya_404(kulup_id)
+    anahtar = request.form.get("anahtar", "")
+    yol = os.path.join(ICE_AKTARIM_KLASORU, f"{anahtar}.json")
+    if not re.fullmatch(r"[0-9a-f]{32}", anahtar) or not os.path.exists(yol):
+        flash("Önizleme bulunamadı veya süresi doldu. Dosyayı yeniden yükleyin.", "hata")
+        return redirect(url_for("uye_ice_aktar", kulup_id=kulup_id))
+    with open(yol, encoding="utf-8") as f:
+        onizleme = json.load(f)
+    os.remove(yol)
+    if onizleme["kulup_id"] != kulup_id or onizleme["kullanici"] != session.get("kullanici_adi"):
+        abort(403)
+    eklenen = guncellenen = 0
+    for s in onizleme["satirlar"]:
+        if s["durum"] not in ("yeni", "guncelleme"):
+            continue
+        uye = s["uye"]
+        # Güncellemede Excel'de boş bırakılan alanlar mevcut bilgiyi silmez.
+        eski = next((u for u in veri.uyeleri_getir(kulup_id) if u["ogrenci_no"] == uye["ogrenci_no"]), {})
+        bilgiler = {a: uye.get(a) or eski.get(a, "") for a in veri.OGRENCI_ALANLARI}
+        veri.uye_kaydet(kulup_id, uye["ogrenci_no"], bilgiler, uye["katilim_tarihi"] or eski.get("katilim_tarihi", ""))
+        eklenen += s["durum"] == "yeni"
+        guncellenen += s["durum"] == "guncelleme"
+    _islem("İçe aktarma", "uye", f"{kulup['isim']} üye listesi", kulup_id, kulup_id,
+           aciklama=f"Excel'den {eklenen} yeni üye eklendi, {guncellenen} üye güncellendi.")
+    flash(f"İçe aktarma tamamlandı: {eklenen} yeni üye eklendi, {guncellenen} üye güncellendi.", "basarili")
+    return redirect(url_for("kulup_detay", kulup_id=kulup_id) + "#uyeler")
 
 
 @app.template_filter("boyut")

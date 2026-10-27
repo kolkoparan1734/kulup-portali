@@ -14,6 +14,7 @@ Tüm veriler data/ klasöründeki JSON dosyalarında tutulur:
     karneler.json     -> dönem sonu dekanlık değerlendirmesi (1-5 puan + not)
     ayarlar.json      -> panel ayarları (kulüp başkanı girişi, oturum süresi)
     islem_gecmisi.json -> kim, ne zaman, hangi kayıtta neyi değiştirdi
+    duyurular.json    -> kulüplere gönderilen duyuruların arşivi
 
 Kulüp, belge ve etkinlik başvurusu silinmez; "arsiv" alanı eklenerek arşive
 alınır. Arşivdeki kayıtlar (ve arşivdeki kulübün belgeleri/başvuruları)
@@ -920,3 +921,41 @@ def donem_karneleri(donem_id, kulupler=None):
     for sira, karne in enumerate(karneler, 1):
         karne["sira"] = sira if karne["puan"] is not None else None
     return karneler
+
+
+# ---------------------------------------------------------------------------
+# Duyurular
+# ---------------------------------------------------------------------------
+
+def kulup_eposta_adresleri(kulup, danisman_dahil=False):
+    """Kulübe ulaşılabilecek e-posta adresleri: kulüp e-postası, aktif başkan
+    hesaplarının e-postası ve (istenirse) danışman e-postası."""
+    adresler = []
+    if kulup.get("eposta"):
+        adresler.append(kulup["eposta"])
+    for k in panel_kullanicilari_getir():
+        if k["rol"] == "baskan" and k.get("kulup_id") == kulup["id"] and k["aktif"] and k.get("eposta"):
+            adresler.append(k["eposta"])
+    if danisman_dahil and kulup["danisman"]["eposta"]:
+        adresler.append(kulup["danisman"]["eposta"])
+    # Aynı adres iki kez yazılmasın (büyük/küçük harf farkı gözetmeden).
+    tekil = {}
+    for adres in adresler:
+        tekil.setdefault(adres.strip().lower(), adres.strip())
+    return list(tekil.values())
+
+
+def duyurulari_getir():
+    with _kilit:
+        return _yukle("duyurular.json", [])[::-1]
+
+
+def duyuru_getir(duyuru_id):
+    return next((d for d in duyurulari_getir() if d["id"] == duyuru_id), None)
+
+
+def duyuru_ekle(duyuru):
+    with _kilit:
+        duyurular = _yukle("duyurular.json", [])
+        duyurular.append(duyuru)
+        _kaydet("duyurular.json", duyurular)

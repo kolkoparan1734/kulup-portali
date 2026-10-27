@@ -116,9 +116,10 @@
     "isim": "Derin Aksakal",
     "baslangic": "",
     "donem_id": "",
-    "bitis": "",
-    "bitis_donem_id": "",
-    "kaydeden": "Sistem"
+    "bitis": "2026-10-27",
+    "bitis_donem_id": "a29e0184d519",
+    "kaydeden": "Sistem",
+    "kapatan": "Sistem (form aktarımı)"
   },
   {
     "id": "84cd16a70937",
@@ -358,9 +359,10 @@
     "isim": "Deniz Şahin",
     "baslangic": "",
     "donem_id": "",
-    "bitis": "",
-    "bitis_donem_id": "",
-    "kaydeden": "Sistem"
+    "bitis": "2026-10-27",
+    "bitis_donem_id": "a29e0184d519",
+    "kaydeden": "Sistem",
+    "kapatan": "Sistem (form aktarımı)"
   },
   {
     "id": "90e684e357a5",
@@ -831,9 +833,10 @@
     "isim": "Nisa Çırpıcı",
     "baslangic": "",
     "donem_id": "",
-    "bitis": "",
-    "bitis_donem_id": "",
-    "kaydeden": "Sistem"
+    "bitis": "2026-10-27",
+    "bitis_donem_id": "a29e0184d519",
+    "kaydeden": "Sistem",
+    "kapatan": "Sistem (form aktarımı)"
   },
   {
     "id": "fccbc35c2de5",
@@ -930,9 +933,10 @@
     "isim": "Batuhan Dede",
     "baslangic": "",
     "donem_id": "",
-    "bitis": "",
-    "bitis_donem_id": "",
-    "kaydeden": "Sistem"
+    "bitis": "2026-10-27",
+    "bitis_donem_id": "a29e0184d519",
+    "kaydeden": "Sistem",
+    "kapatan": "Sistem (form aktarımı)"
   },
   {
     "id": "29de7872f175",
@@ -963,8 +967,141 @@
     "isim": "Burak Kaan",
     "baslangic": "",
     "donem_id": "",
+    "bitis": "2026-10-27",
+    "bitis_donem_id": "a29e0184d519",
+    "kaydeden": "Sistem",
+    "kapatan": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "26d62a058138",
+    "kulup_id": "ieee",
+    "gorev": "Başkan",
+    "isim": "Selnur Günesen",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
     "bitis": "",
     "bitis_donem_id": "",
-    "kaydeden": "Sistem"
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "b1f49d3b8a98",
+    "kulup_id": "tob-tip-ogrencileri-birligi",
+    "gorev": "Başkan",
+    "isim": "Nisanur Çırpıcı",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "fd5ac506ac28",
+    "kulup_id": "yapay-zeka",
+    "gorev": "Başkan",
+    "isim": "Muhammed Batuhan Dede",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "a331b25ca595",
+    "kulup_id": "aubat",
+    "gorev": "Başkan",
+    "isim": "Güliz Doğa Çelik",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "5f269a899d94",
+    "kulup_id": "yazilim-ve-inovasyon",
+    "gorev": "Başkan",
+    "isim": "Burak Kaan Özdemir",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "aa0a9cdb3a4d",
+    "kulup_id": "ideal-hukuk",
+    "gorev": "Eş Başkan",
+    "isim": "İrem G. Altun",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "1d86da841486",
+    "kulup_id": "ebelik",
+    "gorev": "Başkan",
+    "isim": "Helin Çeliker",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "615e351f6d1d",
+    "kulup_id": "sosyal-medya",
+    "gorev": "Başkan",
+    "isim": "Elif Girgin",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "cdc0d3b594a2",
+    "kulup_id": "altinbas-oncology-student-interest-group",
+    "gorev": "Başkan",
+    "isim": "Hammad Assilkhi",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "0fa7063a8184",
+    "kulup_id": "pediatrik-adimlar-ve-lider-saglikcilar-au-pals",
+    "gorev": "Başkan",
+    "isim": "Buşra Balcı",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "bf480de726f6",
+    "kulup_id": "turk-alman-hukuk",
+    "gorev": "Başkan",
+    "isim": "Başak Çabuk",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
+  },
+  {
+    "id": "4f2bdc2a9eef",
+    "kulup_id": "hukuk-ve-strateji",
+    "gorev": "Başkan",
+    "isim": "Hamza Bahadır Salcı",
+    "baslangic": "2026-10-27",
+    "donem_id": "a29e0184d519",
+    "bitis": "",
+    "bitis_donem_id": "",
+    "kaydeden": "Sistem (form aktarımı)"
   }
 ]

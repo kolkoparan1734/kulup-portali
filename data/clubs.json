@@ -10,8 +10,8 @@
       "baskan_kullanici_adi": "250200454",
       "yonetim_kurulu": [
         {
-          "isim": "Zeynep Balcı",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Zeynep Balcı"
         },
         {
           "isim": "Elif Demir",
@@ -95,11 +95,11 @@
       "logo": "ieee_logo.png",
       "kategori": "Akademik / Teknoloji",
       "aciklama": "Mühendislik ve teknoloji alanında seminer, atölye ve proje çalışmaları düzenleyen kulüp.",
-      "baskan": "Deniz Şahin",
+      "baskan": "Selnur Günesen",
       "yonetim_kurulu": [
         {
-          "isim": "Deniz Şahin",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Selnur Günesen"
         },
         {
           "isim": "Ece Yıldız",
@@ -130,7 +130,7 @@
       ],
       "kapak_gorseli": "covers/ieee_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "1e6927e548cb"
     },
     {
       "id": "gastronomi",
@@ -141,8 +141,8 @@
       "baskan": "Zeynep Aras",
       "yonetim_kurulu": [
         {
-          "isim": "Zeynep Aras",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Zeynep Aras"
         },
         {
           "isim": "Tolga Er",
@@ -169,7 +169,7 @@
       ],
       "kapak_gorseli": "covers/gastronomi_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "238915603ab6"
     },
     {
       "id": "yapay-zeka",
@@ -177,11 +177,11 @@
       "logo": "yapayzeka_logo.png",
       "kategori": "Akademik / Teknoloji",
       "aciklama": "Yapay zeka, makine öğrenmesi ve robotik alanlarında proje ve atölyeler düzenleyen kulüp.",
-      "baskan": "Batuhan Dede",
+      "baskan": "Muhammed Batuhan Dede",
       "yonetim_kurulu": [
         {
           "gorev": "Başkan",
-          "isim": "Batuhan Dede"
+          "isim": "Muhammed Batuhan Dede"
         },
         {
           "gorev": "Başkan Yardımcısı",
@@ -219,8 +219,8 @@
       "baskan": "Çağla Feyza Ergen",
       "yonetim_kurulu": [
         {
-          "isim": "Çağla Feyza Ergen",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Çağla Feyza Ergen"
         },
         {
           "isim": "Oğuz Bilgin",
@@ -247,7 +247,7 @@
       ],
       "kapak_gorseli": "covers/genc-kalite_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "683111ff5dd1"
     },
     {
       "id": "psikoloji",
@@ -258,8 +258,8 @@
       "baskan": "Mert Ali Şahin",
       "yonetim_kurulu": [
         {
-          "isim": "Mert Ali Şahin",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Mert Ali Şahin"
         },
         {
           "isim": "Yusuf Bayrak",
@@ -286,7 +286,7 @@
       ],
       "kapak_gorseli": "covers/psikoloji_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "ec8de57231bb"
     },
     {
       "id": "sinema",
@@ -297,8 +297,8 @@
       "baskan": "İclal Yaprak",
       "yonetim_kurulu": [
         {
-          "isim": "İclal Yaprak",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "İclal Yaprak"
         },
         {
           "isim": "Asya Demirtaş",
@@ -325,7 +325,7 @@
       ],
       "kapak_gorseli": "covers/sinema_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "5646bc008df8"
     },
     {
       "id": "kutuphane",
@@ -445,8 +445,8 @@
       "baskan": "Beyza Nur Kahya",
       "yonetim_kurulu": [
         {
-          "isim": "Beyza Nur Kahya",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Beyza Nur Kahya"
         },
         {
           "isim": "Ceren Aktürk",
@@ -473,7 +473,7 @@
       ],
       "kapak_gorseli": "covers/ticaret-lojistik_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "ac52569ce63f"
     },
     {
       "id": "hayvan-haklari",
@@ -485,8 +485,8 @@
       "baskan_kullanici_adi": "250200458",
       "yonetim_kurulu": [
         {
-          "isim": "Yasemin Sarı",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Yasemin Sarı"
         },
         {
           "isim": "Cem Turan",
@@ -513,7 +513,7 @@
       ],
       "kapak_gorseli": "covers/hayvan-haklari_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "7d56cf4ca0ae"
     },
     {
       "id": "iyiligin-gelecegi",
@@ -564,8 +564,8 @@
       "baskan_kullanici_adi": "250200459",
       "yonetim_kurulu": [
         {
-          "isim": "Betül Tığlı",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Betül Tığlı"
         },
         {
           "isim": "Azra Tunç",
@@ -592,7 +592,7 @@
       ],
       "kapak_gorseli": "covers/tiyatro_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "4a9f0d6b0db9"
     },
     {
       "id": "network",
@@ -721,8 +721,8 @@
       "baskan": "Emir Assan",
       "yonetim_kurulu": [
         {
-          "isim": "Emir Assan",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Emir Assan"
         },
         {
           "isim": "Aygerim Bek",
@@ -749,7 +749,7 @@
       ],
       "kapak_gorseli": "covers/turk-dunyasi-genclik_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "9161b1f86413"
     },
     {
       "id": "tebgk",
@@ -839,6 +839,10 @@
       "baskan": "Tuana Alparslan",
       "yonetim_kurulu": [
         {
+          "gorev": "Başkan",
+          "isim": "Tuana Alparslan"
+        },
+        {
           "isim": "Bade Erim",
           "gorev": "Hacer Nur Aktaş"
         },
@@ -867,7 +871,7 @@
       ],
       "kapak_gorseli": "covers/ilsa_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "81cddd35d182"
     },
     {
       "id": "siyaset-diplomasi",
@@ -914,11 +918,11 @@
       "logo": "aubat_logo.png",
       "kategori": "Akademik / Sağlık",
       "aciklama": "Tıbbi bilimler öğrencilerine yönelik akademik seminer ve klinik beceri atölyeleri düzenleyen topluluk.",
-      "baskan": "Derin Aksakal",
+      "baskan": "Güliz Doğa Çelik",
       "yonetim_kurulu": [
         {
-          "isim": "Derin Aksakal",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Güliz Doğa Çelik"
         },
         {
           "isim": "Mira Tuncel",
@@ -945,7 +949,7 @@
       ],
       "kapak_gorseli": "covers/aubat_kapak.jpg",
       "durum": "aktif",
-      "danisman_id": ""
+      "danisman_id": "90b68aa5d5ab"
     },
     {
       "id": "dis-hekimligi",
@@ -994,8 +998,13 @@
       "aciklama": "",
       "baskan": "Ömer Tekdamar",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Ömer Tekdamar"
+        }
+      ],
+      "danisman_id": "33857600a51c"
     },
     {
       "id": "futbol",
@@ -1016,8 +1025,13 @@
       "aciklama": "",
       "baskan": "Ebrar Keçecioğlu",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Ebrar Keçecioğlu"
+        }
+      ],
+      "danisman_id": "cff1a712d7a3"
     },
     {
       "id": "hukuk",
@@ -1049,8 +1063,17 @@
       "aciklama": "",
       "baskan": "Beytullah Haşar",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Beytullah Haşar"
+        },
+        {
+          "gorev": "Eş Başkan",
+          "isim": "İrem G. Altun"
+        }
+      ],
+      "danisman_id": "505bf26fbfcc"
     },
     {
       "id": "makine-muhendisligi",
@@ -1060,8 +1083,13 @@
       "aciklama": "",
       "baskan": "Muhammed Eskiçırak",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Muhammed Eskiçırak"
+        }
+      ],
+      "danisman_id": "4aa36411680b"
     },
     {
       "id": "masa-tenisi",
@@ -1071,8 +1099,13 @@
       "aciklama": "",
       "baskan": "Alperen Başali",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Alperen Başali"
+        }
+      ],
+      "danisman_id": "897fd33dea9b"
     },
     {
       "id": "oyun",
@@ -1082,8 +1115,13 @@
       "aciklama": "",
       "baskan": "Zeynep Aksoy",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Zeynep Aksoy"
+        }
+      ],
+      "danisman_id": "37546cd3d1cf"
     },
     {
       "id": "tob-tip-ogrencileri-birligi",
@@ -1091,10 +1129,15 @@
       "kategori": "Akademik / Sağlık",
       "logo": "tob.png",
       "aciklama": "",
-      "baskan": "Nisa Çırpıcı",
+      "baskan": "Nisanur Çırpıcı",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Nisanur Çırpıcı"
+        }
+      ],
+      "danisman_id": "34ad00be399d"
     },
     {
       "id": "toplum-gonulluleri",
@@ -1104,8 +1147,13 @@
       "aciklama": "",
       "baskan": "Hatice Zehra Kışla",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Hatice Zehra Kışla"
+        }
+      ],
+      "danisman_id": "84477f98ce4f"
     },
     {
       "id": "yazilim-ve-inovasyon",
@@ -1113,10 +1161,15 @@
       "kategori": "Akademik / Teknoloji",
       "logo": "yazilim_inovasyon.jpg",
       "aciklama": "",
-      "baskan": "Burak Kaan",
+      "baskan": "Burak Kaan Özdemir",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Burak Kaan Özdemir"
+        }
+      ],
+      "danisman_id": "ec55331dff07"
     },
     {
       "id": "uniconnect",
@@ -1126,8 +1179,13 @@
       "aciklama": "",
       "baskan": "Mehmet Doğan",
       "durum": "aktif",
-      "yonetim_kurulu": [],
-      "danisman_id": ""
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Mehmet Doğan"
+        }
+      ],
+      "danisman_id": "2f21522bf42e"
     },
     {
       "id": "ai-club",
@@ -1144,6 +1202,102 @@
         }
       ],
       "danisman_id": "7d56cf4ca0ae"
+    },
+    {
+      "id": "ebelik",
+      "isim": "Ebelik Kulübü",
+      "kategori": "Akademik / Sağlık",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Helin Çeliker",
+      "durum": "aktif",
+      "danisman_id": "e56a227962c4",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Helin Çeliker"
+        }
+      ]
+    },
+    {
+      "id": "sosyal-medya",
+      "isim": "Sosyal Medya Kulübü",
+      "kategori": "Kariyer / Networking",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Elif Girgin",
+      "durum": "aktif",
+      "danisman_id": "e862ea702e9b",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Elif Girgin"
+        }
+      ]
+    },
+    {
+      "id": "altinbas-oncology-student-interest-group",
+      "isim": "Altınbaş Oncology Student Interest Group",
+      "kategori": "Akademik / Sağlık",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Hammad Assilkhi",
+      "durum": "aktif",
+      "danisman_id": "90b68aa5d5ab",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Hammad Assilkhi"
+        }
+      ]
+    },
+    {
+      "id": "pediatrik-adimlar-ve-lider-saglikcilar-au-pals",
+      "isim": "Pediatrik Adımlar ve Lider Sağlıkçılar (AU-PALS)",
+      "kategori": "Akademik / Sağlık",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Buşra Balcı",
+      "durum": "aktif",
+      "danisman_id": "90b68aa5d5ab",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Buşra Balcı"
+        }
+      ]
+    },
+    {
+      "id": "turk-alman-hukuk",
+      "isim": "Türk Alman Hukuk Kulübü",
+      "kategori": "Akademik / Hukuk",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Başak Çabuk",
+      "durum": "aktif",
+      "danisman_id": "df3eb3c9a699",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Başak Çabuk"
+        }
+      ]
+    },
+    {
+      "id": "hukuk-ve-strateji",
+      "isim": "Hukuk ve Strateji Kulübü",
+      "kategori": "Akademik / Hukuk",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Hamza Bahadır Salcı",
+      "durum": "aktif",
+      "danisman_id": "55191d380e80",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Hamza Bahadır Salcı"
+        }
+      ]
     }
   ]
 }
