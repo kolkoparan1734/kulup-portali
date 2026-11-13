@@ -1,0 +1,1379 @@
+[
+  {
+    "id": "aae15b33a915",
+    "kulup_id": "arama-kurtarma",
+    "ad": "Temel Arama Kurtarma Eğitimi",
+    "aciklama": "AFAD iş birliğiyle düzenlenen temel eğitim programı.",
+    "tarih_saat": "2026-04-14T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "66c61fb58e87",
+    "kulup_id": "arama-kurtarma",
+    "ad": "Deprem Tatbikatı",
+    "aciklama": "Kampüs genelinde düzenlenecek deprem tatbikatı ve bilgilendirme standı.",
+    "tarih_saat": "2026-10-24T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "f1d61c2f3a52",
+    "kulup_id": "sailing-club",
+    "ad": "Boğaz Yelken Etkinliği",
+    "aciklama": "Kulüp üyelerinin katıldığı tanışma amaçlı yelken turu.",
+    "tarih_saat": "2026-05-09T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "0a9129501c9f",
+    "kulup_id": "sailing-club",
+    "ad": "Temel Yelkencilik Eğitimi",
+    "aciklama": "Yeni üyeler için sıfırdan yelken eğitimi.",
+    "tarih_saat": "2026-10-03T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "4c7c0595bfcf",
+    "kulup_id": "tebgk",
+    "ad": "Eczacılıkta Kariyer Günü",
+    "aciklama": "Sektörden eczacılarla kariyer odaklı söyleşi.",
+    "tarih_saat": "2026-04-20T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "42622bc448f8",
+    "kulup_id": "tebgk",
+    "ad": "Akılcı İlaç Kullanımı Semineri",
+    "aciklama": "Halk sağlığı odaklı bilgilendirme semineri.",
+    "tarih_saat": "2026-11-12T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "cdc2dd3a047f",
+    "kulup_id": "aubat",
+    "ad": "Temel Yaşam Desteği Atölyesi",
+    "aciklama": "Uygulamalı ilk yardım ve temel yaşam desteği eğitimi.",
+    "tarih_saat": "2026-04-16T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "b8dee88c5f1b",
+    "kulup_id": "aubat",
+    "ad": "Tıp Bilimlerinde Kariyer Günü",
+    "aciklama": "Farklı tıbbi bilim dallarından uzmanlarla kariyer söyleşisi.",
+    "tarih_saat": "2026-11-20T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "707a60ecec2e",
+    "kulup_id": "dans",
+    "ad": "Bahar Dans Gösterisi",
+    "aciklama": "Kulüp üyelerinin sahneye koyduğu modern dans gösterisi.",
+    "tarih_saat": "2026-05-14T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "16237fc0a69c",
+    "kulup_id": "dans",
+    "ad": "Yeni Üye Tanışma ve Deneme Dersi",
+    "aciklama": "Yeni dönem için tanışma ve ücretsiz deneme dans dersi.",
+    "tarih_saat": "2026-09-20T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "d7c10086ad42",
+    "kulup_id": "dans",
+    "ad": "dans workshop",
+    "aciklama": "taksimde zeybek etkimniliğime herkesi bekleriz",
+    "tarih_saat": "2026-08-17T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "1b29f8dc572a",
+    "kulup_id": "dis-hekimligi",
+    "ad": "Ağız ve Diş Sağlığı Farkındalık Günü",
+    "aciklama": "Kampüste ücretsiz bilgilendirme standı ve muayene yönlendirmesi.",
+    "tarih_saat": "2026-05-11T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "12c59c1f0b64",
+    "kulup_id": "dis-hekimligi",
+    "ad": "Restoratif Diş Hekimliği Atölyesi",
+    "aciklama": "Uygulamalı klinik beceri atölyesi.",
+    "tarih_saat": "2026-11-16T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "1640a1d7b5d7",
+    "kulup_id": "gastronomi",
+    "ad": "Dünya Mutfakları Günü",
+    "aciklama": "Farklı ülke mutfaklarından tadım standları.",
+    "tarih_saat": "2026-05-30T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "0d4b7a030722",
+    "kulup_id": "gastronomi",
+    "ad": "Hamur İşleri Atölyesi",
+    "aciklama": "Temel hamur işi tekniklerinin öğretildiği uygulamalı atölye.",
+    "tarih_saat": "2026-09-27T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "7da03485992c",
+    "kulup_id": "genc-kalite",
+    "ad": "Kalite Yönetim Sistemleri Semineri",
+    "aciklama": "Sektörden bir uzmanla kalite yönetim sistemleri üzerine söyleşi.",
+    "tarih_saat": "2026-03-05T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "7ffc34366147",
+    "kulup_id": "genc-kalite",
+    "ad": "Genç Kalite Buluşması",
+    "aciklama": "Farklı üniversitelerden kalite kulüplerinin bir araya geldiği network etkinliği.",
+    "tarih_saat": "2026-10-12T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "e9c818a9ba15",
+    "kulup_id": "hayvan-haklari",
+    "ad": "Kampüs Sokak Hayvanları Besleme Kampanyası",
+    "aciklama": "Kampüsteki sokak hayvanları için mama ve barınak desteği kampanyası.",
+    "tarih_saat": "2026-04-11T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "e4a48198ccb5",
+    "kulup_id": "hayvan-haklari",
+    "ad": "Kısırlaştırma Farkındalık Günü",
+    "aciklama": "Yerel bir veteriner kliniğiyle iş birliğinde farkındalık standı.",
+    "tarih_saat": "2026-10-22T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "d4edc6dd2696",
+    "kulup_id": "ieee",
+    "ad": "Gömülü Sistemler Atölyesi",
+    "aciklama": "Arduino ile giriş seviyesi uygulamalı atölye.",
+    "tarih_saat": "2026-03-11T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "ef58c04e0b7d",
+    "kulup_id": "ieee",
+    "ad": "Yapay Zeka Söyleşisi",
+    "aciklama": "Sektörden bir konuşmacı ile yapay zeka üzerine söyleşi.",
+    "tarih_saat": "2026-11-18T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "9fde99de1e38",
+    "kulup_id": "ilsa",
+    "ad": "Moot Court Yarışması",
+    "aciklama": "Öğrencilerin duruşma simülasyonu yaptığı yarışma.",
+    "tarih_saat": "2026-04-27T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "65500cd0cd40",
+    "kulup_id": "ilsa",
+    "ad": "Uluslararası Hukuk Semineri",
+    "aciklama": "Uluslararası hukuk alanında akademik bir seminer.",
+    "tarih_saat": "2026-11-14T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "83952d476221",
+    "kulup_id": "iyiligin-gelecegi",
+    "ad": "Kırtasiye Bağış Kampanyası",
+    "aciklama": "İhtiyaç sahibi öğrencilere kırtasiye malzemesi bağışı.",
+    "tarih_saat": "2026-04-25T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "c9950c943949",
+    "kulup_id": "iyiligin-gelecegi",
+    "ad": "Huzurevi Ziyareti",
+    "aciklama": "Yerel bir huzurevine gönüllü ziyaret ve etkinlik organizasyonu.",
+    "tarih_saat": "2026-10-30T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "1dafd2d6add6",
+    "kulup_id": "ticaret-lojistik",
+    "ad": "Liman ve Lojistik Merkezi Sektör Gezisi",
+    "aciklama": "Öğrencilerin bir lojistik merkezini yerinde incelediği teknik gezi.",
+    "tarih_saat": "2026-04-30T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "0ce92523933a",
+    "kulup_id": "ticaret-lojistik",
+    "ad": "Dış Ticarette Kariyer Günü",
+    "aciklama": "Sektör profesyonelleriyle kariyer odaklı buluşma.",
+    "tarih_saat": "2026-11-05T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "cdd36d67663d",
+    "kulup_id": "kutuphane",
+    "ad": "Aylık Kitap Kulübü Buluşması",
+    "aciklama": "Seçilen bir romanın tartışıldığı okuyucu buluşması.",
+    "tarih_saat": "2026-04-09T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "27ad7d5c63ed",
+    "kulup_id": "kutuphane",
+    "ad": "Yazarla Söyleşi Günü",
+    "aciklama": "Türk edebiyatından bir yazarla kampüste söyleşi.",
+    "tarih_saat": "2026-10-15T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "2107006f7462",
+    "kulup_id": "network",
+    "ad": "Mezunlarla Buluşma Gecesi",
+    "aciklama": "Farklı sektörlerde çalışan mezunlarla networking etkinliği.",
+    "tarih_saat": "2026-05-02T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "6f5e1b5b3263",
+    "kulup_id": "network",
+    "ad": "LinkedIn ve Kişisel Marka Atölyesi",
+    "aciklama": "Öğrencilere profesyonel profil oluşturma üzerine atölye.",
+    "tarih_saat": "2026-11-08T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "a21d96fcdf29",
+    "kulup_id": "psikoloji",
+    "ad": "Ruh Sağlığı Farkındalık Haftası",
+    "aciklama": "Kampüste stant açılarak ruh sağlığı üzerine bilgilendirme yapıldı.",
+    "tarih_saat": "2026-05-20T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "ff33680218ef",
+    "kulup_id": "psikoloji",
+    "ad": "Uzman Söyleşisi: Sınav Kaygısıyla Başa Çıkma",
+    "aciklama": "Alanında uzman bir psikoloğun katılacağı söyleşi.",
+    "tarih_saat": "2026-11-03T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "d04f188b22da",
+    "kulup_id": "satranc",
+    "ad": "Kampüs İçi Satranç Turnuvası",
+    "aciklama": "60 öğrencinin katıldığı eleme usulü turnuva.",
+    "tarih_saat": "2026-04-02T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "d5d21688c4db",
+    "kulup_id": "satranc",
+    "ad": "Hızlı Satranç (Blitz) Gecesi",
+    "aciklama": "5 dakikalık blitz formatında dostluk turnuvası.",
+    "tarih_saat": "2026-10-05T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "7efa56bac843",
+    "kulup_id": "sinema",
+    "ad": "Kısa Film Gecesi",
+    "aciklama": "Öğrencilerin çektiği kısa filmlerin gösterildiği gece.",
+    "tarih_saat": "2026-04-29T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "3d45d56ff109",
+    "kulup_id": "sinema",
+    "ad": "Klasik Sinema Gösterimi",
+    "aciklama": "Sinema tarihinden bir klasik, açık hava gösterimi.",
+    "tarih_saat": "2026-10-08T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "f4cd8e29b0b6",
+    "kulup_id": "siyaset-diplomasi",
+    "ad": "Model Birleşmiş Milletler Simülasyonu",
+    "aciklama": "Öğrencilerin diplomatik müzakere deneyimi kazandığı simülasyon.",
+    "tarih_saat": "2026-05-03T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "f4f3684d22c1",
+    "kulup_id": "siyaset-diplomasi",
+    "ad": "Dış Politika Paneli",
+    "aciklama": "Güncel dış politika gelişmeleri üzerine akademik panel.",
+    "tarih_saat": "2026-11-07T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "26c4ff52aebf",
+    "kulup_id": "sosyoloji",
+    "ad": "Kentleşme ve Toplum Paneli",
+    "aciklama": "Akademisyenlerin katıldığı kentleşme temalı panel.",
+    "tarih_saat": "2026-05-07T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "eb9a4d695941",
+    "kulup_id": "sosyoloji",
+    "ad": "Saha Araştırması Sunum Günü",
+    "aciklama": "Öğrencilerin yürüttüğü saha araştırmalarının sunulduğu gün.",
+    "tarih_saat": "2026-11-10T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "cb69017237b3",
+    "kulup_id": "tiyatro",
+    "ad": "Dönem Sonu Oyun Gösterimi",
+    "aciklama": "Kulüp üyelerinin bir yıl boyunca hazırladığı oyunun sahnelenmesi.",
+    "tarih_saat": "2026-05-25T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "0fb8e666f4c6",
+    "kulup_id": "tiyatro",
+    "ad": "Doğaçlama Atölyesi",
+    "aciklama": "Yeni üyeler için doğaçlama oyunculuğa giriş atölyesi.",
+    "tarih_saat": "2026-10-18T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "d17f73ef26e1",
+    "kulup_id": "turk-dunyasi-genclik",
+    "ad": "Türk Dünyası Kültür Gecesi",
+    "aciklama": "Farklı Türk cumhuriyetlerinden öğrencilerin kültürlerini tanıttığı gece.",
+    "tarih_saat": "2026-05-16T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "bc853396392e",
+    "kulup_id": "turk-dunyasi-genclik",
+    "ad": "Nevruz Kutlaması",
+    "aciklama": "Kampüste düzenlenecek Nevruz kutlama etkinliği.",
+    "tarih_saat": "2026-03-21T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "be19646025f1",
+    "kulup_id": "turk-tarihi-kulturu",
+    "ad": "Osmanlı Tarihi Söyleşisi",
+    "aciklama": "Bir tarihçinin katıldığı Osmanlı tarihi üzerine söyleşi.",
+    "tarih_saat": "2026-04-08T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "2ad88f55802c",
+    "kulup_id": "turk-tarihi-kulturu",
+    "ad": "Müze Gezisi",
+    "aciklama": "İstanbul’daki bir tarih müzesine düzenlenecek gezi.",
+    "tarih_saat": "2026-10-11T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "07a7f74d24c3",
+    "kulup_id": "veri-bilimi",
+    "ad": "Python ile Veri Analizi Atölyesi",
+    "aciklama": "Pandas kütüphanesiyle temel veri analizi uygulamalı atölyesi.",
+    "tarih_saat": "2026-04-22T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "982010572153",
+    "kulup_id": "veri-bilimi",
+    "ad": "Kaggle Yarışması Hazırlık Kampı",
+    "aciklama": "Uluslararası bir veri bilimi yarışmasına hazırlık kampı.",
+    "tarih_saat": "2026-10-20T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "daf26c9b78de",
+    "kulup_id": "yapay-zeka",
+    "ad": "Robotik Kol Yapım Atölyesi",
+    "aciklama": "Öğrencilerin sıfırdan basit bir robotik kol tasarladığı uygulamalı atölye.",
+    "tarih_saat": "2026-04-18T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  },
+  {
+    "id": "e8fd9f3b177a",
+    "kulup_id": "yapay-zeka",
+    "ad": "Yapay Zeka ile Görüntü İşleme Semineri",
+    "aciklama": "Temel görüntü işleme ve yapay zeka uygulamalarına giriş semineri.",
+    "tarih_saat": "2026-09-25T00:00",
+    "saat_belirsiz": true,
+    "yer": "",
+    "katilimci": null,
+    "konusmaci_var": false,
+    "konusmaci": "",
+    "butce": null,
+    "butce_aciklama": "",
+    "ek_dosyalar": [],
+    "kaynak": "eski_site",
+    "giren": "Sistem",
+    "olusturma": "2026-10-24 00:00",
+    "durum": "onaylandi",
+    "gecmis": [
+      {
+        "tarih": "2026-10-24 00:00",
+        "kullanici": "Sistem",
+        "durum": "onaylandi",
+        "aciklama": "Eski herkese açık siteden aktarıldı."
+      }
+    ]
+  }
+]

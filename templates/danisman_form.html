@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Danışmanı Düzenle' if duzenleme else 'Yeni Danışman' }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('danisman_detay', danisman_id=danisman.id) if duzenleme else url_for('danismanlar') }}" class="geri-link">&larr; Geri</a>
+
+<div class="sayfa-baslik">
+    <h1>{{ 'Danışmanı Düzenle' if duzenleme else 'Yeni Danışman' }}</h1>
+</div>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<form method="POST" class="form kutu">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <div class="form-izgara">
+        <label class="alan">
+            <span>Ad soyad *</span>
+            <input type="text" name="ad_soyad" value="{{ danisman.ad_soyad if danisman else '' }}" required maxlength="120" autofocus>
+        </label>
+        <label class="alan">
+            <span>Unvan</span>
+            <input type="text" name="unvan" list="unvan-listesi" value="{{ danisman.unvan if danisman else '' }}" maxlength="40">
+            <datalist id="unvan-listesi">{% for u in unvanlar %}<option value="{{ u }}">{% endfor %}</datalist>
+        </label>
+        <label class="alan">
+            <span>Fakülte</span>
+            <input type="text" name="fakulte" value="{{ danisman.fakulte if danisman else '' }}" maxlength="120" placeholder="ör. Mühendislik ve Doğa Bilimleri Fakültesi">
+        </label>
+        <label class="alan">
+            <span>Bölüm</span>
+            <input type="text" name="bolum" value="{{ danisman.bolum if danisman else '' }}" maxlength="120">
+        </label>
+        <label class="alan">
+            <span>E-posta</span>
+            <input type="email" name="eposta" value="{{ danisman.eposta if danisman else '' }}" maxlength="120">
+        </label>
+        <label class="alan">
+            <span>Telefon</span>
+            <input type="tel" name="telefon" value="{{ danisman.telefon if danisman else '' }}" maxlength="30">
+        </label>
+    </div>
+
+    <div class="form-eylemler">
+        <a href="{{ url_for('danisman_detay', danisman_id=danisman.id) if duzenleme else url_for('danismanlar') }}" class="dugme">Vazgeç</a>
+        <button type="submit" class="dugme dugme-ana">Kaydet</button>
+    </div>
+</form>
+{% endblock %}

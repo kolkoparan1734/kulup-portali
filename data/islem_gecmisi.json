@@ -1,0 +1,1515 @@
+[
+  {
+    "id": "10df3212de43",
+    "tarih": "2026-10-24 17:12:04",
+    "kullanici": "Öğrenci Dekanlığı",
+    "kullanici_adi": "admin",
+    "rol": "dekan",
+    "islem": "Karar",
+    "kayit_turu": "basvuru",
+    "kayit_id": "513be93bc20b",
+    "kayit_ad": "claude eğitimi",
+    "kulup_id": "ai-club",
+    "degisiklikler": [
+      {
+        "alan": "Durum",
+        "eski": "Beklemede",
+        "yeni": "Onaylandı"
+      }
+    ],
+    "aciklama": ""
+  },
+  {
+    "id": "681adc3a4ad3",
+    "tarih": "2026-10-24 17:12:18",
+    "kullanici": "Öğrenci Dekanlığı",
+    "kullanici_adi": "admin",
+    "rol": "dekan",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "ai-club",
+    "kayit_ad": "Altınbaş AI Club",
+    "kulup_id": "ai-club",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi DUYGU KOTAN TÜRKDEN"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Zülal Kılıç"
+      }
+    ],
+    "aciklama": ""
+  },
+  {
+    "id": "6dcef7ecd494",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "ec8de57231bb",
+    "kayit_ad": "Dr. Öğr. Üyesi Ayşegül Güner Algan",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Ayşegül Güner Algan"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "e7569296fdc6",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "81cddd35d182",
+    "kayit_ad": "Dr. Öğr. Üyesi Fulya Eroğlu",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Fulya Eroğlu"
+      },
+      {
+        "alan": "Bölüm",
+        "eski": "",
+        "yeni": "Ceza Hukuku Kürsüsü"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "65d2ba41c02b",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "84477f98ce4f",
+    "kayit_ad": "Arş. Gör. Ece Elif Kuruoğlu",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Ece Elif Kuruoğlu"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Arş. Gör."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "c9700b262fab",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "ac52569ce63f",
+    "kayit_ad": "Dr. Öğr. Üyesi Gül Esin Delipınar",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Gül Esin Delipınar"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "599ac9ad8c2c",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "683111ff5dd1",
+    "kayit_ad": "Arş. Gör. Doğan Kanığ",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Doğan Kanığ"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Arş. Gör."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "2c4083cc08d4",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "1e6927e548cb",
+    "kayit_ad": "Doç. Dr. Doğu Çağdaş Atilla",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Doğu Çağdaş Atilla"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Doç. Dr."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "6423337f7aae",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "e56a227962c4",
+    "kayit_ad": "Dr. Öğr. Üyesi Nurcan Çağlayan",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Nurcan Çağlayan"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "5612b6aba133",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "e862ea702e9b",
+    "kayit_ad": "Dr. Öğr. Üyesi Cansu Kösem Işık",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Cansu Kösem Işık"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "50736551b2fe",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "90b68aa5d5ab",
+    "kayit_ad": "Prof. Dr. Ahmet Midi",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Ahmet Midi"
+      },
+      {
+        "alan": "Bölüm",
+        "eski": "",
+        "yeni": "Tıbbi Patoloji Anabilim Dalı"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Prof. Dr."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "c54d93f02d38",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "cff1a712d7a3",
+    "kayit_ad": "Ebru Sevinç",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Ebru Sevinç"
+      },
+      {
+        "alan": "Bölüm",
+        "eski": "",
+        "yeni": "Hemşirelik Bölüm Başkanı, Dekan Yardımcısı"
+      },
+      {
+        "alan": "Fakülte",
+        "eski": "",
+        "yeni": "Sağlık Bilimleri Fakültesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "6112079d21f2",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "37546cd3d1cf",
+    "kayit_ad": "Doç. Dr. Orhan Akay",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Orhan Akay"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Doç. Dr."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "ae72ddccb66d",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "34ad00be399d",
+    "kayit_ad": "Dr. Öğr. Üyesi Özlem Kurnaz Gömleksiz",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Özlem Kurnaz Gömleksiz"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "c380e7572dd0",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "9161b1f86413",
+    "kayit_ad": "Dr. Öğr. Üyesi Mehmet Turan Çağlar",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Mehmet Turan Çağlar"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "e5411ed123e5",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "390f5a9c6da8",
+    "kayit_ad": "Arş. Gör. Dr. Merve Nur Barun",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "mervenur barun",
+        "yeni": "Merve Nur Barun"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Arş. Gör. Dr."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "5fd53bbc1056",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "238915603ab6",
+    "kayit_ad": "Arş. Gör. Asya Bozyazı Önder",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Asya Bozyazı Önder"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Arş. Gör."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "24b288ba8e84",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "df3eb3c9a699",
+    "kayit_ad": "Doç. Dr. Murat Can Atakan",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Murat Can Atakan"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Doç. Dr."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "155417e3a426",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "4aa36411680b",
+    "kayit_ad": "Doç. Dr. Süleyman Baştürk",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Süleyman Baştürk"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Doç. Dr."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "9547f72ef28e",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "5646bc008df8",
+    "kayit_ad": "Doç. Dr. Janet Barış",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Janet Barış"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Doç. Dr."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "e5f9ec55526b",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "55191d380e80",
+    "kayit_ad": "Dr. Yurdal Özatlan",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Yurdal Özatlan"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "cb06a560e2bd",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "897fd33dea9b",
+    "kayit_ad": "Dr. Öğr. Üyesi Ural Ufuk Demirel",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Ural Ufuk Demirel"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "cf31c1ae53e0",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "4a9f0d6b0db9",
+    "kayit_ad": "Dr. Öğr. Üyesi Bengi Kurtuluş",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Bengi Kurtuluş"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "b63eeaa6c3c0",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "ec55331dff07",
+    "kayit_ad": "Doç. Dr. Hakan Kaygusuz",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Hakan Kaygusuz"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Doç. Dr."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "ad8494ec572b",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "2f21522bf42e",
+    "kayit_ad": "Arş. Gör. Adem Mavanacı",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Adem Mavanacı"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Arş. Gör."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "28ed0a2e0003",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "33857600a51c",
+    "kayit_ad": "Arş. Gör. Mustafa Ege Koç",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Mustafa Ege Koç"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Arş. Gör."
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "5f8682ba9a44",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "danisman",
+    "kayit_id": "505bf26fbfcc",
+    "kayit_ad": "Dr. Öğr. Üyesi Nazım Sinan Odabaşı",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Ad soyad",
+        "eski": "",
+        "yeni": "Nazım Sinan Odabaşı"
+      },
+      {
+        "alan": "Unvan",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "84aa70cbe544",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "psikoloji",
+    "kayit_ad": "Psikoloji Kulübü",
+    "kulup_id": "psikoloji",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Ayşegül Güner Algan"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "cf15957a66dd",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "ai-club",
+    "kayit_ad": "Altınbaş AI Club",
+    "kulup_id": "ai-club",
+    "degisiklikler": [],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "809826180797",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "ilsa",
+    "kayit_ad": "ILSA Altınbaş",
+    "kulup_id": "ilsa",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Fulya Eroğlu"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "Hacer Nur Aktaş: Bade Erim; Başkan Yardımcısı: Ozan Kutlu; Etkinlik Sorumlusu: Yasemin Ak",
+        "yeni": "Başkan: Tuana Alparslan; Hacer Nur Aktaş: Bade Erim; Başkan Yardımcısı: Ozan Kutlu; Etkinlik Sorumlusu: Yasemin Ak"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "d29975eb2d94",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "toplum-gonulluleri",
+    "kayit_ad": "Toplum Gönüllüleri Kulübü (Altınbaş TOG)",
+    "kulup_id": "toplum-gonulluleri",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Arş. Gör. Ece Elif Kuruoğlu"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Hatice Zehra Kışla"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "c26d23c96c53",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "ticaret-lojistik",
+    "kayit_ad": "İşletme Kulübü",
+    "kulup_id": "ticaret-lojistik",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Gül Esin Delipınar"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "2f5eeb94660b",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "genc-kalite",
+    "kayit_ad": "Genç Kalite Kulübü",
+    "kulup_id": "genc-kalite",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Arş. Gör. Doğan Kanığ"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "25065e2d53f1",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "ieee",
+    "kayit_ad": "IEEE Kulübü",
+    "kulup_id": "ieee",
+    "degisiklikler": [
+      {
+        "alan": "Başkan",
+        "eski": "Deniz Şahin",
+        "yeni": "Selnur Günesen"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Doç. Dr. Doğu Çağdaş Atilla"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "Başkan: Deniz Şahin; Başkan Yardımcısı: Ece Yıldız; Etkinlik Koordinatörü: Kerem Aksoy; Sayman: Nil Çelik",
+        "yeni": "Başkan: Selnur Günesen; Başkan Yardımcısı: Ece Yıldız; Etkinlik Koordinatörü: Kerem Aksoy; Sayman: Nil Çelik"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "bc76f37816ca",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "hemsirelik",
+    "kayit_ad": "Hemşirelik Kulübü",
+    "kulup_id": "hemsirelik",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Ebru Sevinç"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Ebrar Keçecioğlu"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "f0c1254153c8",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "oyun",
+    "kayit_ad": "Oyun Kulübü",
+    "kulup_id": "oyun",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Doç. Dr. Orhan Akay"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Zeynep Aksoy"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "8f3ad0743e9d",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "dans",
+    "kayit_ad": "Dans Kulübü",
+    "kulup_id": "dans",
+    "degisiklikler": [],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "ad8842d72a4a",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "tob-tip-ogrencileri-birligi",
+    "kayit_ad": "TÖB – Tıp Öğrencileri Birliği",
+    "kulup_id": "tob-tip-ogrencileri-birligi",
+    "degisiklikler": [
+      {
+        "alan": "Başkan",
+        "eski": "Nisa Çırpıcı",
+        "yeni": "Nisanur Çırpıcı"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Özlem Kurnaz Gömleksiz"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Nisanur Çırpıcı"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "518a30afb920",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "turk-dunyasi-genclik",
+    "kayit_ad": "Türk Dünyası Gençlik Topluluğu",
+    "kulup_id": "turk-dunyasi-genclik",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Mehmet Turan Çağlar"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "1cdf70a204d3",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "yapay-zeka",
+    "kayit_ad": "Yapay Zeka ve Robotik Kulübü",
+    "kulup_id": "yapay-zeka",
+    "degisiklikler": [
+      {
+        "alan": "Başkan",
+        "eski": "Batuhan Dede",
+        "yeni": "Muhammed Batuhan Dede"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "Başkan: Batuhan Dede; Başkan Yardımcısı: Sude Yalman; Proje Sorumlusu: Emre Koç",
+        "yeni": "Başkan: Muhammed Batuhan Dede; Başkan Yardımcısı: Sude Yalman; Proje Sorumlusu: Emre Koç"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "e6e44e84809e",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "aubat",
+    "kayit_ad": "AUBAT",
+    "kulup_id": "aubat",
+    "degisiklikler": [
+      {
+        "alan": "Başkan",
+        "eski": "Derin Aksakal",
+        "yeni": "Güliz Doğa Çelik"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Prof. Dr. Ahmet Midi"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "Başkan: Derin Aksakal; Başkan Yardımcısı: Mira Tuncel; Etkinlik Sorumlusu: Kutlu Er",
+        "yeni": "Başkan: Güliz Doğa Çelik; Başkan Yardımcısı: Mira Tuncel; Etkinlik Sorumlusu: Kutlu Er"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "26cd3f04127f",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "gastronomi",
+    "kayit_ad": "Gastronomi Kulübü",
+    "kulup_id": "gastronomi",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Arş. Gör. Asya Bozyazı Önder"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "c8e3b1ad1a9d",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "makine-muhendisligi",
+    "kayit_ad": "Makine Mühendisliği Kulübü",
+    "kulup_id": "makine-muhendisligi",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Doç. Dr. Süleyman Baştürk"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Muhammed Eskiçırak"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "0529190af646",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "sinema",
+    "kayit_ad": "Sinema Kulübü",
+    "kulup_id": "sinema",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Doç. Dr. Janet Barış"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "3f4de2a6efbc",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "masa-tenisi",
+    "kayit_ad": "Masa Tenisi Kulübü",
+    "kulup_id": "masa-tenisi",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Ural Ufuk Demirel"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Alperen Başali"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "f379818a8b59",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "tiyatro",
+    "kayit_ad": "Tiyatro Kulübü",
+    "kulup_id": "tiyatro",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Bengi Kurtuluş"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "c34496d25a5b",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "yazilim-ve-inovasyon",
+    "kayit_ad": "Yazılım ve İnovasyon Kulübü",
+    "kulup_id": "yazilim-ve-inovasyon",
+    "degisiklikler": [
+      {
+        "alan": "Başkan",
+        "eski": "Burak Kaan",
+        "yeni": "Burak Kaan Özdemir"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Doç. Dr. Hakan Kaygusuz"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Burak Kaan Özdemir"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "047dd250fde2",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "hayvan-haklari",
+    "kayit_ad": "Hayvan Hakları Kulübü",
+    "kulup_id": "hayvan-haklari",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi DUYGU KOTAN TÜRKDEN"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "caf5cad71472",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "uniconnect",
+    "kayit_ad": "UniConnect",
+    "kulup_id": "uniconnect",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Arş. Gör. Adem Mavanacı"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Mehmet Doğan"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "446f581a4ec9",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "besiktas",
+    "kayit_ad": "Beşiktaş Kulübü (UniBJK)",
+    "kulup_id": "besiktas",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Arş. Gör. Mustafa Ege Koç"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Ömer Tekdamar"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "399bccaa71e9",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "ideal-hukuk",
+    "kayit_ad": "İdeal Hukuk Kulübü",
+    "kulup_id": "ideal-hukuk",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Nazım Sinan Odabaşı"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Beytullah Haşar; Eş Başkan: İrem G. Altun"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "3118c08fd1aa",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "ebelik",
+    "kayit_ad": "Ebelik Kulübü",
+    "kulup_id": "ebelik",
+    "degisiklikler": [
+      {
+        "alan": "Ad",
+        "eski": "",
+        "yeni": "Ebelik Kulübü"
+      },
+      {
+        "alan": "Kategori",
+        "eski": "",
+        "yeni": "Akademik / Sağlık"
+      },
+      {
+        "alan": "Başkan",
+        "eski": "",
+        "yeni": "Helin Çeliker"
+      },
+      {
+        "alan": "Durum",
+        "eski": "",
+        "yeni": "aktif"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Nurcan Çağlayan"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Helin Çeliker"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "472d2a7583cd",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "sosyal-medya",
+    "kayit_ad": "Sosyal Medya Kulübü",
+    "kulup_id": "sosyal-medya",
+    "degisiklikler": [
+      {
+        "alan": "Ad",
+        "eski": "",
+        "yeni": "Sosyal Medya Kulübü"
+      },
+      {
+        "alan": "Kategori",
+        "eski": "",
+        "yeni": "Kariyer / Networking"
+      },
+      {
+        "alan": "Başkan",
+        "eski": "",
+        "yeni": "Elif Girgin"
+      },
+      {
+        "alan": "Durum",
+        "eski": "",
+        "yeni": "aktif"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi Cansu Kösem Işık"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Elif Girgin"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "d8dc30c295c7",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "altinbas-oncology-student-interest-group",
+    "kayit_ad": "Altınbaş Oncology Student Interest Group",
+    "kulup_id": "altinbas-oncology-student-interest-group",
+    "degisiklikler": [
+      {
+        "alan": "Ad",
+        "eski": "",
+        "yeni": "Altınbaş Oncology Student Interest Group"
+      },
+      {
+        "alan": "Kategori",
+        "eski": "",
+        "yeni": "Akademik / Sağlık"
+      },
+      {
+        "alan": "Başkan",
+        "eski": "",
+        "yeni": "Hammad Assilkhi"
+      },
+      {
+        "alan": "Durum",
+        "eski": "",
+        "yeni": "aktif"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Prof. Dr. Ahmet Midi"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Hammad Assilkhi"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "6c2773e622b8",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "pediatrik-adimlar-ve-lider-saglikcilar-au-pals",
+    "kayit_ad": "Pediatrik Adımlar ve Lider Sağlıkçılar (AU-PALS)",
+    "kulup_id": "pediatrik-adimlar-ve-lider-saglikcilar-au-pals",
+    "degisiklikler": [
+      {
+        "alan": "Ad",
+        "eski": "",
+        "yeni": "Pediatrik Adımlar ve Lider Sağlıkçılar (AU-PALS)"
+      },
+      {
+        "alan": "Kategori",
+        "eski": "",
+        "yeni": "Akademik / Sağlık"
+      },
+      {
+        "alan": "Başkan",
+        "eski": "",
+        "yeni": "Buşra Balcı"
+      },
+      {
+        "alan": "Durum",
+        "eski": "",
+        "yeni": "aktif"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Prof. Dr. Ahmet Midi"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Buşra Balcı"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "c70fb3ed4431",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "turk-alman-hukuk",
+    "kayit_ad": "Türk Alman Hukuk Kulübü",
+    "kulup_id": "turk-alman-hukuk",
+    "degisiklikler": [
+      {
+        "alan": "Ad",
+        "eski": "",
+        "yeni": "Türk Alman Hukuk Kulübü"
+      },
+      {
+        "alan": "Kategori",
+        "eski": "",
+        "yeni": "Akademik / Hukuk"
+      },
+      {
+        "alan": "Başkan",
+        "eski": "",
+        "yeni": "Başak Çabuk"
+      },
+      {
+        "alan": "Durum",
+        "eski": "",
+        "yeni": "aktif"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Doç. Dr. Murat Can Atakan"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Başak Çabuk"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "3a0d80377fb9",
+    "tarih": "2026-10-27 20:48:11",
+    "kullanici": "Sistem (form aktarımı)",
+    "kullanici_adi": "",
+    "rol": "sistem",
+    "islem": "Ekleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "hukuk-ve-strateji",
+    "kayit_ad": "Hukuk ve Strateji Kulübü",
+    "kulup_id": "hukuk-ve-strateji",
+    "degisiklikler": [
+      {
+        "alan": "Ad",
+        "eski": "",
+        "yeni": "Hukuk ve Strateji Kulübü"
+      },
+      {
+        "alan": "Kategori",
+        "eski": "",
+        "yeni": "Akademik / Hukuk"
+      },
+      {
+        "alan": "Başkan",
+        "eski": "",
+        "yeni": "Hamza Bahadır Salcı"
+      },
+      {
+        "alan": "Durum",
+        "eski": "",
+        "yeni": "aktif"
+      },
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Yurdal Özatlan"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Hamza Bahadır Salcı"
+      }
+    ],
+    "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  }
+]

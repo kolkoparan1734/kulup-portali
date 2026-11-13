@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo %}
+
+{% block title %}Karne · {{ kulup.isim }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('karne', donem=donem.id) }}" class="geri-link">&larr; Kulüp Karnesi</a>
+
+<section class="kulup-ust kutu">
+    {{ kulup_logo(kulup, "buyuk") }}
+    <div class="kulup-ust-metin">
+        <h1>{{ kulup.isim }}</h1>
+        <p class="soluk">{{ donem.ad }} dönem sonu karnesi</p>
+    </div>
+    <form method="GET" class="kulup-ust-eylem">
+        <select name="donem" onchange="this.form.submit()" aria-label="Dönem">
+            {% for d in donemler %}<option value="{{ d.id }}" {% if d.id == donem.id %}selected{% endif %}>{{ d.ad }}</option>{% endfor %}
+        </select>
+    </form>
+</section>
+
+<section class="ozet-kartlari">
+    <div class="ozet-kart"><span class="ozet-etiket">Onaylı etkinlik</span><span class="ozet-deger">{{ karne.etkinlik }}</span></div>
+    <div class="ozet-kart ozet-aktif"><span class="ozet-etiket">Evrak teslim oranı</span>
+        <span class="ozet-deger">{{ '%' ~ karne.teslim_orani if karne.teslim_orani is not none else '—' }}</span>
+        <span class="ozet-alt">{% if karne.evrak_toplam %}{{ karne.evrak_teslim }}/{{ karne.evrak_toplam }} evrak{% else %}zorunlu evrak tanımlı değil{% endif %}</span></div>
+    <div class="ozet-kart"><span class="ozet-etiket">Üye sayısı</span><span class="ozet-deger">{{ karne.uye }}</span><span class="ozet-alt">güncel</span></div>
+    <div class="ozet-kart ozet-pasif"><span class="ozet-etiket">Dekanlık puanı</span><span class="ozet-deger">{{ karne.puan ~ '/5' if karne.puan else '—' }}</span></div>
+</section>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<form method="POST" class="form kutu">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <h2 class="kutu-baslik-tek">Dekanlık Değerlendirmesi</h2>
+    <div class="alan">
+        <span>Puan *</span>
+        <div class="karar-secenekleri puan-secenekleri" role="radiogroup" aria-label="Puan">
+            {% for p, ad in [(1, 'Çok zayıf'), (2, 'Zayıf'), (3, 'Orta'), (4, 'İyi'), (5, 'Çok iyi')] %}
+            <label><input type="radio" name="puan" value="{{ p }}" {% if karne.puan == p %}checked{% endif %} required> {{ p }} · {{ ad }}</label>
+            {% endfor %}
+        </div>
+    </div>
+    <label class="alan">
+        <span>Not</span>
+        <textarea name="not" rows="4" maxlength="1500" placeholder="Dönem içindeki performans, öne çıkanlar, gelişim alanları">{{ karne.not }}</textarea>
+    </label>
+    {% if karne.degerlendirme %}
+    <p class="form-not">Son güncelleme: {{ karne.degerlendirme.guncelleyen }} · {{ karne.degerlendirme.tarih | tarih }}</p>
+    {% endif %}
+    <div class="form-eylemler">
+        <a href="{{ url_for('karne', donem=donem.id) }}" class="dugme">Vazgeç</a>
+        <button type="submit" class="dugme dugme-ana">Kaydet</button>
+    </div>
+</form>
+{% endblock %}

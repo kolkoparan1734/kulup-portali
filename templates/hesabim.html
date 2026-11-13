@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Hesabım{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Hesabım</h1>
+        <p>{{ kullanici.ad_soyad or kullanici.kullanici_adi }} · {{ rol_ad }}{% if kulup %} · {{ kulup.isim }}{% endif %}</p>
+    </div>
+</div>
+
+<div class="belge-izgara">
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Hesap Bilgileri</h2>
+        <dl class="tanim-listesi">
+            <div><dt>Kullanıcı adı</dt><dd class="mono">{{ kullanici.kullanici_adi }}</dd></div>
+            <div><dt>Rol</dt><dd>{{ rol_ad }}</dd></div>
+            {% if kulup %}<div><dt>Kulüp</dt><dd>{{ kulup.isim }}</dd></div>{% endif %}
+            <div><dt>Oturum süresi</dt><dd>{{ oturum_suresi_dk }} dakika işlem yapılmazsa kapanır</dd></div>
+        </dl>
+    </section>
+
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Şifre Değiştir</h2>
+        {% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+        <form method="POST" class="form">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <label class="alan">
+                <span>Mevcut şifre</span>
+                <input type="password" name="mevcut_sifre" required autocomplete="current-password">
+            </label>
+            <label class="alan">
+                <span>Yeni şifre <small>(en az 8 karakter)</small></span>
+                <input type="password" name="yeni_sifre" minlength="8" required autocomplete="new-password">
+            </label>
+            <label class="alan">
+                <span>Yeni şifre (tekrar)</span>
+                <input type="password" name="yeni_sifre_tekrar" minlength="8" required autocomplete="new-password">
+            </label>
+            <button type="submit" class="dugme dugme-ana">Şifreyi Değiştir</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}{{ duyuru.konu }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('duyurular') }}" class="geri-link">&larr; Duyurular</a>
+
+<div class="sayfa-baslik">
+    <div>
+        <h1>{{ duyuru.konu }}</h1>
+        <p>{{ duyuru.tarih | tarih }} · {{ duyuru.gonderen }} · {{ duyuru.hedef_ad }}</p>
+    </div>
+</div>
+
+<div class="detay-izgara-genis">
+    <div>
+        <section class="kutu">
+            <h2 class="kutu-baslik-tek">Metin</h2>
+            <p class="metin-blok">{{ duyuru.metin }}</p>
+        </section>
+
+        <section class="kutu">
+            <h2 class="kutu-baslik-tek">Hedef Kulüpler ({{ duyuru.kulupler | length }})</h2>
+            <p class="kulup-etiketleri">
+                {% for k in duyuru.kulupler %}<a href="{{ url_for('kulup_detay', kulup_id=k.id) }}" class="kulup-etiketi{% if k.id in duyuru.adressiz | map(attribute='id') | list %} kulup-etiketi-uyari{% endif %}">{{ k.isim }}</a>{% endfor %}
+            </p>
+            {% if duyuru.adressiz %}
+            <p class="alici-uyari">{{ duyuru.adressiz | length }} kulübün e-posta adresi olmadığı için duyuru onlara gitmeyecek (kırmızıyla işaretli).
+                Kulübün düzenleme sayfasından "Kulüp e-postası" girilebilir veya başkana panel hesabı açılıp e-postası eklenebilir.</p>
+            {% endif %}
+        </section>
+    </div>
+
+    <div>
+        <section class="kutu">
+            <h2 class="kutu-baslik-tek">Gönder</h2>
+            {% if duyuru.alicilar %}
+            <p class="soluk">{{ duyuru.alicilar | length }} alıcı{% if gizli %}, birbirini görmemesi için "Gizli (BCC)" alanına yazılır{% endif %}.</p>
+            <a href="{{ mailto }}" class="dugme dugme-ana dugme-tam">Outlook'ta Aç</a>
+            {% if mailto_uzun %}
+            <p class="alici-uyari">Alıcı listesi uzun olduğu için bazı e-posta programları adresleri kesebilir.
+                Sorun olursa aşağıdaki adresleri kopyalayıp e-postanın Gizli (BCC) alanına yapıştırın.</p>
+            {% endif %}
+            <label class="alan alici-listesi">
+                <span>Alıcı adresleri</span>
+                <textarea id="alici-adresleri" rows="5" readonly>{{ duyuru.alicilar | join('; ') }}</textarea>
+            </label>
+            <div class="dugme-grubu">
+                <button type="button" class="dugme dugme-ince" data-kopyala="#alici-adresleri">Adresleri kopyala</button>
+                <button type="button" class="dugme dugme-ince" data-kopyala="#duyuru-metni">Metni kopyala</button>
+            </div>
+            <textarea id="duyuru-metni" hidden>{{ duyuru.metin }}</textarea>
+            {% else %}
+            <p class="alici-uyari">Hedef kulüplerin hiçbirinde e-posta adresi kayıtlı değil; duyuru arşive kaydedildi ama gönderilemez.</p>
+            {% endif %}
+        </section>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Yeni Duyuru{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('duyurular') }}" class="geri-link">&larr; Duyurular</a>
+
+<div class="sayfa-baslik">
+    <div>
+        <h1>Yeni Duyuru</h1>
+        <p>Kaydettiğinizde duyuru arşivlenir; ardından tek tuşla e-posta programınızda açabilirsiniz.</p>
+    </div>
+</div>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<form method="POST" class="form kutu" data-duyuru-formu data-alici-adresi="{{ url_for('duyuru_alicilari') }}">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+
+    <h2 class="form-bolum">Alıcılar</h2>
+    <div class="karar-secenekleri" role="radiogroup" aria-label="Hedef">
+        {% for kod, ad in hedef_turleri.items() %}
+        <label><input type="radio" name="hedef_turu" value="{{ kod }}" {% if form.hedef_turu == kod %}checked{% endif %}> {{ ad }}</label>
+        {% endfor %}
+    </div>
+    <div class="form-izgara">
+        <label class="alan" data-hedef-alani="kategori">
+            <span>Kategori</span>
+            <select name="kategori">
+                <option value="">Seçiniz</option>
+                {% for k in kategoriler %}<option {% if k == form.kategori %}selected{% endif %}>{{ k }}</option>{% endfor %}
+            </select>
+        </label>
+        <label class="alan" data-hedef-alani="kulup">
+            <span>Kulüp</span>
+            <select name="kulup_id">
+                <option value="">Seçiniz</option>
+                {% for k in kulupler %}<option value="{{ k.id }}" {% if k.id == form.kulup_id %}selected{% endif %}>{{ k.isim }}</option>{% endfor %}
+            </select>
+        </label>
+    </div>
+    <div class="secenek-satiri">
+        <label class="onay-kutusu"><input type="hidden" name="sadece_aktif" value="0"><input type="checkbox" name="sadece_aktif" value="1" {% if '1' in form.getlist('sadece_aktif') %}checked{% endif %}> Sadece aktif kulüpler</label>
+        <label class="onay-kutusu"><input type="checkbox" name="danisman_dahil" value="1" {% if form.danisman_dahil == '1' %}checked{% endif %}> Danışman hocaları da ekle</label>
+    </div>
+    <div class="alici-onizleme" data-alici-onizleme aria-live="polite"></div>
+
+    <h2 class="form-bolum">Duyuru</h2>
+    <label class="alan">
+        <span>Konu *</span>
+        <input type="text" name="konu" value="{{ form.konu }}" required maxlength="200">
+    </label>
+    <label class="alan">
+        <span>Metin *</span>
+        <textarea name="metin" rows="10" required maxlength="5000">{{ form.metin }}</textarea>
+    </label>
+
+    <div class="form-eylemler">
+        <a href="{{ url_for('duyurular') }}" class="dugme">Vazgeç</a>
+        <button type="submit" class="dugme dugme-ana">Kaydet ve Devam Et</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+    const form = document.querySelector("[data-duyuru-formu]");
+    const onizleme = form.querySelector("[data-alici-onizleme]");
+    let istekNo = 0;
+
+    function alanlariGoster() {
+        const tur = form.querySelector("[name=hedef_turu]:checked").value;
+        form.querySelectorAll("[data-hedef-alani]").forEach((a) => (a.hidden = a.dataset.hedefAlani !== tur));
+        form.querySelector("[name=sadece_aktif][type=checkbox]").closest("label").hidden = tur === "kulup";
+    }
+
+    function onizle() {
+        alanlariGoster();
+        const veri = new FormData(form);
+        const sorgu = new URLSearchParams();
+        ["hedef_turu", "kategori", "kulup_id", "danisman_dahil"].forEach((a) => sorgu.set(a, veri.get(a) || ""));
+        sorgu.set("sadece_aktif", form.querySelector("[name=sadece_aktif][type=checkbox]").checked ? "1" : "0");
+        const bu = ++istekNo;
+        fetch(form.dataset.aliciAdresi + "?" + sorgu).then((r) => r.json()).then(function (d) {
+            if (bu !== istekNo) return;
+            onizleme.replaceChildren();
+            const p = document.createElement("p");
+            if (d.hata) {
+                p.textContent = d.hata;
+                p.className = "soluk";
+            } else {
+                p.innerHTML = "<strong></strong> kulüp, <strong></strong> e-posta adresi";
+                p.querySelectorAll("strong")[0].textContent = d.kulup_sayisi;
+                p.querySelectorAll("strong")[1].textContent = d.alici_sayisi;
+            }
+            onizleme.appendChild(p);
+            if (d.adressiz && d.adressiz.length) {
+                const uyari = document.createElement("p");
+                uyari.className = "alici-uyari";
+                uyari.textContent = d.adressiz.length + " kulübün e-posta adresi yok, duyuru onlara gitmeyecek: " + d.adressiz.join(", ");
+                onizleme.appendChild(uyari);
+            }
+        });
+    }
+    form.addEventListener("change", onizle);
+    onizle();
+})();
+</script>
+{% endblock %}

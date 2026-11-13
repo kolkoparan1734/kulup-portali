@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo, basvuru_rozeti, etkinlik_tarihi %}
+
+{% macro arsiv_eylemleri(tur, kayit_id, ad) %}
+{% if izin('arsiv_geri_getir') %}
+<form method="POST" action="{{ url_for('arsiv_geri_getir', tur=tur, kayit_id=kayit_id) }}">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <button type="submit" class="dugme dugme-ince">Geri getir</button>
+</form>
+{% endif %}
+{% if izin('arsiv_kalici_sil') %}
+<form method="POST" action="{{ url_for('arsiv_kalici_sil', tur=tur, kayit_id=kayit_id) }}"
+      data-onay="{{ ad }} KALICI olarak silinsin mi?{% if tur == 'kulup' %} Kulübün üyelik kayıtları, belgeleri ve etkinlik başvuruları da dosyalarıyla birlikte silinir.{% endif %} Bu işlem geri alınamaz.">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <button type="submit" class="dugme dugme-ince dugme-tehlike">Kalıcı sil</button>
+</form>
+{% endif %}
+{% endmacro %}
+
+{% block title %}Arşiv{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Arşiv</h1>
+        <p>Arşive alınan kulüpler, belgeler ve etkinlik başvuruları. {% if izin('arsiv_geri_getir') %}Geri getirilebilir veya kalıcı olarak silinebilir.{% else %}Geri getirme ve kalıcı silme yalnızca dekan tarafından yapılabilir.{% endif %}</p>
+    </div>
+</div>
+
+<section class="kutu">
+    <h2 class="kutu-baslik-tek">Kulüpler ({{ kulupler | length }})</h2>
+    {% if kulupler %}
+    <ul class="liste">
+        {% for k in kulupler %}
+        <li>
+            <div class="siralama-satir">
+                {{ kulup_logo(k, "kucuk") }}
+                <div><strong>{{ k.isim }}</strong>
+                    <span class="soluk kucuk-metin">{{ k.uye_sayisi }} üye · Arşive alan: {{ k.arsiv.kullanici }} · {{ k.arsiv.tarih | tarih }}</span></div>
+            </div>
+            <div class="satir-eylem">{{ arsiv_eylemleri('kulup', k.id, k.isim) }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}<p class="bos-durum">Arşivde kulüp yok.</p>{% endif %}
+</section>
+
+<section class="kutu">
+    <h2 class="kutu-baslik-tek">Belgeler ({{ belgeler | length }})</h2>
+    {% if belgeler %}
+    <ul class="liste">
+        {% for b in belgeler %}
+        <li>
+            <div><strong>{{ b.tur }}: {{ b.orijinal_ad }}</strong>
+                <span class="soluk kucuk-metin">{{ b.kulup_isim }} · Arşive alan: {{ b.arsiv.kullanici }} · {{ b.arsiv.tarih | tarih }}</span></div>
+            <div class="satir-eylem">{{ arsiv_eylemleri('belge', b.id, b.orijinal_ad) }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}<p class="bos-durum">Arşivde belge yok.</p>{% endif %}
+</section>
+
+<section class="kutu">
+    <h2 class="kutu-baslik-tek">Etkinlik Başvuruları ({{ basvurular | length }})</h2>
+    {% if basvurular %}
+    <ul class="liste">
+        {% for b in basvurular %}
+        <li>
+            <div><strong>{{ b.ad }}</strong> {{ basvuru_rozeti(b) }}
+                <span class="soluk kucuk-metin">{{ b.kulup_isim }} · {{ etkinlik_tarihi(b) }} · Arşive alan: {{ b.arsiv.kullanici }} · {{ b.arsiv.tarih | tarih }}</span></div>
+            <div class="satir-eylem">{{ arsiv_eylemleri('basvuru', b.id, b.ad) }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}<p class="bos-durum">Arşivde etkinlik başvurusu yok.</p>{% endif %}
+</section>
+<p class="form-not">Arşivdeki bir kulübün üyelikleri, belgeleri ve başvuruları kulüple birlikte gizlenir; kulüp geri getirilince hepsi geri gelir.</p>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Takvim · {{ ay_adi }}{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Takvim</h1>
+        <p>{{ sayilar.etkinlik }} onaylı etkinlik · {{ sayilar.evrak }} evrak teslim tarihi</p>
+    </div>
+    <div class="takvim-gezinti">
+        <a href="{{ url_for('takvim', ay=onceki) }}" class="dugme dugme-ince" aria-label="Önceki ay">&larr;</a>
+        <strong class="takvim-ay">{{ ay_adi }}</strong>
+        <a href="{{ url_for('takvim', ay=sonraki) }}" class="dugme dugme-ince" aria-label="Sonraki ay">&rarr;</a>
+        {% if ay.strftime('%Y-%m') != bu_ay %}<a href="{{ url_for('takvim') }}" class="dugme dugme-ince">Bugün</a>{% endif %}
+    </div>
+</div>
+
+<div class="evrak-lejant">
+    <span class="takvim-kayit takvim-etkinlik">Onaylanan etkinlik</span>
+    <span class="takvim-kayit takvim-evrak">Evrak son teslim tarihi</span>
+</div>
+
+<section class="kutu kutu-tablo">
+    <div class="takvim" role="grid" aria-label="{{ ay_adi }}">
+        {% for gun_adi in ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'] %}
+        <div class="takvim-gun-adi" role="columnheader">{{ gun_adi }}</div>
+        {% endfor %}
+        {% for hafta in haftalar %}
+        {% for gun in hafta %}
+        {% set liste = kayitlar.get(gun.isoformat(), []) %}
+        <div class="takvim-gun{% if gun.month != ay.month %} takvim-diger-ay{% endif %}{% if gun == bugun %} takvim-bugun{% endif %}{% if not liste %} takvim-bos{% endif %}" role="gridcell">
+            <span class="takvim-tarih"><span class="takvim-mobil-gun">{{ ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'][gun.weekday()] }}, </span>{{ gun.day }}</span>
+            {% if gun.month == ay.month %}
+            {% for k in liste %}
+            <a href="{{ k.link }}" class="takvim-kayit takvim-{{ k.tur }}" title="{{ k.baslik }} · {{ k.alt }}">
+                {% if k.saat %}<span class="takvim-saat">{{ k.saat }}</span>{% endif %}{{ k.baslik }}
+                <span class="takvim-alt">{{ k.alt }}</span>
+            </a>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</section>
+{% if not kayitlar %}<p class="bos-durum">Bu ay için onaylı etkinlik veya evrak teslim tarihi yok.</p>{% endif %}
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import basvuru_rozeti, etkinlik_tarihi, bos %}
+
+{% block title %}Etkinlik Başvuruları{% endblock %}
+
+{% block content %}
+<div data-filtre-kapsam data-filtre-oge="#basvuru-tablosu tbody tr">
+    <div class="sayfa-baslik">
+        <div>
+            <h1>Etkinlik Başvuruları</h1>
+            <p>Kulüplerin etkinlik başvuruları ve dekanlık onay süreci · <span data-filtre-sayac>{{ basvurular | length }}</span> başvuru gösteriliyor</p>
+        </div>
+        <a href="{{ url_for('basvuru_form') }}" class="dugme dugme-ana">+ Başvuru Gir</a>
+    </div>
+
+    <div class="sekmeler" role="group" aria-label="Duruma göre filtrele">
+        <input type="hidden" data-filtre="durum" value="{{ secili_durum }}">
+        <button type="button" class="sekme" data-sekme="" aria-pressed="{{ 'true' if not secili_durum else 'false' }}">
+            Tümü <span class="sekme-sayi">{{ basvurular | length }}</span>
+        </button>
+        {% for kod, ad in durumlar.items() %}
+        <button type="button" class="sekme" data-sekme="{{ kod }}" aria-pressed="{{ 'true' if secili_durum == kod else 'false' }}">
+            {{ ad }} <span class="sekme-sayi">{{ sayilar[kod] }}</span>
+        </button>
+        {% endfor %}
+    </div>
+
+    <div class="filtre-cubugu">
+        <input type="search" data-filtre="metin" placeholder="Etkinlik, kulüp veya yer ara…" aria-label="Başvuru ara">
+        <select data-filtre="kulup" aria-label="Kulüp">
+            <option value="">Tüm kulüpler</option>
+            {% for k in kulupler %}<option value="{{ k.id }}" {% if k.id == secili_kulup %}selected{% endif %}>{{ k.isim }}</option>{% endfor %}
+        </select>
+        <select data-filtre="donem" aria-label="Dönem">
+            <option value="">Tüm dönemler</option>
+            {% for d in donemler %}<option value="{{ d.id }}">{{ d.ad }}</option>{% endfor %}
+        </select>
+    </div>
+
+    <section class="kutu kutu-tablo">
+        <div class="tablo-sarici">
+            <table class="tablo" id="basvuru-tablosu">
+                <thead>
+                    <tr>
+                        <th data-sirala>Etkinlik</th>
+                        <th data-sirala>Kulüp</th>
+                        <th data-sirala>Tarih</th>
+                        <th data-sirala>Yer</th>
+                        <th data-sirala="sayi">Katılımcı</th>
+                        <th data-sirala>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for b in basvurular %}
+                    <tr data-metin="{{ b.ad }} {{ b.kulup_isim }} {{ b.yer }}" data-durum="{{ b.durum }}"
+                        data-kulup="{{ b.kulup_id }}" data-donem="{{ b.donem_id }}">
+                        <td>
+                            <a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}"><strong>{{ b.ad }}</strong></a>
+                            {% if b.konusmaci_var %}<span class="soluk kucuk-metin">Konuşmacı: {{ b.konusmaci }}</span>{% endif %}
+                        </td>
+                        <td><a href="{{ url_for('kulup_detay', kulup_id=b.kulup_id) }}">{{ b.kulup_isim }}</a></td>
+                        <td data-deger="{{ b.tarih_saat }}">{{ etkinlik_tarihi(b) }}</td>
+                        <td>{{ bos(b.yer) }}</td>
+                        <td data-deger="{{ b.katilimci if b.katilimci is not none else '' }}">{{ bos(b.katilimci) }}</td>
+                        <td data-deger="{{ b.durum_ad }}">{{ basvuru_rozeti(b) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="bos-durum" data-filtre-bos hidden>Filtrelere uyan başvuru yok.</p>
+    </section>
+</div>
+{% endblock %}

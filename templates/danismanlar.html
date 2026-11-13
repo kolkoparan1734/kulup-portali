@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import bos %}
+
+{% block title %}Danışmanlar{% endblock %}
+
+{% block content %}
+<div data-filtre-kapsam data-filtre-oge="#danisman-tablosu tbody tr">
+    <div class="sayfa-baslik">
+        <div>
+            <h1>Danışmanlar</h1>
+            <p><span data-filtre-sayac>{{ danismanlar | length }}</span> danışman hoca</p>
+        </div>
+        {% if izin('danisman_form') %}
+        <a href="{{ url_for('danisman_form') }}" class="dugme dugme-ana">+ Yeni Danışman</a>
+        {% endif %}
+    </div>
+
+    <div class="filtre-cubugu">
+        <input type="search" data-filtre="metin" placeholder="Ad, fakülte, bölüm veya kulüp ara…" aria-label="Danışman ara">
+        <label class="onay-kutusu">
+            <input type="checkbox" data-filtre="bosta"> Kulübü olmayanlar
+        </label>
+    </div>
+
+    <section class="kutu kutu-tablo">
+        <div class="tablo-sarici">
+            <table class="tablo" id="danisman-tablosu">
+                <thead>
+                    <tr>
+                        <th data-sirala>Ad Soyad</th>
+                        <th data-sirala>Fakülte / Bölüm</th>
+                        <th>İletişim</th>
+                        <th data-sirala>Kulüpler</th>
+                        <th class="sag"><span class="gizli-metin">İşlemler</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in danismanlar %}
+                    <tr data-metin="{{ d.tam_ad }} {{ d.fakulte }} {{ d.bolum }} {{ d.eposta }} {{ d.kulupler | map(attribute='isim') | join(' ') }}"
+                        data-bosta="{{ '0' if d.kulupler else '1' }}">
+                        <td data-deger="{{ d.ad_soyad }}">
+                            <a href="{{ url_for('danisman_detay', danisman_id=d.id) }}"><strong>{{ d.ad_soyad }}</strong></a>
+                            {% if d.unvan %}<span class="soluk kucuk-metin">{{ d.unvan }}</span>{% endif %}
+                        </td>
+                        <td>
+                            {{ bos(d.fakulte) }}
+                            {% if d.bolum %}<span class="soluk kucuk-metin">{{ d.bolum }}</span>{% endif %}
+                        </td>
+                        <td class="kucuk-metin">
+                            {% if d.eposta %}<a href="mailto:{{ d.eposta }}">{{ d.eposta }}</a><br>{% endif %}
+                            {% if d.telefon %}{{ d.telefon }}{% endif %}
+                            {% if not d.eposta and not d.telefon %}<span class="soluk">—</span>{% endif %}
+                        </td>
+                        <td data-deger="{{ '%03d' | format(d.kulupler | length) }}">
+                            {% for k in d.kulupler %}
+                            <a href="{{ url_for('kulup_detay', kulup_id=k.id) }}">{{ k.isim }}</a>{% if not loop.last %}, {% endif %}
+                            {% else %}<span class="rozet rozet-pasif">Kulübü yok</span>{% endfor %}
+                        </td>
+                        <td class="sag satir-eylem">
+                            {% if izin('danisman_form') %}
+                            <a href="{{ url_for('danisman_form', danisman_id=d.id) }}" class="dugme dugme-ince">Düzenle</a>
+                            {% endif %}
+                            {% if izin('danisman_sil') %}
+                            <form method="POST" action="{{ url_for('danisman_sil', danisman_id=d.id) }}"
+                                  data-onay="{{ d.tam_ad }} silinsin mi?{% if d.kulupler %} {{ d.kulupler | length }} kulübün danışman alanı boşaltılacak.{% endif %}">
+                                <input type="hidden" name="csrf" value="{{ csrf }}">
+                                <button type="submit" class="dugme dugme-ince dugme-tehlike">Sil</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="bos-durum" data-filtre-bos hidden>{{ 'Aramanıza uyan danışman bulunamadı.' if danismanlar else 'Henüz danışman eklenmemiş.' }}</p>
+    </section>
+</div>
+{% endblock %}

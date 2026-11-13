@@ -1,0 +1,47 @@
+[
+  {
+    "id": "10df3212de43",
+    "tarih": "2026-10-24 17:12:04",
+    "kullanici": "Öğrenci Dekanlığı",
+    "kullanici_adi": "admin",
+    "rol": "dekan",
+    "islem": "Karar",
+    "kayit_turu": "basvuru",
+    "kayit_id": "513be93bc20b",
+    "kayit_ad": "claude eğitimi",
+    "kulup_id": "ai-club",
+    "degisiklikler": [
+      {
+        "alan": "Durum",
+        "eski": "Beklemede",
+        "yeni": "Onaylandı"
+      }
+    ],
+    "aciklama": ""
+  },
+  {
+    "id": "681adc3a4ad3",
+    "tarih": "2026-10-24 17:12:18",
+    "kullanici": "Öğrenci Dekanlığı",
+    "kullanici_adi": "admin",
+    "rol": "dekan",
+    "islem": "Güncelleme",
+    "kayit_turu": "kulup",
+    "kayit_id": "ai-club",
+    "kayit_ad": "Altınbaş AI Club",
+    "kulup_id": "ai-club",
+    "degisiklikler": [
+      {
+        "alan": "Danışman",
+        "eski": "",
+        "yeni": "Dr. Öğr. Üyesi DUYGU KOTAN TÜRKDEN"
+      },
+      {
+        "alan": "Yönetim kurulu",
+        "eski": "",
+        "yeni": "Başkan: Zülal Kılıç"
+      }
+    ],
+    "aciklama": ""
+  }
+]

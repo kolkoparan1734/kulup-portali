@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo %}
+
+{% block title %}Evrak Takibi{% endblock %}
+
+{% block content %}
+<div data-filtre-kapsam data-filtre-oge="#evrak-tablosu tbody tr">
+    <div class="sayfa-baslik">
+        <div>
+            <h1>Evrak Takibi</h1>
+            <p>{% if donem %}{{ donem.ad }} · <span data-filtre-sayac>{{ satirlar | length }}</span> kulüp gösteriliyor{% else %}Önce bir dönem tanımlayın.{% endif %}</p>
+        </div>
+        {% if donem %}<a href="{{ url_for('zorunlu_evraklar', donem_id=donem.id) }}" class="dugme">Zorunlu Evrakları Düzenle</a>{% endif %}
+    </div>
+
+    {% if donem %}
+    <section class="ozet-kartlari">
+        <div class="ozet-kart ozet-aktif"><span class="ozet-etiket">Teslim edildi</span><span class="ozet-deger">{{ toplam.teslim }}</span></div>
+        <div class="ozet-kart ozet-pasif"><span class="ozet-etiket">Süresi yaklaşıyor</span><span class="ozet-deger">{{ toplam.yaklasiyor }}</span><span class="ozet-alt">{{ yaklasiyor_gun }} gün veya daha az kaldı</span></div>
+        <div class="ozet-kart ozet-eksik"><span class="ozet-etiket">Eksik</span><span class="ozet-deger">{{ toplam.eksik }}</span><span class="ozet-alt">son teslim tarihi geçti</span></div>
+        <div class="ozet-kart"><span class="ozet-etiket">Bekleniyor</span><span class="ozet-deger">{{ toplam.bekleniyor }}</span><span class="ozet-alt">teslim tarihine {{ yaklasiyor_gun }} günden fazla var</span></div>
+    </section>
+
+    <form method="GET" class="filtre-cubugu">
+        <select name="donem" onchange="this.form.submit()" aria-label="Dönem">
+            {% for d in donemler %}<option value="{{ d.id }}" {% if d.id == donem.id %}selected{% endif %}>{{ d.ad }}{% if d.aktif %} (aktif){% endif %}</option>{% endfor %}
+        </select>
+        <input type="search" data-filtre="metin" placeholder="Kulüp ara…" aria-label="Kulüp ara">
+        <label class="onay-kutusu"><input type="checkbox" data-filtre="eksikli"> Sadece eksiği/yaklaşanı olanlar</label>
+        <label class="onay-kutusu"><input type="checkbox" name="pasif" value="1" {% if pasifler_dahil %}checked{% endif %} onchange="this.form.submit()"> Pasif kulüpleri de göster</label>
+    </form>
+
+    <div class="evrak-lejant">
+        {% for kod, ad in durumlar.items() %}<span class="evrak-hucre evrak-{{ kod }}">{{ ad }}</span>{% endfor %}
+    </div>
+
+    {% if evraklar %}
+    <section class="kutu kutu-tablo">
+        <div class="tablo-sarici">
+            <table class="tablo evrak-tablosu" id="evrak-tablosu">
+                <thead>
+                    <tr>
+                        <th data-sirala class="sabit-sutun">Kulüp</th>
+                        {% for e in evraklar %}
+                        <th>
+                            {{ e.tur }}
+                            <span class="evrak-son-tarih">Son: {{ e.teslim_tarihi | tarih }}</span>
+                        </th>
+                        {% endfor %}
+                        <th data-sirala="sayi">Eksik</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for s in satirlar %}
+                    {% set k = s.kulup %}
+                    <tr id="kulup-{{ k.id }}" data-metin="{{ k.isim }}"
+                        data-eksikli="{{ '1' if s.sayilar.eksik or s.sayilar.yaklasiyor else '0' }}">
+                        <td class="sabit-sutun" data-deger="{{ k.isim }}">
+                            <a href="{{ url_for('kulup_detay', kulup_id=k.id) }}" class="siralama-satir">
+                                {{ kulup_logo(k, "kucuk") }}<span>{{ k.isim }}</span>
+                            </a>
+                        </td>
+                        {% for h in s.hucreler %}
+                        <td>
+                            <span class="evrak-hucre evrak-{{ h.durum }}">
+                                {% if h.durum == 'teslim' %}✓ Teslim
+                                {% elif h.durum == 'eksik' %}✕ Eksik
+                                {% elif h.durum == 'yaklasiyor' %}! {{ h.kalan_gun }} gün
+                                {% else %}Bekleniyor{% endif %}
+                            </span>
+                            <span class="evrak-eylem">
+                                {% if h.belge %}
+                                <a href="{{ url_for('belge_indir', belge_id=h.belge.id) }}">Belgeyi indir</a>
+                                {% elif h.elden %}
+                                <span class="soluk" title="{{ h.elden.kullanici }} · {{ h.elden.tarih | tarih }}">Elden alındı</span>
+                                <form method="POST" action="{{ url_for('elden_teslim') }}" data-onay="Elden teslim işareti kaldırılsın mı?">
+                                    <input type="hidden" name="csrf" value="{{ csrf }}">
+                                    <input type="hidden" name="evrak_id" value="{{ h.evrak.id }}">
+                                    <input type="hidden" name="kulup_id" value="{{ k.id }}">
+                                    <button type="submit" class="link-dugme">Geri al</button>
+                                </form>
+                                {% else %}
+                                <a href="{{ url_for('belgeler', kulup=k.id, donem=donem.id, tur=h.evrak.tur) }}">Yükle</a>
+                                <form method="POST" action="{{ url_for('elden_teslim') }}">
+                                    <input type="hidden" name="csrf" value="{{ csrf }}">
+                                    <input type="hidden" name="evrak_id" value="{{ h.evrak.id }}">
+                                    <input type="hidden" name="kulup_id" value="{{ k.id }}">
+                                    <button type="submit" class="link-dugme">Elden alındı</button>
+                                </form>
+                                {% endif %}
+                            </span>
+                        </td>
+                        {% endfor %}
+                        <td data-deger="{{ s.sayilar.eksik }}">
+                            {% if s.sayilar.eksik %}<span class="rozet rozet-uyari">{{ s.sayilar.eksik }}</span>{% else %}<span class="soluk">0</span>{% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="bos-durum" data-filtre-bos hidden>Filtrelere uyan kulüp yok.</p>
+    </section>
+    {% else %}
+    <section class="kutu">
+        <p class="bos-durum">Bu dönem için zorunlu evrak tanımlanmamış.
+            <a href="{{ url_for('zorunlu_evraklar', donem_id=donem.id) }}">Zorunlu evrak ekle &rarr;</a></p>
+    </section>
+    {% endif %}
+    {% endif %}
+</div>
+{% endblock %}

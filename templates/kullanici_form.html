@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Kullanıcıyı Düzenle' if duzenleme else 'Yeni Kullanıcı' }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('kullanicilar') }}" class="geri-link">&larr; Kullanıcılar</a>
+
+<div class="sayfa-baslik">
+    <h1>{{ 'Kullanıcıyı Düzenle' if duzenleme else 'Yeni Kullanıcı' }}</h1>
+</div>
+
+{% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+
+<form method="POST" class="form kutu">
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <div class="form-izgara">
+        <label class="alan">
+            <span>Kullanıcı adı *</span>
+            <input type="text" name="kullanici_adi" value="{{ kullanici.kullanici_adi if kullanici else '' }}"
+                   {% if duzenleme %}disabled{% else %}required{% endif %} maxlength="32" pattern="[A-Za-z0-9._\-]{3,32}" autocomplete="off">
+        </label>
+        <label class="alan">
+            <span>Ad soyad *</span>
+            <input type="text" name="ad_soyad" value="{{ kullanici.ad_soyad if kullanici else '' }}" required maxlength="120">
+        </label>
+        <label class="alan">
+            <span>E-posta</span>
+            <input type="email" name="eposta" value="{{ kullanici.eposta if kullanici else '' }}" maxlength="120">
+        </label>
+        <label class="alan">
+            <span>Rol *</span>
+            <select name="rol" required data-rol-secimi>
+                {% for kod, ad in roller.items() %}
+                <option value="{{ kod }}" {% if kullanici and kullanici.rol == kod %}selected{% endif %}>{{ ad }}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <label class="alan" data-baskan-kulubu>
+            <span>Kulüp <small>(kulüp başkanı için)</small></span>
+            <select name="kulup_id">
+                <option value="">Seçiniz</option>
+                {% for k in kulupler %}<option value="{{ k.id }}" {% if kullanici and kullanici.kulup_id == k.id %}selected{% endif %}>{{ k.isim }}</option>{% endfor %}
+            </select>
+        </label>
+        {% if not duzenleme %}
+        <label class="alan">
+            <span>İlk şifre * <small>(en az 8 karakter)</small></span>
+            <input type="password" name="sifre" minlength="8" required autocomplete="new-password">
+        </label>
+        {% endif %}
+    </div>
+    {% if not baskan_girisi %}<p class="form-not">Kulüp başkanı girişi şu an kapalı; başkan hesabı oluşturulabilir ama ayarlardan açılana kadar giriş yapamaz.</p>{% endif %}
+    {% if duzenleme %}<p class="form-not">Şifreyi değiştirmek için Kullanıcılar listesindeki "Şifre sıfırla" butonunu kullanın.</p>{% endif %}
+    <div class="form-eylemler">
+        <a href="{{ url_for('kullanicilar') }}" class="dugme">Vazgeç</a>
+        <button type="submit" class="dugme dugme-ana">Kaydet</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+    // Kulüp seçimi sadece "Kulüp Başkanı" rolünde gösterilir.
+    const rol = document.querySelector("[data-rol-secimi]");
+    const kulup = document.querySelector("[data-baskan-kulubu]");
+    function guncelle() { kulup.hidden = rol.value !== "baskan"; }
+    rol.addEventListener("change", guncelle);
+    guncelle();
+})();
+</script>
+{% endblock %}

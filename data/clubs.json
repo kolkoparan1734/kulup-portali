@@ -6,12 +6,12 @@
       "logo": "dans_logo.png",
       "kategori": "Sanat / Kültür",
       "aciklama": "Modern dans, halk oyunları ve sosyal dans atölyeleriyle öğrencilere sahne deneyimi kazandıran kulüp.",
-      "baskan": "Ahmet Yılmaz",
+      "baskan": "Zeynep Balcı",
       "baskan_kullanici_adi": "250200454",
       "yonetim_kurulu": [
         {
-          "isim": "Ahmet Yılmaz",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Zeynep Balcı"
         },
         {
           "isim": "Elif Demir",
@@ -46,7 +46,9 @@
           "aciklama": "taksimde zeybek etkimniliğime herkesi bekleriz"
         }
       ],
-      "kapak_gorseli": "covers/dans_kapak.jpg"
+      "kapak_gorseli": "covers/dans_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
     },
     {
       "id": "satranc",
@@ -83,7 +85,9 @@
           "aciklama": "5 dakikalık blitz formatında dostluk turnuvası."
         }
       ],
-      "kapak_gorseli": "covers/satranc_kapak.jpg"
+      "kapak_gorseli": "covers/satranc_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
     },
     {
       "id": "ieee",
@@ -91,12 +95,11 @@
       "logo": "ieee_logo.png",
       "kategori": "Akademik / Teknoloji",
       "aciklama": "Mühendislik ve teknoloji alanında seminer, atölye ve proje çalışmaları düzenleyen kulüp.",
-      "baskan": "Deniz Şahin",
-      "baskan_kullanici_adi": "200300400",
+      "baskan": "Selnur Günesen",
       "yonetim_kurulu": [
         {
-          "isim": "Deniz Şahin",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Selnur Günesen"
         },
         {
           "isim": "Ece Yıldız",
@@ -125,7 +128,9 @@
           "aciklama": "Sektörden bir konuşmacı ile yapay zeka üzerine söyleşi."
         }
       ],
-      "kapak_gorseli": "covers/ieee_kapak.jpg"
+      "kapak_gorseli": "covers/ieee_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "1e6927e548cb"
     },
     {
       "id": "gastronomi",
@@ -133,11 +138,11 @@
       "logo": "gastronomi_logo.png",
       "kategori": "Sanat / Kültür",
       "aciklama": "Mutfak kültürü, yemek atölyeleri ve tadım etkinlikleri düzenleyen kulüp.",
-      "baskan": "Aslı Korkmaz",
+      "baskan": "Zeynep Aras",
       "yonetim_kurulu": [
         {
-          "isim": "Aslı Korkmaz",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Zeynep Aras"
         },
         {
           "isim": "Tolga Er",
@@ -162,7 +167,9 @@
           "aciklama": "Temel hamur işi tekniklerinin öğretildiği uygulamalı atölye."
         }
       ],
-      "kapak_gorseli": "covers/gastronomi_kapak.jpg"
+      "kapak_gorseli": "covers/gastronomi_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "238915603ab6"
     },
     {
       "id": "yapay-zeka",
@@ -170,19 +177,19 @@
       "logo": "yapayzeka_logo.png",
       "kategori": "Akademik / Teknoloji",
       "aciklama": "Yapay zeka, makine öğrenmesi ve robotik alanlarında proje ve atölyeler düzenleyen kulüp.",
-      "baskan": "Kaan Aydemir",
+      "baskan": "Muhammed Batuhan Dede",
       "yonetim_kurulu": [
         {
-          "isim": "Kaan Aydemir",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Muhammed Batuhan Dede"
         },
         {
-          "isim": "Sude Yalman",
-          "gorev": "Başkan Yardımcısı"
+          "gorev": "Başkan Yardımcısı",
+          "isim": "Sude Yalman"
         },
         {
-          "isim": "Emre Koç",
-          "gorev": "Proje Sorumlusu"
+          "gorev": "Proje Sorumlusu",
+          "isim": "Emre Koç"
         }
       ],
       "etkinlikler": [
@@ -199,7 +206,9 @@
           "aciklama": "Temel görüntü işleme ve yapay zeka uygulamalarına giriş semineri."
         }
       ],
-      "kapak_gorseli": "covers/yapay-zeka_kapak.jpg"
+      "kapak_gorseli": "covers/yapay-zeka_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "390f5a9c6da8"
     },
     {
       "id": "genc-kalite",
@@ -207,11 +216,11 @@
       "logo": "genckalite_logo.png",
       "kategori": "Akademik",
       "aciklama": "Kalite yönetimi ve sürekli gelişim kültürünü öğrencilere tanıtan, sektörle buluşturan kulüp.",
-      "baskan": "Defne Aksu",
+      "baskan": "Çağla Feyza Ergen",
       "yonetim_kurulu": [
         {
-          "isim": "Defne Aksu",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Çağla Feyza Ergen"
         },
         {
           "isim": "Oğuz Bilgin",
@@ -236,7 +245,9 @@
           "aciklama": "Farklı üniversitelerden kalite kulüplerinin bir araya geldiği network etkinliği."
         }
       ],
-      "kapak_gorseli": "covers/genc-kalite_kapak.jpg"
+      "kapak_gorseli": "covers/genc-kalite_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "683111ff5dd1"
     },
     {
       "id": "psikoloji",
@@ -244,11 +255,11 @@
       "logo": "psikoloji_logo.png",
       "kategori": "Akademik",
       "aciklama": "Psikoloji alanında söyleşi, seminer ve farkındalık etkinlikleri düzenleyen kulüp.",
-      "baskan": "İrem Solak",
+      "baskan": "Mert Ali Şahin",
       "yonetim_kurulu": [
         {
-          "isim": "İrem Solak",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Mert Ali Şahin"
         },
         {
           "isim": "Yusuf Bayrak",
@@ -273,7 +284,9 @@
           "aciklama": "Alanında uzman bir psikoloğun katılacağı söyleşi."
         }
       ],
-      "kapak_gorseli": "covers/psikoloji_kapak.jpg"
+      "kapak_gorseli": "covers/psikoloji_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "ec8de57231bb"
     },
     {
       "id": "sinema",
@@ -281,11 +294,11 @@
       "logo": "sinema_logo.png",
       "kategori": "Sanat / Kültür",
       "aciklama": "Film gösterimleri, tartışma seansları ve kısa film yarışmaları düzenleyen kulüp.",
-      "baskan": "Toprak Ergin",
+      "baskan": "İclal Yaprak",
       "yonetim_kurulu": [
         {
-          "isim": "Toprak Ergin",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "İclal Yaprak"
         },
         {
           "isim": "Asya Demirtaş",
@@ -310,7 +323,9 @@
           "aciklama": "Sinema tarihinden bir klasik, açık hava gösterimi."
         }
       ],
-      "kapak_gorseli": "covers/sinema_kapak.jpg"
+      "kapak_gorseli": "covers/sinema_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "5646bc008df8"
     },
     {
       "id": "kutuphane",
@@ -347,7 +362,9 @@
           "aciklama": "Türk edebiyatından bir yazarla kampüste söyleşi."
         }
       ],
-      "kapak_gorseli": "covers/kutuphane_kapak.jpg"
+      "kapak_gorseli": "covers/kutuphane_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
     },
     {
       "id": "veri-bilimi",
@@ -355,19 +372,11 @@
       "logo": "veribilimi_logo.png",
       "kategori": "Akademik / Teknoloji",
       "aciklama": "Veri analizi, makine öğrenmesi ve istatistik üzerine proje ve eğitimler düzenleyen kulüp.",
-      "baskan": "Ege Sancak",
+      "baskan": "Furkan Kolkoparan",
       "yonetim_kurulu": [
         {
-          "isim": "Ege Sancak",
-          "gorev": "Başkan"
-        },
-        {
-          "isim": "Miray Doğan",
-          "gorev": "Başkan Yardımcısı"
-        },
-        {
-          "isim": "Alp Baransel",
-          "gorev": "Proje Sorumlusu"
+          "gorev": "Başkan",
+          "isim": "Furkan Kolkoparan"
         }
       ],
       "etkinlikler": [
@@ -384,7 +393,9 @@
           "aciklama": "Uluslararası bir veri bilimi yarışmasına hazırlık kampı."
         }
       ],
-      "kapak_gorseli": "covers/veri-bilimi_kapak.jpg"
+      "kapak_gorseli": "covers/veri-bilimi_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "59134c3f82c7"
     },
     {
       "id": "sosyoloji",
@@ -392,10 +403,10 @@
       "logo": "sosyoloji_logo.png",
       "kategori": "Akademik",
       "aciklama": "Toplumsal konular üzerine tartışma panelleri ve saha araştırmaları düzenleyen kulüp.",
-      "baskan": "Yağmur Ceylan",
+      "baskan": "Feyza Yılmaz",
       "yonetim_kurulu": [
         {
-          "isim": "Yağmur Ceylan",
+          "isim": "Feyza Yılmaz",
           "gorev": "Başkan"
         },
         {
@@ -421,19 +432,21 @@
           "aciklama": "Öğrencilerin yürüttüğü saha araştırmalarının sunulduğu gün."
         }
       ],
-      "kapak_gorseli": "covers/sosyoloji_kapak.jpg"
+      "kapak_gorseli": "covers/sosyoloji_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
     },
     {
       "id": "ticaret-lojistik",
-      "isim": "Ticaret ve Lojistik Kulübü",
-      "logo": "ticaretlojistik_logo.png",
+      "isim": "İşletme Kulübü",
+      "logo": "isletme.jpg",
       "kategori": "Akademik / İş Dünyası",
       "aciklama": "Uluslararası ticaret ve lojistik sektörüne yönelik sektör ziyaretleri ve kariyer etkinlikleri düzenleyen kulüp.",
-      "baskan": "Bora Şimşek",
+      "baskan": "Beyza Nur Kahya",
       "yonetim_kurulu": [
         {
-          "isim": "Bora Şimşek",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Beyza Nur Kahya"
         },
         {
           "isim": "Ceren Aktürk",
@@ -458,7 +471,9 @@
           "aciklama": "Sektör profesyonelleriyle kariyer odaklı buluşma."
         }
       ],
-      "kapak_gorseli": "covers/ticaret-lojistik_kapak.jpg"
+      "kapak_gorseli": "covers/ticaret-lojistik_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "ac52569ce63f"
     },
     {
       "id": "hayvan-haklari",
@@ -466,11 +481,12 @@
       "logo": "hayvanhaklari_logo.png",
       "kategori": "Sosyal Sorumluluk",
       "aciklama": "Sokak hayvanlarının korunması ve hayvan hakları konusunda farkındalık oluşturan, düzenli yardım kampanyaları yürüten kulüp.",
-      "baskan": "Aylin Er",
+      "baskan": "Yasemin Sarı",
+      "baskan_kullanici_adi": "250200458",
       "yonetim_kurulu": [
         {
-          "isim": "Aylin Er",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Yasemin Sarı"
         },
         {
           "isim": "Cem Turan",
@@ -495,7 +511,9 @@
           "aciklama": "Yerel bir veteriner kliniğiyle iş birliğinde farkındalık standı."
         }
       ],
-      "kapak_gorseli": "covers/hayvan-haklari_kapak.jpg"
+      "kapak_gorseli": "covers/hayvan-haklari_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "7d56cf4ca0ae"
     },
     {
       "id": "iyiligin-gelecegi",
@@ -503,10 +521,10 @@
       "logo": "iyiliginGelecegi_logo.png",
       "kategori": "Sosyal Sorumluluk",
       "aciklama": "Toplum yararına gönüllülük projeleri yürüten, bağış ve dayanışma kampanyaları organize eden kulüp.",
-      "baskan": "Meltem Kaan",
+      "baskan": "Eda Gül",
       "yonetim_kurulu": [
         {
-          "isim": "Meltem Kaan",
+          "isim": "Eda Gül",
           "gorev": "Başkan"
         },
         {
@@ -532,7 +550,9 @@
           "aciklama": "Yerel bir huzurevine gönüllü ziyaret ve etkinlik organizasyonu."
         }
       ],
-      "kapak_gorseli": "covers/iyiligin-gelecegi_kapak.jpg"
+      "kapak_gorseli": "covers/iyiligin-gelecegi_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
     },
     {
       "id": "tiyatro",
@@ -540,11 +560,12 @@
       "logo": "tiyatro_logo.png",
       "kategori": "Sanat / Kültür",
       "aciklama": "Sahne oyunculuğu atölyeleri düzenleyen ve dönem sonu oyun gösterimleri sahneleyen kulüp.",
-      "baskan": "Rüzgar Onat",
+      "baskan": "Betül Tığlı",
+      "baskan_kullanici_adi": "250200459",
       "yonetim_kurulu": [
         {
-          "isim": "Rüzgar Onat",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Betül Tığlı"
         },
         {
           "isim": "Azra Tunç",
@@ -569,7 +590,9 @@
           "aciklama": "Yeni üyeler için doğaçlama oyunculuğa giriş atölyesi."
         }
       ],
-      "kapak_gorseli": "covers/tiyatro_kapak.jpg"
+      "kapak_gorseli": "covers/tiyatro_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "4a9f0d6b0db9"
     },
     {
       "id": "network",
@@ -577,10 +600,11 @@
       "logo": "network_logo.png",
       "kategori": "Kariyer / Networking",
       "aciklama": "Öğrencileri sektör profesyonelleri ve mezunlarla buluşturan, kariyer gelişimine odaklanan kulüp.",
-      "baskan": "Efe Kutlu",
+      "baskan": "Zeynep Sena",
+      "baskan_kullanici_adi": "250200460",
       "yonetim_kurulu": [
         {
-          "isim": "Efe Kutlu",
+          "isim": "Zeynep Sena",
           "gorev": "Başkan"
         },
         {
@@ -606,7 +630,9 @@
           "aciklama": "Öğrencilere profesyonel profil oluşturma üzerine atölye."
         }
       ],
-      "kapak_gorseli": "covers/network_kapak.jpg"
+      "kapak_gorseli": "covers/network_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
     },
     {
       "id": "arama-kurtarma",
@@ -614,10 +640,10 @@
       "logo": "aramakurtarma_logo.png",
       "kategori": "Sosyal Sorumluluk",
       "aciklama": "Afet bilinci, ilk yardım ve arama kurtarma teknikleri konusunda eğitimler düzenleyen, gönüllü ekip kuran kulüp.",
-      "baskan": "beyza",
+      "baskan": "Kerem Yıldız",
       "yonetim_kurulu": [
         {
-          "isim": "beyza",
+          "isim": "Kerem Yıldız",
           "gorev": "Başkan"
         },
         {
@@ -643,7 +669,9 @@
           "aciklama": "Kampüs genelinde düzenlenecek deprem tatbikatı ve bilgilendirme standı."
         }
       ],
-      "kapak_gorseli": "covers/arama-kurtarma_kapak.jpg"
+      "kapak_gorseli": "covers/arama-kurtarma_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
     },
     {
       "id": "sailing-club",
@@ -651,19 +679,19 @@
       "logo": "sailingclub_logo.png",
       "kategori": "Spor",
       "aciklama": "Yelken sporunu öğrencilere tanıtan, denizcilik eğitimleri ve yarışlar düzenleyen kulüp.",
-      "baskan": "beyza",
+      "baskan": "Timur Ege",
       "yonetim_kurulu": [
         {
-          "isim": "beyza",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Timur Ege"
         },
         {
-          "isim": "İpek Doğan",
-          "gorev": "Başkan Yardımcısı"
+          "gorev": "Başkan Yardımcısı",
+          "isim": "İpek Doğan"
         },
         {
-          "isim": "Arda Kurtuluş",
-          "gorev": "Antrenman Sorumlusu"
+          "gorev": "Antrenman Sorumlusu",
+          "isim": "Arda Kurtuluş"
         }
       ],
       "etkinlikler": [
@@ -680,7 +708,9 @@
           "aciklama": "Yeni üyeler için sıfırdan yelken eğitimi."
         }
       ],
-      "kapak_gorseli": "covers/sailing-club_kapak.jpg"
+      "kapak_gorseli": "covers/sailing-club_kapak.jpg",
+      "durum": "pasif",
+      "danisman_id": ""
     },
     {
       "id": "turk-dunyasi-genclik",
@@ -688,11 +718,11 @@
       "logo": "turkdunyasi_logo.png",
       "kategori": "Kültür",
       "aciklama": "Türk dünyası ile kültürel bağları güçlendiren, öğrenci değişimi ve kültür etkinlikleri düzenleyen topluluk.",
-      "baskan": "Nurlan Aliyev",
+      "baskan": "Emir Assan",
       "yonetim_kurulu": [
         {
-          "isim": "Nurlan Aliyev",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Emir Assan"
         },
         {
           "isim": "Aygerim Bek",
@@ -717,7 +747,9 @@
           "aciklama": "Kampüste düzenlenecek Nevruz kutlama etkinliği."
         }
       ],
-      "kapak_gorseli": "covers/turk-dunyasi-genclik_kapak.jpg"
+      "kapak_gorseli": "covers/turk-dunyasi-genclik_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "9161b1f86413"
     },
     {
       "id": "tebgk",
@@ -754,7 +786,9 @@
           "aciklama": "Halk sağlığı odaklı bilgilendirme semineri."
         }
       ],
-      "kapak_gorseli": "covers/tebgk_kapak.jpg"
+      "kapak_gorseli": "covers/tebgk_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
     },
     {
       "id": "turk-tarihi-kulturu",
@@ -763,19 +797,19 @@
       "kategori": "Akademik / Kültür",
       "aciklama": "Türk tarihi ve kültürü üzerine söyleşi, gezi ve okuma grubu etkinlikleri düzenleyen kulüp.",
       "baskan": "Kaan Sezer",
-      "baskan_kullanici_adi": "admingüncel",
+      "baskan_kullanici_adi": "250200782",
       "yonetim_kurulu": [
         {
-          "isim": "Kaan Sezer",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Kaan Sezer"
         },
         {
-          "isim": "Elif Naz Tan",
-          "gorev": "Başkan Yardımcısı"
+          "gorev": "Başkan Yardımcısı",
+          "isim": "Elif Naz Tan"
         },
         {
-          "isim": "Tarkan Uçar",
-          "gorev": "Etkinlik Sorumlusu"
+          "gorev": "Etkinlik Sorumlusu",
+          "isim": "Tarkan Uçar"
         }
       ],
       "etkinlikler": [
@@ -792,7 +826,9 @@
           "aciklama": "İstanbul’daki bir tarih müzesine düzenlenecek gezi."
         }
       ],
-      "kapak_gorseli": "covers/turk-tarihi-kulturu_kapak.jpg"
+      "kapak_gorseli": "covers/turk-tarihi-kulturu_kapak.jpg",
+      "durum": "pasif",
+      "danisman_id": ""
     },
     {
       "id": "ilsa",
@@ -800,8 +836,12 @@
       "logo": "ilsa_logo.png",
       "kategori": "Akademik / Hukuk",
       "aciklama": "Uluslararası hukuk öğrenci birliği bünyesinde, moot court ve hukuk seminerleri düzenleyen kulüp.",
-      "baskan": "Hacer Nur Aktaş",
+      "baskan": "Tuana Alparslan",
       "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Tuana Alparslan"
+        },
         {
           "isim": "Bade Erim",
           "gorev": "Hacer Nur Aktaş"
@@ -829,7 +869,9 @@
           "aciklama": "Uluslararası hukuk alanında akademik bir seminer."
         }
       ],
-      "kapak_gorseli": "covers/ilsa_kapak.jpg"
+      "kapak_gorseli": "covers/ilsa_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "81cddd35d182"
     },
     {
       "id": "siyaset-diplomasi",
@@ -866,7 +908,9 @@
           "aciklama": "Güncel dış politika gelişmeleri üzerine akademik panel."
         }
       ],
-      "kapak_gorseli": "covers/siyaset-diplomasi_kapak.jpg"
+      "kapak_gorseli": "covers/siyaset-diplomasi_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
     },
     {
       "id": "aubat",
@@ -874,11 +918,11 @@
       "logo": "aubat_logo.png",
       "kategori": "Akademik / Sağlık",
       "aciklama": "Tıbbi bilimler öğrencilerine yönelik akademik seminer ve klinik beceri atölyeleri düzenleyen topluluk.",
-      "baskan": "Derin Aksakal",
+      "baskan": "Güliz Doğa Çelik",
       "yonetim_kurulu": [
         {
-          "isim": "Derin Aksakal",
-          "gorev": "Başkan"
+          "gorev": "Başkan",
+          "isim": "Güliz Doğa Çelik"
         },
         {
           "isim": "Mira Tuncel",
@@ -903,7 +947,9 @@
           "aciklama": "Farklı tıbbi bilim dallarından uzmanlarla kariyer söyleşisi."
         }
       ],
-      "kapak_gorseli": "covers/aubat_kapak.jpg"
+      "kapak_gorseli": "covers/aubat_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": "90b68aa5d5ab"
     },
     {
       "id": "dis-hekimligi",
@@ -940,7 +986,318 @@
           "aciklama": "Uygulamalı klinik beceri atölyesi."
         }
       ],
-      "kapak_gorseli": "covers/dis-hekimligi_kapak.jpg"
+      "kapak_gorseli": "covers/dis-hekimligi_kapak.jpg",
+      "durum": "aktif",
+      "danisman_id": ""
+    },
+    {
+      "id": "besiktas",
+      "isim": "Beşiktaş Kulübü (UniBJK)",
+      "kategori": "Spor",
+      "logo": "besiktas.jpg",
+      "aciklama": "",
+      "baskan": "Ömer Tekdamar",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Ömer Tekdamar"
+        }
+      ],
+      "danisman_id": "33857600a51c"
+    },
+    {
+      "id": "futbol",
+      "isim": "Futbol Kulübü",
+      "kategori": "Spor",
+      "logo": "futbol.png",
+      "aciklama": "",
+      "baskan": "",
+      "durum": "aktif",
+      "yonetim_kurulu": [],
+      "danisman_id": ""
+    },
+    {
+      "id": "hemsirelik",
+      "isim": "Hemşirelik Kulübü",
+      "kategori": "Akademik / Sağlık",
+      "logo": "hemsirelik.jpg",
+      "aciklama": "",
+      "baskan": "Ebrar Keçecioğlu",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Ebrar Keçecioğlu"
+        }
+      ],
+      "danisman_id": "cff1a712d7a3"
+    },
+    {
+      "id": "hukuk",
+      "isim": "Hukuk Kulübü",
+      "kategori": "Akademik / Hukuk",
+      "logo": "hukuk.png",
+      "aciklama": "",
+      "baskan": "",
+      "durum": "aktif",
+      "yonetim_kurulu": [],
+      "danisman_id": ""
+    },
+    {
+      "id": "hukukta-kariyer",
+      "isim": "Hukukta Kariyer Kulübü",
+      "kategori": "Kariyer / Hukuk",
+      "logo": "hukukta_kariyer.png",
+      "aciklama": "",
+      "baskan": "Ali Fettah Arslan",
+      "durum": "aktif",
+      "yonetim_kurulu": [],
+      "danisman_id": ""
+    },
+    {
+      "id": "ideal-hukuk",
+      "isim": "İdeal Hukuk Kulübü",
+      "kategori": "Akademik / Hukuk",
+      "logo": "ideal_hukuk.png",
+      "aciklama": "",
+      "baskan": "Beytullah Haşar",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Beytullah Haşar"
+        },
+        {
+          "gorev": "Eş Başkan",
+          "isim": "İrem G. Altun"
+        }
+      ],
+      "danisman_id": "505bf26fbfcc"
+    },
+    {
+      "id": "makine-muhendisligi",
+      "isim": "Makine Mühendisliği Kulübü",
+      "kategori": "Akademik / Mühendislik",
+      "logo": "makine_muhendisligi.jpg",
+      "aciklama": "",
+      "baskan": "Muhammed Eskiçırak",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Muhammed Eskiçırak"
+        }
+      ],
+      "danisman_id": "4aa36411680b"
+    },
+    {
+      "id": "masa-tenisi",
+      "isim": "Masa Tenisi Kulübü",
+      "kategori": "Spor",
+      "logo": "masa_tenisi.jpg",
+      "aciklama": "",
+      "baskan": "Alperen Başali",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Alperen Başali"
+        }
+      ],
+      "danisman_id": "897fd33dea9b"
+    },
+    {
+      "id": "oyun",
+      "isim": "Oyun Kulübü",
+      "kategori": "Zeka Oyunları / Hobi",
+      "logo": "oyun.png",
+      "aciklama": "",
+      "baskan": "Zeynep Aksoy",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Zeynep Aksoy"
+        }
+      ],
+      "danisman_id": "37546cd3d1cf"
+    },
+    {
+      "id": "tob-tip-ogrencileri-birligi",
+      "isim": "TÖB – Tıp Öğrencileri Birliği",
+      "kategori": "Akademik / Sağlık",
+      "logo": "tob.png",
+      "aciklama": "",
+      "baskan": "Nisanur Çırpıcı",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Nisanur Çırpıcı"
+        }
+      ],
+      "danisman_id": "34ad00be399d"
+    },
+    {
+      "id": "toplum-gonulluleri",
+      "isim": "Toplum Gönüllüleri Kulübü (Altınbaş TOG)",
+      "kategori": "Sosyal Sorumluluk",
+      "logo": "toplum_gonulluleri.png",
+      "aciklama": "",
+      "baskan": "Hatice Zehra Kışla",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Hatice Zehra Kışla"
+        }
+      ],
+      "danisman_id": "84477f98ce4f"
+    },
+    {
+      "id": "yazilim-ve-inovasyon",
+      "isim": "Yazılım ve İnovasyon Kulübü",
+      "kategori": "Akademik / Teknoloji",
+      "logo": "yazilim_inovasyon.jpg",
+      "aciklama": "",
+      "baskan": "Burak Kaan Özdemir",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Burak Kaan Özdemir"
+        }
+      ],
+      "danisman_id": "ec55331dff07"
+    },
+    {
+      "id": "uniconnect",
+      "isim": "UniConnect",
+      "kategori": "Kariyer / Networking",
+      "logo": "uniconnect.jpg",
+      "aciklama": "",
+      "baskan": "Mehmet Doğan",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Mehmet Doğan"
+        }
+      ],
+      "danisman_id": "2f21522bf42e"
+    },
+    {
+      "id": "ai-club",
+      "isim": "Altınbaş AI Club",
+      "kategori": "Akademik / Teknoloji",
+      "logo": "ai_club.jpg",
+      "aciklama": "",
+      "baskan": "Zülal Kılıç",
+      "durum": "aktif",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Zülal Kılıç"
+        }
+      ],
+      "danisman_id": "7d56cf4ca0ae"
+    },
+    {
+      "id": "ebelik",
+      "isim": "Ebelik Kulübü",
+      "kategori": "Akademik / Sağlık",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Helin Çeliker",
+      "durum": "aktif",
+      "danisman_id": "e56a227962c4",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Helin Çeliker"
+        }
+      ]
+    },
+    {
+      "id": "sosyal-medya",
+      "isim": "Sosyal Medya Kulübü",
+      "kategori": "Kariyer / Networking",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Elif Girgin",
+      "durum": "aktif",
+      "danisman_id": "e862ea702e9b",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Elif Girgin"
+        }
+      ]
+    },
+    {
+      "id": "altinbas-oncology-student-interest-group",
+      "isim": "Altınbaş Oncology Student Interest Group",
+      "kategori": "Akademik / Sağlık",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Hammad Assilkhi",
+      "durum": "aktif",
+      "danisman_id": "90b68aa5d5ab",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Hammad Assilkhi"
+        }
+      ]
+    },
+    {
+      "id": "pediatrik-adimlar-ve-lider-saglikcilar-au-pals",
+      "isim": "Pediatrik Adımlar ve Lider Sağlıkçılar (AU-PALS)",
+      "kategori": "Akademik / Sağlık",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Buşra Balcı",
+      "durum": "aktif",
+      "danisman_id": "90b68aa5d5ab",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Buşra Balcı"
+        }
+      ]
+    },
+    {
+      "id": "turk-alman-hukuk",
+      "isim": "Türk Alman Hukuk Kulübü",
+      "kategori": "Akademik / Hukuk",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Başak Çabuk",
+      "durum": "aktif",
+      "danisman_id": "df3eb3c9a699",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Başak Çabuk"
+        }
+      ]
+    },
+    {
+      "id": "hukuk-ve-strateji",
+      "isim": "Hukuk ve Strateji Kulübü",
+      "kategori": "Akademik / Hukuk",
+      "logo": "",
+      "aciklama": "",
+      "baskan": "Hamza Bahadır Salcı",
+      "durum": "aktif",
+      "danisman_id": "55191d380e80",
+      "yonetim_kurulu": [
+        {
+          "gorev": "Başkan",
+          "isim": "Hamza Bahadır Salcı"
+        }
+      ]
     }
   ]
 }

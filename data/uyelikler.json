@@ -52,11 +52,13 @@
       "254588901",
       "205671991",
       "238849659",
-      "241625320"
+      "241625320",
+      "250200454"
     ],
     "bekleyen": [
       "250200454"
-    ]
+    ],
+    "katilim_tarihleri": {}
   },
   "dans": {
     "onaylanan": [
@@ -113,7 +115,8 @@
       "240438667",
       "250200454"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "satranc": {
     "onaylanan": [
@@ -168,7 +171,8 @@
       "258080327",
       "213955570"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "ieee": {
     "onaylanan": [
@@ -223,7 +227,8 @@
       "217859551",
       "218284501"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "gastronomi": {
     "onaylanan": [
@@ -278,7 +283,8 @@
       "257498979",
       "241251774"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "yapay-zeka": {
     "onaylanan": [
@@ -333,7 +339,8 @@
       "248662382",
       "222255455"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "genc-kalite": {
     "onaylanan": [
@@ -388,7 +395,10 @@
       "213593895",
       "225463081"
     ],
-    "bekleyen": []
+    "bekleyen": [
+      "250200460"
+    ],
+    "katilim_tarihleri": {}
   },
   "psikoloji": {
     "onaylanan": [
@@ -443,7 +453,8 @@
       "255313837",
       "264705810"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "sinema": {
     "onaylanan": [
@@ -498,7 +509,8 @@
       "226697479",
       "265508247"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "kutuphane": {
     "onaylanan": [
@@ -553,7 +565,8 @@
       "243846041",
       "238877757"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "veri-bilimi": {
     "onaylanan": [
@@ -608,7 +621,8 @@
       "229950707",
       "252401769"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "sosyoloji": {
     "onaylanan": [
@@ -663,7 +677,8 @@
       "231595407",
       "238849841"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "ticaret-lojistik": {
     "onaylanan": [
@@ -718,7 +733,8 @@
       "244745115",
       "248091814"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "hayvan-haklari": {
     "onaylanan": [
@@ -771,9 +787,11 @@
       "268657057",
       "203643692",
       "236592516",
-      "230091362"
+      "230091362",
+      "200300400"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "iyiligin-gelecegi": {
     "onaylanan": [
@@ -828,7 +846,8 @@
       "204042005",
       "248124513"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "tiyatro": {
     "onaylanan": [
@@ -883,7 +902,8 @@
       "255305796",
       "241512777"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "network": {
     "onaylanan": [
@@ -936,9 +956,11 @@
       "244982449",
       "268290651",
       "265359854",
-      "201082498"
+      "201082498",
+      "250200461"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "arama-kurtarma": {
     "onaylanan": [
@@ -993,7 +1015,8 @@
       "258409625",
       "260044971"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "sailing-club": {
     "onaylanan": [
@@ -1048,7 +1071,8 @@
       "215739166",
       "253137759"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "turk-dunyasi-genclik": {
     "onaylanan": [
@@ -1103,7 +1127,8 @@
       "225882456",
       "235717551"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "tebgk": {
     "onaylanan": [
@@ -1158,7 +1183,10 @@
       "258756233",
       "262914630"
     ],
-    "bekleyen": []
+    "bekleyen": [
+      "250200460"
+    ],
+    "katilim_tarihleri": {}
   },
   "ilsa": {
     "onaylanan": [
@@ -1213,7 +1241,8 @@
       "243470731",
       "225825803"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "siyaset-diplomasi": {
     "onaylanan": [
@@ -1268,7 +1297,8 @@
       "237448485",
       "205948916"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "aubat": {
     "onaylanan": [
@@ -1323,7 +1353,8 @@
       "230052373",
       "238852582"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   },
   "dis-hekimligi": {
     "onaylanan": [
@@ -1378,6 +1409,7 @@
       "246010912",
       "254995260"
     ],
-    "bekleyen": []
+    "bekleyen": [],
+    "katilim_tarihleri": {}
   }
 }

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Kullanıcılar{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Kullanıcılar</h1>
+        <p>Panele giriş yapabilen dekanlık ve kulüp başkanı hesapları. Öğrenci hesapları burada listelenmez.</p>
+    </div>
+    <a href="{{ url_for('kullanici_form') }}" class="dugme dugme-ana">+ Yeni Kullanıcı</a>
+</div>
+
+{% if not ayarlar.baskan_girisi %}
+<div class="bildirim bildirim-hata" role="status">Kulüp başkanı girişi şu an kapalı; başkan hesapları giriş yapamaz.
+    <a href="{{ url_for('ayarlar') }}">Panel Ayarları</a>'ndan açabilirsiniz.</div>
+{% endif %}
+
+<section class="kutu kutu-tablo">
+    <div class="tablo-sarici">
+        <table class="tablo">
+            <thead>
+                <tr>
+                    <th data-sirala>Ad Soyad</th>
+                    <th data-sirala>Kullanıcı Adı</th>
+                    <th data-sirala>Rol</th>
+                    <th data-sirala>Durum</th>
+                    <th class="sag"><span class="gizli-metin">İşlemler</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for k in kullanicilar %}
+                <tr{% if not k.aktif %} class="satir-soluk"{% endif %}>
+                    <td><strong>{{ k.ad_soyad or '—' }}</strong>{% if k.eposta %}<span class="soluk kucuk-metin">{{ k.eposta }}</span>{% endif %}</td>
+                    <td class="mono">{{ k.kullanici_adi }}{% if k.kullanici_adi == session.kullanici_adi %} <span class="soluk">(siz)</span>{% endif %}</td>
+                    <td>{{ k.rol_ad }}{% if k.kulup_isim %}<span class="soluk kucuk-metin">{{ k.kulup_isim }}</span>{% endif %}</td>
+                    <td>{% if k.aktif %}<span class="rozet rozet-aktif">Aktif</span>{% else %}<span class="rozet rozet-pasif">Pasif</span>{% endif %}</td>
+                    <td class="sag satir-eylem">
+                        <a href="{{ url_for('kullanici_form', kullanici_adi=k.kullanici_adi) }}" class="dugme dugme-ince">Düzenle</a>
+                        <form method="POST" action="{{ url_for('kullanici_sifre_sifirla', kullanici_adi=k.kullanici_adi) }}"
+                              data-onay="{{ k.kullanici_adi }} için yeni bir geçici şifre oluşturulsun mu? Mevcut şifresi geçersiz olur.">
+                            <input type="hidden" name="csrf" value="{{ csrf }}">
+                            <button type="submit" class="dugme dugme-ince">Şifre sıfırla</button>
+                        </form>
+                        {% if k.kullanici_adi != session.kullanici_adi %}
+                        <form method="POST" action="{{ url_for('kullanici_durum', kullanici_adi=k.kullanici_adi) }}"
+                              {% if k.aktif %}data-onay="{{ k.kullanici_adi }} pasif yapılsın mı? Panele giriş yapamaz."{% endif %}>
+                            <input type="hidden" name="csrf" value="{{ csrf }}">
+                            <button type="submit" class="dugme dugme-ince{% if k.aktif %} dugme-tehlike{% endif %}">{{ 'Pasif yap' if k.aktif else 'Aktif yap' }}</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="kutu">
+    <h2 class="kutu-baslik-tek">Rol Yetkileri</h2>
+    <dl class="tanim-listesi">
+        <div><dt>Dekan</dt><dd>Her şeye tam yetki: silme/arşivleme, arşivden geri getirme, kullanıcı ve ayar yönetimi.</dd></div>
+        <div><dt>Dekanlık Personeli</dt><dd>Görüntüleme, ekleme ve düzenleme. Silme/arşivleme ve rol değiştirme yok.</dd></div>
+        <div><dt>Kulüp Başkanı</dt><dd>Yalnızca kendi kulübünü görür; belge yükler ve etkinlik başvurusu yapar.</dd></div>
+    </dl>
+</section>
+{% endblock %}

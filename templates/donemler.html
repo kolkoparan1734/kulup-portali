@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Dönemler{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Dönemler</h1>
+        <p>Belgeler ve kayıtlar döneme bağlanır. Aktif dönem üst çubukta görünür ve yeni kayıtlarda varsayılan olarak seçilir.</p>
+    </div>
+</div>
+
+<div class="belge-izgara">
+    <section class="kutu">
+        <h2 class="kutu-baslik-tek">Yeni Dönem</h2>
+        {% if hata %}<div class="bildirim bildirim-hata" role="alert">{{ hata }}</div>{% endif %}
+        <form method="POST" class="form">
+            <input type="hidden" name="csrf" value="{{ csrf }}">
+            <label class="alan">
+                <span>Dönem adı *</span>
+                <input type="text" name="ad" value="{{ form.ad }}" required maxlength="60" placeholder="ör. 2026-2027 Bahar">
+            </label>
+            <label class="alan">
+                <span>Başlangıç *</span>
+                <input type="date" name="baslangic" value="{{ form.baslangic }}" required>
+            </label>
+            <label class="alan">
+                <span>Bitiş *</span>
+                <input type="date" name="bitis" value="{{ form.bitis }}" required>
+            </label>
+            <label class="onay-kutusu">
+                <input type="checkbox" name="aktif_yap" value="1" {% if form.aktif_yap %}checked{% endif %}> Aktif dönem yap
+            </label>
+            <button type="submit" class="dugme dugme-ana dugme-tam">Dönem Ekle</button>
+        </form>
+    </section>
+
+    <section class="kutu kutu-tablo">
+        <div class="tablo-sarici">
+            <table class="tablo">
+                <thead>
+                    <tr>
+                        <th>Dönem</th>
+                        <th>Tarih Aralığı</th>
+                        <th>Kayıt</th>
+                        <th class="sag"><span class="gizli-metin">İşlemler</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in donemler %}
+                    <tr>
+                        <td>
+                            <strong>{{ d.ad }}</strong>
+                            {% if d.aktif %}<span class="rozet rozet-aktif">Aktif dönem</span>{% endif %}
+                        </td>
+                        <td>{{ d.baslangic | tarih }} – {{ d.bitis | tarih }}</td>
+                        <td>{{ d.kayit_sayisi }}</td>
+                        <td class="sag satir-eylem">
+                            {% if not d.aktif %}
+                            {% if izin('donem_aktif_yap') %}
+                            <form method="POST" action="{{ url_for('donem_aktif_yap', donem_id=d.id) }}">
+                                <input type="hidden" name="csrf" value="{{ csrf }}">
+                                <button type="submit" class="dugme dugme-ince">Aktif yap</button>
+                            </form>
+                            {% endif %}
+                            {% endif %}
+                            <a href="{{ url_for('zorunlu_evraklar', donem_id=d.id) }}" class="dugme dugme-ince">Zorunlu evraklar</a>
+                            <a href="{{ url_for('donem_duzenle', donem_id=d.id) }}" class="dugme dugme-ince">Düzenle</a>
+                            {% if not d.aktif and not d.kayit_sayisi %}
+                            {% if izin('donem_sil') %}
+                            <form method="POST" action="{{ url_for('donem_sil', donem_id=d.id) }}" data-onay="{{ d.ad }} silinsin mi?">
+                                <input type="hidden" name="csrf" value="{{ csrf }}">
+                                <button type="submit" class="dugme dugme-ince dugme-tehlike">Sil</button>
+                            </form>
+                            {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% if not donemler %}<p class="bos-durum">Henüz dönem tanımlanmamış.</p>{% endif %}
+        <p class="form-not tablo-not">Aktif dönem ile belgesi veya zorunlu evrakı olan dönemler silinemez.</p>
+    </section>
+</div>
+{% endblock %}

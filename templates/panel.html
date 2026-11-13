@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo, etkinlik_tarihi, bos %}
+
+{% block title %}Ana Panel{% endblock %}
+
+{% block content %}
+<div class="sayfa-baslik">
+    <div>
+        <h1>Ana Panel</h1>
+        <p>Kulüplerin ve üyeliklerin genel durumu.</p>
+    </div>
+</div>
+
+<section class="ozet-kartlari">
+    <a href="{{ url_for('kulupler') }}" class="ozet-kart">
+        <span class="ozet-etiket">Toplam Kulüp</span>
+        <span class="ozet-deger">{{ ozet.kulup }}</span>
+    </a>
+    <a href="{{ url_for('uyeler') }}" class="ozet-kart">
+        <span class="ozet-etiket">Toplam Üye</span>
+        <span class="ozet-deger">{{ ozet.uye }}</span>
+        <span class="ozet-alt">{{ ozet.uyelik }} kulüp üyeliği</span>
+    </a>
+    <div class="ozet-kart ozet-aktif">
+        <span class="ozet-etiket">Aktif Kulüp</span>
+        <span class="ozet-deger">{{ ozet.aktif }}</span>
+    </div>
+    <div class="ozet-kart ozet-pasif">
+        <span class="ozet-etiket">Pasif Kulüp</span>
+        <span class="ozet-deger">{{ ozet.pasif }}</span>
+    </div>
+</section>
+
+{% if donem_ozeti %}
+<section class="donem-seridi" aria-label="Aktif dönem özeti">
+    <span class="donem-seridi-baslik">{{ aktif_donem.ad }}</span>
+    <a href="{{ url_for('etkinlik_basvurulari') }}"><strong>{{ donem_ozeti.etkinlik }}</strong> onaylı etkinlik</a>
+    <a href="{{ url_for('evrak_takibi') }}">Evrak teslim oranı <strong>{{ '%' ~ donem_ozeti.teslim_orani if donem_ozeti.teslim_orani is not none else '—' }}</strong></a>
+    <a href="{{ url_for('karne') }}">Ortalama karne puanı <strong>{{ donem_ozeti.ortalama_puan or '—' }}</strong>
+        <span class="soluk">({{ donem_ozeti.degerlendirilen }}/{{ donem_ozeti.aktif }} kulüp)</span></a>
+    <a href="{{ url_for('raporlar') }}" class="donem-seridi-link">Raporlar &rarr;</a>
+</section>
+{% endif %}
+
+{% if evrak_uyarilari %}
+<section class="kutu kutu-uyari">
+    <div class="kutu-baslik">
+        <h2>
+            {% if eksikli_kulup %}Eksik evrakı olan {{ eksikli_kulup }} kulüp{% else %}Evrak teslim süresi yaklaşan kulüpler{% endif %}
+            {% if evrak_uyarilari | length > eksikli_kulup %}<span class="soluk"> · {{ evrak_uyarilari | length - eksikli_kulup }} kulübün süresi yaklaşıyor</span>{% endif %}
+        </h2>
+        <a href="{{ url_for('evrak_takibi') }}" class="kutu-link">Evrak Takibi &rarr;</a>
+    </div>
+    <div class="uyari-kulupler">
+        {% for s in evrak_uyarilari[:12] %}
+        <a href="{{ url_for('evrak_takibi') }}#kulup-{{ s.kulup.id }}" class="uyari-kulup">
+            {{ s.kulup.isim }}
+            {% if s.sayilar.eksik %}<span class="evrak-hucre evrak-eksik">{{ s.sayilar.eksik }} eksik</span>{% endif %}
+            {% if s.sayilar.yaklasiyor %}<span class="evrak-hucre evrak-yaklasiyor">{{ s.sayilar.yaklasiyor }} yaklaşıyor</span>{% endif %}
+        </a>
+        {% endfor %}
+        {% if evrak_uyarilari | length > 12 %}<span class="soluk kucuk-metin">ve {{ evrak_uyarilari | length - 12 }} kulüp daha…</span>{% endif %}
+    </div>
+</section>
+{% endif %}
+
+<section class="kutu{% if bekleyenler %} kutu-vurgu{% endif %}">
+    <div class="kutu-baslik">
+        <h2>Onay Bekleyen Başvurular <span class="menu-sayac satir-ici">{{ bekleyenler | length }}</span></h2>
+        <a href="{{ url_for('etkinlik_basvurulari', durum='beklemede') }}" class="kutu-link">Tümü &rarr;</a>
+    </div>
+    {% if bekleyenler %}
+    <ul class="liste">
+        {% for b in bekleyenler[:6] %}
+        <li>
+            <div>
+                <a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}"><strong>{{ b.ad }}</strong></a>
+                <span class="soluk">{{ b.kulup_isim }}{% if b.yer %} · {{ b.yer }}{% endif %}</span>
+            </div>
+            <div class="liste-sag">
+                <span>{{ etkinlik_tarihi(b) }}</span>
+                <a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}" class="kucuk-metin">İncele &rarr;</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% if bekleyenler | length > 6 %}<p class="soluk kucuk-metin">ve {{ bekleyenler | length - 6 }} başvuru daha…</p>{% endif %}
+    {% else %}
+    <p class="bos-durum">Onay bekleyen başvuru yok.</p>
+    {% endif %}
+</section>
+
+<div class="panel-izgara">
+    <section class="kutu">
+        <div class="kutu-baslik">
+            <h2>Son Eklenen Üyeler</h2>
+            <a href="{{ url_for('uyeler') }}" class="kutu-link">Tümü &rarr;</a>
+        </div>
+        {% if son_uyeler %}
+        <ul class="liste">
+            {% for uye in son_uyeler %}
+            <li>
+                <div>
+                    <strong>{{ uye.ad_soyad or uye.ogrenci_no }}</strong>
+                    <span class="soluk">{{ uye.ogrenci_no }}{% if uye.bolum %} · {{ uye.bolum }}{% endif %}</span>
+                </div>
+                <div class="liste-sag">
+                    <a href="{{ url_for('kulup_detay', kulup_id=uye.kulup_id) }}">{{ uye.kulup_isim }}</a>
+                    <span class="soluk">{{ uye.katilim_tarihi | tarih }}</span>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="bos-durum">Henüz katılım tarihi girilmiş üye yok. Panelden eklenen üyeler burada görünür.</p>
+        {% endif %}
+    </section>
+
+    <section class="kutu">
+        <div class="kutu-baslik">
+            <h2>En Çok Üyesi Olan Kulüpler</h2>
+            <a href="{{ url_for('kulupler') }}" class="kutu-link">Tümü &rarr;</a>
+        </div>
+        <ol class="siralama">
+            {% for kulup in en_buyukler %}
+            <li>
+                <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="siralama-satir">
+                    {{ kulup_logo(kulup, "kucuk") }}
+                    <span class="siralama-ad">{{ kulup.isim }}</span>
+                    <span class="siralama-sayi">{{ kulup.uye_sayisi }}</span>
+                </a>
+                <span class="cubuk"><span style="width: {{ (kulup.uye_sayisi / en_fazla * 100) if en_fazla else 0 }}%"></span></span>
+            </li>
+            {% endfor %}
+        </ol>
+    </section>
+</div>
+{% endblock %}
