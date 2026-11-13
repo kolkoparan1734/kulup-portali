@@ -92,6 +92,7 @@
       "kategori": "Akademik / Teknoloji",
       "aciklama": "Mühendislik ve teknoloji alanında seminer, atölye ve proje çalışmaları düzenleyen kulüp.",
       "baskan": "Deniz Şahin",
+      "baskan_kullanici_adi": "200300400",
       "yonetim_kurulu": [
         {
           "isim": "Deniz Şahin",
@@ -613,10 +614,10 @@
       "logo": "aramakurtarma_logo.png",
       "kategori": "Sosyal Sorumluluk",
       "aciklama": "Afet bilinci, ilk yardım ve arama kurtarma teknikleri konusunda eğitimler düzenleyen, gönüllü ekip kuran kulüp.",
-      "baskan": "Kerem Yıldız",
+      "baskan": "beyza",
       "yonetim_kurulu": [
         {
-          "isim": "Kerem Yıldız",
+          "isim": "beyza",
           "gorev": "Başkan"
         },
         {
@@ -650,10 +651,10 @@
       "logo": "sailingclub_logo.png",
       "kategori": "Spor",
       "aciklama": "Yelken sporunu öğrencilere tanıtan, denizcilik eğitimleri ve yarışlar düzenleyen kulüp.",
-      "baskan": "Timur Ege",
+      "baskan": "beyza",
       "yonetim_kurulu": [
         {
-          "isim": "Timur Ege",
+          "isim": "beyza",
           "gorev": "Başkan"
         },
         {
