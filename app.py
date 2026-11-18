@@ -10,11 +10,24 @@ Nasıl çalıştırılır (VS Code terminalinde):
     2) python app.py
     3) Tarayıcıda http://127.0.0.1:5000 adresini açın
 
+İlk kurulumda (veya dekan şifresi unutulduğunda) dekan hesabı oluşturmak için:
+    python app.py dekan-olustur
+
 Ortam değişkenleri (isteğe bağlı):
-    PANEL_SECRET_KEY     -> oturum şifreleme anahtarı
-    PANEL_KURTARMA_KODU  -> "Şifremi unuttum" sayfasında istenen kurtarma kodu.
-                            Tanımlı değilse şifre sıfırlama kapalıdır.
+    PANEL_SECRET_KEY       -> oturum şifreleme anahtarı. Tanımlı değilse ilk
+                              çalıştırmada rastgele üretilip instance/gizli_anahtar
+                              dosyasında saklanır (bu dosya git'e girmez).
+    PANEL_KURTARMA_KODU    -> "Şifremi unuttum" sayfasında istenen kurtarma kodu.
+                              Tanımlı değilse şifre sıfırlama kapalıdır.
+    PANEL_HTTPS=1          -> panel HTTPS üzerinden yayınlanıyorsa; oturum çerezi
+                              yalnızca HTTPS ile gönderilir.
+    PANEL_DEBUG=1          -> geliştirme modu (kod değişince yeniden başlar).
+                              Gerçek kullanımda açılmamalıdır.
+    PANEL_VERI_KLASORU     -> data/ yerine kullanılacak veri klasörü (ör. demo/veri).
+    PANEL_YUKLEME_KLASORU  -> uploads/ yerine kullanılacak yükleme klasörü.
 """
+
+import getpass
 
 import hmac
 import io
@@ -22,9 +35,10 @@ import json
 import os
 import re
 import secrets
+import sys
+import time
 from urllib.parse import quote
 from datetime import date, datetime, timedelta
-from functools import wraps
 from uuid import uuid4
 
 from flask import (
@@ -39,12 +53,40 @@ import config
 import veri
 
 app = Flask(__name__)
-app.secret_key = os.environ.get("PANEL_SECRET_KEY", "prototip-gizli-anahtar-degistirin")
-app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024  # yükleme sınırı: 20 MB
 
-BELGE_KLASORU = os.path.join(app.root_path, "uploads", "belgeler")
-BASVURU_KLASORU = os.path.join(app.root_path, "uploads", "basvurular")
-ICE_AKTARIM_KLASORU = os.path.join(app.root_path, "uploads", "ice_aktarim")
+
+def _gizli_anahtar():
+    """Oturum anahtarı koda yazılmaz: önce PANEL_SECRET_KEY ortam değişkenine bakılır;
+    yoksa ilk çalıştırmada rastgele üretilip instance/gizli_anahtar dosyasında saklanır."""
+    anahtar = os.environ.get("PANEL_SECRET_KEY")
+    if anahtar:
+        return anahtar
+    yol = os.path.join(app.instance_path, "gizli_anahtar")
+    try:
+        with open(yol, encoding="utf-8") as f:
+            anahtar = f.read().strip()
+    except FileNotFoundError:
+        anahtar = ""
+    if not anahtar:
+        os.makedirs(app.instance_path, exist_ok=True)
+        anahtar = secrets.token_hex(32)
+        with open(yol, "w", encoding="utf-8") as f:
+            f.write(anahtar)
+    return anahtar
+
+
+app.secret_key = _gizli_anahtar()
+app.config.update(
+    MAX_CONTENT_LENGTH=20 * 1024 * 1024,  # yükleme sınırı: 20 MB
+    SESSION_COOKIE_HTTPONLY=True,          # çerez JavaScript'ten okunamaz
+    SESSION_COOKIE_SAMESITE="Lax",         # başka siteden gelen POST'larda gönderilmez
+    SESSION_COOKIE_SECURE=os.environ.get("PANEL_HTTPS") == "1",
+)
+
+YUKLEME_KLASORU = os.environ.get("PANEL_YUKLEME_KLASORU") or os.path.join(app.root_path, "uploads")
+BELGE_KLASORU = os.path.join(YUKLEME_KLASORU, "belgeler")
+BASVURU_KLASORU = os.path.join(YUKLEME_KLASORU, "basvurular")
+ICE_AKTARIM_KLASORU = os.path.join(YUKLEME_KLASORU, "ice_aktarim")
 LOGO_KLASORU = os.path.join(app.static_folder, "images")
 
 BELGE_UZANTILARI = {"pdf", "doc", "docx", "odt", "xls", "xlsx", "ods", "png", "jpg", "jpeg"}
@@ -58,19 +100,25 @@ EPOSTA_DESENI = re.compile(r"[^@\s]+@[^@\s]+\.[^@\s]+")
 # Giriş yapmadan açılabilen sayfalar.
 ACIK_SAYFALAR = {"giris_yap", "sifremi_unuttum", "static"}
 
-# Yalnızca dekanın açabildiği sayfalar: silme, arşiv yönetimi, kullanıcı ve ayarlar.
-# Dekanlık personeli bunların dışındaki her şeyi görüntüleyip ekleyip düzenleyebilir.
-DEKAN_SAYFALARI = {
-    "kulup_sil", "uye_sil", "belge_sil", "danisman_sil", "donem_sil", "basvuru_sil", "zorunlu_evrak_sil",
-    "arsiv_geri_getir", "arsiv_kalici_sil",
-    "kullanicilar", "kullanici_form", "kullanici_durum", "kullanici_sifre_sifirla", "ayarlar",
-}
+# Her sayfanın hangi rollere açık olduğu, route'un üstündeki @rol_gerekli(...) ile
+# belirlenir ve burada toplanır. Kontrol her istekte sunucuda yapılır (oturum_kontrolu);
+# menüde bağlantının gizlenmesi yalnızca görünümdür.
+#   dekan    -> her şey: onay/ret, silme/arşiv, kullanıcı yönetimi, ayarlar
+#   personel -> kulüp, üye, belge ve başvuru kayıtlarını görür ve düzenler; karar veremez, silemez
+#   baskan   -> yalnızca kendi kulübü: başvuru ve belge gönderir, sonucu takip eder
+SAYFA_ROLLERI = {}
 
-# Kulüp başkanının açabildiği sayfalar; hepsinde yalnızca kendi kulübünün kayıtlarını görür.
-BASKAN_SAYFALARI = {
-    "ana_panel", "kulup_detay", "belgeler", "belge_indir", "etkinlik_basvurulari", "basvuru_form",
-    "basvuru_detay", "basvuru_dosya", "hesabim", "cikis_yap",
-}
+
+def rol_gerekli(*roller):
+    """Route'u yalnızca verilen rollere açar.
+
+    @rol_gerekli taşımayan bir route (giriş sayfaları hariç) hiçbir role açık
+    değildir; yeni eklenen sayfa yanlışlıkla herkese açılmaz.
+    """
+    def kaydet(gorunum):
+        SAYFA_ROLLERI[gorunum.__name__] = frozenset(roller)
+        return gorunum
+    return kaydet
 
 
 def _rol():
@@ -79,14 +127,7 @@ def _rol():
 
 def izin(endpoint):
     """Giriş yapmış kullanıcının rolü bu sayfayı açmaya yetiyor mu? (sahiplik kontrolü hariç)"""
-    rol = _rol()
-    if rol == "dekan":
-        return True
-    if rol == "personel":
-        return endpoint not in DEKAN_SAYFALARI
-    if rol == "baskan":
-        return endpoint in BASKAN_SAYFALARI
-    return False
+    return _rol() in SAYFA_ROLLERI.get(endpoint, ())
 
 
 def _baskan_kulubu():
@@ -165,6 +206,14 @@ def csrf_kontrolu():
             abort(400)
 
 
+@app.after_request
+def guvenlik_basliklari(yanit):
+    yanit.headers.setdefault("X-Content-Type-Options", "nosniff")
+    yanit.headers.setdefault("X-Frame-Options", "DENY")
+    yanit.headers.setdefault("Referrer-Policy", "same-origin")
+    return yanit
+
+
 @app.context_processor
 def sablon_degiskenleri():
     if "csrf" not in session:
@@ -174,7 +223,7 @@ def sablon_degiskenleri():
         "csrf": session["csrf"],
         "aktif_sayfa": request.endpoint or "",
         "aktif_donem": veri.aktif_donem() if giris_var else None,
-        "bekleyen_basvuru": veri.bekleyen_basvuru_sayisi() if giris_var and izin("basvuru_karar") else 0,
+        "bekleyen_basvuru": veri.bekleyen_basvuru_sayisi(_baskan_kulubu()) if giris_var else 0,
         "izin": izin,
         "rol": _rol(),
         "rol_ad": veri.ROLLER.get(_rol(), ""),
@@ -273,6 +322,7 @@ def _guvenli_yonlendirme(hedef):
 @app.errorhandler(400)
 @app.errorhandler(403)
 @app.errorhandler(404)
+@app.errorhandler(405)
 @app.errorhandler(413)
 @app.errorhandler(500)
 def hata_sayfasi(hata):
@@ -281,10 +331,11 @@ def hata_sayfasi(hata):
         400: "İstek geçersiz veya oturum süresi dolmuş. Sayfayı yenileyip tekrar deneyin.",
         403: "Bu işlem için yetkiniz yok.",
         404: "Aradığınız sayfa bulunamadı.",
+        405: "Bu adres bu şekilde açılamaz.",
         413: "Yüklenen dosya çok büyük (en fazla 20 MB).",
         500: "Beklenmeyen bir hata oluştu.",
     }
-    return render_template("eror.html", kod=kod, mesaj=mesajlar.get(kod, "Bir hata oluştu.")), kod
+    return render_template("hata.html", kod=kod, mesaj=mesajlar.get(kod, "Bir hata oluştu.")), kod
 
 
 # ---------------------------------------------------------------------------
@@ -303,6 +354,36 @@ def _sifre_dogru(kullanici, sifre):
     return False
 
 
+# Şifre ve kurtarma kodu tahminini yavaşlatmak için: aynı adresten aynı hesaba
+# art arda yapılan hatalı denemeler sayılır, sınır aşılınca kısa süre beklenir.
+DENEME_SINIRI = 5
+DENEME_SURESI_SN = 5 * 60
+_hatali_denemeler = {}  # (ip, hedef) -> hatalı deneme zamanları
+
+
+def _deneme_anahtari(hedef):
+    return request.remote_addr or "", hedef.lower()
+
+
+def _deneme_kilitli(hedef):
+    simdi = time.time()
+    anahtar = _deneme_anahtari(hedef)
+    zamanlar = [z for z in _hatali_denemeler.get(anahtar, []) if simdi - z < DENEME_SURESI_SN]
+    if zamanlar:
+        _hatali_denemeler[anahtar] = zamanlar
+    else:
+        _hatali_denemeler.pop(anahtar, None)
+    return len(zamanlar) >= DENEME_SINIRI
+
+
+def _hatali_deneme(hedef):
+    _hatali_denemeler.setdefault(_deneme_anahtari(hedef), []).append(time.time())
+
+
+def _denemeleri_sifirla(hedef):
+    _hatali_denemeler.pop(_deneme_anahtari(hedef), None)
+
+
 @app.route("/giris", methods=["GET", "POST"])
 def giris_yap():
     hata = None
@@ -311,7 +392,10 @@ def giris_yap():
         sifre = request.form.get("sifre", "")
         kullanici = veri.kullanici_bul(kullanici_adi)
 
-        if veri.panel_yetkilisi_mi(kullanici) and _sifre_dogru(kullanici, sifre):
+        if _deneme_kilitli(kullanici_adi):
+            hata = "Çok fazla hatalı deneme yapıldı. Lütfen 5 dakika sonra tekrar deneyin."
+        elif veri.panel_yetkilisi_mi(kullanici) and _sifre_dogru(kullanici, sifre):
+            _denemeleri_sifirla(kullanici_adi)
             csrf = session.get("csrf")
             session.clear()
             session["csrf"] = csrf or secrets.token_hex(16)
@@ -321,7 +405,9 @@ def giris_yap():
             session["kulup_id"] = kullanici.get("kulup_id", "")
             session["son_islem"] = datetime.now().timestamp()
             return redirect(_guvenli_yonlendirme(request.args.get("sonra")))
-        hata = "Kullanıcı adı veya şifre hatalı ya da panele erişim yetkiniz yok."
+        else:
+            _hatali_deneme(kullanici_adi)
+            hata = "Kullanıcı adı veya şifre hatalı ya da panele erişim yetkiniz yok."
 
     return render_template("giris.html", hata=hata)
 
@@ -338,7 +424,11 @@ def sifremi_unuttum():
         yeni_sifre_tekrar = request.form.get("yeni_sifre_tekrar", "")
         kullanici = veri.kullanici_bul(kullanici_adi)
 
-        if not veri.panel_yetkilisi_mi(kullanici) or not hmac.compare_digest(kod, kurtarma_kodu):
+        if _deneme_kilitli("kurtarma"):
+            hata = "Çok fazla hatalı deneme yapıldı. Lütfen 5 dakika sonra tekrar deneyin."
+        elif not veri.panel_yetkilisi_mi(kullanici) or not hmac.compare_digest(
+                kod.encode("utf-8"), kurtarma_kodu.encode("utf-8")):
+            _hatali_deneme("kurtarma")
             hata = "Kullanıcı adı veya kurtarma kodu hatalı."
         elif len(yeni_sifre) < 8:
             hata = "Yeni şifre en az 8 karakter olmalı."
@@ -352,8 +442,11 @@ def sifremi_unuttum():
     return render_template("sifremi_unuttum.html", hata=hata, aktif=bool(kurtarma_kodu))
 
 
-@app.route("/cikis")
+@app.route("/cikis", methods=["POST"])
+@rol_gerekli("dekan", "personel", "baskan")
 def cikis_yap():
+    # Çıkış POST ile yapılır (CSRF anahtarı kontrol edilir); böylece başka bir
+    # sitedeki bağlantı veya görsel kullanıcının oturumunu kapatamaz.
     session.clear()
     flash("Oturumunuz kapatıldı.", "basarili")
     return redirect(url_for("giris_yap"))
@@ -363,11 +456,34 @@ def cikis_yap():
 # Ana panel
 # ---------------------------------------------------------------------------
 
+def _baskan_paneli():
+    """Kulüp başkanının ana sayfası: kendi kulübünün başvuruları, sonuçları ve evrak durumu."""
+    kulup = _kulup_veya_404(_baskan_kulubu())
+    # En son gönderilen üstte.
+    basvurular = sorted(veri.basvurulari_getir(kulup_id=kulup["id"]),
+                        key=lambda b: b.get("olusturma", ""), reverse=True)
+    donem = veri.aktif_donem()
+    evraklar = []
+    if donem:
+        _, satirlar = veri.evrak_durumlari(donem["id"], kulupler=[kulup])
+        evraklar = satirlar[0]["hucreler"] if satirlar else []
+    return render_template(
+        "baskan_panel.html",
+        kulup=kulup,
+        basvurular=basvurular,
+        sayilar={d: sum(1 for b in basvurular if b["durum"] == d) for d in veri.BASVURU_DURUMLARI},
+        durumlar=veri.BASVURU_DURUMLARI,
+        evraklar=evraklar,
+        evrak_durumlari=veri.EVRAK_DURUMLARI,
+        belgeler=veri.belgeleri_getir(kulup["id"])[:5],
+    )
+
+
 @app.route("/")
+@rol_gerekli("dekan", "personel", "baskan")
 def ana_panel():
-    # Kulüp başkanının ana sayfası kendi kulübüdür.
     if _rol() == "baskan":
-        return redirect(url_for("kulup_detay", kulup_id=_baskan_kulubu()))
+        return _baskan_paneli()
     kulupler = veri.kulupleri_getir()
     tum_uyeler = veri.tum_uyeleri_getir()
     ozet = {
@@ -443,7 +559,26 @@ def _uzanti(dosya_adi):
     return dosya_adi.rsplit(".", 1)[-1].lower() if "." in dosya_adi else ""
 
 
+_ZIP, _OLE = (b"PK\x03\x04",), (b"\xd0\xcf\x11\xe0",)
+_DOSYA_IMZALARI = {
+    "pdf": (b"%PDF",), "png": (b"\x89PNG\r\n\x1a\n",), "jpg": (b"\xff\xd8\xff",), "jpeg": (b"\xff\xd8\xff",),
+    "docx": _ZIP, "xlsx": _ZIP, "odt": _ZIP, "ods": _ZIP, "doc": _OLE, "xls": _OLE,
+}
+
+
+def _icerik_uygun(dosya):
+    """Yüklenen dosyanın ilk baytları uzantısıyla uyuşuyor mu? (ör. adı .pdf yapılmış
+    başka türde bir dosyayı reddeder)"""
+    uzanti = _uzanti(dosya.filename)
+    bas = dosya.stream.read(12)
+    dosya.stream.seek(0)
+    if uzanti == "webp":
+        return bas[:4] == b"RIFF" and bas[8:12] == b"WEBP"
+    return bas.startswith(_DOSYA_IMZALARI.get(uzanti, ()))
+
+
 @app.route("/kulupler")
+@rol_gerekli("dekan", "personel")
 def kulupler():
     return render_template(
         "kulupler.html",
@@ -454,6 +589,7 @@ def kulupler():
 
 @app.route("/kulupler/yeni", methods=["GET", "POST"])
 @app.route("/kulupler/<kulup_id>/duzenle", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def kulup_form(kulup_id=None):
     mevcut = _kulup_veya_404(kulup_id) if kulup_id else None
     hata = None
@@ -482,8 +618,8 @@ def kulup_form(kulup_id=None):
             hata = "Seçilen danışman bulunamadı."
         elif kulup["eposta"] and not EPOSTA_DESENI.fullmatch(kulup["eposta"]):
             hata = "Kulüp e-posta adresi geçersiz."
-        elif logo and logo.filename and _uzanti(logo.filename) not in LOGO_UZANTILARI:
-            hata = "Logo PNG, JPG veya WEBP olmalı."
+        elif logo and logo.filename and (_uzanti(logo.filename) not in LOGO_UZANTILARI or not _icerik_uygun(logo)):
+            hata = "Logo PNG, JPG veya WEBP biçiminde bir görsel olmalı."
         else:
             kulup["id"] = mevcut["id"] if mevcut else _kulup_id_uret(kulup["isim"])
             if logo and logo.filename:
@@ -525,6 +661,7 @@ def kulup_form(kulup_id=None):
 
 
 @app.route("/kulupler/<kulup_id>/sil", methods=["POST"])
+@rol_gerekli("dekan")
 def kulup_sil(kulup_id):
     """Kulübü silmez, arşive alır (üyelikleri, belgeleri ve başvuruları onunla birlikte gizlenir)."""
     kulup = _kulup_veya_404(kulup_id)
@@ -535,6 +672,7 @@ def kulup_sil(kulup_id):
 
 
 @app.route("/kulupler/<kulup_id>")
+@rol_gerekli("dekan", "personel", "baskan")
 def kulup_detay(kulup_id):
     kulup = _kulup_veya_404(kulup_id)
     return render_template(
@@ -553,6 +691,7 @@ def kulup_detay(kulup_id):
 
 @app.route("/kulupler/<kulup_id>/uyeler/yeni", methods=["GET", "POST"])
 @app.route("/kulupler/<kulup_id>/uyeler/<ogrenci_no>/duzenle", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def uye_form(kulup_id, ogrenci_no=None):
     kulup = _kulup_veya_404(kulup_id)
     mevcut = None
@@ -600,6 +739,7 @@ def uye_form(kulup_id, ogrenci_no=None):
 
 
 @app.route("/kulupler/<kulup_id>/uyeler/<ogrenci_no>/sil", methods=["POST"])
+@rol_gerekli("dekan")
 def uye_sil(kulup_id, ogrenci_no):
     kulup = _kulup_veya_404(kulup_id)
     uye = next((u for u in veri.uyeleri_getir(kulup_id) if u["ogrenci_no"] == ogrenci_no), None)
@@ -624,6 +764,7 @@ def _dosya_adi(kulup):
 
 
 @app.route("/kulupler/<kulup_id>/uyeler.xlsx")
+@rol_gerekli("dekan", "personel")
 def uyeler_excel(kulup_id):
     from openpyxl import Workbook
     from openpyxl.styles import Font, PatternFill
@@ -669,6 +810,7 @@ def _pdf_fontu():
 
 
 @app.route("/kulupler/<kulup_id>/uyeler.pdf")
+@rol_gerekli("dekan", "personel")
 def uyeler_pdf(kulup_id):
     from reportlab.lib import colors
     from reportlab.lib.pagesizes import A4, landscape
@@ -719,6 +861,7 @@ def uyeler_pdf(kulup_id):
 # ---------------------------------------------------------------------------
 
 @app.route("/uyeler")
+@rol_gerekli("dekan", "personel")
 def uyeler():
     return render_template(
         "uyeler.html",
@@ -743,11 +886,13 @@ def _danisman_veya_404(danisman_id):
 
 
 @app.route("/danismanlar")
+@rol_gerekli("dekan", "personel")
 def danismanlar():
     return render_template("danismanlar.html", danismanlar=veri.danismanlari_getir())
 
 
 @app.route("/danismanlar/<danisman_id>")
+@rol_gerekli("dekan", "personel")
 def danisman_detay(danisman_id):
     danisman = _danisman_veya_404(danisman_id)
     kulupler = [k for k in veri.kulupleri_getir() if k["danisman_id"] == danisman_id]
@@ -756,6 +901,7 @@ def danisman_detay(danisman_id):
 
 @app.route("/danismanlar/yeni", methods=["GET", "POST"])
 @app.route("/danismanlar/<danisman_id>/duzenle", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def danisman_form(danisman_id=None):
     mevcut = _danisman_veya_404(danisman_id) if danisman_id else None
     hata = None
@@ -784,6 +930,7 @@ def danisman_form(danisman_id=None):
 
 
 @app.route("/danismanlar/<danisman_id>/sil", methods=["POST"])
+@rol_gerekli("dekan")
 def danisman_sil(danisman_id):
     danisman = _danisman_veya_404(danisman_id)
     veri.danisman_sil(danisman_id)
@@ -818,6 +965,7 @@ def _donem_formu():
 
 
 @app.route("/donemler", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def donemler():
     hata = None
     if request.method == "POST":
@@ -842,6 +990,7 @@ def donemler():
 
 
 @app.route("/donemler/<donem_id>/duzenle", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def donem_duzenle(donem_id):
     mevcut = veri.donem_getir(donem_id)
     if mevcut is None:
@@ -862,6 +1011,7 @@ def donem_duzenle(donem_id):
 
 
 @app.route("/donemler/<donem_id>/aktif", methods=["POST"])
+@rol_gerekli("dekan", "personel")
 def donem_aktif_yap(donem_id):
     donem = veri.donem_getir(donem_id)
     if donem is None:
@@ -875,6 +1025,7 @@ def donem_aktif_yap(donem_id):
 
 
 @app.route("/donemler/<donem_id>/sil", methods=["POST"])
+@rol_gerekli("dekan")
 def donem_sil(donem_id):
     donem = veri.donem_getir(donem_id)
     if donem is None:
@@ -952,8 +1103,11 @@ def _basvuru_formu(kulup_isimleri):
 def _basvuru_dosyalarini_kaydet():
     """Yüklenen ek dosyaları kaydeder; (dosya listesi, hata) döndürür."""
     dosyalar = [d for d in request.files.getlist("ek_dosya") if d and d.filename]
-    if any(_uzanti(d.filename) not in BELGE_UZANTILARI for d in dosyalar):
-        return [], "Ek dosya türü desteklenmiyor."
+    for d in dosyalar:
+        if _uzanti(d.filename) not in BELGE_UZANTILARI:
+            return [], f"“{d.filename}” eklenemedi: bu dosya türü desteklenmiyor."
+        if not _icerik_uygun(d):
+            return [], f"“{d.filename}” eklenemedi: dosyanın içeriği uzantısıyla uyuşmuyor."
     kayitlar = []
     os.makedirs(BASVURU_KLASORU, exist_ok=True)
     for dosya in dosyalar:
@@ -978,6 +1132,7 @@ def _kullanicinin_kulupleri():
 
 
 @app.route("/etkinlik-basvurulari")
+@rol_gerekli("dekan", "personel", "baskan")
 def etkinlik_basvurulari():
     basvurular = veri.basvurulari_getir(kulup_id=_baskan_kulubu())
     sayilar = {d: sum(1 for b in basvurular if b["durum"] == d) for d in veri.BASVURU_DURUMLARI}
@@ -995,6 +1150,7 @@ def etkinlik_basvurulari():
 
 @app.route("/etkinlik-basvurulari/yeni", methods=["GET", "POST"])
 @app.route("/etkinlik-basvurulari/<basvuru_id>/duzenle", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel", "baskan")
 def basvuru_form(basvuru_id=None):
     mevcut = _basvuru_veya_404(basvuru_id) if basvuru_id else None
     # Kulüp başkanı karar verilmiş başvuruyu değiştiremez; sadece bekleyen/revizyondakini düzenler.
@@ -1008,6 +1164,9 @@ def basvuru_form(basvuru_id=None):
         basvuru, hata = _basvuru_formu(kulup_isimleri)
         if _baskan_kulubu():
             basvuru["kaynak"] = "baskan"
+            # Kulüp başkanı ileri tarihli etkinlik için başvurur; geçmiş kayıtları dekanlık girer.
+            if not hata and basvuru["tarih_saat"] < f"{datetime.now():%Y-%m-%dT%H:%M}":
+                hata = "Etkinlik tarihi geçmiş bir tarih olamaz."
         if not hata:
             yeni_dosyalar, hata = _basvuru_dosyalarini_kaydet()
         if not hata:
@@ -1055,6 +1214,7 @@ def basvuru_form(basvuru_id=None):
 
 
 @app.route("/etkinlik-basvurulari/<basvuru_id>")
+@rol_gerekli("dekan", "personel", "baskan")
 def basvuru_detay(basvuru_id):
     basvuru = _basvuru_veya_404(basvuru_id)
     return render_template("basvuru_detay.html", basvuru=basvuru, durumlar=veri.BASVURU_DURUMLARI,
@@ -1062,6 +1222,7 @@ def basvuru_detay(basvuru_id):
 
 
 @app.route("/etkinlik-basvurulari/<basvuru_id>/karar", methods=["POST"])
+@rol_gerekli("dekan")
 def basvuru_karar(basvuru_id):
     basvuru = _basvuru_veya_404(basvuru_id)
     durum = request.form.get("durum", "")
@@ -1069,7 +1230,7 @@ def basvuru_karar(basvuru_id):
     if durum not in ("onaylandi", "reddedildi", "revizyon", "beklemede"):
         flash("Geçersiz karar.", "hata")
     elif durum in ("reddedildi", "revizyon") and not aciklama:
-        flash("Red ve revizyon kararlarında açıklama yazmak zorunludur.", "hata")
+        flash("Ret ve revizyon kararlarında açıklama yazmak zorunludur.", "hata")
     elif durum == basvuru["durum"] and not aciklama:
         flash("Başvuru zaten bu durumda.", "hata")
     else:
@@ -1081,6 +1242,7 @@ def basvuru_karar(basvuru_id):
 
 
 @app.route("/etkinlik-basvurulari/<basvuru_id>/dosya/<dosya_id>")
+@rol_gerekli("dekan", "personel", "baskan")
 def basvuru_dosya(basvuru_id, dosya_id):
     basvuru = _basvuru_veya_404(basvuru_id)
     dosya = next((d for d in basvuru.get("ek_dosyalar", []) if d["id"] == dosya_id), None)
@@ -1091,6 +1253,7 @@ def basvuru_dosya(basvuru_id, dosya_id):
 
 
 @app.route("/etkinlik-basvurulari/<basvuru_id>/sil", methods=["POST"])
+@rol_gerekli("dekan")
 def basvuru_sil(basvuru_id):
     """Başvuruyu silmez, arşive alır."""
     basvuru = _basvuru_veya_404(basvuru_id)
@@ -1132,6 +1295,7 @@ def _zorunlu_evrak_formu():
 
 
 @app.route("/donemler/<donem_id>/zorunlu-evraklar", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def zorunlu_evraklar(donem_id):
     donem = _donem_veya_404(donem_id)
     hata = None
@@ -1150,6 +1314,7 @@ def zorunlu_evraklar(donem_id):
 
 
 @app.route("/zorunlu-evraklar/<evrak_id>/duzenle", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def zorunlu_evrak_duzenle(evrak_id):
     evrak = veri.zorunlu_evrak_getir(evrak_id)
     if evrak is None:
@@ -1171,6 +1336,7 @@ def zorunlu_evrak_duzenle(evrak_id):
 
 
 @app.route("/zorunlu-evraklar/<evrak_id>/sil", methods=["POST"])
+@rol_gerekli("dekan")
 def zorunlu_evrak_sil(evrak_id):
     evrak = veri.zorunlu_evrak_getir(evrak_id)
     if evrak is None:
@@ -1183,6 +1349,7 @@ def zorunlu_evrak_sil(evrak_id):
 
 
 @app.route("/evrak-takibi")
+@rol_gerekli("dekan", "personel")
 def evrak_takibi():
     donem = _secili_donem()
     pasifler_dahil = request.args.get("pasif") == "1"
@@ -1197,6 +1364,7 @@ def evrak_takibi():
 
 
 @app.route("/evrak-takibi/elden", methods=["POST"])
+@rol_gerekli("dekan", "personel")
 def elden_teslim():
     evrak = veri.zorunlu_evrak_getir(request.form.get("evrak_id", ""))
     kulup = veri.kulup_getir(request.form.get("kulup_id", ""))
@@ -1216,6 +1384,7 @@ def elden_teslim():
 # ---------------------------------------------------------------------------
 
 @app.route("/karne")
+@rol_gerekli("dekan", "personel")
 def karne():
     donem = _secili_donem()
     pasifler_dahil = request.args.get("pasif") == "1"
@@ -1230,6 +1399,7 @@ def karne():
 
 
 @app.route("/kulupler/<kulup_id>/karne", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def kulup_karne(kulup_id):
     kulup = _kulup_veya_404(kulup_id)
     donem = _secili_donem()
@@ -1322,6 +1492,7 @@ def _grafik_verileri(donem):
 
 
 @app.route("/raporlar")
+@rol_gerekli("dekan", "personel")
 def raporlar():
     donem = _secili_donem()
     return render_template("raporlar.html", donem=donem, donemler=veri.donemleri_getir(),
@@ -1337,6 +1508,7 @@ def _rapor_donemi_veya_404():
 
 
 @app.route("/raporlar/donem.xlsx")
+@rol_gerekli("dekan", "personel")
 def donem_raporu_excel():
     from openpyxl import Workbook
     from openpyxl.styles import Font, PatternFill
@@ -1422,6 +1594,7 @@ def _pdf_tablo(basliklar, satirlar, genislikler, stiller, tablo_stili):
 
 
 @app.route("/raporlar/donem.pdf")
+@rol_gerekli("dekan", "personel")
 def donem_raporu_pdf():
     from reportlab.platypus import Paragraph, Spacer
     from reportlab.lib.units import cm
@@ -1442,6 +1615,7 @@ def donem_raporu_pdf():
 
 
 @app.route("/kulupler/<kulup_id>/rapor.pdf")
+@rol_gerekli("dekan", "personel")
 def kulup_raporu_pdf(kulup_id):
     from reportlab.lib.units import cm
     from reportlab.platypus import Paragraph, Spacer
@@ -1504,6 +1678,7 @@ AY_ADLARI = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "
 
 
 @app.route("/takvim")
+@rol_gerekli("dekan", "personel")
 def takvim():
     import calendar
 
@@ -1561,6 +1736,7 @@ def _belge_dosyasini_sil(belge):
 
 
 @app.route("/belgeler", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel", "baskan")
 def belgeler():
     kulupler = _kullanicinin_kulupleri()
     kulup_isimleri = {k["id"]: k["isim"] for k in kulupler}
@@ -1582,6 +1758,8 @@ def belgeler():
             flash("Lütfen yüklenecek dosyayı seçin.", "hata")
         elif _uzanti(dosya.filename) not in BELGE_UZANTILARI:
             flash("Bu dosya türü desteklenmiyor.", "hata")
+        elif not _icerik_uygun(dosya):
+            flash("Dosyanın içeriği uzantısıyla uyuşmuyor; dosya yüklenmedi.", "hata")
         else:
             os.makedirs(BELGE_KLASORU, exist_ok=True)
             belge_id = uuid4().hex
@@ -1631,6 +1809,7 @@ def belgeler():
 
 
 @app.route("/belgeler/<belge_id>/indir")
+@rol_gerekli("dekan", "personel", "baskan")
 def belge_indir(belge_id):
     belge = veri.belge_getir(belge_id)
     if belge is None:
@@ -1640,6 +1819,7 @@ def belge_indir(belge_id):
 
 
 @app.route("/belgeler/<belge_id>/sil", methods=["POST"])
+@rol_gerekli("dekan")
 def belge_sil(belge_id):
     """Belgeyi silmez, arşive alır."""
     belge = veri.belge_getir(belge_id)
@@ -1660,6 +1840,7 @@ ARSIV_TURLERI = {"kulup": "Kulüp", "belge": "Belge", "basvuru": "Etkinlik başv
 
 
 @app.route("/arsiv")
+@rol_gerekli("dekan", "personel")
 def arsiv():
     kulup_isimleri = {k["id"]: k["isim"] for k in veri.kulupleri_getir(arsiv=None)}
     belgeler = veri.belgeleri_getir(arsiv=True)
@@ -1684,6 +1865,7 @@ def _arsiv_kaydi_veya_404(tur, kayit_id):
 
 
 @app.route("/arsiv/<tur>/<kayit_id>/geri-getir", methods=["POST"])
+@rol_gerekli("dekan")
 def arsiv_geri_getir(tur, kayit_id):
     kayit, ad, kulup_id = _arsiv_kaydi_veya_404(tur, kayit_id)
     {"kulup": veri.kulup_arsiv_ayarla, "belge": veri.belge_arsiv_ayarla,
@@ -1697,6 +1879,7 @@ def arsiv_geri_getir(tur, kayit_id):
 
 
 @app.route("/arsiv/<tur>/<kayit_id>/kalici-sil", methods=["POST"])
+@rol_gerekli("dekan")
 def arsiv_kalici_sil(tur, kayit_id):
     kayit, ad, kulup_id = _arsiv_kaydi_veya_404(tur, kayit_id)
     if tur == "kulup":
@@ -1737,6 +1920,7 @@ def _gecici_sifre():
 
 
 @app.route("/kullanicilar")
+@rol_gerekli("dekan")
 def kullanicilar():
     kulup_isimleri = {k["id"]: k["isim"] for k in veri.kulupleri_getir(arsiv=None)}
     liste = veri.panel_kullanicilari_getir()
@@ -1747,6 +1931,7 @@ def kullanicilar():
 
 @app.route("/kullanicilar/yeni", methods=["GET", "POST"])
 @app.route("/kullanicilar/<kullanici_adi>/duzenle", methods=["GET", "POST"])
+@rol_gerekli("dekan")
 def kullanici_form(kullanici_adi=None):
     mevcut = _panel_kullanicisi_veya_404(kullanici_adi) if kullanici_adi else None
     hata = None
@@ -1790,6 +1975,7 @@ def kullanici_form(kullanici_adi=None):
 
 
 @app.route("/kullanicilar/<kullanici_adi>/durum", methods=["POST"])
+@rol_gerekli("dekan")
 def kullanici_durum(kullanici_adi):
     kullanici = _panel_kullanicisi_veya_404(kullanici_adi)
     yeni = not kullanici["aktif"]
@@ -1806,6 +1992,7 @@ def kullanici_durum(kullanici_adi):
 
 
 @app.route("/kullanicilar/<kullanici_adi>/sifre-sifirla", methods=["POST"])
+@rol_gerekli("dekan")
 def kullanici_sifre_sifirla(kullanici_adi):
     kullanici = _panel_kullanicisi_veya_404(kullanici_adi)
     sifre = _gecici_sifre()
@@ -1819,6 +2006,7 @@ def kullanici_sifre_sifirla(kullanici_adi):
 
 
 @app.route("/hesabim", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel", "baskan")
 def hesabim():
     """Giriş yapan kullanıcının kendi şifresini değiştirmesi."""
     kullanici = veri.kullanici_bul(session["kullanici_adi"])
@@ -1847,6 +2035,7 @@ def hesabim():
 # ---------------------------------------------------------------------------
 
 @app.route("/ayarlar", methods=["GET", "POST"])
+@rol_gerekli("dekan")
 def ayarlar():
     hata = None
     eski = veri.ayarlari_getir()
@@ -1872,6 +2061,7 @@ def ayarlar():
 # ---------------------------------------------------------------------------
 
 @app.route("/islem-gecmisi")
+@rol_gerekli("dekan", "personel")
 def islem_gecmisi():
     filtre = {a: request.args.get(a, "") for a in ("kullanici_adi", "kulup_id", "kayit_turu", "baslangic", "bitis")}
     islemler = veri.islemleri_getir(**filtre)
@@ -1953,11 +2143,13 @@ def _mailto(duyuru):
 
 
 @app.route("/duyurular")
+@rol_gerekli("dekan", "personel")
 def duyurular():
     return render_template("duyurular.html", duyurular=veri.duyurulari_getir(), hedef_turleri=HEDEF_TURLERI)
 
 
 @app.route("/duyurular/alicilar")
+@rol_gerekli("dekan", "personel")
 def duyuru_alicilari():
     """Duyuru formundaki canlı alıcı önizlemesi için JSON."""
     hedef, hata = _duyuru_hedefi(request.args)
@@ -1968,6 +2160,7 @@ def duyuru_alicilari():
 
 
 @app.route("/duyurular/yeni", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def duyuru_form():
     hata = None
     form = request.form if request.method == "POST" else MultiDict({
@@ -1998,6 +2191,7 @@ def duyuru_form():
 
 
 @app.route("/duyurular/<duyuru_id>")
+@rol_gerekli("dekan", "personel")
 def duyuru_detay(duyuru_id):
     duyuru = veri.duyuru_getir(duyuru_id)
     if duyuru is None:
@@ -2026,6 +2220,7 @@ def _excel_basligi(sayfa, basliklar, genislikler):
 
 
 @app.route("/iletisim-listesi.xlsx")
+@rol_gerekli("dekan", "personel")
 def iletisim_listesi():
     from openpyxl import Workbook
 
@@ -2063,6 +2258,7 @@ def _arama_metni(metin):
 
 
 @app.route("/ara")
+@rol_gerekli("dekan", "personel")
 def ara():
     """Kulüp, başkan, danışman ve öğrenci (numara veya ad) araması; JSON döner."""
     q = _arama_metni(request.args.get("q", "").strip())
@@ -2105,6 +2301,7 @@ SABLON_ALANLARI = ["ad_soyad", "ogrenci_no", "bolum", "sinif", "telefon", "epost
 
 
 @app.route("/kulupler/<kulup_id>/uyeler/sablon.xlsx")
+@rol_gerekli("dekan", "personel")
 def uye_sablonu(kulup_id):
     from openpyxl import Workbook
     from openpyxl.comments import Comment
@@ -2204,6 +2401,7 @@ def _excel_uyelerini_oku(dosya, kulup_id):
 
 
 @app.route("/kulupler/<kulup_id>/uyeler/ice-aktar", methods=["GET", "POST"])
+@rol_gerekli("dekan", "personel")
 def uye_ice_aktar(kulup_id):
     kulup = _kulup_veya_404(kulup_id)
     satirlar, anahtar, hata = None, None, None
@@ -2233,6 +2431,7 @@ def uye_ice_aktar(kulup_id):
 
 
 @app.route("/kulupler/<kulup_id>/uyeler/ice-aktar/onayla", methods=["POST"])
+@rol_gerekli("dekan", "personel")
 def uye_ice_aktar_onayla(kulup_id):
     kulup = _kulup_veya_404(kulup_id)
     anahtar = request.form.get("anahtar", "")
@@ -2286,6 +2485,25 @@ def tarih_filtresi(deger):
         return deger or ""
 
 
+def _dekan_olustur():
+    """Komut satırından dekan hesabı oluşturur veya mevcut hesabın şifresini yeniler."""
+    kullanici_adi = input("Kullanıcı adı [admin]: ").strip() or "admin"
+    if not re.fullmatch(r"[A-Za-z0-9._-]{3,32}", kullanici_adi):
+        sys.exit("Kullanıcı adı 3-32 karakter olmalı; harf, rakam, nokta, alt çizgi ve tire içerebilir.")
+    mevcut = veri.kullanici_bul(kullanici_adi)
+    sifre = getpass.getpass("Yeni şifre (en az 8 karakter): ")
+    if len(sifre) < 8 or sifre != getpass.getpass("Yeni şifre (tekrar): "):
+        sys.exit("Şifre en az 8 karakter olmalı ve iki giriş aynı olmalı.")
+    alanlar = {"sifre_hash": generate_password_hash(sifre), "rol": "dekan", "aktif": True}
+    if not mevcut:
+        alanlar["ad_soyad"] = input("Ad soyad [Öğrenci Dekanlığı]: ").strip() or "Öğrenci Dekanlığı"
+    veri.kullanici_kaydet(kullanici_adi, alanlar)
+    print(f"{kullanici_adi} dekan hesabı {'güncellendi' if mevcut else 'oluşturuldu'}.")
+
+
 if __name__ == "__main__":
-    # debug=True: kod değiştikçe sunucu otomatik yeniden başlar.
-    app.run(debug=True)
+    if sys.argv[1:] == ["dekan-olustur"]:
+        _dekan_olustur()
+    else:
+        # PANEL_DEBUG=1: kod değiştikçe sunucu otomatik yeniden başlar (yalnızca geliştirme için).
+        app.run(debug=os.environ.get("PANEL_DEBUG") == "1")

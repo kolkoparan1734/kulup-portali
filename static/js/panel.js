@@ -2,6 +2,7 @@
 //  - mobilde sol menünün açılıp kapanması
 //  - silme gibi işlemlerden önce onay sorulması (form[data-onay])
 //  - kart/tablo arama ve filtreleri ([data-filtre-kapsam])
+//  - başvuru kararında ret/revizyon açıklaması kontrolü ([data-karar-formu])
 //  - tablo sütunlarına tıklayarak sıralama (th[data-sirala])
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -145,6 +146,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // --- Başvuru kararı: ret ve revizyonda açıklama zorunlu ----------------
+    document.querySelectorAll("[data-karar-formu]").forEach(function (form) {
+        const aciklama = form.querySelector("textarea[name='aciklama']");
+        const hata = form.querySelector("[data-karar-hata]");
+        form.addEventListener("submit", function (e) {
+            const dugme = e.submitter;
+            if (dugme && dugme.hasAttribute("data-aciklama-zorunlu") && !aciklama.value.trim()) {
+                e.preventDefault();
+                hata.hidden = false;
+                aciklama.setAttribute("aria-invalid", "true");
+                aciklama.focus();
+            }
+        });
+        aciklama.addEventListener("input", function () {
+            hata.hidden = true;
+            aciklama.removeAttribute("aria-invalid");
+        });
+    });
+
     // --- Arama ve filtreler -----------------------------------------------
     // Kapsam içindeki [data-filtre] alanları, data-filtre-oge seçicisine uyan
     // öğeleri süzer. "metin" alanı öğenin data-metin değerinde arar, diğer
@@ -163,6 +183,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (alan.type === "checkbox") return !alan.checked || oge.dataset[ad] === "1";
                     if (!alan.value) return true;
                     if (ad === "metin") return kucult(oge.dataset.metin).includes(kucult(alan.value.trim()));
+                    // Tarih aralığı: öğenin data-tarih değeri (YYYY-AA-GG) ile karşılaştırılır.
+                    if (ad === "baslangic") return (oge.dataset.tarih || "") >= alan.value;
+                    if (ad === "bitis") return (oge.dataset.tarih || "") <= alan.value;
                     return oge.dataset[ad] === alan.value;
                 });
                 oge.hidden = !uygun;

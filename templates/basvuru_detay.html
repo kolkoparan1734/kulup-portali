@@ -5,6 +5,7 @@
 
 {% block content %}
 <a href="{{ url_for('etkinlik_basvurulari') }}" class="geri-link">&larr; Etkinlik Başvuruları</a>
+{% set duzenlenebilir = rol != 'baskan' or basvuru.durum in ('beklemede', 'revizyon') %}
 
 <section class="kulup-ust kutu">
     <div class="kulup-ust-metin">
@@ -14,11 +15,11 @@
         </div>
         <p class="soluk">
             <a href="{{ url_for('kulup_detay', kulup_id=basvuru.kulup_id) }}">{{ basvuru.kulup_isim }}</a>
-            · {{ etkinlik_tarihi(basvuru) }}{% if basvuru.yer %} · {{ basvuru.yer }}{% endif %}
+            · Etkinlik başvurusu · {{ etkinlik_tarihi(basvuru) }}{% if basvuru.yer %} · {{ basvuru.yer }}{% endif %}
         </p>
     </div>
     <div class="kulup-ust-eylem">
-        {% if rol != 'baskan' or basvuru.durum in ('beklemede', 'revizyon') %}
+        {% if duzenlenebilir %}
         <a href="{{ url_for('basvuru_form', basvuru_id=basvuru.id) }}" class="dugme">Düzenle</a>
         {% endif %}
         {% if izin('basvuru_sil') %}
@@ -30,6 +31,25 @@
         {% endif %}
     </div>
 </section>
+
+{% if basvuru.son_karar %}
+<div class="sonuc-kutu sonuc-{{ basvuru.durum }}" role="status">
+    <div>
+        <strong>{% if basvuru.durum == 'onaylandi' %}Başvuru onaylandı{% elif basvuru.durum == 'reddedildi' %}Başvuru reddedildi{% else %}Dekanlık revizyon istedi{% endif %}</strong>
+        <span class="kucuk-metin">{{ basvuru.son_karar.kullanici }} · {{ basvuru.son_karar.tarih | tarih }}</span>
+        {% if basvuru.son_karar.aciklama %}<p class="metin-blok"><span class="sonuc-etiket">Açıklama:</span> {{ basvuru.son_karar.aciklama }}</p>{% endif %}
+        {% if basvuru.durum == 'revizyon' %}<p class="kucuk-metin">Başvuru açıklamaya göre düzenlenip kaydedildiğinde yeniden değerlendirmeye alınır.</p>{% endif %}
+    </div>
+    {% if basvuru.durum == 'revizyon' %}
+    <a href="{{ url_for('basvuru_form', basvuru_id=basvuru.id) }}" class="dugme dugme-ince">Başvuruyu Düzenle</a>
+    {% endif %}
+</div>
+{% elif basvuru.durum == 'beklemede' and rol == 'baskan' %}
+<div class="sonuc-kutu sonuc-beklemede" role="status">
+    <div><strong>Başvurunuz dekanlığın onayını bekliyor</strong>
+    <span class="kucuk-metin">Karar verildiğinde sonucu ve varsa açıklamasını bu sayfada göreceksiniz.</span></div>
+</div>
+{% endif %}
 
 <div class="detay-izgara-genis">
     <div>
@@ -44,7 +64,7 @@
                     {% if basvuru.butce_aciklama %}<span class="soluk kucuk-metin">{{ basvuru.butce_aciklama }}</span>{% endif %}
                 </dd></div>
                 <div><dt>Kaynak</dt><dd>{{ kaynaklar.get(basvuru.kaynak, '—') }}</dd></div>
-                <div><dt>Giren</dt><dd>{{ basvuru.giren or '—' }}{% if basvuru.olusturma %} · {{ basvuru.olusturma | tarih }}{% endif %}</dd></div>
+                <div><dt>Gönderen</dt><dd>{{ basvuru.giren or '—' }}{% if basvuru.olusturma %} · {{ basvuru.olusturma | tarih }}{% endif %}</dd></div>
             </dl>
             {% if basvuru.aciklama %}
             <h3 class="alt-baslik">Açıklama</h3>
@@ -71,25 +91,23 @@
 
     <div>
         {% if izin('basvuru_karar') %}
-        <section class="kutu">
-            <h2 class="kutu-baslik-tek">Karar Ver</h2>
-            <form method="POST" action="{{ url_for('basvuru_karar', basvuru_id=basvuru.id) }}" class="form">
+        <section class="kutu{% if basvuru.durum == 'beklemede' %} kutu-vurgu{% endif %}" id="karar">
+            <h2 class="kutu-baslik-tek">{{ 'Karar Ver' if basvuru.durum == 'beklemede' else 'Kararı Değiştir' }}</h2>
+            <form method="POST" action="{{ url_for('basvuru_karar', basvuru_id=basvuru.id) }}" class="form" data-karar-formu>
                 <input type="hidden" name="csrf" value="{{ csrf }}">
-                <div class="karar-secenekleri" role="radiogroup" aria-label="Karar">
-                    <label><input type="radio" name="durum" value="onaylandi" required> Onayla</label>
-                    <label><input type="radio" name="durum" value="revizyon"> Revizyon iste</label>
-                    <label><input type="radio" name="durum" value="reddedildi"> Reddet</label>
-                    {% if basvuru.durum != 'beklemede' %}<label><input type="radio" name="durum" value="beklemede"> Beklemeye al</label>{% endif %}
-                </div>
                 <label class="alan">
-                    <span>Açıklama <small>(red ve revizyonda zorunlu)</small></span>
+                    <span>Açıklama <small>(ret ve revizyonda zorunlu · kulüp başkanı görür)</small></span>
                     <textarea name="aciklama" rows="3" maxlength="1000" placeholder="Kulübe iletilecek gerekçe veya not"></textarea>
                 </label>
-                <button type="submit" class="dugme dugme-ana dugme-tam">Kararı Kaydet</button>
+                <p class="alan-hata" data-karar-hata role="alert" hidden>Reddetmek veya revizyon istemek için açıklama yazmalısınız.</p>
+                <div class="karar-dugmeleri">
+                    {% if basvuru.durum != 'onaylandi' %}<button type="submit" name="durum" value="onaylandi" class="dugme dugme-onay">Onayla</button>{% endif %}
+                    {% if basvuru.durum != 'reddedildi' %}<button type="submit" name="durum" value="reddedildi" class="dugme dugme-red" data-aciklama-zorunlu>Reddet</button>{% endif %}
+                    {% if basvuru.durum != 'revizyon' %}<button type="submit" name="durum" value="revizyon" class="dugme" data-aciklama-zorunlu>Revizyon İste</button>{% endif %}
+                    {% if basvuru.durum != 'beklemede' %}<button type="submit" name="durum" value="beklemede" class="dugme">Beklemeye Al</button>{% endif %}
+                </div>
             </form>
         </section>
-        {% elif basvuru.durum == 'revizyon' %}
-        <div class="bildirim bildirim-hata" role="status">Dekanlık bu başvuru için revizyon istedi. Süreç geçmişindeki açıklamaya göre başvuruyu düzenleyip kaydedin; başvuru yeniden değerlendirmeye alınır.</div>
         {% endif %}
 
         <section class="kutu">

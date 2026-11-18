@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% from "_makrolar.html" import kulup_logo, basvuru_rozeti, etkinlik_tarihi, bos %}
+
+{% block title %}Ana Sayfa{% endblock %}
+
+{% block content %}
+<section class="kulup-ust kutu">
+    {{ kulup_logo(kulup, "buyuk") }}
+    <div class="kulup-ust-metin">
+        <div class="kulup-ust-satir">
+            <h1>{{ kulup.isim }}</h1>
+        </div>
+        <p class="soluk">Hoş geldiniz, {{ session.ad_soyad }}. Başvurularınızı ve belgelerinizi buradan gönderip sonucunu takip edebilirsiniz.</p>
+    </div>
+    <div class="kulup-ust-eylem">
+        <a href="{{ url_for('kulup_detay', kulup_id=kulup.id) }}" class="dugme">Kulüp Sayfası</a>
+        <a href="{{ url_for('belgeler') }}" class="dugme">Belge Yükle</a>
+        <a href="{{ url_for('basvuru_form') }}" class="dugme dugme-ana">+ Yeni Başvuru</a>
+    </div>
+</section>
+
+<section class="ozet-kartlari" aria-label="Başvuru durumları">
+    {% for kod, ad in durumlar.items() %}
+    <a href="{{ url_for('etkinlik_basvurulari', durum=kod) }}" class="ozet-kart ozet-durum-{{ kod }}">
+        <span class="ozet-etiket">{{ ad }}</span>
+        <span class="ozet-deger">{{ sayilar[kod] }}</span>
+    </a>
+    {% endfor %}
+</section>
+
+{% set revizyonlar = basvurular | selectattr('durum', 'equalto', 'revizyon') | list %}
+{% if revizyonlar %}
+<section class="kutu kutu-uyari">
+    <div class="kutu-baslik">
+        <h2>Düzeltmeniz Beklenen Başvurular</h2>
+    </div>
+    <ul class="liste">
+        {% for b in revizyonlar %}
+        <li>
+            <div>
+                <a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}"><strong>{{ b.ad }}</strong></a>
+                <span class="soluk">{{ b.son_karar.aciklama if b.son_karar else '' }}</span>
+            </div>
+            <a href="{{ url_for('basvuru_form', basvuru_id=b.id) }}" class="dugme dugme-ince">Düzenle</a>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}
+
+<section class="kutu kutu-tablo">
+    <div class="kutu-baslik">
+        <h2>Başvurularım <span class="soluk">({{ basvurular | length }})</span></h2>
+        <a href="{{ url_for('etkinlik_basvurulari') }}" class="kutu-link">Tümü &rarr;</a>
+    </div>
+    {% if basvurular %}
+    <div class="tablo-sarici">
+        <table class="tablo">
+            <thead>
+                <tr>
+                    <th>Etkinlik</th>
+                    <th>Etkinlik Tarihi</th>
+                    <th>Gönderim</th>
+                    <th>Durum</th>
+                    <th>Dekanlık Açıklaması</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in basvurular[:10] %}
+                <tr>
+                    <td><a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}"><strong>{{ b.ad }}</strong></a></td>
+                    <td>{{ etkinlik_tarihi(b) }}</td>
+                    <td>{{ bos(b.olusturma | tarih) }}</td>
+                    <td>{{ basvuru_rozeti(b) }}</td>
+                    <td>
+                        {% if b.son_karar and b.son_karar.aciklama %}{{ b.son_karar.aciklama }}
+                        {% elif b.durum == 'beklemede' %}<span class="soluk">Dekanlık inceliyor</span>
+                        {% else %}<span class="soluk">—</span>{% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if basvurular | length > 10 %}<p class="soluk kucuk-metin tablo-not">ve {{ basvurular | length - 10 }} başvuru daha…</p>{% endif %}
+    {% else %}
+    <p class="bos-durum">Henüz başvurunuz yok. “+ Yeni Başvuru” ile ilk etkinlik başvurunuzu gönderebilirsiniz.</p>
+    {% endif %}
+</section>
+
+<div class="panel-izgara">
+    <section class="kutu">
+        <div class="kutu-baslik">
+            <h2>Zorunlu Evraklar{% if aktif_donem %} <span class="soluk">· {{ aktif_donem.ad }}</span>{% endif %}</h2>
+        </div>
+        {% if evraklar %}
+        <ul class="liste">
+            {% for h in evraklar %}
+            <li>
+                <div>
+                    <strong>{{ h.evrak.tur }}</strong>
+                    <span class="soluk">Son teslim: {{ h.evrak.teslim_tarihi | tarih }}</span>
+                </div>
+                <div class="liste-sag">
+                    <span class="evrak-hucre evrak-{{ h.durum }}">{{ evrak_durumlari[h.durum] }}</span>
+                    {% if h.durum != 'teslim' %}
+                    <a href="{{ url_for('belgeler', tur=h.evrak.tur) }}" class="kucuk-metin">Yükle &rarr;</a>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="bos-durum">Bu dönem için tanımlı zorunlu evrak yok.</p>
+        {% endif %}
+    </section>
+
+    <section class="kutu">
+        <div class="kutu-baslik">
+            <h2>Son Yüklenen Belgeler</h2>
+            <a href="{{ url_for('belgeler') }}" class="kutu-link">Tümü &rarr;</a>
+        </div>
+        {% if belgeler %}
+        <ul class="liste">
+            {% for belge in belgeler %}
+            <li>
+                <div><strong>{{ belge.tur }}</strong><span class="soluk">{{ belge.orijinal_ad }} · {{ belge.yukleme_tarihi | tarih }}</span></div>
+                <a href="{{ url_for('belge_indir', belge_id=belge.id) }}" class="dugme dugme-ince">İndir</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="bos-durum">Henüz yüklenmiş belge yok.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

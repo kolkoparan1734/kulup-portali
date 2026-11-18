@@ -1511,5 +1511,105 @@
       }
     ],
     "aciklama": "Kaynak: kuluplerAU - Form Yanıtları 1 (27.10.2026)"
+  },
+  {
+    "id": "0e5713fd48a4",
+    "tarih": "2026-11-18 13:52:45",
+    "kullanici": "Öğrenci Dekanlığı",
+    "kullanici_adi": "admin",
+    "rol": "dekan",
+    "islem": "Güncelleme",
+    "kayit_turu": "ayar",
+    "kayit_id": "",
+    "kayit_ad": "Panel ayarları",
+    "kulup_id": "",
+    "degisiklikler": [
+      {
+        "alan": "Kulüp başkanı girişi",
+        "eski": "Hayır",
+        "yeni": "Evet"
+      }
+    ],
+    "aciklama": ""
+  },
+  {
+    "id": "f84eb5510dac",
+    "tarih": "2026-11-18 13:55:34",
+    "kullanici": "Öğrenci Dekanlığı",
+    "kullanici_adi": "admin",
+    "rol": "dekan",
+    "islem": "Karar",
+    "kayit_turu": "basvuru",
+    "kayit_id": "ef58c04e0b7d",
+    "kayit_ad": "Yapay Zeka Söyleşisi",
+    "kulup_id": "ieee",
+    "degisiklikler": [
+      {
+        "alan": "Durum",
+        "eski": "Onaylandı",
+        "yeni": "Beklemede"
+      }
+    ],
+    "aciklama": ""
+  },
+  {
+    "id": "9ee2adf5aa6a",
+    "tarih": "2026-11-18 13:55:38",
+    "kullanici": "Öğrenci Dekanlığı",
+    "kullanici_adi": "admin",
+    "rol": "dekan",
+    "islem": "Karar",
+    "kayit_turu": "basvuru",
+    "kayit_id": "ef58c04e0b7d",
+    "kayit_ad": "Yapay Zeka Söyleşisi",
+    "kulup_id": "ieee",
+    "degisiklikler": [
+      {
+        "alan": "Durum",
+        "eski": "Beklemede",
+        "yeni": "Onaylandı"
+      }
+    ],
+    "aciklama": ""
+  },
+  {
+    "id": "9ae546e430f8",
+    "tarih": "2026-11-18 13:55:39",
+    "kullanici": "Öğrenci Dekanlığı",
+    "kullanici_adi": "admin",
+    "rol": "dekan",
+    "islem": "Karar",
+    "kayit_turu": "basvuru",
+    "kayit_id": "ef58c04e0b7d",
+    "kayit_ad": "Yapay Zeka Söyleşisi",
+    "kulup_id": "ieee",
+    "degisiklikler": [
+      {
+        "alan": "Durum",
+        "eski": "Onaylandı",
+        "yeni": "Beklemede"
+      }
+    ],
+    "aciklama": ""
+  },
+  {
+    "id": "5e0c36cdcee2",
+    "tarih": "2026-11-18 13:55:52",
+    "kullanici": "Öğrenci Dekanlığı",
+    "kullanici_adi": "admin",
+    "rol": "dekan",
+    "islem": "Karar",
+    "kayit_turu": "basvuru",
+    "kayit_id": "0ce92523933a",
+    "kayit_ad": "Dış Ticarette Kariyer Günü",
+    "kulup_id": "ticaret-lojistik",
+    "degisiklikler": [
+      {
+        "alan": "Durum",
+        "eski": "Onaylandı",
+        "yeni": "Beklemede"
+      }
+    ],
+    "aciklama": ""
   }
 ]

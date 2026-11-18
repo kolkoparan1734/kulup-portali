@@ -556,13 +556,31 @@
     "kaynak": "eski_site",
     "giren": "Sistem",
     "olusturma": "2026-10-24 00:00",
-    "durum": "onaylandi",
+    "durum": "beklemede",
     "gecmis": [
       {
         "tarih": "2026-10-24 00:00",
         "kullanici": "Sistem",
         "durum": "onaylandi",
         "aciklama": "Eski herkese açık siteden aktarıldı."
+      },
+      {
+        "tarih": "2026-11-18 13:55",
+        "kullanici": "Öğrenci Dekanlığı",
+        "durum": "beklemede",
+        "aciklama": ""
+      },
+      {
+        "tarih": "2026-11-18 13:55",
+        "kullanici": "Öğrenci Dekanlığı",
+        "durum": "onaylandi",
+        "aciklama": ""
+      },
+      {
+        "tarih": "2026-11-18 13:55",
+        "kullanici": "Öğrenci Dekanlığı",
+        "durum": "beklemede",
+        "aciklama": ""
       }
     ]
   },
@@ -718,13 +736,19 @@
     "kaynak": "eski_site",
     "giren": "Sistem",
     "olusturma": "2026-10-24 00:00",
-    "durum": "onaylandi",
+    "durum": "beklemede",
     "gecmis": [
       {
         "tarih": "2026-10-24 00:00",
         "kullanici": "Sistem",
         "durum": "onaylandi",
         "aciklama": "Eski herkese açık siteden aktarıldı."
+      },
+      {
+        "tarih": "2026-11-18 13:55",
+        "kullanici": "Öğrenci Dekanlığı",
+        "durum": "beklemede",
+        "aciklama": ""
       }
     ]
   },

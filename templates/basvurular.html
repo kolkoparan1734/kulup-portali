@@ -8,9 +8,9 @@
     <div class="sayfa-baslik">
         <div>
             <h1>Etkinlik Başvuruları</h1>
-            <p>Kulüplerin etkinlik başvuruları ve dekanlık onay süreci · <span data-filtre-sayac>{{ basvurular | length }}</span> başvuru gösteriliyor</p>
+            <p>{{ 'Kulübünüzün etkinlik başvuruları ve dekanlık kararları' if rol == 'baskan' else 'Kulüplerin etkinlik başvuruları ve dekanlık onay süreci' }} · <span data-filtre-sayac>{{ basvurular | length }}</span> başvuru gösteriliyor</p>
         </div>
-        <a href="{{ url_for('basvuru_form') }}" class="dugme dugme-ana">+ Başvuru Gir</a>
+        <a href="{{ url_for('basvuru_form') }}" class="dugme dugme-ana">{{ '+ Yeni Başvuru' if rol == 'baskan' else '+ Başvuru Gir' }}</a>
     </div>
 
     <div class="sekmeler" role="group" aria-label="Duruma göre filtrele">
@@ -27,14 +27,22 @@
 
     <div class="filtre-cubugu">
         <input type="search" data-filtre="metin" placeholder="Etkinlik, kulüp veya yer ara…" aria-label="Başvuru ara">
+        {% if rol != 'baskan' %}
         <select data-filtre="kulup" aria-label="Kulüp">
             <option value="">Tüm kulüpler</option>
             {% for k in kulupler %}<option value="{{ k.id }}" {% if k.id == secili_kulup %}selected{% endif %}>{{ k.isim }}</option>{% endfor %}
         </select>
+        {% endif %}
         <select data-filtre="donem" aria-label="Dönem">
             <option value="">Tüm dönemler</option>
             {% for d in donemler %}<option value="{{ d.id }}">{{ d.ad }}</option>{% endfor %}
         </select>
+        <label class="tarih-araligi">
+            <span>Etkinlik tarihi</span>
+            <input type="date" data-filtre="baslangic" aria-label="Etkinlik tarihi başlangıç">
+            <span aria-hidden="true">–</span>
+            <input type="date" data-filtre="bitis" aria-label="Etkinlik tarihi bitiş">
+        </label>
     </div>
 
     <section class="kutu kutu-tablo">
@@ -43,32 +51,34 @@
                 <thead>
                     <tr>
                         <th data-sirala>Etkinlik</th>
-                        <th data-sirala>Kulüp</th>
-                        <th data-sirala>Tarih</th>
+                        {% if rol != 'baskan' %}<th data-sirala>Kulüp</th>{% endif %}
+                        <th data-sirala>Etkinlik Tarihi</th>
                         <th data-sirala>Yer</th>
-                        <th data-sirala="sayi">Katılımcı</th>
+                        <th data-sirala>Gönderen</th>
+                        <th data-sirala>Gönderim Tarihi</th>
                         <th data-sirala>Durum</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for b in basvurular %}
-                    <tr data-metin="{{ b.ad }} {{ b.kulup_isim }} {{ b.yer }}" data-durum="{{ b.durum }}"
-                        data-kulup="{{ b.kulup_id }}" data-donem="{{ b.donem_id }}">
+                    <tr data-metin="{{ b.ad }} {{ b.kulup_isim }} {{ b.yer }} {{ b.giren }}" data-durum="{{ b.durum }}"
+                        data-kulup="{{ b.kulup_id }}" data-donem="{{ b.donem_id }}" data-tarih="{{ b.tarih_saat[:10] }}">
                         <td>
                             <a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}"><strong>{{ b.ad }}</strong></a>
                             {% if b.konusmaci_var %}<span class="soluk kucuk-metin">Konuşmacı: {{ b.konusmaci }}</span>{% endif %}
                         </td>
-                        <td><a href="{{ url_for('kulup_detay', kulup_id=b.kulup_id) }}">{{ b.kulup_isim }}</a></td>
+                        {% if rol != 'baskan' %}<td><a href="{{ url_for('kulup_detay', kulup_id=b.kulup_id) }}">{{ b.kulup_isim }}</a></td>{% endif %}
                         <td data-deger="{{ b.tarih_saat }}">{{ etkinlik_tarihi(b) }}</td>
                         <td>{{ bos(b.yer) }}</td>
-                        <td data-deger="{{ b.katilimci if b.katilimci is not none else '' }}">{{ bos(b.katilimci) }}</td>
+                        <td>{{ bos(b.giren) }}</td>
+                        <td data-deger="{{ b.olusturma }}">{{ bos(b.olusturma | tarih) }}</td>
                         <td data-deger="{{ b.durum_ad }}">{{ basvuru_rozeti(b) }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-        <p class="bos-durum" data-filtre-bos hidden>Filtrelere uyan başvuru yok.</p>
+        <p class="bos-durum" data-filtre-bos hidden>{{ 'Filtrelere uyan başvuru yok.' if basvurular else 'Henüz başvuru yok.' }}</p>
     </section>
 </div>
 {% endblock %}

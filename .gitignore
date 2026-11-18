@@ -220,3 +220,14 @@ __marimo__/
 # Panelden yüklenen kulüp evrakları
 uploads/
 data/*.tmp
+
+# Canlı veri: kişisel bilgi ve şifre özetleri içerir, depoya girmemeli.
+# (Daha önce commit'lenmiş dosyalar için ayrıca "git rm --cached" gerekir.)
+data/*.json
+data/yedek/
+
+# Demo veri seti ve video: demo/veri_olustur.py ve demo/kayit.py ile yeniden üretilir.
+demo/veri/
+demo/uploads/
+demo/video/
+demo/ornek-etkinlik-plani.pdf

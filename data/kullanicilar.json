@@ -1,7 +1,7 @@
 [
   {
     "kullanici_adi": "admin",
-    "sifre_hash": "scrypt:32768:8:1$ywoNyDVKLw8t1Tvk$2bc3e4c02664a488046146b8f19f8ea3dcc0aa1da8a119a55b4e0ba89abadc7ad8fe080350fd5f52e2c42d7a952d2cb6c1f1c213763439dd7d4a750f6f4adb02",
+    "sifre_hash": "scrypt:32768:8:1$1Dd1qjD2GLsw7Xmt$343088ee78982037f5bd244dbdcb69591071afb0b07e8b126dd9f62ac4584ecdfa7785297950d2a6a2a6286aa8be85f2061f85c8fd010554bfc180f318ab71b5",
     "rol": "dekan",
     "ad_soyad": "Öğrenci Dekanlığı"
   },

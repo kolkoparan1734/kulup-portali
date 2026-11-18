@@ -8,7 +8,9 @@
 <div class="sayfa-baslik">
     <div>
         <h1>{{ 'Başvuruyu Düzenle' if duzenleme else 'Yeni Etkinlik Başvurusu' }}</h1>
-        <p>{% if duzenleme and basvuru.durum == 'revizyon' %}Kaydettiğinizde başvuru yeniden "Beklemede" durumuna geçer.{% else %}Kulüplerden e-posta veya elden gelen başvuruları buradan girebilirsiniz.{% endif %}</p>
+        <p>{% if duzenleme and basvuru.durum == 'revizyon' %}Kaydettiğinizde başvuru yeniden “Bekliyor” durumuna geçer ve dekanlık tekrar değerlendirir.
+           {% elif rol == 'baskan' %}Başvurunuz dekanlığın onayına gönderilir; sonucu ana sayfanızdan takip edebilirsiniz.
+           {% else %}Kulüplerden e-posta veya elden gelen başvuruları buradan girebilirsiniz.{% endif %}</p>
     </div>
 </div>
 
@@ -88,13 +90,13 @@
     <p class="form-not">Mevcut ekler: {{ basvuru.ek_dosyalar | map(attribute='orijinal_ad') | join(', ') }}. Yeni seçtikleriniz bunlara eklenir.</p>
     {% endif %}
     <label class="alan">
-        <span>Dosya <small>({{ uzantilar }} · birden fazla seçilebilir)</small></span>
+        <span>Dosya <small>({{ uzantilar }} · toplam en fazla 20 MB · birden fazla seçilebilir)</small></span>
         <input type="file" name="ek_dosya" multiple>
     </label>
 
     <div class="form-eylemler">
         <a href="{{ url_for('basvuru_detay', basvuru_id=basvuru.id) if duzenleme else url_for('etkinlik_basvurulari') }}" class="dugme">Vazgeç</a>
-        <button type="submit" class="dugme dugme-ana">Kaydet</button>
+        <button type="submit" class="dugme dugme-ana">{{ 'Başvuruyu Gönder' if rol == 'baskan' and not duzenleme else 'Kaydet' }}</button>
     </div>
 </form>
 {% endblock %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_makrolar.html" import kulup_logo, etkinlik_tarihi, bos %}
+{% from "_makrolar.html" import kulup_logo, basvuru_rozeti, etkinlik_tarihi, bos %}
 
 {% block title %}Ana Panel{% endblock %}
 
@@ -10,6 +10,51 @@
         <p>Kulüplerin ve üyeliklerin genel durumu.</p>
     </div>
 </div>
+
+<section class="kutu kutu-tablo onay-bekleyenler{% if bekleyenler %} kutu-vurgu{% endif %}" id="onay-bekleyenler">
+    <div class="kutu-baslik">
+        <h2>Onay Bekleyenler <span class="menu-sayac satir-ici" title="Onay bekleyen başvuru sayısı">{{ bekleyenler | length }}</span></h2>
+        <a href="{{ url_for('etkinlik_basvurulari', durum='beklemede') }}" class="kutu-link">Tümü &rarr;</a>
+    </div>
+    {% if bekleyenler %}
+    <div class="tablo-sarici">
+        <table class="tablo">
+            <thead>
+                <tr>
+                    <th>Kulüp</th>
+                    <th>Başvuru Türü</th>
+                    <th>Başvuru</th>
+                    <th>Gönderen</th>
+                    <th>Gönderim Tarihi</th>
+                    <th>Durum</th>
+                    <th class="sag"><span class="gizli-metin">İşlem</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in bekleyenler[:8] %}
+                <tr>
+                    <td data-etiket="Kulüp"><a href="{{ url_for('kulup_detay', kulup_id=b.kulup_id) }}">{{ b.kulup_isim }}</a></td>
+                    <td data-etiket="Tür">Etkinlik başvurusu</td>
+                    <td class="onay-baslik">
+                        <a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}"><strong>{{ b.ad }}</strong></a>
+                        <span class="soluk kucuk-metin">Etkinlik: {{ etkinlik_tarihi(b) }}{% if b.yer %} · {{ b.yer }}{% endif %}</span>
+                    </td>
+                    <td data-etiket="Gönderen">{{ bos(b.giren) }}</td>
+                    <td data-etiket="Gönderim">{{ bos(b.olusturma | tarih) }}</td>
+                    <td data-etiket="Durum">{{ basvuru_rozeti(b) }}</td>
+                    <td class="sag onay-eylem"><a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}" class="dugme dugme-ince dugme-ana">İncele</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if bekleyenler | length > 8 %}
+    <p class="soluk kucuk-metin tablo-not">ve {{ bekleyenler | length - 8 }} başvuru daha — <a href="{{ url_for('etkinlik_basvurulari', durum='beklemede') }}">tümünü göster</a></p>
+    {% endif %}
+    {% else %}
+    <p class="bos-durum">Onay bekleyen başvuru yok.</p>
+    {% endif %}
+</section>
 
 <section class="ozet-kartlari">
     <a href="{{ url_for('kulupler') }}" class="ozet-kart">
@@ -63,32 +108,6 @@
     </div>
 </section>
 {% endif %}
-
-<section class="kutu{% if bekleyenler %} kutu-vurgu{% endif %}">
-    <div class="kutu-baslik">
-        <h2>Onay Bekleyen Başvurular <span class="menu-sayac satir-ici">{{ bekleyenler | length }}</span></h2>
-        <a href="{{ url_for('etkinlik_basvurulari', durum='beklemede') }}" class="kutu-link">Tümü &rarr;</a>
-    </div>
-    {% if bekleyenler %}
-    <ul class="liste">
-        {% for b in bekleyenler[:6] %}
-        <li>
-            <div>
-                <a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}"><strong>{{ b.ad }}</strong></a>
-                <span class="soluk">{{ b.kulup_isim }}{% if b.yer %} · {{ b.yer }}{% endif %}</span>
-            </div>
-            <div class="liste-sag">
-                <span>{{ etkinlik_tarihi(b) }}</span>
-                <a href="{{ url_for('basvuru_detay', basvuru_id=b.id) }}" class="kucuk-metin">İncele &rarr;</a>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-    {% if bekleyenler | length > 6 %}<p class="soluk kucuk-metin">ve {{ bekleyenler | length - 6 }} başvuru daha…</p>{% endif %}
-    {% else %}
-    <p class="bos-durum">Onay bekleyen başvuru yok.</p>
-    {% endif %}
-</section>
 
 <div class="panel-izgara">
     <section class="kutu">

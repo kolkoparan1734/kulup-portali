@@ -82,14 +82,15 @@ h2 { font-size: 15px; font-weight: 600; }
 .ustbar-baslik strong { color: var(--altin); font-weight: 700; }
 /* --- Genel arama ------------------------------------------------------------ */
 .genel-arama { position: relative; margin-left: auto; width: min(380px, 34vw); }
-.genel-arama input {
+/* Genel form alanı kuralından (aşağıda) daha özgül olmalı; yoksa kutu beyaz zemine beyaz yazı olur. */
+.ustbar .genel-arama input {
     width: 100%; padding: 8px 12px;
     border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px;
     background: rgba(255, 255, 255, 0.1); color: var(--beyaz);
 }
-.genel-arama input::placeholder { color: rgba(255, 255, 255, 0.65); }
-.genel-arama input:focus { background: var(--beyaz); color: var(--slate); border-color: var(--altin); box-shadow: none; }
-.genel-arama input:focus::placeholder { color: var(--slate-acik); }
+.ustbar .genel-arama input::placeholder { color: rgba(255, 255, 255, 0.65); }
+.ustbar .genel-arama input:focus { background: var(--beyaz); color: var(--slate); border-color: var(--altin); box-shadow: none; }
+.ustbar .genel-arama input:focus::placeholder { color: var(--slate-acik); }
 .arama-ac { display: none; }
 .arama-sonuclari {
     position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 40;
@@ -177,7 +178,9 @@ h2 { font-size: 15px; font-weight: 600; }
     font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
     color: var(--slate-acik);
 }
-.menu-cikis { margin-top: auto; color: var(--kirmizi); }
+.menu-cikis { margin-top: auto; }
+.menu-cikis .menu-oge { width: 100%; border: 0; background: none; font: inherit; font-weight: 500; cursor: pointer; color: var(--kirmizi); }
+.menu-cikis .menu-oge:hover { background: var(--kirmizi-soluk); }
 .menu-cikis svg { fill: var(--kirmizi); }
 .menu-perde { position: fixed; inset: var(--ustbar-h) 0 0 0; z-index: 15; background: rgba(16, 24, 40, 0.4); }
 
@@ -223,6 +226,10 @@ h2 { font-size: 15px; font-weight: 600; }
 .dugme:hover { background: var(--zemin); text-decoration: none; }
 .dugme-ana { background: var(--lacivert); border-color: var(--lacivert); color: var(--beyaz); }
 .dugme-ana:hover { background: var(--lacivert-parlak); }
+.dugme-onay { background: var(--yesil); border-color: var(--yesil); color: var(--beyaz); }
+.dugme-onay:hover { background: #0E6740; }
+.dugme-red { background: var(--kirmizi); border-color: var(--kirmizi); color: var(--beyaz); }
+.dugme-red:hover { background: #99200F; }
 .dugme-tehlike { color: var(--kirmizi); }
 .dugme-tehlike:hover { background: var(--kirmizi-soluk); border-color: #F5C2BD; }
 .dugme-ince { padding: 6px 11px; font-size: 13px; }
@@ -285,6 +292,32 @@ h2 { font-size: 15px; font-weight: 600; }
 /* --- Evrak takibi ------------------------------------------------------------ */
 .ozet-eksik { border-top-color: var(--kirmizi); }
 .kutu-uyari { border-left: 4px solid var(--kirmizi); }
+
+/* --- Onay akışı ----------------------------------------------------------- */
+.kutu-tablo > .kutu-baslik { padding: 16px 20px 12px; margin-bottom: 0; }
+.kutu-tablo > .bos-durum { padding: 0 20px 18px; }
+.karar-dugmeleri { display: flex; flex-wrap: wrap; gap: 8px; }
+.karar-dugmeleri .dugme { flex: 1 1 auto; justify-content: center; text-align: center; }
+.alan-hata { margin: -4px 0 0; color: var(--kirmizi); font-weight: 500; font-size: 13px; }
+textarea[aria-invalid="true"] { border-color: var(--kirmizi); }
+.sonuc-kutu {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap;
+    padding: 14px 18px; margin-bottom: 20px;
+    border: 1px solid; border-left-width: 4px; border-radius: var(--radius);
+}
+.sonuc-kutu > div { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.sonuc-kutu strong { font-size: 15px; }
+.sonuc-kutu p { margin: 4px 0 0; }
+.sonuc-etiket { font-weight: 600; }
+.sonuc-onaylandi { background: var(--yesil-soluk); color: var(--yesil); border-color: #B7E1C8; border-left-color: var(--yesil); }
+.sonuc-reddedildi { background: var(--kirmizi-soluk); color: var(--kirmizi); border-color: #F5C2BD; border-left-color: var(--kirmizi); }
+.sonuc-revizyon { background: var(--lacivert-soluk); color: var(--lacivert); border-color: #C7CDE6; border-left-color: var(--lacivert); }
+.sonuc-beklemede { background: var(--altin-soluk); color: #8A5A00; border-color: #F5D98B; border-left-color: var(--altin); }
+.ozet-kart.ozet-durum-beklemede { border-top-color: var(--altin); }
+.ozet-kart.ozet-durum-onaylandi { border-top-color: var(--yesil); }
+.ozet-kart.ozet-durum-reddedildi { border-top-color: var(--kirmizi); }
+.tarih-araligi { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; color: var(--slate-acik); font-weight: 500; font-size: 13px; }
+.tarih-araligi input[type="date"] { width: auto; }
 .satir-soluk td { color: var(--slate-acik); }
 .puan { white-space: nowrap; font-weight: 600; font-variant-numeric: tabular-nums; }
 .puan-yildiz { color: var(--altin); letter-spacing: 1px; }
@@ -658,6 +691,20 @@ a.ozet-kart:hover { text-decoration: none; border-color: #C7CDE6; border-top-col
     .kulup-ust { flex-direction: column; }
     .kulup-ust-eylem { width: 100%; }
     .filtre-cubugu select, .filtre-cubugu input[type="search"] { flex: 1 1 100%; max-width: none; }
+    .tarih-araligi { flex: 1 1 100%; }
+    /* Onay Bekleyenler: dar ekranda her başvuru alt alta bir kart olur. */
+    .onay-bekleyenler thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .onay-bekleyenler table, .onay-bekleyenler tbody, .onay-bekleyenler tr { display: block; }
+    .onay-bekleyenler tr { padding: 12px 16px; border-top: 1px solid var(--cizgi); }
+    .onay-bekleyenler td { display: flex; justify-content: space-between; gap: 12px; padding: 3px 0; border: 0; text-align: right; }
+    .onay-bekleyenler td[data-etiket]::before { content: attr(data-etiket); color: var(--slate-acik); font-weight: 500; text-align: left; }
+    .onay-bekleyenler td.onay-baslik { display: block; order: -1; text-align: left; padding-bottom: 6px; }
+    .onay-bekleyenler tr { display: flex; flex-direction: column; }
+    .onay-bekleyenler td.onay-eylem { padding-top: 8px; }
+    .onay-bekleyenler td.onay-eylem .dugme { width: 100%; }
+    .tarih-araligi input[type="date"] { flex: 1 1 120px; min-width: 0; }
+    .karar-dugmeleri .dugme { flex: 1 1 100%; }
+    .sonuc-kutu { padding: 12px 14px; }
     .kutu { padding: 16px; }
     .kutu-tablo { padding: 0; }
     .yk-satir { grid-template-columns: minmax(0, 1fr) auto; }

@@ -32,7 +32,10 @@ import threading
 from datetime import date, datetime
 from uuid import uuid4
 
-VERI_KLASORU = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+# Varsayılan veri klasörü data/; PANEL_VERI_KLASORU ile başka bir klasör
+# (ör. tanıtım videosu için demo/veri) kullanılabilir, gerçek veriye dokunulmaz.
+VERI_KLASORU = os.environ.get("PANEL_VERI_KLASORU") or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "data")
 
 # Aynı anda gelen iki istek aynı dosyayı yazmaya çalışmasın diye tek kilit.
 _kilit = threading.RLock()
@@ -54,6 +57,7 @@ def _yukle(dosya_adi, varsayilan):
 
 
 def _kaydet(dosya_adi, veri):
+    os.makedirs(VERI_KLASORU, exist_ok=True)
     gecici = _yol(dosya_adi) + ".tmp"
     with open(gecici, "w", encoding="utf-8") as f:
         json.dump(veri, f, ensure_ascii=False, indent=2)
@@ -609,7 +613,7 @@ def belge_sil(belge_id):
 # ---------------------------------------------------------------------------
 
 BASVURU_DURUMLARI = {
-    "beklemede": "Beklemede",
+    "beklemede": "Bekliyor",
     "onaylandi": "Onaylandı",
     "reddedildi": "Reddedildi",
     "revizyon": "Revizyon istendi",
@@ -639,6 +643,9 @@ def basvurulari_getir(kulup_id=None, durum=None, arsiv=False):
             continue
         b["kulup_isim"] = kulup_isimleri.get(b["kulup_id"], "—")
         b["durum_ad"] = BASVURU_DURUMLARI.get(b["durum"], b["durum"])
+        # Geçerli durumu belirleyen son karar (kim, ne zaman, hangi açıklamayla).
+        b["son_karar"] = None if b["durum"] == "beklemede" else next(
+            (g for g in reversed(b.get("gecmis", [])) if g["durum"] == b["durum"]), None)
         donem = tarihin_donemi(b["tarih_saat"], donemler)
         b["donem_id"] = donem["id"] if donem else ""
         b["donem_ad"] = donem["ad"] if donem else ""
@@ -659,7 +666,7 @@ def basvuru_arsiv_ayarla(basvuru_id, kullanici=None):
     _liste_arsiv_ayarla("etkinlik_basvurulari.json", basvuru_id, kullanici)
 
 
-_HESAPLANAN_BASVURU_ALANLARI = {"kulup_isim", "durum_ad", "donem_id", "donem_ad", "arsiv"}
+_HESAPLANAN_BASVURU_ALANLARI = {"kulup_isim", "durum_ad", "donem_id", "donem_ad", "arsiv", "son_karar"}
 
 
 def basvuru_kaydet(basvuru):
